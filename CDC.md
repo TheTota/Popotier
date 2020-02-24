@@ -1,5 +1,5 @@
 # Cahier des charges
-Équipe Alexandre Tomasia,Thomas Cianfarani et Vanessa Asejo Caspillo.
+Équipe Alexandre Tomasia, Thomas Cianfarani et Vanessa Asejo Caspillo.
 
 ## Contexte
 Depuis le 13 septembre 1985, la boutique MicroGameZone vend des jeux vidéo sur toutes les plateformes. Aujourd'hui, MicroGameZone est devenu une franchise et possède 43 boutiques en France. Au cours des 5 dernières années, la clientèle s'est vue diminuer de 30% à cause de la dématérialisation des jeux et la multiplication des plateformes de vente en ligne. La perte de chiffre dûe à la baisse de clientèle rend difficile le financement des magasins physique.
