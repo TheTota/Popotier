@@ -39,7 +39,9 @@ Pour répondre à ces besoins, notre équipe notamment forte de deux personnes e
 ### Solution techniques
 D'un point de vue technique, nous proposons d'intégrer des technologies éprouvées, performantes et peu onéreuses :
 - Une base de données MariaDB pour la gestion et la manipulation des données. 
-- Serveur Web Apache pour la délivrance des pages Web. Apache est aujourd'hui le serveur le plus populaire et dispose de nombreux modules.
+- Serveur Web Apache pour la hébergement des pages Web. Apache est aujourd'hui le serveur le plus populaire et dispose de nombreux modules.
+- Language HTML et CSS pour les differentes vues du site.
+- Le moteur de template Twig.
 - Le framework open source CSS Bootstrap pour l'affichage esthétique des pages et de leur contenu. 
 - PHP natif pour le back-end du site.
 
