@@ -41,7 +41,7 @@ D'un point de vue technique, nous proposons d'intégrer des technologies éprouv
 - Une base de données MariaDB pour la gestion et la manipulation des données. 
 - Serveur Web Apache pour la hébergement des pages Web. Apache est aujourd'hui le serveur le plus populaire et dispose de nombreux modules.
 - Language HTML et CSS pour les differentes vues du site.
-- Le moteur de template Twig.
+- Le moteur de template Twig afin de séparer le code PHP de ma vue.
 - Le framework open source CSS Bootstrap pour l'affichage esthétique des pages et de leur contenu. 
 - PHP natif pour le back-end du site.
 
