@@ -1,5 +1,16 @@
 {% extends "layout/base.html.twig" %}
 
+{% block title %}{{ page }}{% endblock %}
+
 {% block content %}
-    blablabla
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}
+

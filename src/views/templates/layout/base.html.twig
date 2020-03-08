@@ -2,18 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    {% block links %}
+        {{ include('layout/links/links.html.twig') }}
+    {% endblock %}
+
     <title>Popotier - {% block title %}{% endblock %}</title>
 </head>
 <body>
     <header>
-        {% block header %}{% endblock %}
+        {% block header %}
+            {{ include('layout/header.html.twig') }}
+        {% endblock %}
     </header>
     <div id="content">
         {% block content %}{% endblock %}
     </div>
     <footer>
-        {% block footer %}{% endblock %}
+        {% block footer %}
+            {{ include('layout/footer.html.twig') }}
+        {% endblock %}
     </footer>
 </body>
 </html>
