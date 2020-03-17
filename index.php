@@ -4,6 +4,11 @@
 $request = $_SERVER['REQUEST_URI'];
 var_dump($request);
 
+if( preg_match('/^(\/popotier\/recette\/)[0-9]+/', $request)){
+    $splitRequest = explode('/', $request);
+    var_dump($splitRequest);die;
+}
+
 switch ($request) {
     case '/popotier/' :
         require_once 'src/controllers/IndexController.php';
