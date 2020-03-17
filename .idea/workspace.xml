@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="254fc6b5-3f27-4fdb-bd69-62af811eddbe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/recipe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Popotier.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Popotier.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/templates/index/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/templates/index/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/templates/layout/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/templates/layout/header.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/recipe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/recipe.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +64,7 @@
       <updated>1582552135099</updated>
       <workItem from="1582552136675" duration="602000" />
       <workItem from="1583670463226" duration="8633000" />
-      <workItem from="1584462830049" duration="3089000" />
+      <workItem from="1584462830049" duration="3703000" />
     </task>
     <servers />
   </component>

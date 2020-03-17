@@ -13,6 +13,10 @@ class Recipe {
     private $evaluation;
     private $authorQuote;
     private $valid;
+    private $author; // User
+    private $type; // Type
+    private $ingredients; // Ingredient
+
 
     public function __construct(
         $id,
@@ -41,7 +45,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -49,7 +53,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -57,7 +61,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -65,7 +69,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -73,7 +77,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getImage()
     {
@@ -81,7 +85,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $image
+     * @param string $image
      */
     public function setImage($image)
     {
@@ -89,7 +93,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getCookingTime()
     {
@@ -97,7 +101,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $cookingTime
+     * @param int $cookingTime
      */
     public function setCookingTime($cookingTime)
     {
@@ -105,7 +109,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getPreparationTime()
     {
@@ -113,7 +117,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $preparationTime
+     * @param int $preparationTime
      */
     public function setPreparationTime($preparationTime)
     {
@@ -121,7 +125,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getPersonNumber()
     {
@@ -129,7 +133,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $personNumber
+     * @param int $personNumber
      */
     public function setPersonNumber($personNumber)
     {
@@ -169,7 +173,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getEvaluation()
     {
@@ -177,7 +181,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $evaluation
+     * @param int $evaluation
      */
     public function setEvaluation($evaluation)
     {
@@ -185,7 +189,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getAuthorQuote()
     {
@@ -193,7 +197,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $authorQuote
+     * @param string $authorQuote
      */
     public function setAuthorQuote($authorQuote)
     {
@@ -201,7 +205,7 @@ class Recipe {
     }
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getValid()
     {
@@ -209,7 +213,7 @@ class Recipe {
     }
 
     /**
-     * @param mixed $valid
+     * @param boolean $valid
      */
     public function setValid($valid)
     {
