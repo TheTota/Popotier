@@ -16,3 +16,12 @@ _Le marmiton du pauvre !_
 - Le créateur de la recette choisit parmis ces options/labels, qui eux sont définis par un admin
 - Un admin doit pouvoir valider les recettes 
 - Un admin doit pouvoir lister les allergies connues
+
+## Mise en place du projet
+
+- Intaller composer : https://getcomposer.org/
+- ajouter composer a vos variables d'environnement
+- clonez le projet
+- ouvrez un terminal a la racine du projet
+- lancez la commande "composer install" afin qu'il installe les différentes dépendances du projet
+
