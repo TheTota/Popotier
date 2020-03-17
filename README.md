@@ -24,4 +24,5 @@ _Le marmiton du pauvre !_
 - ouvrez un terminal a la racine du projet
 - lancez la commande "composer install" afin qu'il installe les différentes dépendances du projet
 (Si votre terminal ne connais pas la commande "composer", il faut l'ajouter a vos variables d'environnement)
+- Vous pouvez lancer le site :)
 
