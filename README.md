@@ -20,8 +20,8 @@ _Le marmiton du pauvre !_
 ## Mise en place du projet
 
 - Intaller composer : https://getcomposer.org/
-- ajouter composer a vos variables d'environnement
 - clonez le projet
 - ouvrez un terminal a la racine du projet
 - lancez la commande "composer install" afin qu'il installe les différentes dépendances du projet
+(Si votre terminal ne connais pas la commande "composer", il faut l'ajouter a vos variables d'environnement)
 
