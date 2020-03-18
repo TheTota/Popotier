@@ -1,6 +1,8 @@
 <?php
 
-class Recipe {
+namespace Src\Models;
+
+class RecipeEntity {
 
     private $id;
     private $name;
@@ -13,9 +15,9 @@ class Recipe {
     private $evaluation;
     private $authorQuote;
     private $valid;
-    private $author; // User
+    private $author; // UserEntity
     private $type; // Type
-    private $ingredients; // Ingredient
+    private $ingredients; // IngredientEntity
 
 
     public function __construct(
