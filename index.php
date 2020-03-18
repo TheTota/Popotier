@@ -18,15 +18,15 @@ if( preg_match('/^(\/popotier\/recette\/)[0-9]+/', $request)){
 }
 
 switch ($request) {
-    case '/popotier/' :
-        header('Location: /popotier/home');
+    case '/' :
+        header('Location: /home');
         break;
 
-    case '/popotier/home':
+    case '/home':
         IndexController::indexAction();
         break;
 
-    case '/popotier/login':
+    case '/login':
         LoginController::indexAction();
         break;
 
