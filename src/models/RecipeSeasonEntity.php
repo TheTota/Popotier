@@ -2,13 +2,13 @@
 
 namespace Src\Models;
 
-class RecipeSeason{
+class RecipeSeasonEntity{
 
     private $id;
     private $label;
 
     /**
-     * RecipeSeason constructor.
+     * RecipeSeasonEntity constructor.
      * @param $id
      * @param $label
      */
