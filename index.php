@@ -11,9 +11,9 @@ use Src\Controllers\LoginController;
 $request = $_SERVER['REQUEST_URI'];
 
 // For test purpose
-if( preg_match('/^(\/popotier\/recette\/)[0-9]+/', $request)){
+if( preg_match('/^(\/recette\/)[0-9]+/', $request)){
     $splitRequest = explode('/', $request);
-    var_dump($splitRequest);die;
+    var_dump($splitRequest[2]);die;
 }
 
 switch ($request) {
