@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\models",
+    "\\src\\services",
+    "\\src\\views",
+    "\\src\\views\\templates",
+    "\\src\\views\\templates\\index",
+    "\\src\\views\\templates\\layout",
+    "\\src\\views\\templates\\layout\\links",
+    "\\src\\views\\templates\\login"
+  ],
+  "SelectedNode": "\\index.php",
+  "PreviewInSolutionExplorer": false
+}
