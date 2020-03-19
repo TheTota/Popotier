@@ -1,44 +1,39 @@
 <?php
 
-namespace src\services;
+namespace Src\Services;
 
 class DataBaseService { 
 
-    private $hote; // Adresse du serveur 
-    private $login; // Login 
-    private $pass; // Mot de passe 
-    private $dbName;
-    private $db; // Base de données à utiliser 
+    private $hote = 'mysql-popotier.alwaysdata.net'; // Adresse du serveur
+    private $login = 'popotier'; // Login
+    private $pass = 'nopass@2020'; // Mot de passe
+    private $dbName = 'popotier_bdd'; // Nom de la bdd
 
+    private static $instance;
 
-	public static function getInstance()
+	public static function getInstance(): DataBaseService
     {
         if (self::$instance === null) {
-            self::$instance = new DatabaseManager();
+            self::$instance = new DataBaseService();
         }
 
         return self::$instance;
     }
 
-    public function __construct($hote,$login,$pass, $db, $dbName)
+    public function __construct()
     {
-        $this->hote = $hote;
-        $this->login = $login;
-        $this->pass = $pass;
-        $this->db_name = $dbName;
-
+        $this->connection();
     }
 
-	public function connection() {
+	private function connection() {
 		try {
-                $this->db = new PDO('mysql:host='.$this->hote.';dbname='.$this->dbName, $this->login, $this->pass);
+                $this->db = new \PDO('mysql:host='.$this->hote.';dbname='.$this->dbName, $this->login, $this->pass);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
 	}
 
-    
-    function getDb() {
+    function getDb(): \PDO {
         return $this->db;
     }
 }
