@@ -11,11 +11,16 @@ class LoginService {
 
 		public static function connect($email, $password) {
 
-			$db =  DataBaseService::getInstance();
-			$req = $db->getDb()->prepare( "SELECT * FROM Utilisateur WHERE email =:email AND mot_de_passe =:mot_de_passe");
-			$req->execute(array('email' => $email, 'mot_de_passe' => $password)); 
-			$res = $req->fetchAll();
-			return $res;
-	}
+			$db = DataBaseService::getInstance()->getDb();
+			$userExists = false;
+			$req = $db->query("SELECT * FROM Utilisateur WHERE email='".$email."' AND mot_de_passe='".$password."'")->fetch();
+			if(req) {
+				$userExists = true;
+				session_start();
+				return $userExists;
+			} else {
+				return $userExists;
+			}
+		}
 
 }

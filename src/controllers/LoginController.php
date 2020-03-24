@@ -1,5 +1,6 @@
 <?php
 namespace Src\Controllers;
+require_once 'src/services/LoginService.php';
 use Src\Services\LoginService;
 
 
@@ -7,8 +8,6 @@ class LoginController{
 	
     public static function indexAction(){
         require_once 'bootstrap.php';
-		require_once 'src/services/LoginService.php';
-
 
 		if(isset($_POST['connexion']))
 		{
@@ -16,12 +15,13 @@ class LoginController{
 			if(isset($_POST['inputEmail']) && isset($_POST['inputPassword'])){
             
 				$connect = LoginService::connect($_POST['inputEmail'],$_POST['inputPassword']);
+
 				if($connect) {
 					header('Location: /home');
 					
 				} else {
-					echo "Wrong login or password.";
-					echo $twig->render('login/login.html.twig', []);
+					//echo "Wrong login or password.";
+					$twig->render('login/login.html.twig', ['loginError' => true]);
 				}
 			} 
 		} else {

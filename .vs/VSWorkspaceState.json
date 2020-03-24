@@ -2,7 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\models",
+    "\\src\\controllers",
     "\\src\\services",
     "\\src\\views",
     "\\src\\views\\templates",
@@ -11,6 +11,6 @@
     "\\src\\views\\templates\\layout\\links",
     "\\src\\views\\templates\\login"
   ],
-  "SelectedNode": "\\index.php",
+  "SelectedNode": "\\src\\services\\LoginService.php",
   "PreviewInSolutionExplorer": false
 }

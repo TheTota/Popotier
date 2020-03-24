@@ -3,6 +3,9 @@
 {% block content %}
     <form method="POST" action="/login">
         <div class="form-group">
+		{% if loginError == true %}
+			<p>Email or password incorrect.</p>
+		{% endif %}
             <label for="inputEmail">Email address</label>
             <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="Entrez votre email">
             <small id="emailHelp" class="form-text text-muted">Nous ne partagerons pas vôtre email.</small>
@@ -14,4 +17,6 @@
 
         <button type="submit" class="btn btn-primary" name="connexion">Submit</button>
     </form>
+
+
 {% endblock %}
