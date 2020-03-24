@@ -9,6 +9,7 @@ use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
 
 $request = $_SERVER['REQUEST_URI'];
+var_dump($request);
 
 // For test purpose
 if( preg_match('/^(\/recette\/)[0-9]+/', $request)){
