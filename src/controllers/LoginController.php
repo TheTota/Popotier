@@ -11,7 +11,6 @@ class LoginController{
 
 		if(isset($_POST['connexion']))
 		{
-				
 			if(isset($_POST['inputEmail']) && isset($_POST['inputPassword'])){
             
 				$connect = LoginService::connect($_POST['inputEmail'],$_POST['inputPassword']);
@@ -21,7 +20,7 @@ class LoginController{
 					
 				} else {
 					//echo "Wrong login or password.";
-					$twig->render('login/login.html.twig', ['loginError' => true]);
+					echo $twig->render('login/login.html.twig', ['loginError' => true]);
 				}
 			} 
 		} else {
