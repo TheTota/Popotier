@@ -20,6 +20,7 @@ class LoginService
         if ($req) {
             $userExists = true;
             session_start();
+			$_SESSION['email'] = $email;
             return $userExists;
         } else {
             return $userExists;
