@@ -4,12 +4,14 @@
 // This file will be our router
 
 require_once 'bootstrap.php';
-require_once 'src/controllers/IndexController.php';
-require_once 'src/controllers/LoginController.php';
-require_once 'src/controllers/UserController.php';
+
+include 'src/controllers/IndexController.php';
+include 'src/controllers/LoginController.php';
+include 'src/controllers/UserController.php';
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
+use Src\Controllers\UserController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -56,6 +58,17 @@ switch ($request) {
         UserController::emailVerify($email);
         break;
 
+	case '/user':
+		UserController::userRecipeAction();
+		break;
+
+	case '/user/recipe':
+		UserController::userRecipeAction();
+		break;
+
+	case '/user/favorite':
+		UserController::userFavoriteAction();
+		break;
     default:
         http_response_code(404);
         IndexController::pageNotFoundAction();
