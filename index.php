@@ -7,9 +7,11 @@ require_once 'bootstrap.php';
 
 include 'src/controllers/IndexController.php';
 include 'src/controllers/LoginController.php';
+include 'src/controllers/UserController.php';
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
+use Src\Controllers\UserController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -36,6 +38,17 @@ switch ($request) {
         LoginController::logoutAction();
         break;
 
+	case '/user':
+		UserController::userRecipeAction();
+		break;
+
+	case '/user/recipe':
+		UserController::userRecipeAction();
+		break;
+
+	case '/user/favorite':
+		UserController::userFavoriteAction();
+		break;
     default:
         http_response_code(404);
         IndexController::pageNotFoundAction();

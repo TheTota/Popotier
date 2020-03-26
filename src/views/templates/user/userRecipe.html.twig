@@ -1,0 +1,13 @@
+{% extends "user/user.html.twig" %}
+
+{% block recipeList %}
+
+	{% for recipe in recipes %}
+		<div class="d-block">
+			<img>
+			<a class="text-dark" href="">
+				{{ recipe }}
+			</a>
+		</div>
+	{% endfor %}
+{% endblock %}
