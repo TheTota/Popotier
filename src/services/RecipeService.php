@@ -15,6 +15,7 @@ use Src\Models\UserEntity;
 
 class RecipeService{
 
+	private $db;
 
     public static function fetchAll() {
         $db = DataBaseService::getInstance()->getDb();
@@ -74,7 +75,7 @@ class RecipeService{
 
 		foreach($req as $row){
 			$recipe = new RecipeEntity(
-				$row['id'], 
+				$row['id'],
 				$row['nom'],
 				$row['image'],
 				$row['temps_cuisson'],
