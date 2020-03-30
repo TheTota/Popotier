@@ -1,6 +1,7 @@
 <?php
 
 namespace Src\Services;
+require_once 'src/models/RecipeEntity.php';
 
 require_once 'src/models/RecipeEntity.php';
 
@@ -68,8 +69,27 @@ class RecipeService{
 
 	public static function fetchAllUserRecipe($userEmail){
 		$db = DataBaseService::getInstance()->getDb();
-		$recipes = $db->query("SELECT * FROM Recette WHERE email='" . $userEmail . "'")->fetchAll();
+		$req = $db->query("SELECT * FROM Recette WHERE email='" . $userEmail . "'")->fetchAll();
+		$recipes = array();
+
+		foreach($req as $row){
+			$recipe = new RecipeEntity(
+				$row['id'], 
+				$row['nom'],
+				$row['image'],
+				$row['temps_cuisson'],
+				$row['temps_preparation'],
+				$row['nb_personnes'],
+				$row['difficulte'],
+				$row['prix_moyen'],
+				$row['note_recette'],
+				$row['note_auteur'],
+				$row['id_type']
+			);
+			array_push($recipes, $recipe);
+		}
 		return $recipes;
 	}
+
 
 }
