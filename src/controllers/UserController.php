@@ -8,8 +8,11 @@ require_once 'src/services/UserService.php';
 use Src\Models\UserEntity;
 require_once 'src/models/RecipeEntity.php';
 
+require_once 'src/models/RecipeEntity.php';
+
 use Src\Services\UserService;
 use Src\Services\RoleService;
+use Src\Models\RecipeEntity;
 use Src\Models\RecipeEntity;
 
 class UserController{
@@ -86,6 +89,12 @@ class UserController{
 
 		public static function userAddRecipeAction() {
 			echo \Templater::getInstance()->getTwig()->render('user/userAddRecipe.html.twig', []);
+		}
+
+		public static function userAddRecipeAction() {
+		require'bootstrap.php';
+			echo $twig->render('user/userAddRecipe.html.twig', []);
+
 		}
 
 }
