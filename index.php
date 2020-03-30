@@ -49,6 +49,10 @@ switch ($request) {
 	case '/user/favorite':
 		UserController::userFavoriteAction();
 		break;
+
+	case '/user/addrecipe':
+		UserController::userAddRecipeAction();
+		break;
     default:
         http_response_code(404);
         IndexController::pageNotFoundAction();
