@@ -12,12 +12,11 @@ class LoginController{
 		if(isset($_POST['connexion']))
 		{
 			if(isset($_POST['inputEmail']) && isset($_POST['inputPassword'])){
-            
-				$connect = LoginService::connect($_POST['inputEmail'],$_POST['inputPassword']);
 
-				if($connect) {
+				if(LoginService::connect($_POST['inputEmail'],$_POST['inputPassword'])) {
+
 					header('Location: /home');
-					
+
 				} else {
 					//echo "Wrong login or password.";
 					echo $twig->render('login/login.html.twig', ['loginError' => true]);

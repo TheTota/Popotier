@@ -1,25 +1,36 @@
 {% extends "layout/base.html.twig" %}
 
+
 {% block content %}
-    <form method="POST" action="/login">
-        <div class="form-group">
+    <script src="/public/js/login/login-form.js"></script>
 
-            <label for="inputEmail">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"
-                   placeholder="Entrez votre email">
-            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons pas vôtre email.</small>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" name="inputPassword"
-                   placeholder="Mot de passe">
-        </div>
-        {% if loginError %}
-            <small class="text-danger">Email or password incorrect.</small>
-        {% endif %}
+    <div id="login-container" class="container">
+        <div class="row center">
+            <div class="col-sm-4">
+                <form method="POST" action="/login">
+                    <div class="form-group">
+                        <label for="inputEmail">Adresse email</label>
+                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"
+                               placeholder="Email">
+                        <small id="emailHelp" class="form-text text-muted">Nous ne partagerons pas vôtre email.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword"
+                               placeholder="Mot de passe">
+                    </div>
+                    {% if loginError %}
+                        <small class="text-danger">Email ou mot de passe incorrect.</small>
+                    {% endif %}
 
-        <button type="submit" class="btn btn-primary" name="connexion">Submit</button>
-    </form>
+                    <button id=submit type="submit" class="btn btn-primary" name="connexion">Submit</button>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
 {% endblock %}
