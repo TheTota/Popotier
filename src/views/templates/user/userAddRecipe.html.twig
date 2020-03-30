@@ -1,0 +1,45 @@
+{% extends "layout/base.html.twig" %}
+
+{% block content %}
+	<h1>Ajouter une nouvelle Recette</h1>
+
+		<form metho="POST" action="/user/recipe">
+			<div class="form-group">
+				<label for="name"> Nom de la recette </label>
+				<input type="text" class="form-control" id="name" placeholder="Nom">
+			</div>
+			<div class="form-group">
+				<label for="cookingTime"> Temps de cuisson </label>
+				<input type="text" class="form-control" id="cookingTime">
+			</div>
+			<div class="form-group">
+				<label for="preparationTime"> Temps de préparation </label>
+				<input type="text" class="form-control" id="preparationTime">
+			</div>
+			<div class="form-group">
+				<label for="personNumber"> Nombre de personne </label>
+				<input type="text" class="form-control" id="personNumber">
+			</div>
+			<div class="form-group">
+				<label for="difficulty"> Difficulté </label>
+				<input type="text" class="form-control" id="difficulty">
+			</div>
+			<div class="form-group">
+				<label for="meanPrice"> Prix moyen  </label>
+				<input type="text" class="form-control" id="meanPrice">
+			</div>
+			<div class="form-group">
+				<label for="evaluation"> Note   </label>
+				<input type="text" class="form-control" id="evaluation">
+			</div>
+			<div class="form-group">
+				<label for="authorQuote"> Annotations   </label>
+				<textarea  class="form-control" id="authorQuote"></textarea>
+			</div>
+
+			{% block steps %}{% endblock %}	
+
+			<button type="submit" class="btn btn-primary" name="addRecipe">Terminer</button>
+		</form>
+
+{% endblock %}
