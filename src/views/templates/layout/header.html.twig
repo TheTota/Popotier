@@ -12,12 +12,14 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            {% if session.alias %}
-                <a href="#">profil</a>
-            {% else %}
-                <a class="nav-link" href="/login">Login</a>
-            {% endif %}
-
+            <div class="user-actions">
+                {% if session.alias %}
+                    <a class="btn btn-primary" href="#">profil</a>
+                    <a class="btn btn-danger" href="/logout">deconnexion</a>
+                {% else %}
+                    <a class="nav-link" href="/login">Login</a>
+                {% endif %}
+            </div>
         </form>
     </div>
 </nav>

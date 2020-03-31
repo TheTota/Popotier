@@ -4,10 +4,13 @@ require_once 'src/services/LoginService.php';
 use Src\Services\LoginService;
 
 
+
 class LoginController{
+
+
 	
-    public static function indexAction(){
-        require_once 'bootstrap.php';
+    public static function loginAction(){
+        $twig = \Templater::getInstance()->getTwig();
 
 		if(isset($_POST['connexion']))
 		{
@@ -25,5 +28,12 @@ class LoginController{
 		} else {
 		        echo $twig->render('login/login.html.twig', []);
 		}
+    }
+
+    public static function logoutAction() {
+        session_start();
+        session_destroy();
+
+        header('location: /login');
     }
 }

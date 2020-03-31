@@ -1,8 +1,7 @@
 {% extends "layout/base.html.twig" %}
 
-
 {% block content %}
-    <script src="/public/js/login/login-form.js"></script>
+
 
     <div id="login-container" class="container">
         <div class="row center">
@@ -25,12 +24,13 @@
 
                     <button id=submit type="submit" class="btn btn-primary" name="connexion">Submit</button>
 
-
                 </form>
             </div>
         </div>
     </div>
 
+{% endblock %}
 
-
+{% block scripts %}
+    <script src="/public/js/login/login-form.js"></script>
 {% endblock %}
