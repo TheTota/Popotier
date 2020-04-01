@@ -2,6 +2,10 @@
 
 namespace Src\Services;
 
+require_once 'src/services/DataBaseService.php';
+
+require_once 'src/models/RecipeTypeEntity.php';
+
 use Src\Models\RecipeTypeEntity;
 
 class TypeService{
@@ -10,8 +14,14 @@ class TypeService{
 
     }
 
-    public function findById($id){
+    public static function findById($id): RecipeTypeEntity{
+        $db = DataBaseService::getInstance()->getDb();
 
+        $result = $db->query("SELECT * FROM Type WHERE id = '$id'")->fetch();
+
+        $recipeType = new RecipeTypeEntity($result['id'], $result['libelle']);
+
+        return $recipeType;
     }
 
     public function add(RecipeTypeEntity $type){

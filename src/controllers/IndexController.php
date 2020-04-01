@@ -2,11 +2,21 @@
 
 namespace Src\Controllers;
 
+require_once 'src/services/RecipeService.php';
+
+use Src\Services\RecipeService;
+
 class IndexController{
 
-    public static function indexAction(){
+    public static function homeAction(){
+        $recipes = RecipeService::fetchAll();
 
-        echo \Templater::getInstance()->getTwig()->render('index/index.html.twig', ['page' => 'accueil']);
+        echo \Templater::getInstance()->getTwig()->render('home/home.html.twig',
+            [
+                'page' => 'accueil',
+                'recipes' => $recipes // Array of recipe entities
+            ]
+        );
     }
 
     public static function pageNotFoundAction(){

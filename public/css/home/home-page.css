@@ -1,0 +1,52 @@
+#search-section {
+    min-height: 200px;
+    position: relative;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+}
+
+.spacer {
+    height: 100px;
+}
+
+.separator {
+    width: 80%;
+}
+
+#recipe-section {
+    display: flex;
+    justify-content: center;
+}
+
+.recipe-block {
+    margin: 0 15px;
+    padding: 0;
+    width: 270px;
+}
+
+.recipe-block:hover {
+    cursor: pointer;
+}
+
+.recipe-image {
+    overflow: hidden;
+    height: 350px;
+    width: 100%;
+}
+
+.recipe-image img {
+    height: 350px;
+    margin-left: -25%;
+}
+
+
+
+
+

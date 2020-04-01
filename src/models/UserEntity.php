@@ -11,7 +11,7 @@ class UserEntity
     private $firstName;
     private $alias;
     private $password;
-    private $role;
+    private $role; // Role Entity
 
     public function __construct(
         $email,

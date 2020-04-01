@@ -31,7 +31,11 @@ class RecipeEntity {
         $meanPrice,
         $evaluation,
         $authorQuote,
-        $valid)
+        $valid,
+        $author,
+        $type,
+        $ingredients
+    )
     {
         $this->id = $id;
         $this->name = $name;
@@ -44,6 +48,9 @@ class RecipeEntity {
         $this->evaluation = $evaluation;
         $this->authorQuote = $authorQuote;
         $this->valid = $valid;
+        $this->author = $author;
+        $this->type = $type;
+        $this->ingredients = $ingredients;
     }
 
     /**

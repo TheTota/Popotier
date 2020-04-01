@@ -20,7 +20,7 @@ class Templater {
         require_once 'vendor/autoload.php';
         $loader = new \Twig\Loader\FilesystemLoader('./src/views/templates');
         $this->twig = new \Twig\Environment($loader, [
-            'cache' => './var/cache/twig',
+            //'cache' => './var/cache/twig',
         ]);
     }
 

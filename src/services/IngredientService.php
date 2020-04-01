@@ -11,7 +11,15 @@ class IngredientService{
     }
 
     public function findById($id){
+        $db = DataBaseService::getInstance()->getDb();
 
+        $result = query("SELECT * FROM Ingredient WHERE id = '$id'")->fetch();
+
+        $ingredient = new IngredientEntity(
+
+        );
+
+        return $ingredient;
     }
 
     public function add(IngredientEntity $ingredient){
