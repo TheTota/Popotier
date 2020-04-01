@@ -1,6 +1,18 @@
 #search-section {
     min-height: 200px;
-    position: relative;
+    margin-top: 50px;
+    display: table;
+}
+
+.search-content {
+    display: table-cell;
+    vertical-align: middle;
+    margin: auto;
+}
+
+.center-search {
+    width: 60%;
+    margin: auto;
 }
 
 .vertical-center {
@@ -51,6 +63,10 @@ h2 {
 .recipe-image img {
     height: 350px;
     margin-left: -25%;
+}
+
+.blur {
+    filter: blur(2px);
 }
 
 .recipe-description {
