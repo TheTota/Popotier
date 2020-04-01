@@ -19,25 +19,23 @@
     </div>
     <hr class="separator">
 
+    <h2>Dernières recettes</h2>
+
     <div id="recipe-section" class="container">
         <div class="row">
             {% if recipes %}
                 {% for recipe in recipes %}
                     <div class="row-sm-4">
-                        <div class="recipe-block card">
+                        <div class="recipe-block">
                             <div class="recipe-image">
                                 {% if recipe.image %}
-
                                     <img src="{{ recipe.image }}" alt="image du plat">
-
                                 {% else %}
-
                                     <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat">
-
                                 {% endif %}
                             </div>
-                            <div>
-                                <p>{{ recipe.name }}</p>
+                            <div class="recipe-description">
+                                <strong class="center">{{ recipe.name }}</strong>
                             </div>
                         </div>
                     </div>

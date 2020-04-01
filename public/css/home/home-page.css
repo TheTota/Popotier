@@ -25,10 +25,16 @@
     justify-content: center;
 }
 
+h2 {
+    margin-bottom: 35px;
+}
+
 .recipe-block {
-    margin: 0 15px;
+    margin: 0 15px 15px;
     padding: 0;
     width: 270px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 15px;
 }
 
 .recipe-block:hover {
@@ -39,12 +45,23 @@
     overflow: hidden;
     height: 350px;
     width: 100%;
+    border-radius: 15px 15px 0 0;
 }
 
 .recipe-image img {
     height: 350px;
     margin-left: -25%;
 }
+
+.recipe-description {
+    height: 100px;
+    font-size: 1.2em;
+}
+
+.center {
+    text-align: center;
+}
+
 
 
 
