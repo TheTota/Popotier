@@ -20,7 +20,6 @@ class IndexController{
     }
 
     public static function pageNotFoundAction(){
-        require 'bootstrap.php';
         echo \Templater::getInstance()->getTwig()->render('layout/page-not-found.html.twig');
     }
 }
