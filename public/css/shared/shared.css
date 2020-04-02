@@ -1,0 +1,7 @@
+.light-blur {
+    filter: blur(2px);
+}
+
+strong-blur {
+    filter: blur(5px);
+}

@@ -1,0 +1,49 @@
+{% extends "layout/base.html.twig" %}
+
+{% block title %}{{ page }}{% endblock %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/public/css/home/home-page.css">
+{% endblock %}
+
+{% block content %}
+    <div id="search-section" class="container-fluid">
+        <div class="row search-content">
+            <div class="center-search">
+                <input class="form-control" type="text" placeholder="Une envie particulière?">
+            </div>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <h2>Dernières recettes</h2>
+
+    <div id="recipe-section" class="container">
+        <div class="row">
+            {% if recipes %}
+                {% for recipe in recipes %}
+                    <div class="row-sm-4">
+                        <div class="recipe-block">
+                            <div class="recipe-image">
+                                {% if recipe.image %}
+                                    <img src="{{ recipe.image }}" alt="image du plat">
+                                {% else %}
+                                    <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat">
+                                {% endif %}
+                            </div>
+                            <div class="recipe-description">
+                                <strong class="center">{{ recipe.name }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucune recette pour le moment :(</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+{% endblock %}
+
