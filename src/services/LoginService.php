@@ -14,15 +14,15 @@ class LoginService
     {
 
         $db = DataBaseService::getInstance()->getDb();
-        $userExists = false;
-        $req = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email . "' AND mot_de_passe='" . $password . "'")->fetch();
 
-        if ($req) {
-            $userExists = true;
-            session_start();
-            return $userExists;
+        $res = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email . "' AND mot_de_passe='" . $password . "'")->fetch();
+
+        if ($res) {
+
+            $_SESSION['alias'] = $res['pseudo'];
+            return true;
         } else {
-            return $userExists;
+            return false;
         }
     }
 

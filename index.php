@@ -2,6 +2,9 @@
 
 // An htaccess file has been configured to redirect all request to this file
 // This file will be our router
+
+require_once 'bootstrap.php';
+
 include 'src/controllers/IndexController.php';
 include 'src/controllers/LoginController.php';
 
@@ -9,7 +12,6 @@ use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
 
 $request = $_SERVER['REQUEST_URI'];
-var_dump($request);
 
 // For test purpose
 if( preg_match('/^(\/recette\/)[0-9]+/', $request)){
@@ -27,7 +29,11 @@ switch ($request) {
         break;
 
     case '/login':
-        LoginController::indexAction();
+        LoginController::loginAction();
+        break;
+
+    case '/logout':
+        LoginController::logoutAction();
         break;
 
     default:

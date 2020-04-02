@@ -4,20 +4,22 @@ require_once 'src/services/LoginService.php';
 use Src\Services\LoginService;
 
 
+
 class LoginController{
+
+
 	
-    public static function indexAction(){
-        require_once 'bootstrap.php';
+    public static function loginAction(){
+        $twig = \Templater::getInstance()->getTwig();
 
 		if(isset($_POST['connexion']))
 		{
 			if(isset($_POST['inputEmail']) && isset($_POST['inputPassword'])){
-            
-				$connect = LoginService::connect($_POST['inputEmail'],$_POST['inputPassword']);
 
-				if($connect) {
+				if(LoginService::connect($_POST['inputEmail'],$_POST['inputPassword'])) {
+
 					header('Location: /home');
-					
+
 				} else {
 					//echo "Wrong login or password.";
 					echo $twig->render('login/login.html.twig', ['loginError' => true]);
@@ -26,5 +28,12 @@ class LoginController{
 		} else {
 		        echo $twig->render('login/login.html.twig', []);
 		}
+    }
+
+    public static function logoutAction() {
+        session_start();
+        session_destroy();
+
+        header('location: /login');
     }
 }
