@@ -25,7 +25,7 @@ switch ($request) {
         break;
 
     case '/home':
-        IndexController::indexAction();
+        IndexController::homeAction();
         break;
 
     case '/login':

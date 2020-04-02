@@ -1,3 +1,5 @@
+// JS that handle the behaviour of the login form
+
 $(function() {
 
     const email = $('#inputEmail');
@@ -10,8 +12,9 @@ $(function() {
     password.on('input', enableOrDisableSubmit);
 
     function enableOrDisableSubmit() {
+        const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
-        if(email.val() == '' || password.val() == ''){
+        if(email.val() == '' || password.val() == '' || email.val().match(emailRegex) == null ){
             submit.prop('disabled', true);
         }else{
             submit.prop('disabled', false);

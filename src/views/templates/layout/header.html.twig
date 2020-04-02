@@ -14,10 +14,10 @@
         <form class="form-inline my-2 my-lg-0">
             <div class="user-actions">
                 {% if session.alias %}
-                    <a class="btn btn-primary" href="#">profil</a>
-                    <a class="btn btn-danger" href="/logout">deconnexion</a>
+                    <a class="btn btn-light btn-sm" href="#">profil</a>
+                    <a class="btn btn-outline-danger btn-sm" href="/logout">deconnexion</a>
                 {% else %}
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="btn btn-outline-primary" href="/login">Login</a>
                 {% endif %}
             </div>
         </form>
