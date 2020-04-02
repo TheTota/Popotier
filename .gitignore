@@ -50,9 +50,3 @@
 
 # Embedded web-server pid file
 /.web-server-pid
-
-# PhpStorm files
-/.idea
-
-#visual studio code
-/.vs

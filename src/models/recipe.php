@@ -1,8 +1,6 @@
 <?php
 
-namespace Src\Models;
-
-class RecipeEntity {
+class Recipe {
 
     private $id;
     private $name;
@@ -15,9 +13,9 @@ class RecipeEntity {
     private $evaluation;
     private $authorQuote;
     private $valid;
-    private $author; // UserEntity
+    private $author; // User
     private $type; // Type
-    private $ingredients; // IngredientEntity
+    private $ingredients; // Ingredient
 
 
     public function __construct(
@@ -31,11 +29,7 @@ class RecipeEntity {
         $meanPrice,
         $evaluation,
         $authorQuote,
-        $valid,
-        $author,
-        $type,
-        $ingredients
-    )
+        $valid)
     {
         $this->id = $id;
         $this->name = $name;
@@ -48,9 +42,6 @@ class RecipeEntity {
         $this->evaluation = $evaluation;
         $this->authorQuote = $authorQuote;
         $this->valid = $valid;
-        $this->author = $author;
-        $this->type = $type;
-        $this->ingredients = $ingredients;
     }
 
     /**
