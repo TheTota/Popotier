@@ -1,5 +1,5 @@
 $(function () {
-    //Properties
+    // Properties
     var lastNameError = true;
     var firstNameError = true;
     var emailError = true;
@@ -8,7 +8,7 @@ $(function () {
 
     const onlyLettersRegex = /[A-Za-z]+$/;
 
-    // Elements
+    // Elements selection
     const lastName = $('#inputLastName');
     const firstName = $('#inputFirstName');
     const email = $('#inputEmail');
@@ -16,7 +16,7 @@ $(function () {
     const alias = $('#inputAlias');
     const submitButton = $('#submit');
 
-
+    // Events
     lastName.on('input', () => {
         const lastNameValue = lastName.val();
 
@@ -48,6 +48,7 @@ $(function () {
         if(emailValue == ''){
             $('#emailExistError').hide();
             $('#emailError').hide();
+            emailError = true;
         } else {
             if(emailValue.match(emailRegex) != null) {
                 checkEmail().then(
@@ -77,6 +78,24 @@ $(function () {
         }
     });
 
+    password.on('change', () => {
+        const passwordValue = password.val();
+        const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
+
+        if (passwordValue.match(passwordRegex) != null) {
+            $('#passwordError').hide();
+            passwordError = false;
+        } else {
+            $('#passwordError').show();
+            passwordError = true;
+        }
+    });
+
+    $("form :input").on('change', () => {
+        handleSubmitButton();
+    });
+
+    // Functions
     function checkAlias() {
         return new Promise((resolve, reject) => {
             $.get('/user/verify/alias/' + alias.val(), function (data, status) {
@@ -116,24 +135,6 @@ $(function () {
             })
         })
     }
-
-    password.on('change', () => {
-        const passwordValue = password.val();
-        const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
-
-        if (passwordValue.match(passwordRegex) != null) {
-            $('#passwordError').hide();
-            passwordError = false;
-        } else {
-            $('#passwordError').show();
-            passwordError = true;
-        }
-    });
-
-    $("form :input").on('change', () => {
-
-        handleSubmitButton();
-    })
 
     function handleSubmitButton() {
         if (formHasErrors()) {

@@ -1,17 +1,13 @@
 <?php
 
 require_once 'src/utils/Templater.php';
-
 require_once 'src/models/UserEntity.php';
-
 require_once 'src/services/RoleService.php';
 require_once 'src/services/UserService.php';
 
 use Src\Models\UserEntity;
-
 use Src\Services\UserService;
 use Src\Services\RoleService;
-
 
 class UserController{
 
@@ -36,11 +32,17 @@ class UserController{
         }
 
         echo $twig->render('user/user-create.html.twig');
-
-
-
     }
 
+    /**
+     * @param $alias The alias choosed by the user
+     *
+     * This function is used to check with an ajax call if the alias is already used by another user
+     *
+     * Returns false if the user can not use this alias or true if he can
+     *
+     * Route: user/verify/alias
+     */
     public static function aliasVerify($alias){
         if(UserService::aliasExist($alias)){
             echo false;
@@ -49,6 +51,15 @@ class UserController{
         }
     }
 
+    /**
+     * @param $email The email choosed by the user
+     *
+     * This function is used to check with an ajax call if the email is already used by another user
+     *
+     * Returns false if the user can not use this email or true if he can
+     *
+     * Route: user/verify/email
+     */
     public static function emailVerify($email){
         if(UserService::emailExists($email)){
             echo false;

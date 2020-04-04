@@ -16,8 +16,6 @@ class LoginService
 
         $res = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email ."'")->fetch();
 
-
-
         if ($res) {
             // TODO: don't forget to remove that, it's for dev purpose
             if($email == 'defaultadmin@gmail.com') {

@@ -4,7 +4,6 @@
 // This file will be our router
 
 require_once 'bootstrap.php';
-
 require_once 'src/controllers/IndexController.php';
 require_once 'src/controllers/LoginController.php';
 require_once 'src/controllers/UserController.php';
@@ -14,12 +13,7 @@ use Src\Controllers\LoginController;
 
 $request = $_SERVER['REQUEST_URI'];
 
-// For test purpose
-if( preg_match('/^(\/recette\/)[0-9]+/', $request)){
-    $splitRequest = explode('/', $request);
-    var_dump($splitRequest[2]);die;
-}
-
+// When we need to fetch some parameters from the url, we need to use some Regular Expressions
 if( preg_match('/^(\/user\/verify\/alias\/)[a-zA-Z]+/', $request)){
     $splitRequest = explode('/', $request);
     $alias = $splitRequest[4];
@@ -32,6 +26,7 @@ if( preg_match('/^(\/user\/verify\/email\/)[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n
     $request = '/user/verify/email';
 }
 
+// Routing
 switch ($request) {
     case '/' :
         header('Location: /home');

@@ -66,7 +66,6 @@ class UserService
 
         $result = $db->query("SELECT pseudo from Utilisateur WHERE pseudo LIKE '$alias'")->fetch();
 
-
         if($result){
             return true;
         } else {
