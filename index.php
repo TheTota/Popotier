@@ -5,8 +5,9 @@
 
 require_once 'bootstrap.php';
 
-include 'src/controllers/IndexController.php';
-include 'src/controllers/LoginController.php';
+require_once 'src/controllers/IndexController.php';
+require_once 'src/controllers/LoginController.php';
+require_once 'src/controllers/UserController.php';
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
@@ -17,6 +18,18 @@ $request = $_SERVER['REQUEST_URI'];
 if( preg_match('/^(\/recette\/)[0-9]+/', $request)){
     $splitRequest = explode('/', $request);
     var_dump($splitRequest[2]);die;
+}
+
+if( preg_match('/^(\/user\/verify\/alias\/)[a-zA-Z]+/', $request)){
+    $splitRequest = explode('/', $request);
+    $alias = $splitRequest[4];
+    $request = '/user/verify/alias';
+}
+
+if( preg_match('/^(\/user\/verify\/email\/)[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/', $request)){
+    $splitRequest = explode('/', $request);
+    $email = $splitRequest[4];
+    $request = '/user/verify/email';
 }
 
 switch ($request) {
@@ -34,6 +47,18 @@ switch ($request) {
 
     case '/logout':
         LoginController::logoutAction();
+        break;
+
+    case '/user/add':
+        UserController::addAction();
+        break;
+
+    case '/user/verify/alias':
+        UserController::aliasVerify($alias);
+        break;
+
+    case '/user/verify/email':
+        UserController::emailVerify($email);
         break;
 
     default:

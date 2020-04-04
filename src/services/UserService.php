@@ -12,11 +12,13 @@ use Src\Models\UserEntity;
 class UserService
 {
 
-    public function fetchAll() {
+    public function fetchAll()
+    {
 
     }
 
-    public static function findByEmail($email) {
+    public static function findByEmail($email)
+    {
         $db = DataBaseService::getInstance()->getDb();
 
         $result = $db->query("SELECT * FROM Utilisateur WHERE email LIKE '$email'")->fetch();
@@ -33,9 +35,20 @@ class UserService
         return $user;
     }
 
-    public function add(UserEntity $user)
+    public static function add(UserEntity $user)
     {
+        $db = DataBaseService::getInstance()->getDb();
 
+        $request = $db->prepare("INSERT INTO Utilisateur VALUES (?, ?, ?, ?, ?, ?)");
+
+        $request->execute([
+            $user->getEmail(),
+            $user->getLastName(),
+            $user->getFirstName(),
+            $user->getAlias(),
+            password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            $user->getRole()->getId()
+        ]);
     }
 
     public function update(UserEntity $user)
@@ -43,8 +56,33 @@ class UserService
 
     }
 
-    public function delete(UserEntity $user){
+    public function delete(UserEntity $user)
+    {
 
+    }
+
+    public static function aliasExist($alias){
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT alias from Utilisateur WHERE pseudo LIKE '$alias'")->fetch();
+
+        if($result){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function emailExists($email){
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT email from Utilisateur WHERE email LIKE '$email'")->fetch();
+
+        if($result){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
