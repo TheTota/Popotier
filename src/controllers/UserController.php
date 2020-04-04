@@ -30,13 +30,15 @@ class UserController{
                 RoleService::findByName('Utilisateur')
             );
 
-            var_dump($user);
-
             UserService::add($user);
+            echo $twig->render('user/user-create.html.twig', ["userCreated" => "true"]);
+            return;
         }
 
-
         echo $twig->render('user/user-create.html.twig');
+
+
+
     }
 
     public static function aliasVerify($alias){

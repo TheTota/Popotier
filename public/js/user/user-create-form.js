@@ -17,7 +17,7 @@ $(function () {
     const submitButton = $('#submit');
 
 
-    lastName.on('input', function () {
+    lastName.on('input', () => {
         const lastNameValue = lastName.val();
 
         if (lastNameValue.match(onlyLettersRegex) != null || lastNameValue == '') {
@@ -29,7 +29,7 @@ $(function () {
         }
     });
 
-    firstName.on('input', function () {
+    firstName.on('input', () => {
         const firstNameValue = firstName.val();
 
         if (firstNameValue.match(onlyLettersRegex) != null || firstNameValue == '') {
@@ -41,16 +41,65 @@ $(function () {
         }
     });
 
-    email.on('change', function () {
+    email.on('change', () => {
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
         const emailValue = email.val();
 
-        $('#emailExistError').hide();
-        $('#emailError').hide();
+        if(emailValue == ''){
+            $('#emailExistError').hide();
+            $('#emailError').hide();
+        } else {
+            if(emailValue.match(emailRegex) != null) {
+                checkEmail().then(
+                    () => {
+                        handleSubmitButton();
+                    }
+                )
+            } else {
+                $('#emailError').show();
+                emailError = true;
+            }
+        }
+    });
 
-        if (emailValue.match(emailRegex) != null) {
+    alias.on('change',  () => {
+        const aliasValue = alias.val();
 
-            $.get('/user/verify/email/' + emailValue, function(data, status) {
+        $('#aliasError').hide();
+        aliasError = true;
+
+        if(aliasValue.length > 0){
+            checkAlias().then(
+                () => {
+                    handleSubmitButton();
+                }
+            )
+        }
+    });
+
+    function checkAlias() {
+        return new Promise((resolve, reject) => {
+            $.get('/user/verify/alias/' + alias.val(), function (data, status) {
+
+                if (status == 'success') {
+                    if (!data) {
+                        aliasError = true;
+                        $('#aliasError').show();
+                    } else {
+                        aliasError = false;
+                        $('#aliasError').hide();
+                    }
+                    resolve();
+                } else {
+                    reject();
+                }
+            });
+        })
+    }
+
+    function checkEmail() {
+        return new Promise((resolve, reject) => {
+            $.get('/user/verify/email/' + email.val(), function(data, status) {
 
                 if(status == 'success'){
                     if(!data){
@@ -60,36 +109,15 @@ $(function () {
                         emailError = false;
                         $('#emailExistError').hide();
                     }
+                    resolve();
+                } else {
+                    reject();
                 }
             })
-        } else {
-            $('#emailError').show();
-            emailError = true;
-        }
+        })
+    }
 
-    });
-
-    alias.on('change', function () {
-        const aliasValue = alias.val();
-
-        if(aliasValue.length > 0){
-            $.get('/user/verify/alias/' + aliasValue, function (data, status) {
-                if (status == 'success') {
-                    if (!data) {
-                        aliasError = true;
-                        $('#aliasError').show();
-                    } else {
-                        aliasError = false;
-                        $('#aliasError').hide();
-                    }
-                }
-            });
-        } else {
-            $('#aliasError').hide();
-        }
-    });
-
-    password.on('change', function () {
+    password.on('change', () => {
         const passwordValue = password.val();
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
 
@@ -102,7 +130,8 @@ $(function () {
         }
     });
 
-    $("form :input").on('change', function () {
+    $("form :input").on('change', () => {
+
         handleSubmitButton();
     })
 

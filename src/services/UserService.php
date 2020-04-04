@@ -64,7 +64,8 @@ class UserService
     public static function aliasExist($alias){
         $db = DataBaseService::getInstance()->getDb();
 
-        $result = $db->query("SELECT alias from Utilisateur WHERE pseudo LIKE '$alias'")->fetch();
+        $result = $db->query("SELECT pseudo from Utilisateur WHERE pseudo LIKE '$alias'")->fetch();
+
 
         if($result){
             return true;
