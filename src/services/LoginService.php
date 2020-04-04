@@ -27,6 +27,7 @@ class LoginService
 
             if(password_verify($password, $res['mot_de_passe'])){
                 $_SESSION['alias'] = $res['pseudo'];
+                $_SESSION['role'] = $res['role'];
                 return true;
             } else {
                 return false;

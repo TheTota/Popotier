@@ -1,12 +1,12 @@
 {% extends "layout/base.html.twig" %}
 
 {% block links %}
-    {{ parent()}}
+    {{ parent() }}
     <link rel="stylesheet" href="/public/css/user/user-form.css">
-{%  endblock %}
+{% endblock %}
 
 {% block content %}
-    <h2>Inscription</h2>
+    <h2>Formulaire d'inscription</h2>
 
     <div class="container">
         <div class="row">
@@ -17,7 +17,9 @@
                         Le compte a bien été créé, vous pouvez a présent vous connecter
                     </div>
                 {% endif %}
+
                 {{ include('user/user-create-form.html.twig') }}
+
             </div>
             <div class="col-md-3"></div>
         </div>
