@@ -14,23 +14,23 @@ class LoginService
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $res = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email ."'")->fetch();
+        $res = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email . "'")->fetch();
 
-        if ($res) {
+        if($res){
             // TODO: don't forget to remove that, it's for dev purpose
-            if($email == 'defaultadmin@gmail.com') {
+            if ($email == 'defaultadmin@gmail.com') {
                 $_SESSION['alias'] = $res['pseudo'];
                 return true;
             }
 
-            if(password_verify($password, $res['mot_de_passe'])){
+            if (password_verify($password, $res['mot_de_passe'])) {
                 $_SESSION['alias'] = $res['pseudo'];
                 $_SESSION['role'] = $res['role'];
                 return true;
             } else {
                 return false;
             }
-        } else {
+        }else{
             return false;
         }
     }
