@@ -27,7 +27,6 @@ class LoginController{
 			} 
 		} else {
 		        echo $twig->render('login/login.html.twig', []);
-				echo 'hey';
 		}
     }
 

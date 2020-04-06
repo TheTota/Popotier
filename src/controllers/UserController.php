@@ -14,6 +14,9 @@ use Src\Models\RecipeEntity;
 
 class UserController{
 
+		public static function indexAction(){
+			echo \Templater::getInstance()->getTwig()->render('user/user.html.twig', []);
+		}
     // routing : /user/add
     public static function addAction(){
         $twig = Templater::getInstance()->getTwig();
@@ -72,22 +75,17 @@ class UserController{
     }
 
 		public static function userRecipeAction() {
-			require_once 'bootstrap.php';
-			session_start();
 			$recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
-			echo $twig->render('user/userRecipe.html.twig', ['recipes'=>$recipes]);
+			echo \Templater::getInstance()->getTwig()->render('user/userRecipe.html.twig', ['recipes'=>$recipes]);
 
 		}
 
-    public static function userFavoriteAction() {
-    require_once 'bootstrap.php';
-    echo $twig->render('user/userFavorite.html.twig', []);
+		public static function userFavoriteAction() {
+			echo \Templater::getInstance()->getTwig()->render('user/userFavorite.html.twig', []);
     }
 
 		public static function userAddRecipeAction() {
-		require'bootstrap.php';
-			echo $twig->render('user/userAddRecipe.html.twig', []);
-
+			echo \Templater::getInstance()->getTwig()->render('user/userAddRecipe.html.twig', []);
 		}
 
 }
