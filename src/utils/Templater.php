@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Templater {
 
     private $twig;

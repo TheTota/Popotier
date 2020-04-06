@@ -18,8 +18,8 @@ class LoginService
         $res = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email . "' AND mot_de_passe='" . $password . "'")->fetch();
 
         if ($res) {
-
             $_SESSION['alias'] = $res['pseudo'];
+            $_SESSION['email'] = $res['email'];
             return true;
         } else {
             return false;
