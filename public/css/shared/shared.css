@@ -5,3 +5,7 @@
 strong-blur {
     filter: blur(5px);
 }
+
+.hide {
+    display: none;
+}

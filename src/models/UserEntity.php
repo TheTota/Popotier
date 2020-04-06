@@ -110,5 +110,23 @@ class UserEntity
         $this->password = $password;
     }
 
+    /**
+     * @return RoleEntity
+     */
+    public function getRole(): RoleEntity
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
+
+
 }
 

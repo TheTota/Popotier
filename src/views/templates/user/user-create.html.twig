@@ -1,0 +1,30 @@
+{% extends "layout/base.html.twig" %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/public/css/user/user-form.css">
+{% endblock %}
+
+{% block content %}
+    <h2>Formulaire d'inscription</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                {% if userCreated %}
+                    <div class="alert alert-success" role="alert">
+                        Le compte a bien été créé, vous pouvez a présent vous connecter
+                    </div>
+                {% endif %}
+                {{ include('user/user-create-form.html.twig') }}
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/public/js/user/user-create-form.js"></script>
+{% endblock %}

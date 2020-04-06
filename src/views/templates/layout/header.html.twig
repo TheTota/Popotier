@@ -14,10 +14,17 @@
         <form class="form-inline my-2 my-lg-0">
             <div class="user-actions">
                 {% if session.alias %}
-                    <a class="btn btn-light btn-sm" href="#">profil</a>
-                    <a class="btn btn-outline-danger btn-sm" href="/logout">deconnexion</a>
+                    {% if session.role == 'admin' %}
+                        <a class="btn btn-light btn-sm" href="#">Profil</a>
+                        <a class="btn btn-outline-danger btn-sm" href="/logout">Deconnexion</a>
+                    {% else %}
+                        <a class="btn btn-light btn-sm" href="#">Profil</a>
+                        <a class="btn btn-outline-danger btn-sm" href="/logout">Deconnexion</a>
+                    {% endif %}
+
                 {% else %}
-                    <a class="btn btn-outline-primary" href="/login">Login</a>
+                    <a class="btn btn-outline-primary" href="/user/add">Inscritpion</a>
+                    <a class="btn btn-outline-primary" href="/login">Connexion</a>
                 {% endif %}
             </div>
         </form>
