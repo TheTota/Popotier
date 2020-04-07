@@ -23,7 +23,6 @@ class RecipeService{
         $recipesArray =  array();
         foreach ($recipes as $recipe) {
             // TODO: fetch author, type and ingredients and create the entity before creating the recipe entity
-
             array_push(
                 $recipesArray,
                 new RecipeEntity(
@@ -37,9 +36,12 @@ class RecipeService{
                     $recipe['prix_moyen'],
                     $recipe['note_recette'],
                     $recipe['note_auteur'],
-                    true,
+                    $recipe['valide'],
                     UserService::findByEmail($recipe['email']),
                     TypeService::findById($recipe['id_type']),
+                    ($recipe['id_admin'] == null)? null : UserService::findByEmail($recipe['id_admin']),
+
+
                     null
                 )
             );
