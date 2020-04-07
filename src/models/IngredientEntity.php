@@ -5,17 +5,17 @@ namespace Src\Models;
 class IngredientEntity{
 
     private $id;
-    private $libelle;
+    private $name;
 
     /**
      * IngredientEntity constructor.
      * @param $id
-     * @param $libelle
+     * @param $name
      */
-    public function __construct($id, $libelle)
+    public function __construct($id, $name)
     {
         $this->id = $id;
-        $this->libelle = $libelle;
+        $this->name = $name;
     }
 
     /**
@@ -35,19 +35,19 @@ class IngredientEntity{
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLibelle()
+    public function getLibelle(): string
     {
-        return $this->libelle;
+        return $this->name;
     }
 
     /**
-     * @param mixed $libelle
+     * @param string $libelle
      */
-    public function setLibelle($libelle)
+    public function setLibelle(string $name)
     {
-        $this->libelle = $libelle;
+        $this->name = $name;
     }
 
 

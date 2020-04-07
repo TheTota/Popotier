@@ -2,6 +2,8 @@
 
 namespace Src\Models;
 
+use http\Client\Curl\User;
+
 class RecipeEntity {
 
     private $id;
@@ -16,9 +18,7 @@ class RecipeEntity {
     private $authorQuote;
     private $valid;
     private $author; // UserEntity
-    private $type; // Type
-    private $ingredients; // IngredientEntity
-
+    private $type; // TypeEntity
 
     public function __construct(
         $id,
@@ -33,8 +33,7 @@ class RecipeEntity {
         $authorQuote,
         $valid,
         $author,
-        $type,
-        $ingredients
+        $type
     )
     {
         $this->id = $id;
@@ -50,7 +49,6 @@ class RecipeEntity {
         $this->valid = $valid;
         $this->author = $author;
         $this->type = $type;
-        $this->ingredients = $ingredients;
     }
 
     /**
@@ -227,6 +225,38 @@ class RecipeEntity {
     public function setValid($valid)
     {
         $this->valid = $valid;
+    }
+
+    /**
+     * @return UserEntity
+     */
+    public function getAuthor(): UserEntity
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param UserEntity $author
+     */
+    public function setAuthor(UserEntity $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return RecipeTypeEntity
+     */
+    public function getType(): RecipeTypeEntity
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param RecipeTypeEntity $type
+     */
+    public function setType(RecipeTypeEntity $type)
+    {
+        $this->type = $type;
     }
 
 
