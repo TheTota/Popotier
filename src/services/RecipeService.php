@@ -1,6 +1,7 @@
 <?php
 
 namespace Src\Services;
+
 require_once 'src/models/RecipeEntity.php';
 
 require_once 'src/models/RecipeEntity.php';
