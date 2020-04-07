@@ -41,7 +41,7 @@ class RecipeService{
                     $recipe['note_recette'],
                     $recipe['note_auteur'],
                     true,
-                    UserService::findByEmail($recipe['email']),
+                    UserService::findByEmail($recipe['id_auteur']),
                     TypeService::findById($recipe['id_type']),
                     null
                 )
@@ -53,12 +53,29 @@ class RecipeService{
 
     public function findById($id){
       	$db = DataBaseService::getInstance()->getDb();
-		$recipe = $db->query("SELECT * FROM Recette WHERE ic='" . $id . "'")->fetch();
+		$req = $db->query("SELECT * FROM Recette WHERE id='" . $id . "'")->fetch();
+
+		$recipe = new RecipeEntity(
+					$req['id'],
+                    $req['nom'],
+                    $req['image'],
+                    $req['temps_cuisson'],
+                    $req['temps_preparation'],
+                    $req['nb_personnes'],
+                    $req['difficulte'],
+                    $req['prix_moyen'],
+                    $req['note_recette'],
+                    $req['note_auteur'],
+                    $req['valid'],
+                    $req['id_auteur'],
+                    $req['id_type'],
+                    null
+					);
 		return $recipe;
     }
 
     public function add(RecipeEntity $recipe){
-        //TODO
+        $db = DataBaseService::getInstance()->getDb();
     }
 
     public function update(RecipeEntity $recipe){
@@ -71,27 +88,58 @@ class RecipeService{
 
 	public static function fetchAllUserRecipe($userEmail){
 		$db = DataBaseService::getInstance()->getDb();
-		$req = $db->query("SELECT * FROM Recette WHERE email='" . $userEmail . "'")->fetchAll();
+		$req = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userEmail . "'")->fetchAll();
+		$recipes = array();
+
+		foreach($req as $row){
+			array_push($recipes,
+			$recipe = new RecipeEntity(
+                    $row['id'],
+                    $row['nom'],
+                    $row['image'],
+                    $row['temps_cuisson'],
+                    $row['temps_preparation'],
+                    $row['nb_personnes'],
+                    $row['difficulte'],
+                    $row['prix_moyen'],	
+                    $row['note_recette'],
+                    $row['note_auteur'],
+                    $row['valide'],
+                    UserService::findByEmail($row['id_auteur']),
+                    TypeService::findById($row['id_type']),
+                    null
+				)
+			);
+		}
+
+		return $recipes;
+	}
+
+	public static function fetchAllUserFavoriteRecipe($userEmail){
+		$db = DataBaseService::getInstance()->getDb();
+		$req = $db->query("SELECT * FROM Recette JOIN Utilisateur_Recette on Recette.id = Utilisateur_Recette.id_recette AND Utilisateur_Recette.email ='" . $userEmail . "'")->fetchAll();
+
 		$recipes = array();
 
 		foreach($req as $row){
 			$recipe = new RecipeEntity(
-				$row['id'],
-				$row['nom'],
-				$row['image'],
-				$row['temps_cuisson'],
-				$row['temps_preparation'],
-				$row['nb_personnes'],
-				$row['difficulte'],
-				$row['prix_moyen'],
-				$row['note_recette'],
-				$row['note_auteur'],
-				$row['id_type']
+					$row['id'],
+					$row['nom'],
+					$row['image'],
+					$row['temps_cuisson'],
+					$row['temps_preparation'],
+					$row['nb_personnes'],
+					$row['difficulte'],
+					$row['prix_moyen'],
+					$row['note_recette'],
+					$row['note_auteur'],
+					$row['valide'],
+					$row['id_auteur'],
+					$row['id_type'],
+					null
 			);
 			array_push($recipes, $recipe);
 		}
 		return $recipes;
 	}
-
-
 }

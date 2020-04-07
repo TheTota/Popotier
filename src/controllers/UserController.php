@@ -77,19 +77,24 @@ class UserController{
             echo true;
         }
     }
+	/**
+	* This function is used to view all the user's recipes.
+	*/
+	public static function viewRecipeAction() {
+		$recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
+		echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', 
+			[
+				'recipes'=>RecipeService::fetchAllUserRecipe($_SESSION['email']), 
+				'recipeList'=>true
+			]
+		);
 
-		public static function userRecipeAction() {
-			$recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
-			echo \Templater::getInstance()->getTwig()->render('user/userRecipe.html.twig', ['recipes'=>$recipes]);
+	}
 
-		}
-
-		public static function userFavoriteAction() {
-			echo \Templater::getInstance()->getTwig()->render('user/userFavorite.html.twig', []);
+	public static function viewFavoriteAction() {
+			$recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
+			echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes'=>$recipes]);
     }
 
-		public static function userAddRecipeAction() {
-			echo \Templater::getInstance()->getTwig()->render('user/userAddStep.html.twig', []);
-		}
-
 }
+

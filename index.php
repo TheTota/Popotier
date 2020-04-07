@@ -8,10 +8,12 @@ require_once 'bootstrap.php';
 include 'src/controllers/IndexController.php';
 include 'src/controllers/LoginController.php';
 include 'src/controllers/UserController.php';
+include 'src/controllers/RecipeController.php';
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
 use Src\Controllers\UserController;
+use Src\Controllers\RecipeController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -59,20 +61,21 @@ switch ($request) {
         break;
 
 	case '/user':
-		UserController::userRecipeAction();
+		UserController::indexAction();
 		break;
 
-	case '/user/recipe':
-		UserController::userRecipeAction();
+	case '/user/view/recipe-list':
+		UserController::viewRecipeAction();
 		break;
 
-	case '/user/favorite':
-		UserController::userFavoriteAction();
+	case '/user/view/favorite-list':
+		UserController::viewFavoriteRecipeAction();
 		break;
 
-	case '/user/addrecipe':
-		UserController::userAddRecipeAction();
+	case '/recipe/add':
+		RecipeController::addRecipeAction();
 		break;
+
     default:
         http_response_code(404);
         IndexController::pageNotFoundAction();

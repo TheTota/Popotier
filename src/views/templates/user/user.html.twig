@@ -1,10 +1,9 @@
 {% extends "layout/base.html.twig" %}
 
 {% block content %}
-
 	<ul class="nav nav-tabs text-dark">
-	 <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/recipe">Mes recettes</a></li>
-	 <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/favorite">Mes favoris</a></li>
+	 <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/recipe-list">Mes recettes</a></li>
+	 <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/favorite-list">Mes favoris</a></li>
 	</ul>
 
 	{%block recipeList %}{%endblock%}
