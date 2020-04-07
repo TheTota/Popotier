@@ -7,9 +7,11 @@ require_once 'bootstrap.php';
 require_once 'src/controllers/IndexController.php';
 require_once 'src/controllers/LoginController.php';
 require_once 'src/controllers/UserController.php';
+require_once 'src/controllers/AdminController.php';
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
+use Src\Controller\AdminController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -54,6 +56,10 @@ switch ($request) {
 
     case '/user/verify/email':
         UserController::emailVerify($email);
+        break;
+
+    case '/admin/view':
+        AdminController::viewAction();
         break;
 
     default:
