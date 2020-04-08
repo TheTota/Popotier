@@ -7,7 +7,6 @@ class StepEntity {
     private $id;
     private $position;
     private $description;
-    private $recipe; // RecipeEntity
 
     /**
      * StepEntity constructor.
@@ -16,12 +15,11 @@ class StepEntity {
      * @param $description
      * @param $recipe
      */
-    public function __construct($id, $position, $description, $recipe)
+    public function __construct($id, $position, $description)
     {
         $this->id = $id;
         $this->position = $position;
         $this->description = $description;
-        $this->recipe = $recipe;
     }
 
     /**
@@ -41,17 +39,17 @@ class StepEntity {
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getPosition(): integer
+    public function getPosition(): int
     {
         return $this->position;
     }
 
     /**
-     * @param integer $position
+     * @param int $position
      */
-    public function setPosition(integer $position)
+    public function setPosition(int $position)
     {
         $this->position = $position;
     }
@@ -71,24 +69,4 @@ class StepEntity {
     {
         $this->description = $description;
     }
-
-    /**
-     * @return RecipeEntity
-     */
-    public function getRecipe(): RecipeEntity
-    {
-        return $this->recipe;
-    }
-
-    /**
-     * @param RecipeEntity $recipe
-     */
-    public function setRecipe(RecipeEntity $recipe)
-    {
-        $this->recipe = $recipe;
-    }
-
-
-
-
 }

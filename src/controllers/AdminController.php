@@ -17,7 +17,21 @@ class AdminController
         $recipesToValidate = RecipeService::findAllThatNeedValidation();
 
         echo $twig->render(
-            'admin/admin-page.html.twig',
+            'admin/admin-recipe.html.twig',
+            [
+                'recipesToValidate' => $recipesToValidate
+            ]);
+
+    }
+
+    public static function viewRecipesAction() {
+        $twig = \Templater::getInstance()->getTwig();
+
+        $recipesToValidate = RecipeService::findAllThatNeedValidation();
+
+
+        echo $twig->render(
+            'admin/admin-recipe.html.twig',
             [
                 'recipesToValidate' => $recipesToValidate
             ]);

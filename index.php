@@ -8,24 +8,37 @@ require_once 'src/controllers/IndexController.php';
 require_once 'src/controllers/LoginController.php';
 require_once 'src/controllers/UserController.php';
 require_once 'src/controllers/AdminController.php';
+require_once 'src/controllers/RecipeController.php';
+
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
 use Src\Controller\AdminController;
+use Src\Controller\RecipeController;
 
 $request = $_SERVER['REQUEST_URI'];
 
 // When we need to fetch some parameters from the url, we need to use some Regular Expressions
+
+// For /user/verify/alias/:alias
 if( preg_match('/^(\/user\/verify\/alias\/)[a-zA-Z]+/', $request)){
     $splitRequest = explode('/', $request);
     $alias = $splitRequest[4];
     $request = '/user/verify/alias';
 }
 
+// For /user/verify/email/:email
 if( preg_match('/^(\/user\/verify\/email\/)[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/', $request)){
     $splitRequest = explode('/', $request);
     $email = $splitRequest[4];
     $request = '/user/verify/email';
+}
+
+// For /recipe/view/:id
+if( preg_match('/^(\/recipe\/view\/)[0-9]+/', $request)){
+    $splitRequest = explode('/', $request);
+    $recipe = $splitRequest[3];
+    $request = '/recipe/view/:id';
 }
 
 // Routing
@@ -60,6 +73,14 @@ switch ($request) {
 
     case '/admin/view':
         AdminController::viewAction();
+        break;
+
+    case '/admin/view/recipes':
+        AdminController::viewRecipesAction();
+        break;
+
+    case '/recipe/view/:id':
+        RecipeController::viewAction($recipe);
         break;
 
     default:
