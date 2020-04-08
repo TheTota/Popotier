@@ -76,14 +76,73 @@ class RecipeService{
 
     public function add(RecipeEntity $recipe){
         $db = DataBaseService::getInstance()->getDb();
+		$req = $db->prepare("INSERT INTO Recette (
+							nom,
+							image,
+							temps_cuisson,
+							temps_preparation,
+							nb_personnes,
+							difficulte,
+							prix_moyen,
+							note_auteur, 
+							valid,
+							id_auteur, 
+							id_type
+							) VALUES(?,?,?,?,?,?,?,?,?,?);");
+
+		$req->execute([
+			$recipe->getName(),
+			$recipe->getImage(),
+			$recipe->getCookingTime(),
+			$recipe->getPreparationTime(),
+			$recipe->getPersonNumber(),
+			$recipe->getDifficulty(),
+			$recipe->getMeanPrice(),
+			$recipe->getAuthorQuote(),
+			$recipe->getValid(),
+			$recipe->getAuthor(),
+			$recipe->getType()		
+		]);
     }
 
     public function update(RecipeEntity $recipe){
-        //TODO
+	   $db = DataBaseService::getInstance()->getDb();
+       $req = "UPDATE Recette SET 
+							nom=?,
+							image=?,
+							temps_cuisson=?,
+							temps_preparation=?,
+							nb_personnes=?,
+							difficulte=?,
+							prix_moyen=?,
+							note_auteur=?, 
+							valid=?,
+							id_auteur=?, 
+							id_type=?, 
+							valid=?,
+							id_admin=? 
+							WHERE id=?";
+		$db->prepare($req)->execute([
+			$recipe->getName(),
+			$recipe->getImage(),
+			$recipe->getCookingTime(),
+			$recipe->getPreparationTime(),
+			$recipe->getPersonNumber(),
+			$recipe->getDifficulty(),
+			$recipe->getMeanPrice(),
+			$recipe->getAuthorQuote(),
+			$recipe->getValid(),
+			$recipe->getAuthor(),
+			$recipe->getType(),
+			$recipe->getValid(),
+			$recipe->getAdmin(),
+			$recupe->getId()
+		]);
     }
 
     public function delete(RecipeEntity $id){
-        //TODO
+       $db = DataBaseService::getInstance()->getDb();
+	   $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
     }
 
 	public static function fetchAllUserRecipe($userEmail){

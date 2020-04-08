@@ -61,7 +61,7 @@ switch ($request) {
         break;
 
 	case '/user':
-		UserController::indexAction();
+		UserController::viewRecipeAction();
 		break;
 
 	case '/user/view/recipe-list':
@@ -69,7 +69,7 @@ switch ($request) {
 		break;
 
 	case '/user/view/favorite-list':
-		UserController::viewFavoriteRecipeAction();
+		UserController::viewFavoriteAction();
 		break;
 
 	case '/recipe/add':

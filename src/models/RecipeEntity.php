@@ -229,5 +229,60 @@ class RecipeEntity {
         $this->valid = $valid;
     }
 
+	  /**
+     * @return UserEntity
+     */
+    public function getAuthor(): UserEntity
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param UserEntity $author
+     */
+    public function setAuthor(UserEntity $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return RecipeTypeEntity
+     */
+    public function getType(): RecipeTypeEntity
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param RecipeTypeEntity $type
+     */
+    public function setType(RecipeTypeEntity $type)
+    {
+        $this->type = $type;
+    }
+
+	  /**
+     * @param RecipeTypeEntity $type
+     */
+    public function setType(RecipeTypeEntity $type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return UserEntity
+     */
+    public function getAdmin(): UserEntity
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param UserEntity $admin
+     */
+    public function setAdmin(UserEntity $admin)
+    {
+        $this->admin = $admin;
+    }
 
 }
