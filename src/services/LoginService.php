@@ -20,6 +20,7 @@ class LoginService
             // TODO: don't forget to remove that, it's for dev purpose
             if($email == 'defaultadmin@gmail.com') {
                 $_SESSION['alias'] = $res['pseudo'];
+                $_SESSION['role'] = ($res['id_role'] == '1')? 'admin' : 'user';
                 return true;
             }
 
