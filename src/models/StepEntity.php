@@ -7,7 +7,7 @@ class StepEntity {
     private $id;
     private $position;
     private $description;
-    private $recipe;
+    private $recipe; // RecipeEntity
 
     /**
      * StepEntity constructor.
@@ -41,49 +41,49 @@ class StepEntity {
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
-    public function getPosition()
+    public function getPosition(): integer
     {
         return $this->position;
     }
 
     /**
-     * @param mixed $position
+     * @param integer $position
      */
-    public function setPosition($position)
+    public function setPosition(integer $position)
     {
         $this->position = $position;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
     /**
-     * @return mixed
+     * @return RecipeEntity
      */
-    public function getRecipe()
+    public function getRecipe(): RecipeEntity
     {
         return $this->recipe;
     }
 
     /**
-     * @param mixed $recipe
+     * @param RecipeEntity $recipe
      */
-    public function setRecipe($recipe)
+    public function setRecipe(RecipeEntity $recipe)
     {
         $this->recipe = $recipe;
     }
