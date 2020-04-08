@@ -1,0 +1,10 @@
+{% extends 'admin-page.html.twig' %}
+
+{% block admin_content %}
+    <h3>Liste des recettes a valider</h3>
+    {% for recipe in recipesToValidate %}
+        <div class="container">
+            {{ recipe.name }}
+        </div>
+    {% endfor %}
+{% endblock %}

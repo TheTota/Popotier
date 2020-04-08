@@ -20,34 +20,7 @@ class RecipeService{
 
         $recipes = $db->query('SELECT * FROM Recette');
 
-        $recipesArray =  array();
-        foreach ($recipes as $recipe) {
-            // TODO: fetch author, type and ingredients and create the entity before creating the recipe entity
-            array_push(
-                $recipesArray,
-                new RecipeEntity(
-                    $recipe['id'],
-                    $recipe['nom'],
-                    $recipe['image'],
-                    $recipe['temps_cuisson'],
-                    $recipe['temps_preparation'],
-                    $recipe['nb_personnes'],
-                    $recipe['difficulte'],
-                    $recipe['prix_moyen'],
-                    $recipe['note_recette'],
-                    $recipe['note_auteur'],
-                    $recipe['valide'],
-                    UserService::findByEmail($recipe['email']),
-                    TypeService::findById($recipe['id_type']),
-                    ($recipe['id_admin'] == null)? null : UserService::findByEmail($recipe['id_admin']),
-
-
-                    null
-                )
-            );
-        }
-
-        return $recipesArray;
+        return self::createRecipeArray($recipes);
     }
 
     public function findById($id){
@@ -64,6 +37,41 @@ class RecipeService{
 
     public function delete(RecipeEntity $id){
         //TODO
+    }
+
+    public static function findAllThatNeedValidation(): array{
+        $db = DataBaseService::getInstance()->getDb();
+
+        $recipes = $db->query('SELECT * FROM Recette WHERE valide = false');
+
+        return self::createRecipeArray($recipes);
+    }
+
+    private static function createRecipeArray(\PDOStatement $recipes): array
+    {
+        $recipesArray = array();
+        foreach ($recipes as $recipe) {
+            array_push(
+                $recipesArray,
+                new RecipeEntity(
+                    $recipe['id'],
+                    $recipe['nom'],
+                    $recipe['image'],
+                    $recipe['temps_cuisson'],
+                    $recipe['temps_preparation'],
+                    $recipe['nb_personnes'],
+                    $recipe['difficulte'],
+                    $recipe['prix_moyen'],
+                    $recipe['note_recette'],
+                    $recipe['note_auteur'],
+                    $recipe['valide'],
+                    UserService::findByEmail($recipe['id_auteur']),
+                    TypeService::findById($recipe['id_type']),
+                    ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin'])
+                )
+            );
+        }
+        return $recipesArray;
     }
 
 }
