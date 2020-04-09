@@ -2,19 +2,19 @@
 
 // An htaccess file has been configured to redirect all request to this file
 // This file will be our router
-
 require_once 'bootstrap.php';
+
 require_once 'src/controllers/IndexController.php';
 require_once 'src/controllers/LoginController.php';
-require_once 'src/controllers/UserController.php';
 require_once 'src/controllers/AdminController.php';
 require_once 'src/controllers/RecipeController.php';
-
+require_once 'src/controllers/UserController.php';
 
 use Src\Controllers\IndexController;
 use Src\Controllers\LoginController;
-use Src\Controller\AdminController;
-use Src\Controller\RecipeController;
+use Src\Controllers\AdminController;
+use Src\Controllers\RecipeController;
+use Src\Controllers\UserController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -77,6 +77,22 @@ switch ($request) {
     case '/user/verify/email':
         UserController::emailVerify($email);
         break;
+
+	case '/user':
+		UserController::viewRecipeAction();
+		break;
+
+	case '/user/view/recipe-list':
+		UserController::viewRecipeAction();
+		break;
+
+	case '/user/view/favorite-list':
+		UserController::viewFavoriteAction();
+		break;
+
+	case '/recipe/add':
+		RecipeController::addRecipeAction();
+		break;
 
     case '/admin/view/dashboard':
         adminGuard();

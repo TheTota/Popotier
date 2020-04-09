@@ -1,6 +1,7 @@
 <?php
 
-namespace Src\Controller;
+
+namespace Src\Controllers;
 
 require_once 'src/services/UserService.php';
 require_once 'src/services/RecipeService.php';
@@ -8,7 +9,13 @@ require_once 'src/services/RecipeService.php';
 use Src\Services\RecipeService;
 use Src\Services\UserService;
 
-class RecipeController{
+class RecipeController {
+
+
+    public static function addRecipeAction() {
+        echo \Templater::getInstance()->getTwig()->render('recipe/recipe-step-create.html.twig', []);
+
+    }
 
     /**
      * Route: /recipe/summary/:id

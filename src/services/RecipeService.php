@@ -4,6 +4,8 @@ namespace Src\Services;
 
 require_once 'src/models/RecipeEntity.php';
 
+require_once 'src/models/RecipeEntity.php';
+
 require_once 'src/services/UserService.php';
 require_once 'src/services/TypeService.php';
 require_once 'src/services/IngredientService.php';
@@ -18,6 +20,7 @@ use Src\Services\StepService;
 class RecipeService
 {
 
+	private $db;
 
     public static function fetchAll()
     {
@@ -52,11 +55,6 @@ class RecipeService
             ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
             StepService::findByRecette($recipe['id'])
         );
-    }
-
-    public function add(RecipeEntity $recipe)
-    {
-        //TODO
     }
 
     public static function update(RecipeEntity $recipe)
@@ -101,9 +99,9 @@ class RecipeService
         }
     }
 
-    public function delete(RecipeEntity $id)
-    {
-        //TODO
+    public static function delete(RecipeEntity $id){
+        $db = DataBaseService::getInstance()->getDb();
+        $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
     }
 
     public static function findAllThatNeedValidation(): array
@@ -114,6 +112,52 @@ class RecipeService
 
         return self::createRecipeArray($recipes);
     }
+
+    public static function add(RecipeEntity $recipe){
+        $db = DataBaseService::getInstance()->getDb();
+        $req = $db->prepare("INSERT INTO Recette (
+							nom,
+							image,
+							temps_cuisson,
+							temps_preparation,
+							nb_personnes,
+							difficulte,
+							prix_moyen,
+							note_auteur, 
+							valid,
+							id_auteur, 
+							id_type
+							) VALUES(?,?,?,?,?,?,?,?,?,?);");
+
+        $req->execute([
+            $recipe->getName(),
+            $recipe->getImage(),
+            $recipe->getCookingTime(),
+            $recipe->getPreparationTime(),
+            $recipe->getPersonNumber(),
+            $recipe->getDifficulty(),
+            $recipe->getMeanPrice(),
+            $recipe->getAuthorQuote(),
+            $recipe->getValid(),
+            $recipe->getAuthor(),
+            $recipe->getType()
+        ]);
+    }
+
+    public static function fetchAllUserFavoriteRecipe($userEmail){
+        $db = DataBaseService::getInstance()->getDb();
+        $recipes = $db->query("SELECT * FROM Recette JOIN Utilisateur_Recette on Recette.id = Utilisateur_Recette.id_recette AND Utilisateur_Recette.email ='" . $userEmail . "'");
+
+        return self::createRecipeArray($recipes);
+    }
+
+    public static function fetchAllUserRecipe($userEmail){
+        $db = DataBaseService::getInstance()->getDb();
+        $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userEmail . "'");
+
+        return self::createRecipeArray($recipes);
+    }
+
 
     private static function createRecipeArray(\PDOStatement $recipes): array
     {
@@ -143,5 +187,4 @@ class RecipeService
         }
         return $recipesArray;
     }
-
 }

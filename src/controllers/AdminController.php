@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Controller;
+namespace Src\Controllers;
 
 require_once 'src/services/RecipeService.php';
 

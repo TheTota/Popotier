@@ -1,21 +1,36 @@
 <?php
 
+namespace Src\Controllers;
+
 require_once 'src/utils/Templater.php';
+
 require_once 'src/models/UserEntity.php';
 require_once 'src/services/RoleService.php';
 require_once 'src/services/UserService.php';
+require_once 'src/models/RecipeEntity.php';
+require_once 'src/services/RecipeService.php';
 
-use Src\Models\UserEntity;
 use Src\Services\UserService;
 use Src\Services\RoleService;
+use Src\Models\UserEntity;
+use Src\Services\RecipeService;
 
-class UserController{
+
+
+class UserController
+{
+
+    public static function indexAction()
+    {
+        echo \Templater::getInstance()->getTwig()->render('user/user.html.twig', []);
+    }
 
     // routing : /user/add
-    public static function addAction(){
+    public static function addAction()
+    {
         $twig = Templater::getInstance()->getTwig();
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
 
             $user = new UserEntity(
                 $_POST['email'],
@@ -43,8 +58,9 @@ class UserController{
      *
      * Route: user/verify/alias
      */
-    public static function aliasVerify($alias){
-        if(UserService::aliasExist($alias)){
+    public static function aliasVerify($alias)
+    {
+        if (UserService::aliasExist($alias)) {
             echo false;
         } else {
             echo true;
@@ -60,11 +76,34 @@ class UserController{
      *
      * Route: user/verify/email
      */
-    public static function emailVerify($email){
-        if(UserService::emailExists($email)){
+    public static function emailVerify($email)
+    {
+        if (UserService::emailExists($email)) {
             echo false;
         } else {
             echo true;
         }
     }
+
+    /**
+     * This function is used to view all the user's recipes.
+     */
+    public static function viewRecipeAction()
+    {
+        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
+        echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
+            [
+                'recipes' => $recipes,
+                'recipeList' => true
+            ]
+        );
+    }
+
+    public static function viewFavoriteAction()
+    {
+        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
+        echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
+    }
+
 }
+
