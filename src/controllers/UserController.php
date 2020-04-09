@@ -28,7 +28,7 @@ class UserController
     // routing : /user/add
     public static function addAction()
     {
-        $twig = Templater::getInstance()->getTwig();
+        $twig = \Templater::getInstance()->getTwig();
 
         if (!empty($_POST)) {
 
