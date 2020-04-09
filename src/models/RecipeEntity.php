@@ -2,11 +2,15 @@
 
 namespace Src\Models;
 
-class RecipeEntity {
+use http\Client\Curl\User;
+
+class RecipeEntity
+{
 
     private $id;
     private $name;
     private $image;
+    private $creationDate;
     private $cookingTime;
     private $preparationTime;
     private $personNumber;
@@ -16,14 +20,15 @@ class RecipeEntity {
     private $authorQuote;
     private $valid;
     private $author; // UserEntity
-    private $type; // Type
-    private $ingredients; // IngredientEntity
-
+    private $type; // TypeEntity
+    private $admin; // UserEntity
+    private $steps; // StepEntity[]
 
     public function __construct(
         $id,
         $name,
         $image,
+        $creationDate,
         $cookingTime,
         $preparationTime,
         $personNumber,
@@ -34,12 +39,14 @@ class RecipeEntity {
         $valid,
         $author,
         $type,
-        $ingredients
+        $admin,
+        $steps
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->image = $image;
+        $this->creationDate = $creationDate;
         $this->cookingTime = $cookingTime;
         $this->preparationTime = $preparationTime;
         $this->personNumber = $personNumber;
@@ -50,7 +57,8 @@ class RecipeEntity {
         $this->valid = $valid;
         $this->author = $author;
         $this->type = $type;
-        $this->ingredients = $ingredients;
+        $this->admin = $admin;
+        $this->steps = $steps;
     }
 
     /**
@@ -142,6 +150,22 @@ class RecipeEntity {
     }
 
     /**
+     * @return mixed
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param mixed $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
+    }
+
+    /**
      * @param int $personNumber
      */
     public function setPersonNumber($personNumber)
@@ -227,6 +251,70 @@ class RecipeEntity {
     public function setValid($valid)
     {
         $this->valid = $valid;
+    }
+
+    /**
+     * @return UserEntity
+     */
+    public function getAuthor(): UserEntity
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param UserEntity $author
+     */
+    public function setAuthor(UserEntity $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return RecipeTypeEntity
+     */
+    public function getType(): RecipeTypeEntity
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param RecipeTypeEntity $type
+     */
+    public function setType(RecipeTypeEntity $type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return UserEntity
+     */
+    public function getAdmin(): UserEntity
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param UserEntity $admin
+     */
+    public function setAdmin(UserEntity $admin)
+    {
+        $this->admin = $admin;
+    }
+
+    /**
+     * @return StepEntity[]
+     */
+    public function getSteps(): array
+    {
+        return $this->steps;
+    }
+
+    /**
+     * @param StepEntity[] $steps
+     */
+    public function setSteps(array $steps)
+    {
+        $this->steps = $steps;
     }
 
 

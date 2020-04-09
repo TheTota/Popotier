@@ -1,0 +1,44 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/public/css/admin/admin-page.css">
+{% endblock %}
+{% block scripts %}
+    <script src="/public/js/admin/admin-page.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <nav id="sidenav">
+            <div class="sidebar-header">
+                <h3>Administration</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a id="dashboard" href="/admin/view/dashboard" onclick="setActive(this)">Dashboard</a>
+                </li>
+                <li>
+                    <a id="recipe" href="/admin/view/recipes" onclick="setActive(this)">Recettes</a>
+                </li>
+                <li>
+                    <a id="tag" href="#" onclick="setActive(this)">Tags</a>
+                </li>
+                <li>
+                    <a id="allergy" href="#" onclick="setActive(this)">Allergènes</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="admin-content">
+            <button type="button" id="sidenavCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+
+            {% block admin_content %}
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

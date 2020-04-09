@@ -24,6 +24,16 @@ class RoleService{
         return $role;
     }
 
+    public static function findByName($name): RoleEntity{
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT * FROM Role WHERE libelle = '$name'")->fetch();
+
+        $role = new RoleEntity($result['id'], $result['libelle']);
+
+        return $role;
+    }
+
     public function add(RoleEntity $role){
 
     }

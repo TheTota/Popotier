@@ -1,6 +1,6 @@
 // JS that handle the behaviour of the login form
 
-$(function() {
+$(() => {
 
     const email = $('#inputEmail');
     const password = $('#inputPassword');

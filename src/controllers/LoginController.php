@@ -1,6 +1,8 @@
 <?php
 namespace Src\Controllers;
+
 require_once 'src/services/LoginService.php';
+
 use Src\Services\LoginService;
 
 
@@ -17,7 +19,6 @@ class LoginController{
 			if(isset($_POST['inputEmail']) && isset($_POST['inputPassword'])){
 
 				if(LoginService::connect($_POST['inputEmail'],$_POST['inputPassword'])) {
-
 					header('Location: /home');
 
 				} else {

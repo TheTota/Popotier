@@ -1,9 +1,14 @@
 html, body {
     height: 100%;
+    padding-top: 28px;
 }
 
 #content {
     height: 100%;
     width: 80%;
     margin: auto;
+}
+
+button:hover:disabled {
+    cursor: no-drop;
 }

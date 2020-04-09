@@ -2,6 +2,8 @@
 
 namespace Src\Models;
 
+use http\Client\Curl\User;
+
 class CommentEntity{
 
     private $id;
@@ -36,17 +38,17 @@ class CommentEntity{
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
@@ -68,33 +70,33 @@ class CommentEntity{
     }
 
     /**
-     * @return mixed
+     * @return UserEntity
      */
-    public function getUser()
+    public function getUser(): UserEntity
     {
         return $this->user;
     }
 
     /**
-     * @param mixed $user
+     * @param UserEntity $user
      */
-    public function setUser($user)
+    public function setUser(UserEntity $user)
     {
         $this->user = $user;
     }
 
     /**
-     * @return mixed
+     * @return RecipeEntity
      */
-    public function getRecipe()
+    public function getRecipe(): RecipeEntity
     {
         return $this->recipe;
     }
 
     /**
-     * @param mixed $recipe
+     * @param RecipeEntity $recipe
      */
-    public function setRecipe($recipe)
+    public function setRecipe(RecipeEntity $recipe)
     {
         $this->recipe = $recipe;
     }
