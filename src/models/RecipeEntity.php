@@ -261,14 +261,6 @@ class RecipeEntity {
         $this->type = $type;
     }
 
-	  /**
-     * @param RecipeTypeEntity $type
-     */
-    public function setType(RecipeTypeEntity $type)
-    {
-        $this->type = $type;
-    }
-
     /**
      * @return UserEntity
      */

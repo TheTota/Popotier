@@ -136,7 +136,7 @@ class RecipeService{
 			$recipe->getType(),
 			$recipe->getValid(),
 			$recipe->getAdmin(),
-			$recupe->getId()
+			$recipe->getId()
 		]);
     }
 

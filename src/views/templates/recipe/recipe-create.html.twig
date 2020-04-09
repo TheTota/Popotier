@@ -9,6 +9,7 @@
 				<input type="image" class="form-control" id="photo">
 
 			</div>
+
 			<div class="form-group">
 				<label for="name"> Nom de la recette </label>
 				<input type="text" class="form-control" id="name" placeholder="Nom">
@@ -18,26 +19,43 @@
 				<label for="cookingTime"> Temps de cuisson </label>
 				<input type="number" class="form-control" id="cookingTime">
 			</div>
+
 			<div class="form-group">
 				<label for="preparationTime"> Temps de préparation </label>
 				<input type="number" class="form-control" id="preparationTime">
 			</div>
+
 			<div class="form-group">
 				<label for="personNumber"> Nombre de personne </label>
-				<input type="number" class="form-control" id="personNumber">
+				<select type="number" class="form-control" id="personNumber">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+				</select>
 			</div>
+
 			<div class="form-group">
 				<label for="difficulty"> Difficulté </label>
-				<input type="number" class="form-control" id="difficulty">
+				<select type="number" class="form-control" id="difficulty">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
 			</div>
+
 			<div class="form-group">
 				<label for="meanPrice"> Prix moyen  </label>
 				<input type="number" class="form-control" id="meanPrice">
 			</div>
-			<div class="form-group">
-				<label for="evaluation"> Note   </label>
-				<input type="number" class="form-control" id="evaluation">
-			</div>
+
 			<div class="form-group">
 				<label for="authorQuote"> Annotations   </label>
 				<textarea  class="form-control" id="authorQuote"></textarea>

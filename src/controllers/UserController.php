@@ -84,7 +84,7 @@ class UserController{
 		$recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
 		echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', 
 			[
-				'recipes'=>RecipeService::fetchAllUserRecipe($_SESSION['email']), 
+				'recipes'=>$recipes, 
 				'recipeList'=>true
 			]
 		);
