@@ -27,7 +27,7 @@ function getRecipeSummaryRequest(id) {
 function validateRecipe(idRecipe) {
     validateRecipeRequest(idRecipe).then(
         () => {
-            window.location.replace("/admin/view");
+            window.location.replace("/admin/view/recipes");
         }
     )
 }

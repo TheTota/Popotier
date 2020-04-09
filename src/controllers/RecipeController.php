@@ -36,8 +36,10 @@ class RecipeController{
         $recipe->setValid(true);
         $recipe->setAdmin(UserService::findByEmail($_SESSION['email']));
 
-        RecipeService::update($recipe);
-
-        echo true;
+        if(RecipeService::update($recipe)){
+            echo true;
+        } else {
+            echo false;
+        }
     }
 }

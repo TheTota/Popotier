@@ -13,9 +13,6 @@ class AdminController
     {
         $twig = \Templater::getInstance()->getTwig();
 
-        //TODO: Get all recipes that need validation
-        $recipesToValidate = RecipeService::findAllThatNeedValidation();
-
         echo $twig->render(
             'admin/admin-dashboard.html.twig'
         );
@@ -26,7 +23,6 @@ class AdminController
         $twig = \Templater::getInstance()->getTwig();
 
         $recipesToValidate = RecipeService::findAllThatNeedValidation();
-
 
         echo $twig->render(
             'admin/admin-recipe.html.twig',

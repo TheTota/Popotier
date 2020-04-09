@@ -79,7 +79,7 @@ class RecipeService
             WHERE id = ?
         ");
 
-        $statement->execute([
+        $response = $statement->execute([
             $recipe->getName(),
             $recipe->getImage(),
             $recipe->getCookingTime(),
@@ -93,6 +93,12 @@ class RecipeService
             $recipe->getAdmin()->getEmail(),
             $recipe->getId()
         ]);
+
+        if($response){
+            return true;
+        } else {
+            return new \PDOException();
+        }
     }
 
     public function delete(RecipeEntity $id)
