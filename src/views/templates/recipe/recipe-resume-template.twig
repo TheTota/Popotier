@@ -2,9 +2,9 @@
     <h3>{{ recipe.name }}</h3>
     <div class="row-md">
         {% if recipe.image %}
-            <img src="{{ recipe.image }}" alt="image of the recipe">
+            <img class="width100" src="{{ recipe.image }}" alt="image of the recipe">
         {% else %}
-            <img src="/public/assets/recipes-image/knives.jpg" alt="image of the recipe">
+            <img class="width100" src="/public/assets/recipes-image/knives.jpg" alt="image of the recipe">
         {% endif %}
     </div>
     <small>Créé le {{ recipe.creationDate | date('d/m/Y') }}</small>
@@ -20,7 +20,17 @@
 
     <div class="row">
         <div class="col-md-6"><p>Difficulté : {{ recipe.difficulty }}/5</p></div>
-        <div class="col-md-6"><p>Prix moyen : {{ recipe.meanPrice }}€</p></div>
+        <div class="col-md-6">
+            <p>
+                Prix moyen :
+                {% if recipe.meanPrice %}
+                    {{ recipe.meanPrice }}€
+                {% else %}
+                     nc
+                {% endif %}
+                €
+            </p>
+        </div>
     </div>
 
     <p>Recette proposée par <a href="/user/view/{{ recipe.author.alias }}">{{ recipe.author.alias }}</a></p>
@@ -36,5 +46,8 @@
                 </p>
             </div>
         {% endfor %}
+    </div>
+    <div class="row-md-12">
+        <button class="btn btn-info width100" onclick="validateRecipe({{ recipe.id }})">Valider</button>
     </div>
 </div>

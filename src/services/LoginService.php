@@ -21,12 +21,14 @@ class LoginService
             if($email == 'defaultadmin@gmail.com' || $email == 'defaultuser@gmail.com') {
                 $_SESSION['alias'] = $res['pseudo'];
                 $_SESSION['role'] = ($res['id_role'] == '1')? 'admin' : 'user';
+                $_SESSION['email'] = $res['email'];
                 return true;
             }
 
             if(password_verify($password, $res['mot_de_passe'])){
                 $_SESSION['alias'] = $res['pseudo'];
                 $_SESSION['role'] = $res['role'];
+                $_SESSION['email'] = $res['email'];
                 return true;
             } else {
                 return false;

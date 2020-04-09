@@ -34,11 +34,18 @@ if( preg_match('/^(\/user\/verify\/email\/)[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n
     $request = '/user/verify/email';
 }
 
-// For /recipe/view/:id
-if( preg_match('/^(\/recipe\/view\/)[0-9]+/', $request)){
+// For /recipe/summary/:id
+if( preg_match('/^(\/recipe\/summary\/)[0-9]+/', $request)){
     $splitRequest = explode('/', $request);
-    $recipe = $splitRequest[3];
-    $request = '/recipe/view/:id';
+    $recipeId = $splitRequest[3];
+    $request = '/recipe/summary/:id';
+}
+
+// For /recipe/validate/:id
+if( preg_match('/^(\/recipe\/validate\/)[0-9]+/', $request)){
+    $splitRequest = explode('/', $request);
+    $recipeId = $splitRequest[3];
+    $request = '/recipe/validate/:id';
 }
 
 // Routing
@@ -71,7 +78,8 @@ switch ($request) {
         UserController::emailVerify($email);
         break;
 
-    case '/admin/view':
+    case '/admin/view/dashboard':
+        adminGuard();
         AdminController::viewAction();
         break;
 
@@ -79,13 +87,23 @@ switch ($request) {
         AdminController::viewRecipesAction();
         break;
 
-    case '/recipe/view/:id':
-        RecipeController::viewAction($recipe);
+    case '/recipe/summary/:id':
+        RecipeController::summaryAction($recipeId);
+        break;
+
+    case '/recipe/validate/:id':
+        RecipeController::validateAction($recipeId);
         break;
 
     default:
         http_response_code(404);
         IndexController::pageNotFoundAction();
         break;
+}
+
+function adminGuard() {
+    if($_SESSION['role'] != 'admin'){
+        header('location: /home');
+    }
 }
 

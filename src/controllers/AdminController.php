@@ -17,10 +17,8 @@ class AdminController
         $recipesToValidate = RecipeService::findAllThatNeedValidation();
 
         echo $twig->render(
-            'admin/admin-recipe.html.twig',
-            [
-                'recipesToValidate' => $recipesToValidate
-            ]);
+            'admin/admin-dashboard.html.twig'
+        );
 
     }
 

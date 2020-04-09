@@ -31,8 +31,8 @@
                 <td>{{ recipe.creation_date | date('d/m/Y') }}</td>
                 <td>{{ recipe.type.label }}</td>
                 <td>
-                    <button class="btn btn-info">valider</button>
-                    <button class="btn btn-info" onclick="checkRecipe({{ recipe.id }})">voir</button>
+                    <button class="btn btn-info" onclick="validateRecipe({{ recipe.id }})">valider</button>
+                    <button class="btn btn-info" onclick="getRecipeSummary({{ recipe.id }})">voir</button>
                 </td>
             </tr>
         {% endfor %}

@@ -13,9 +13,8 @@
     min-width: 230px;
     max-width: 230px;
     min-height: 100vh;
-    padding-top: 25px;
-    background: #5B8068;
-    color: #fff;
+    color: #000;
+    background: #f8f9fa;
     transition: all 0.3s;
 }
 
@@ -40,15 +39,24 @@
 
 .sidebar-header {
     padding-bottom: 15px;
+    padding-top: 15px;
     text-align: center;
+    background: #91CCA7;
+    border-top: 1px solid #348050;
+    border-bottom: 1px solid #348050;
+    color: #fff;
 }
 
 #sidenav a:hover {
-    background: #5B8068;
+    background-position: left bottom;
+    color: #fff;
 }
 
 #sidenav a.active {
     border-right: 5px solid #805C5B;
+    background: #91CCA7;
+    color: #fff;
+    transition: none;
 }
 
 #sidenav a {
@@ -56,7 +64,10 @@
     padding: 10px 0;
     padding-left: 25px;
     text-decoration: none;
-    color: white;
-    background: #91CCA7;
+    color: #000;
+    background: linear-gradient(to right, #91CCA7 50%, #f8f9fa 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .3s ease-out;
 }
 

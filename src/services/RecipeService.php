@@ -15,10 +15,12 @@ use Src\Models\StepEntity;
 use Src\Models\UserEntity;
 use Src\Services\StepService;
 
-class RecipeService{
+class RecipeService
+{
 
 
-    public static function fetchAll() {
+    public static function fetchAll()
+    {
         $db = DataBaseService::getInstance()->getDb();
 
         $recipes = $db->query('SELECT * FROM Recette');
@@ -26,7 +28,8 @@ class RecipeService{
         return self::createRecipeArray($recipes);
     }
 
-    public static function findById($id){
+    public static function findById($id): RecipeEntity
+    {
         $db = DataBaseService::getInstance()->getDb();
 
         $recipe = $db->query("SELECT * FROM Recette WHERE id = '$id'")->fetch();
@@ -51,19 +54,54 @@ class RecipeService{
         );
     }
 
-    public function add(RecipeEntity $recipe){
+    public function add(RecipeEntity $recipe)
+    {
         //TODO
     }
 
-    public function update(RecipeEntity $recipe){
+    public static function update(RecipeEntity $recipe)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $statement = $db->prepare("UPDATE Recette SET 
+            nom = ?,
+            image = ?,
+            temps_cuisson = ?, 
+            temps_preparation = ?,
+            nb_personnes = ?,
+            difficulte = ?,
+            prix_moyen = ?,
+            note_auteur = ?,
+            valide = ?,
+            id_type = ?,
+            id_admin = ?
+            
+            WHERE id = ?
+        ");
+
+        $statement->execute([
+            $recipe->getName(),
+            $recipe->getImage(),
+            $recipe->getCookingTime(),
+            $recipe->getPreparationTime(),
+            $recipe->getPersonNumber(),
+            $recipe->getDifficulty(),
+            $recipe->getMeanPrice(),
+            $recipe->getAuthorQuote(),
+            $recipe->getValid(),
+            $recipe->getType()->getId(),
+            $recipe->getAdmin()->getEmail(),
+            $recipe->getId()
+        ]);
+    }
+
+    public function delete(RecipeEntity $id)
+    {
         //TODO
     }
 
-    public function delete(RecipeEntity $id){
-        //TODO
-    }
-
-    public static function findAllThatNeedValidation(): array{
+    public static function findAllThatNeedValidation(): array
+    {
         $db = DataBaseService::getInstance()->getDb();
 
         $recipes = $db->query('SELECT * FROM Recette WHERE valide = false');
