@@ -10,6 +10,7 @@ class RecipeEntity
     private $id;
     private $name;
     private $image;
+    private $creationDate;
     private $cookingTime;
     private $preparationTime;
     private $personNumber;
@@ -21,11 +22,13 @@ class RecipeEntity
     private $author; // UserEntity
     private $type; // TypeEntity
     private $admin; // UserEntity
+    private $steps; // StepEntity[]
 
     public function __construct(
         $id,
         $name,
         $image,
+        $creationDate,
         $cookingTime,
         $preparationTime,
         $personNumber,
@@ -36,12 +39,14 @@ class RecipeEntity
         $valid,
         $author,
         $type,
-        $admin
+        $admin,
+        $steps
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->image = $image;
+        $this->creationDate = $creationDate;
         $this->cookingTime = $cookingTime;
         $this->preparationTime = $preparationTime;
         $this->personNumber = $personNumber;
@@ -53,6 +58,7 @@ class RecipeEntity
         $this->author = $author;
         $this->type = $type;
         $this->admin = $admin;
+        $this->steps = $steps;
     }
 
     /**
@@ -141,6 +147,22 @@ class RecipeEntity
     public function getPersonNumber()
     {
         return $this->personNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param mixed $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
     }
 
     /**
@@ -277,6 +299,22 @@ class RecipeEntity
     public function setAdmin(UserEntity $admin)
     {
         $this->admin = $admin;
+    }
+
+    /**
+     * @return StepEntity[]
+     */
+    public function getSteps(): array
+    {
+        return $this->steps;
+    }
+
+    /**
+     * @param StepEntity[] $steps
+     */
+    public function setSteps(array $steps)
+    {
+        $this->steps = $steps;
     }
 
 

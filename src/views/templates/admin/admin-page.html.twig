@@ -17,16 +17,16 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#" class="active">Dashboard</a>
-                </li>
-                <li class="active">
-                    <a href="#">Recettes</a>
+                    <a id="dashboard" href="/admin/view/dashboard" onclick="setActive(this)">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Tags</a>
+                    <a id="recipe" href="/admin/view/recipes" onclick="setActive(this)">Recettes</a>
                 </li>
                 <li>
-                    <a href="#">Allergènes</a>
+                    <a id="tag" href="#" onclick="setActive(this)">Tags</a>
+                </li>
+                <li>
+                    <a id="allergy" href="#" onclick="setActive(this)">Allergènes</a>
                 </li>
             </ul>
         </nav>
@@ -37,7 +37,7 @@
             </button>
 
             {% block admin_content %}
-                <h3>DashBoard</h3>
+
             {% endblock %}
         </div>
     </div>

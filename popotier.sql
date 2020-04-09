@@ -80,13 +80,14 @@ CREATE TABLE Recette
     id                INTEGER      NOT NULL AUTO_INCREMENT,
     nom               VARCHAR(255) NOT NULL,
     image             VARCHAR(255),
+    date_creation     DATE         NOT NULL,
     temps_cuisson     INTEGER,
     temps_preparation INTEGER,
     nb_personnes      INTEGER,
     difficulte        INTEGER,
     prix_moyen        INTEGER,
     note_recette      INTEGER,
-    note_auteur       INTEGER,
+    note_auteur       VARCHAR(255),
     id_auteur         VARCHAR(255) NOT NULL,
     id_type           INTEGER      NOT NULL,
     valide            BOOLEAN DEFAULT 0,
@@ -177,7 +178,13 @@ CREATE TABLE Ingredient_Recette
     CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
 );
 
-
+-- ---------------------------------------------------------------------------
+-- TRIGGERS
+-- ---------------------------------------------------------------------------
+CREATE TRIGGER `set_creation_date` BEFORE INSERT ON `Recette` FOR EACH ROW
+BEGIN
+    SET NEW.date_creation = NOW();
+END
 
 -- ---------------------------------------------------------------------------
 -- Insert some data.

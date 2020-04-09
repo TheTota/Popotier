@@ -13,11 +13,19 @@ class AdminController
     {
         $twig = \Templater::getInstance()->getTwig();
 
-        //TODO: Get all recipes that need validation
+        echo $twig->render(
+            'admin/admin-dashboard.html.twig'
+        );
+
+    }
+
+    public static function viewRecipesAction() {
+        $twig = \Templater::getInstance()->getTwig();
+
         $recipesToValidate = RecipeService::findAllThatNeedValidation();
 
         echo $twig->render(
-            'admin/admin-page.html.twig',
+            'admin/admin-recipe.html.twig',
             [
                 'recipesToValidate' => $recipesToValidate
             ]);
