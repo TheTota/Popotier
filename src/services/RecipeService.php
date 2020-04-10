@@ -43,7 +43,7 @@ class RecipeService
             $recipe['note_auteur'],
             $recipe['valide'],
             UserService::findById($recipe['id_auteur']),
-            TypeService::findById($recipe['id_type']),
+            TypeService::findById($recipe['id_type'])->gz,
             ($recipe['id_admin'] == null) ? null : UserService::findById($recipe['id_admin']),
             StepService::findByRecette($recipe['id']),
             IngredientRecipeService::findAllByRecipe($recipe['id'])
@@ -124,7 +124,7 @@ class RecipeService
 							valid,
 							id_auteur, 
 							id_type
-							) VALUES(?,?,?,?,?,?,?,?,?);");
+							) VALUES(?,?,?,?,?,?,?,?,?,?);");
 
         $req->execute([
             $recipe->getName(),
@@ -133,12 +133,13 @@ class RecipeService
             $recipe->getPreparationTime(),
             $recipe->getPersonNumber(),
             $recipe->getDifficulty(),
-            $recipe->getMeanPrice(),
+			$recipe->getMeanPrice(),
             $recipe->getAuthorQuote(),
-            $recipe->getValid(),
-            $recipe->getAuthor(),
-            $recipe->getType()
+            $recipe->getAuthor()->getEmail(),
+			$recipe->getValid(),
+            $recipe->getType()->getId()
         ]);
+
     }
 
     public static function fetchAllUserFavoriteRecipe($userEmail){

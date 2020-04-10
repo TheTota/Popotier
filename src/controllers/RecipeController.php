@@ -20,7 +20,6 @@ class RecipeController
     public function view($recipeId)
     {
         $twig = Templater::getInstance()->getTwig();
-
         $recipe = RecipeService::findById($recipeId);
 
         echo $twig->render('recipe/recipe-view.html.twig', [
@@ -28,9 +27,46 @@ class RecipeController
         ]);
     }
 
-    public function addRecipe()
-    {
-        echo Templater::getInstance()->getTwig()->render('recipe/recipe-step-create.html.twig', []);
+    public static function addRecipeAction() {
+	    $twig = \Templater::getInstance()->getTwig();
+		$recipeCreated = false;
+
+		if (!empty($_POST)) {
+
+			$recipe = new RecipeEntity(
+				null, // id
+				$_POST['inputName'],
+				$_POST['inputImage'],
+				null, //date creation
+				$_POST['inputCookingTime'],
+				$_POST['inputPreparationTime'],
+				$_POST['inputPersonNumber'],
+				$_POST['inputDifficulty'],
+				$_POST['inputMeanPrice'],
+				null, //evaluation
+				$_POST['inputAuthorQuote'],
+				0, //valid
+				UserService::findByEmail($_SESSION['email']),
+				RecipeTypeService::findById($_POST['inputType']),
+				null, // admin
+				null // steps
+			);
+			RecipeService::add($recipe);
+			$recipeCreated = true;
+			echo $twig->render('recipe/recipe-create.html.twig', ["recipeCreated"=> $recipeCreated]);
+			return;
+		}
+
+	/*	if($recipeCreated)
+		{
+			header('Location: /user');
+		} else {
+			header('Location: /recipe/add');
+		}
+
+		*/
+        echo $twig->render('recipe/recipe-step-create.html.twig', []);
+
     }
 
     public function delete($recipeId) {
