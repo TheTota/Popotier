@@ -9,7 +9,7 @@ use Src\Services\RecipeService;
 class AdminController
 {
 
-    public static function viewAction()
+    public function view()
     {
         $twig = \Templater::getInstance()->getTwig();
 
@@ -19,7 +19,7 @@ class AdminController
 
     }
 
-    public static function viewRecipesAction() {
+    public function viewRecipes() {
         $twig = \Templater::getInstance()->getTwig();
 
         $recipesToValidate = RecipeService::findAllThatNeedValidation();

@@ -4,19 +4,26 @@
 // This file will be our router
 require_once 'bootstrap.php';
 
-require_once 'src/controllers/IndexController.php';
+require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/LoginController.php';
 require_once 'src/controllers/AdminController.php';
 require_once 'src/controllers/RecipeController.php';
 require_once 'src/controllers/UserController.php';
+require_once 'src/routing/Route.php';
 
-use Src\Controllers\IndexController;
+use Src\Controllers\DefaultController;
 use Src\Controllers\LoginController;
 use Src\Controllers\AdminController;
 use Src\Controllers\RecipeController;
 use Src\Controllers\UserController;
 
+
+
 $request = $_SERVER['REQUEST_URI'];
+
+$routerModule = RouterModule::getInstance();
+
+$routerModule
 
 // When we need to fetch some parameters from the url, we need to use some Regular Expressions
 
@@ -55,65 +62,75 @@ switch ($request) {
         break;
 
     case '/home':
-        IndexController::homeAction();
+        $defaultController = new DefaultController();
+        $defaultController->home();
         break;
 
     case '/login':
-        LoginController::loginAction();
+        $loginController = new LoginController();
+        $loginController->login();
         break;
 
     case '/logout':
-        LoginController::logoutAction();
+        $loginController = new LoginController();
+        $loginController->logout();
         break;
 
     case '/user/add':
-        UserController::addAction();
+        $userController = new UserController();
+        $userController->add();
         break;
 
     case '/user/verify/alias':
-        UserController::aliasVerify($alias);
+        $userController = new UserController();
+        $userController->aliasVerify($alias);
         break;
 
     case '/user/verify/email':
-        UserController::emailVerify($email);
+        $userController = new UserController();
+        $userController->emailVerify($email);
         break;
 
-	case '/user':
-		UserController::viewRecipeAction();
-		break;
-
 	case '/user/view/recipe-list':
-		UserController::viewRecipeAction();
+        $userController = new UserController();
+		$userController->viewRecipe();
 		break;
 
 	case '/user/view/favorite-list':
-		UserController::viewFavoriteAction();
+        $userController = new UserController();
+		$userController->viewFavorite();
 		break;
 
 	case '/recipe/add':
-		RecipeController::addRecipeAction();
+	    $recipeController = new RecipeController();
+		$recipeController->addRecipe();
 		break;
 
     case '/admin/view/dashboard':
         adminGuard();
-        AdminController::viewAction();
+        $adminController = new AdminController();
+        $adminController->view();
         break;
 
     case '/admin/view/recipes':
-        AdminController::viewRecipesAction();
+        $adminController = new AdminController();
+        $adminController->viewRecipes();
         break;
 
     case '/recipe/summary/:id':
-        RecipeController::summaryAction($recipeId);
+        $recipeController = new RecipeController();
+        $recipeController->summary($recipeId);
         break;
 
     case '/recipe/validate/:id':
-        RecipeController::validateAction($recipeId);
+        $recipeController = new RecipeController();
+        $recipeController->validate($recipeId);
         break;
 
     default:
         http_response_code(404);
-        IndexController::pageNotFoundAction();
+        $defaultController = new DefaultController();
+        $defaultController->pageNotFound();
         break;
 }
 

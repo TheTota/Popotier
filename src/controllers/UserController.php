@@ -15,18 +15,16 @@ use Src\Services\RoleService;
 use Src\Models\UserEntity;
 use Src\Services\RecipeService;
 
-
-
 class UserController
 {
 
-    public static function indexAction()
+    public function index()
     {
         echo \Templater::getInstance()->getTwig()->render('user/user.html.twig', []);
     }
 
     // routing : /user/add
-    public static function addAction()
+    public function add()
     {
         $twig = \Templater::getInstance()->getTwig();
 
@@ -58,7 +56,7 @@ class UserController
      *
      * Route: user/verify/alias
      */
-    public static function aliasVerify($alias)
+    public function aliasVerify($alias)
     {
         if (UserService::aliasExist($alias)) {
             echo false;
@@ -76,7 +74,7 @@ class UserController
      *
      * Route: user/verify/email
      */
-    public static function emailVerify($email)
+    public function emailVerify($email)
     {
         if (UserService::emailExists($email)) {
             echo false;
@@ -88,7 +86,7 @@ class UserController
     /**
      * This function is used to view all the user's recipes.
      */
-    public static function viewRecipeAction()
+    public function viewRecipe()
     {
         $recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
         echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
@@ -99,7 +97,7 @@ class UserController
         );
     }
 
-    public static function viewFavoriteAction()
+    public function viewFavorite()
     {
         $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
         echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);

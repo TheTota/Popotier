@@ -9,9 +9,7 @@ use Src\Services\LoginService;
 
 class LoginController{
 
-
-	
-    public static function loginAction(){
+    public function login(){
         $twig = \Templater::getInstance()->getTwig();
 
 		if(isset($_POST['connexion']))
@@ -31,7 +29,7 @@ class LoginController{
 		}
     }
 
-    public static function logoutAction() {
+    public function logout() {
         session_start();
         session_destroy();
 

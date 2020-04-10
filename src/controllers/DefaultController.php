@@ -6,9 +6,9 @@ require_once 'src/services/RecipeService.php';
 
 use Src\Services\RecipeService;
 
-class IndexController{
+class DefaultController{
 
-    public static function homeAction(){
+    public function home(){
         $recipes = RecipeService::fetchAll();
 
         echo \Templater::getInstance()->getTwig()->render('home/home.html.twig',
@@ -19,7 +19,7 @@ class IndexController{
         );
     }
 
-    public static function pageNotFoundAction(){
+    public function pageNotFound(){
         echo \Templater::getInstance()->getTwig()->render('layout/page-not-found.html.twig');
     }
 }

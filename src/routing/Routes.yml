@@ -1,0 +1,57 @@
+default:
+  path: /
+
+home:
+  path: /home
+
+login:
+  path: /login
+
+logout:
+  path: /logout
+
+add_user:
+  path: /user/add
+
+user_verify_email:
+  path: /user/verify/email/{email}
+  requirements:
+    email: '/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/'
+
+user_verify_alias:
+  path: /user/verify/alias/{alias}
+  requirements:
+    alias: '/[a-zA-Z]+'
+
+user_recipe_list:
+  path: /user/view/recipe-list
+
+user_favorite_list:
+  path: /user/view/favorite-list
+
+add_recipe:
+  path: /recipe/add
+
+validate_recipe:
+  path: /recipe/validate/{id}
+  requirements:
+    id: '/[0-9]+/'
+
+
+recipe_summary:
+  path: /recipe/summary/{id}
+  requirements:
+    id: '[0-9]+'
+
+admin_dashboard:
+  path: /admin/view/dashboard
+
+admin_recipes:
+  path: /admin/view/recipes
+
+
+
+
+
+
+

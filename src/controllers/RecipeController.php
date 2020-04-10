@@ -12,7 +12,7 @@ use Src\Services\UserService;
 class RecipeController {
 
 
-    public static function addRecipeAction() {
+    public function addRecipe() {
         echo \Templater::getInstance()->getTwig()->render('recipe/recipe-step-create.html.twig', []);
 
     }
@@ -20,7 +20,7 @@ class RecipeController {
     /**
      * Route: /recipe/summary/:id
      */
-    public static function summaryAction($recipeId){
+    public function summary($recipeId){
         $twig = \Templater::getInstance()->getTwig();
 
         $recipe = RecipeService::findById($recipeId);
@@ -36,7 +36,7 @@ class RecipeController {
     /**
      * Route: /recipe/validate/:id
      */
-    public static function validateAction($recipeId){
+    public function validate($recipeId){
 
         $recipe = RecipeService::findById($recipeId);
 
