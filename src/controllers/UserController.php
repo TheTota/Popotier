@@ -98,5 +98,6 @@ class UserController
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
     }
 
+
 }
 

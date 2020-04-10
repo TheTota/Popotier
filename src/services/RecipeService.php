@@ -51,7 +51,7 @@ class RecipeService
             $recipe['note_auteur'],
             $recipe['valide'],
             UserService::findByEmail($recipe['id_auteur']),
-            TypeService::findById($recipe['id_type']),
+            TypeService::findById($recipe['id_type'])->gz,
             ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
             StepService::findByRecette($recipe['id'])
         );
@@ -87,7 +87,7 @@ class RecipeService
             $recipe->getMeanPrice(),
             $recipe->getAuthorQuote(),
             $recipe->getValid(),
-            $recipe->getType()->getId(),
+            $recipe->getType()->getId(),	
             $recipe->getAdmin()->getEmail(),
             $recipe->getId()
         ]);
@@ -124,10 +124,10 @@ class RecipeService
 							difficulte,
 							prix_moyen,
 							note_auteur, 
-							valid,
-							id_auteur, 
+							id_auteur,
+							valide,
 							id_type
-							) VALUES(?,?,?,?,?,?,?,?,?,?);");
+							) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 
         $req->execute([
             $recipe->getName(),
@@ -136,12 +136,13 @@ class RecipeService
             $recipe->getPreparationTime(),
             $recipe->getPersonNumber(),
             $recipe->getDifficulty(),
-            $recipe->getMeanPrice(),
+			$recipe->getMeanPrice(),
             $recipe->getAuthorQuote(),
-            $recipe->getValid(),
-            $recipe->getAuthor(),
-            $recipe->getType()
+            $recipe->getAuthor()->getEmail(),
+			$recipe->getValid(),
+            $recipe->getType()->getId()
         ]);
+
     }
 
     public static function fetchAllUserFavoriteRecipe($userEmail){
