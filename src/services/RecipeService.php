@@ -124,7 +124,7 @@ class RecipeService
 							valid,
 							id_auteur, 
 							id_type
-							) VALUES(?,?,?,?,?,?,?,?,?,?);");
+							) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 
         $req->execute([
             $recipe->getName(),

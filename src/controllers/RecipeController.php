@@ -6,6 +6,8 @@ use src\routing\RouterModule;
 use src\utils\Templater;
 use src\services\RecipeService;
 use src\services\UserService;
+require_once 'src/services/RecipeTypeService.php';
+require_once 'src/models/RecipeEntity.php';
 
 class RecipeController
 {
