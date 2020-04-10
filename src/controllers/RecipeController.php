@@ -29,6 +29,10 @@ class RecipeController
         ]);
     }
 
+    public function delete($recipeId) {
+        RecipeService::deleteByID($recipeId);
+    }
+
     public static function addRecipeAction() {
 	    $twig = \Templater::getInstance()->getTwig();
 		$recipeCreated = false;
@@ -68,12 +72,6 @@ class RecipeController
 
 		*/
         echo $twig->render('recipe/recipe-step-create.html.twig', []);
-
-    }
-
-    public function delete($recipeId) {
-        RecipeService::deleteByID($recipeId);
-    }
 
     public function deleteValidatedRecipe($recipeId) {
         self::delete($recipeId);
