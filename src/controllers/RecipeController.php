@@ -20,7 +20,7 @@ class RecipeController {
     /**
      * Route: /recipe/summary/:id
      */
-    public function summary($recipeId){
+    public function summary($recipeId) {
         $twig = \Templater::getInstance()->getTwig();
 
         $recipe = RecipeService::findById($recipeId);

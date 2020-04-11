@@ -1,6 +1,11 @@
 <?php
 
 require_once 'src/routing/AbstractRouter.php';
+require_once 'src/controllers/DefaultController.php';
+require_once 'src/controllers/LoginController.php';
+require_once 'src/controllers/AdminController.php';
+require_once 'src/controllers/RecipeController.php';
+require_once 'src/controllers/UserController.php';
 
 class RouterModule extends AbstractRouter {
 
@@ -22,20 +27,10 @@ class RouterModule extends AbstractRouter {
     }
 
     /**
-     * @return array
-     */
-    public function getRoutes(): array
-    {
-        return $this->routes;
-    }
-
-    /**
      * @param array $routes
      */
     public function setRoutes(array $routes)
     {
         $this->routes = $routes;
     }
-
-
 }

@@ -6,15 +6,18 @@ require_once './src/routing/Route.php';
 
 use Symfony\Component\Yaml\Yaml;
 
+
 session_start();
+
+// INIT OF TWIG
 Templater::getInstance()->getTwig()->addGlobal('session', $_SESSION);
 $pathFunction = new \Twig\TwigFunction('path', function (string $path_name, array $parameters = null) {
     $router = RouterModule::getInstance();
-    echo $router->navigate($path_name);
-   // echo $router->checkRoute($path_name);
+    echo $router->generatePath($path_name, $parameters);
 });
 Templater::getInstance()->getTwig()->addFunction($pathFunction);
 
+// INIT OF THE ROUTER
 $routesYML = Yaml::parse(file_get_contents('./src/routing/Routes.yml'));
 $routerModule = RouterModule::getInstance();
 foreach ($routesYML as $name => $route){
@@ -22,9 +25,11 @@ foreach ($routesYML as $name => $route){
         new Route(
             $name,
             $route['path'],
-            $req = (isset($route['requirements']))? $route['requirements']: null
+            $requirements = (isset($route['requirements']))? $route['requirements']: [],
+            $route['controller'],
+            $route['action']
         )
     );
 }
 
-var_dump($routerModule->navigate('validate_recipe', ['5']));
+//$routerModule->checkURL('/recipe/summary/5');die;

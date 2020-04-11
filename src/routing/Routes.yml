@@ -1,53 +1,80 @@
 default:
   path: /
+  controller: DefaultController
+  action: home
 
 home:
   path: /home
+  controller: DefaultController
+  action: home
 
 login:
   path: /login
+  controller: LoginController
+  action: login
 
 logout:
   path: /logout
+  controller: LoginController
+  action: logout
 
 add_user:
   path: /user/add
+  controller: UserController
+  action: add
 
 user_verify_email:
   path: /user/verify/email/{email}
+  controller: UserController
+  action: emailVerify
   requirements:
-    email: '/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/'
+    email: '[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/'
 
 user_verify_alias:
   path: /user/verify/alias/{alias}
+  controller: UserController
+  action: aliasVerify
   requirements:
-    alias: '/[a-zA-Z]+'
+    alias: '[a-zA-Z]+'
 
 user_recipe_list:
   path: /user/view/recipe-list
+  controller: UserController
+  action: recipeList
 
 user_favorite_list:
   path: /user/view/favorite-list
+  controller: UserController
+  action: favoriteList
 
 add_recipe:
   path: /recipe/add
+  controller: RecipeController
+  action: add
 
 validate_recipe:
   path: /recipe/validate/{id}
+  controller: RecipeController
+  action: validate
   requirements:
-    id: '/[0-9]+/'
-
+    id: '[0-9]+'
 
 recipe_summary:
   path: /recipe/summary/{id}
+  controller: RecipeController
+  action: summary
   requirements:
     id: '[0-9]+'
 
 admin_dashboard:
   path: /admin/view/dashboard
+  controller: AdminController
+  action: view
 
 admin_recipes:
   path: /admin/view/recipes
+  controller: AdminController
+  action: viewRecipes
 
 
 

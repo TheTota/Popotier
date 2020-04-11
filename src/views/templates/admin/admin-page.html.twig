@@ -17,10 +17,10 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a id="dashboard" href="/admin/view/dashboard" onclick="setActive(this)">Dashboard</a>
+                    <a id="dashboard" href="{{ path('admin_dashboard') }}" onclick="setActive(this)">Dashboard</a>
                 </li>
                 <li>
-                    <a id="recipe" href="/admin/view/recipes" onclick="setActive(this)">Recettes</a>
+                    <a id="recipe" href="{{ path('admin_recipes') }}" onclick="setActive(this)">Recettes</a>
                 </li>
                 <li>
                     <a id="tag" href="#" onclick="setActive(this)">Tags</a>

@@ -4,7 +4,7 @@
 
 	<div class="d-block">
 		{% if recipeList %}
-		<a  class="btn btn-primary " id="addRecipe" href="/recipe/add"> Ajouter une recette</a>
+		<a  class="btn btn-primary " id="addRecipe" href="{{ path('add_recipe') }}"> Ajouter une recette</a>
 		{% endif %}
 
 		{%if recipes %}

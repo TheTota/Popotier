@@ -5,18 +5,26 @@ class Route {
     private $name;
     private $path;
     private $requirements = [];
+    private $controller;
+    private $action;
 
     /**
      * Route constructor.
      * @param string $name
      * @param string $path
      * @param array|null $requirements
+     * @param string $controller
+     * @param string $action
      */
-    public function __construct(string $name, string $path, array $requirements = null)
+    public function __construct(string $name, string $path, array $requirements = [], string $controller, string $action)
     {
         $this->name = $name;
         $this->path = $path;
-        $this->requirements = $requirements;
+        foreach ($requirements as $key => $requirement){
+            $this->requirements[$key] = '('.$requirement.')';
+        }
+        $this->controller = $controller;
+        $this->action = $action;
     }
 
     /**
@@ -52,12 +60,60 @@ class Route {
     }
 
     /**
+     * @return array|null
+     */
+    public function getRequirements(): array
+    {
+        return $this->requirements;
+    }
+
+    /**
+     * @param array|null $requirements
+     */
+    public function setRequirements(array $requirements)
+    {
+        $this->requirements = $requirements;
+    }
+
+    /**
+     * @return string
+     */
+    public function getController(): string
+    {
+        return $this->controller;
+    }
+
+    /**
+     * @param string $controller
+     */
+    public function setController(string $controller)
+    {
+        $this->controller = $controller;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAction(): string
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param string $action
+     */
+    public function setAction(string $action)
+    {
+        $this->action = $action;
+    }
+
+    /**
      * @param array|null $parameters
      * @return string
      *
      * Generate a url path, with the given parameters
      */
-    public function generatePath(array $parameters = null): string{
+    public function generatePath(array $parameters = null): string {
         if($parameters){
             $path = $this->getPath();
             $parametersToReplace = [];
