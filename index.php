@@ -4,6 +4,8 @@
 // This file will be our router
 require_once 'bootstrap.php';
 
+use Src\Routing\RouterModule;
+
 $request = $_SERVER['REQUEST_URI'];
 
 $routerModule = RouterModule::getInstance();

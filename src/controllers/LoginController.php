@@ -1,16 +1,15 @@
 <?php
 namespace Src\Controllers;
 
-require_once 'src/services/LoginService.php';
-
 use Src\Services\LoginService;
+use Src\Utils\Templater;
 
 
 
 class LoginController{
 
     public function login(){
-        $twig = \Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
 
 		if(isset($_POST['connexion']))
 		{

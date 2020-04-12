@@ -1,5 +1,7 @@
 <?php
 
+namespace Src\Routing;
+
 class Route {
 
     private $name;

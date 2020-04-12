@@ -1,11 +1,19 @@
 <?php
 
-require_once './src/utils/Templater.php';
+/*require_once './src/utils/Templater.php';
 require_once './src/routing/RouterModule.php';
-require_once './src/routing/Route.php';
+require_once './src/routing/Route.php';*/
 
+use Src\Utils\Templater;
+use Src\Routing\Route;
+use Src\Routing\RouterModule;
 use Symfony\Component\Yaml\Yaml;
 
+// AUTOLOADER INIT
+spl_autoload_register( function($className) {
+    $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/' . $className . '.php';
+});
 
 session_start();
 
@@ -18,7 +26,7 @@ $pathFunction = new \Twig\TwigFunction('path', function (string $path_name, arra
 Templater::getInstance()->getTwig()->addFunction($pathFunction);
 
 // INIT OF THE ROUTER
-$routesYML = Yaml::parse(file_get_contents('./src/routing/Routes.yml'));
+$routesYML = Yaml::parse(file_get_contents('./src/routing/routes.yml'));
 $routerModule = RouterModule::getInstance();
 foreach ($routesYML as $name => $route){
     $routerModule->addRoute(
@@ -31,5 +39,6 @@ foreach ($routesYML as $name => $route){
         )
     );
 }
+
 
 //$routerModule->checkURL('/recipe/summary/5');die;

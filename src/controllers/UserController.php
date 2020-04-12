@@ -2,31 +2,26 @@
 
 namespace Src\Controllers;
 
-require_once 'src/utils/Templater.php';
-
-require_once 'src/models/UserEntity.php';
-require_once 'src/services/RoleService.php';
-require_once 'src/services/UserService.php';
-require_once 'src/models/RecipeEntity.php';
-require_once 'src/services/RecipeService.php';
+use Src\Utils\Templater;
 
 use Src\Services\UserService;
 use Src\Services\RoleService;
-use Src\Models\UserEntity;
 use Src\Services\RecipeService;
+
+use Src\Models\UserEntity;
 
 class UserController
 {
 
     public function index()
     {
-        echo \Templater::getInstance()->getTwig()->render('user/user.html.twig', []);
+        echo Templater::getInstance()->getTwig()->render('user/user.html.twig', []);
     }
 
     // routing : /user/add
     public function add()
     {
-        $twig = \Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
 
         if (!empty($_POST)) {
 
@@ -89,7 +84,7 @@ class UserController
     public function viewRecipe()
     {
         $recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
-        echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
+        echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
             [
                 'recipes' => $recipes,
                 'recipeList' => true
@@ -100,7 +95,7 @@ class UserController
     public function viewFavorite()
     {
         $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
-        echo \Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
+        echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
     }
 
 }

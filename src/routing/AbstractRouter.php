@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/controllers/RecipeController.php';
+namespace Src\Routing;
 
 abstract class AbstractRouter {
 
@@ -50,6 +50,12 @@ abstract class AbstractRouter {
         return false;
     }
 
+    /**
+     * @param Route $route
+     * @param null $parameters
+     *
+     * Call the right controller and the right action depending on the route
+     */
     public function callController(Route $route, $parameters = null) {
         $controllerClass = '\Src\Controllers\\'.$route->getController();
         $controllerInstance = new $controllerClass();

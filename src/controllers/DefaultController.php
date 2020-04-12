@@ -2,16 +2,15 @@
 
 namespace Src\Controllers;
 
-require_once 'src/services/RecipeService.php';
-
 use Src\Services\RecipeService;
+use Src\Utils\Templater;
 
 class DefaultController{
 
     public function home(){
         $recipes = RecipeService::fetchAll();
 
-        echo \Templater::getInstance()->getTwig()->render('home/home.html.twig',
+        echo Templater::getInstance()->getTwig()->render('home/home.html.twig',
             [
                 'page' => 'accueil',
                 'recipes' => $recipes // Array of recipe entities
@@ -20,6 +19,6 @@ class DefaultController{
     }
 
     public function pageNotFound(){
-        echo \Templater::getInstance()->getTwig()->render('layout/page-not-found.html.twig');
+        echo Templater::getInstance()->getTwig()->render('layout/page-not-found.html.twig');
     }
 }

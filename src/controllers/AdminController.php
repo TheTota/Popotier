@@ -2,7 +2,7 @@
 
 namespace Src\Controllers;
 
-require_once 'src/services/RecipeService.php';
+use Src\Utils\Templater;
 
 use Src\Services\RecipeService;
 
@@ -11,7 +11,7 @@ class AdminController
 
     public function view()
     {
-        $twig = \Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
 
         echo $twig->render(
             'admin/admin-dashboard.html.twig'
@@ -20,7 +20,7 @@ class AdminController
     }
 
     public function viewRecipes() {
-        $twig = \Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
 
         $recipesToValidate = RecipeService::findAllThatNeedValidation();
 
