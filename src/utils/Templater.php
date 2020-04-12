@@ -1,5 +1,9 @@
 <?php
 
+namespace Src\Utils;
+
+require_once 'src/routing/RouterModule.php';
+
 
 class Templater {
 
@@ -32,4 +36,5 @@ class Templater {
     {
         return $this->twig;
     }
+
 }

@@ -1,18 +1,15 @@
 <?php
 namespace Src\Controllers;
 
-require_once 'src/services/LoginService.php';
-
 use Src\Services\LoginService;
+use Src\Utils\Templater;
 
 
 
 class LoginController{
 
-
-	
-    public static function loginAction(){
-        $twig = \Templater::getInstance()->getTwig();
+    public function login(){
+        $twig = Templater::getInstance()->getTwig();
 
 		if(isset($_POST['connexion']))
 		{
@@ -31,7 +28,7 @@ class LoginController{
 		}
     }
 
-    public static function logoutAction() {
+    public function logout() {
         session_start();
         session_destroy();
 

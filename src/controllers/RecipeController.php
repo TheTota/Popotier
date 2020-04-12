@@ -1,10 +1,8 @@
 <?php
 
-
 namespace Src\Controllers;
 
-require_once 'src/services/UserService.php';
-require_once 'src/services/RecipeService.php';
+use Src\Utils\Templater;
 
 use Src\Services\RecipeService;
 use Src\Services\UserService;
@@ -12,16 +10,15 @@ use Src\Services\UserService;
 class RecipeController {
 
 
-    public static function addRecipeAction() {
-        echo \Templater::getInstance()->getTwig()->render('recipe/recipe-step-create.html.twig', []);
-
+    public function addRecipe() {
+        echo Templater::getInstance()->getTwig()->render('recipe/recipe-step-create.html.twig', []);
     }
 
     /**
      * Route: /recipe/summary/:id
      */
-    public static function summaryAction($recipeId){
-        $twig = \Templater::getInstance()->getTwig();
+    public function summary($recipeId) {
+        $twig = Templater::getInstance()->getTwig();
 
         $recipe = RecipeService::findById($recipeId);
 
@@ -36,7 +33,7 @@ class RecipeController {
     /**
      * Route: /recipe/validate/:id
      */
-    public static function validateAction($recipeId){
+    public function validate($recipeId){
 
         $recipe = RecipeService::findById($recipeId);
 
