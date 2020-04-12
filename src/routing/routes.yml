@@ -1,3 +1,11 @@
+# This file defines all the routes used on the application
+# The parameters are:
+# path: the url of the route
+# controller: The controller to call to handle this route
+# action : The function to call inside the specified controller
+# requirements (optional): dictionary of constrains for the url parameters ( format: <name of parameter>: <regex constraint> )
+#
+
 default:
   path: /
   controller: DefaultController
