@@ -1,2 +1,72 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block content %}
+
+    <div class="container col-md-6">
+        <h3>{{ recipe.name }}</h3>
+        <div class="row-md">
+            {% if recipe.image %}
+                <img class="width100" src="{{ recipe.image }}" alt="image of the recipe">
+            {% else %}
+                <img class="width100" src="/public/assets/recipes-image/knives.jpg" alt="image of the recipe">
+            {% endif %}
+        </div>
+        <small>Créé le {{ recipe.creationDate | date('d/m/Y') }}</small>
+
+        <hr class="separator">
+
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    <i class="fas fa-clock text-info"></i>
+                    Temps de cuisson : {{ recipe.cookingTime }} min
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    <i class="fas fa-clock text-info"></i>
+                    Temps de préparation : {{ recipe.preparationTime }} min
+                </p>
+            </div>
+        </div>
+
+        <p>Recette pour {{ recipe.personNumber }} personne(s)</p>
+
+        <div class="row">
+            <div class="col-md-6"><p>Difficulté : {{ recipe.difficulty }}/5</p></div>
+            <div class="col-md-6">
+                <p>
+                    Prix moyen :
+                    {% if recipe.meanPrice %}
+                        {{ recipe.meanPrice }} €
+                    {% else %}
+                        nc
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <p>Recette proposée par <a href="/user/view/{{ recipe.author.alias }}">{{ recipe.author.alias }}</a></p>
+
+        <hr class="separator">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Ingrédients</h4>
+            </div>
+            <div class="col-md-8">
+                <h4>Etapes</h4>
+                <div class="col">
+                    {% for step in recipe.steps %}
+                        <div class="row">
+                            <p>
+                                <strong>{{ step.position }} .</strong>
+                                {{ step.description }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

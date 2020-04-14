@@ -23,6 +23,7 @@ class RecipeEntity
     private $type; // TypeEntity
     private $admin; // UserEntity
     private $steps; // StepEntity[]
+    private $ingredients; // IngredientEntity[]
 
     public function __construct(
         $id,
@@ -316,6 +317,24 @@ class RecipeEntity
     {
         $this->steps = $steps;
     }
+
+    /**
+     * @return IngredientEntity[]
+     */
+    public function getIngredients(): array
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * @param IngredientEntity[] $ingredients
+     */
+    public function setIngredients(array $ingredients)
+    {
+        $this->ingredients = $ingredients;
+    }
+
+
 
 
 }
