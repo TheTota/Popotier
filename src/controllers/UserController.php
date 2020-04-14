@@ -97,7 +97,5 @@ class UserController
         $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
     }
-
-
 }
 

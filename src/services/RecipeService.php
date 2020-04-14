@@ -51,7 +51,7 @@ class RecipeService
             $recipe['note_auteur'],
             $recipe['valide'],
             UserService::findByEmail($recipe['id_auteur']),
-            TypeService::findById($recipe['id_type'])->gz,
+            TypeService::findById($recipe['id_type']),
             ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
             StepService::findByRecette($recipe['id'])
         );

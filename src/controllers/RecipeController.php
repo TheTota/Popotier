@@ -3,9 +3,6 @@
 namespace Src\Controllers;
 
 use Src\Utils\Templater;
-require_once 'src/services/RecipeTypeService.php';
-require_once 'src/models/RecipeEntity.php';
-
 use Src\Services\RecipeService;
 use Src\Services\UserService;
 use Src\Services\RecipeTypeService;
@@ -15,8 +12,8 @@ use Src\Models\RecipeEntity;
 class RecipeController {
 
 
-    public static function addRecipeAction() {
-	    $twig = \Templater::getInstance()->getTwig();
+    public static function add() {
+	    $twig = Templater::getInstance()->getTwig();
 		$recipeCreated = false;
 
 		if (!empty($_POST)) {
