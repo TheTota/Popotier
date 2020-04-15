@@ -3,6 +3,7 @@
 namespace Src\Controllers;
 
 use Src\Services\AllergenService;
+use Src\Services\TagService;
 use Src\Utils\Templater;
 
 use Src\Services\RecipeService;
@@ -35,7 +36,11 @@ class AdminController
     public function viewTags() {
         $twig = Templater::getInstance()->getTwig();
 
-        echo $twig->render('admin/admin-tag.html.twig');
+        $tags = TagService::fetchAll();
+
+        echo $twig->render('admin/admin-tag.html.twig', [
+            'tags' => $tags
+        ]);
     }
 
     public function  viewAllergies() {

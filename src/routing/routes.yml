@@ -106,6 +106,18 @@ delete_allergen:
   requirements:
     id: '[0-9]+'
 
+add_tag:
+  path: /tag/add
+  controller: TagController
+  action: add
+
+delete_tag:
+  path: /tag/delete/{id}
+  controller: TagController
+  action: delete
+  requirements:
+    id: '[0-9]+'
+
 
 
 
