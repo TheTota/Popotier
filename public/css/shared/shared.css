@@ -16,3 +16,8 @@ strong-blur {
 .width80 {
     width: 80%;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
