@@ -2,6 +2,8 @@
 
 namespace Src\Routing;
 
+
+
 abstract class AbstractRouter {
 
     protected $routes; // Route[]
@@ -121,6 +123,6 @@ abstract class AbstractRouter {
             }
         }
 
-        throw new Exception('page not found');
+        throw new \Exception('page not found');
     }
 }

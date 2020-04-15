@@ -84,6 +84,28 @@ admin_recipes:
   controller: AdminController
   action: viewRecipes
 
+admin_tags:
+  path: /admin/view/tags
+  controller: AdminController
+  action: viewTags
+
+admin_allergies:
+  path: /admin/view/allergies
+  controller: AdminController
+  action: viewAllergies
+
+add_allergen:
+  path: /allergen/add
+  controller: AllergenController
+  action: add
+
+delete_allergen:
+  path: /allergen/delete/{id}
+  controller: AllergenController
+  action: delete
+  requirements:
+    id: '[0-9]+'
+
 
 
 

@@ -10,6 +10,7 @@
 
 #sidenav {
     z-index: 500;
+    position: fixed;
     min-width: 230px;
     max-width: 230px;
     min-height: 100vh;
@@ -29,12 +30,19 @@
 
 #sidenav.active {
     margin-left: -230px;
+
 }
 
 #admin-content {
     width: 100%;
     padding: 20px;
     min-height: 100vh;
+    margin-left: 230px;
+    transition: all 0.3s;
+}
+
+#admin-content.active {
+    margin-left: 0px;
 }
 
 .sidebar-header {

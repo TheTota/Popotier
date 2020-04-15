@@ -1,9 +1,5 @@
 <?php
 
-/*require_once './src/utils/Templater.php';
-require_once './src/routing/RouterModule.php';
-require_once './src/routing/Route.php';*/
-
 use Src\Utils\Templater;
 use Src\Routing\Route;
 use Src\Routing\RouterModule;
