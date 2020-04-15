@@ -1,0 +1,46 @@
+.recipe-container {
+    margin-top: 30px;
+}
+
+#recipe-name {
+    background: #91CCA7;
+    color: white;
+    padding-bottom: 10px;
+    margin: 0;
+    border-radius: 25px 25px 0 0;
+}
+
+hr {
+    background: #91CCA7;
+}
+
+.recipe-container ol {
+    counter-reset: item;
+    list-style: none;
+    padding-left: 40px;
+}
+
+.recipe-container li {
+    counter-increment: item;
+    margin: 0 0 0.5rem 0;
+    position: relative;
+}
+
+.recipe-container ol li::before {
+    position: absolute;
+    font-weight: bold;
+    content: counter(item);
+    color: white;
+    background: #91CCA7;
+    border-radius: 0px 25px 25px 0;
+    text-align: center;
+
+    --size: 32px;
+    left: calc(-1 * var(--size) - 10px);
+    line-height: var(--size);
+    width: var(--size);
+    height: var(--size);
+    top: 0;
+
+    box-shadow: 1px 1px 1px #0b2e13;
+}

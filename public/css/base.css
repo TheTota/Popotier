@@ -3,6 +3,16 @@ html, body {
     padding-top: 28px;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 #content {
     height: 100%;
     width: 80%;

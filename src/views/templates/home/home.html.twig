@@ -24,8 +24,8 @@
             {% if recipes %}
                 {% for recipe in recipes %}
                     <div class="row-sm-4">
-                        <a href="{{ path('recipe_view', [recipe.id]) }}">
-                            <div class="recipe-block">
+                        <div class="recipe-block">
+                            <a href="{{ path('recipe_view', [recipe.id]) }}">
                                 <div class="recipe-image">
                                     {% if recipe.image %}
                                         <img src="{{ recipe.image }}" alt="image du plat">
@@ -36,8 +36,9 @@
                                 <div class="recipe-description">
                                     <strong class="center">{{ recipe.name }}</strong>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+
 
                     </div>
                 {% endfor %}
