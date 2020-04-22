@@ -35,6 +35,7 @@ DROP TABLE IF EXISTS Utilisateur;
 DROP TABLE IF EXISTS Role;
 DROP TABLE IF EXISTS Ingredient_Recette;
 DROP TABLE IF EXISTS Ingredient;
+DROP TABLE IF EXISTS Note;
 DROP TABLE IF EXISTS Allergene;
 
 CREATE TABLE Role
@@ -87,7 +88,6 @@ CREATE TABLE Recette
     nb_personnes      INTEGER,
     difficulte        INTEGER,
     prix_moyen        INTEGER,
-    note_recette      INTEGER,
     note_auteur       VARCHAR(255),
     id_auteur         VARCHAR(255) NOT NULL,
     id_type           INTEGER      NOT NULL,
@@ -170,15 +170,37 @@ CREATE TABLE Ingredient
     CONSTRAINT FK_Allergene FOREIGN KEY (id_allergene) REFERENCES Allergene(id)
 );
 
+DROP TABLE IF EXISTS Unite;
+CREATE TABLE Unite
+(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    nom VARCHAR(255) NOT NULL,
+    CONSTRAINT PK_Unite PRIMARY KEY (id)
+);
+
 DROP TABLE IF EXISTS Ingredient_Recette;
 CREATE TABLE Ingredient_Recette
 (
     id_ingredient INTEGER           NOT NULL,
     id_recette    INTEGER           NOT NULL,
     quantite      INTEGER DEFAULT 1 NOT NULL,
+    id_unite INTEGER,
     CONSTRAINT PK_Ingredient_Recette PRIMARY KEY (id_ingredient, id_recette),
     CONSTRAINT FK_Ingredient_Recette_Ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient (id),
-    CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
+    CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
+    CONSTRAINT FK_Ingredient_Recette_Unite FOREIGN KEY (id_unite) REFERENCES Unite (id)
+);
+
+DROP TABLE IF EXISTS Note;
+CREATE TABLE Note
+(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  valeur TINYINT NOT NULL,
+  id_recette INTEGER NOT NULL,
+  id_utilisateur VARCHAR(255) NOT NULL,
+  CONSTRAINT PK_Note PRIMARY KEY (id),
+  CONSTRAINT FK_Note_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
+  CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (email)
 );
 
 DROP TABLE IF EXISTS Allergene;

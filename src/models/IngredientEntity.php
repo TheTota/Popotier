@@ -6,6 +6,7 @@ class IngredientEntity{
 
     private $id;
     private $name;
+    private $quantity;
     private $allergen; // AllergenEntity
 
     /**
@@ -14,10 +15,11 @@ class IngredientEntity{
      * @param $name
      * @param null|AllergenEntity $allergen
      */
-    public function __construct($id, $name, $allergen)
+    public function __construct($id, $name, $quantity = null, $allergen)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->quantity = $quantity;
         $this->allergen = $allergen;
     }
 
@@ -40,17 +42,33 @@ class IngredientEntity{
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity(int $quantity)
+    {
+        $this->quantity = $quantity;
     }
 
     /**

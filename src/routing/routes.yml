@@ -74,6 +74,13 @@ recipe_summary:
   requirements:
     id: '[0-9]+'
 
+recipe_view:
+  path: /recipe/view/{id}
+  controller: RecipeController
+  action: view
+  requirements:
+    id: '[0-9]+'
+
 admin_dashboard:
   path: /admin/view/dashboard
   controller: AdminController
