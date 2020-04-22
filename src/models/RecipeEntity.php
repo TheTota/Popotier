@@ -16,7 +16,6 @@ class RecipeEntity
     private $personNumber;
     private $difficulty;
     private $meanPrice;
-    private $evaluation;
     private $authorQuote;
     private $valid;
     private $author; // UserEntity
@@ -35,13 +34,13 @@ class RecipeEntity
         $personNumber,
         $difficulty,
         $meanPrice,
-        $evaluation,
         $authorQuote,
         $valid,
         $author,
         $type,
         $admin,
-        $steps
+        $steps,
+        $ingredients
     )
     {
         $this->id = $id;
@@ -53,13 +52,13 @@ class RecipeEntity
         $this->personNumber = $personNumber;
         $this->difficulty = $difficulty;
         $this->meanPrice = $meanPrice;
-        $this->evaluation = $evaluation;
         $this->authorQuote = $authorQuote;
         $this->valid = $valid;
         $this->author = $author;
         $this->type = $type;
         $this->admin = $admin;
         $this->steps = $steps;
+        $this->ingredients = $ingredients;
     }
 
     /**
@@ -204,22 +203,6 @@ class RecipeEntity
     public function setMeanPrice($meanPrice)
     {
         $this->meanPrice = $meanPrice;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEvaluation()
-    {
-        return $this->evaluation;
-    }
-
-    /**
-     * @param int $evaluation
-     */
-    public function setEvaluation($evaluation)
-    {
-        $this->evaluation = $evaluation;
     }
 
     /**
