@@ -35,6 +35,7 @@ DROP TABLE IF EXISTS Utilisateur;
 DROP TABLE IF EXISTS Role;
 DROP TABLE IF EXISTS Ingredient_Recette;
 DROP TABLE IF EXISTS Ingredient;
+DROP TABLE IF EXISTS Allergene;
 
 CREATE TABLE Role
 (
@@ -164,7 +165,9 @@ CREATE TABLE Ingredient
 (
     id  INTEGER      NOT NULL AUTO_INCREMENT,
     nom VARCHAR(255) NOT NULL,
-    CONSTRAINT PK_Ingredient PRIMARY KEY (id)
+    id_allergene INTEGER,
+    CONSTRAINT PK_Ingredient PRIMARY KEY (id),
+    CONSTRAINT FK_Allergene FOREIGN KEY (id_allergene) REFERENCES Allergene(id)
 );
 
 DROP TABLE IF EXISTS Ingredient_Recette;
@@ -178,13 +181,24 @@ CREATE TABLE Ingredient_Recette
     CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
 );
 
+DROP TABLE IF EXISTS Allergene;
+CREATE TABLE Allergene
+(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    nom VARCHAR(255) NOT NULL,
+    CONSTRAINT PK_Allergene PRIMARY KEY (id)
+);
+
 -- ---------------------------------------------------------------------------
 -- TRIGGERS
 -- ---------------------------------------------------------------------------
+DELIMITER $$
 CREATE TRIGGER `set_creation_date` BEFORE INSERT ON `Recette` FOR EACH ROW
 BEGIN
     SET NEW.date_creation = NOW();
 END
+$$
+DELIMITER ;
 
 -- ---------------------------------------------------------------------------
 -- Insert some data.

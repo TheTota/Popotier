@@ -5,7 +5,7 @@ namespace Src\Models;
 class TagEntity{
 
     private $id;
-    private $label;
+    private $name;
 
     /**
      * TagEntity constructor.
@@ -15,7 +15,7 @@ class TagEntity{
     public function __construct($id, $label)
     {
         $this->id = $id;
-        $this->label = $label;
+        $this->name = $label;
     }
 
     /**
@@ -35,20 +35,23 @@ class TagEntity{
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getLabel(): string
+    public function getName()
     {
-        return $this->label;
+        return $this->name;
     }
 
     /**
-     * @param string $label
+     * @param mixed $name
      */
-    public function setLabel(string $label)
+    public function setName($name)
     {
-        $this->label = $label;
+        $this->name = $name;
     }
+
+
+
 
 
 }

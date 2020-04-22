@@ -1,0 +1,47 @@
+{% extends 'admin/admin-page.html.twig' %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="/public/js/admin/admin-allergy.js"></script>
+{% endblock %}
+
+{% block admin_content %}
+    <h3>Allergènes</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for allergen in allergens %}
+                    <tr>
+                        <td>{{ allergen.name }}</td>
+                        <td>
+                            <a class="btn btn-outline-danger" href="{{ path('delete_allergen', [allergen.id]) }}" >
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <form action="{{ path('add_allergen') }}" method="POST">
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="inputAllergeneName" name="inputAllergenName" placeholder="Ajouter un allergène">
+                            </div>
+                        </td>
+                        <td>
+                            <button id="submit" class="btn btn-outline-info" type="submit" disabled><i class="fas fa-plus"></i></button>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -2,23 +2,20 @@
 
 namespace Src\Models;
 
-class IngredientEntity{
+class AllergenEntity{
 
     private $id;
     private $name;
-    private $allergen; // AllergenEntity
 
     /**
-     * IngredientEntity constructor.
+     * AllergenEntity constructor.
      * @param $id
      * @param $name
-     * @param null|AllergenEntity $allergen
      */
-    public function __construct($id, $name, $allergen)
+    public function __construct($id, $name)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->allergen = $allergen;
     }
 
     /**
@@ -52,25 +49,6 @@ class IngredientEntity{
     {
         $this->name = $name;
     }
-
-    /**
-     * @return null|AllergenEntity
-     */
-    public function getAllergen()
-    {
-        return $this->allergen;
-    }
-
-    /**
-     * @param AllergenEntity $allergen
-     */
-    public function setAllergen(AllergenEntity $allergen)
-    {
-        $this->allergen = $allergen;
-    }
-
-
-
 
 
 }

@@ -3,7 +3,7 @@ INSERT INTO Type(libelle) VALUES('Plat');
 INSERT INTO Type(libelle) VALUES('Dessert');
 INSERT INTO Type(libelle) VALUES('Boisson');
 
-
+INSERT INTO `Allergene` (`id`, `nom`) VALUES (NULL, 'gluten'), (NULL, 'crustacés');
 
 INSERT INTO Recette(nom,temps_preparation,nb_personnes,note_recette, note_auteur, id_auteur, id_type) 
 VALUES('Barbajuan',60, 4,8,'A manger froid ou chaud !', 'defaultuser@gmail.com', 1);
