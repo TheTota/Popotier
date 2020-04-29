@@ -2,13 +2,10 @@
 
 namespace src\services;
 
-
-use src\services\DatabaseService;
+use src\services\DataBaseService;
 
 class LoginService
 {
-
-    private $db;
 
     public static function connect($email, $password)
     {
