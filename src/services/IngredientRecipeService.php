@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-use Src\Models\IngredientEntity;
-use Src\Models\IngredientRecipeEntity;
+use src\models\IngredientEntity;
+use src\models\IngredientRecipeEntity;
 
 class IngredientRecipeService {
 

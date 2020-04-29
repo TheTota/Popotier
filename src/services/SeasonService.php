@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-use Src\Models\RecipeSeasonEntity;
+use src\models\RecipeSeasonEntity;
 
 class SeasonService{
 

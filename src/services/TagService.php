@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-use Src\Models\TagEntity;
+use src\models\TagEntity;
 
 class TagService{
 

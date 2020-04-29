@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Services;
-require_once('src/services/DataBaseService.php');
+namespace src\services;
 
-use Src\Services\DatabaseService;
+
+use src\services\DatabaseService;
 
 class LoginService
 {

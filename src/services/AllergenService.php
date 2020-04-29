@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-use Src\Models\AllergenEntity;
+use src\models\AllergenEntity;
 
 class AllergenService {
 

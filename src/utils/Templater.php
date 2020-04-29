@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Utils;
+namespace src\utils;
 
 require_once 'src/routing/RouterModule.php';
 

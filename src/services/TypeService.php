@@ -1,12 +1,12 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
 require_once 'src/services/DataBaseService.php';
 
 require_once 'src/models/RecipeTypeEntity.php';
 
-use Src\Models\RecipeTypeEntity;
+use src\models\RecipeTypeEntity;
 
 class TypeService{
 

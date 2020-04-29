@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
 class DataBaseService { 
 

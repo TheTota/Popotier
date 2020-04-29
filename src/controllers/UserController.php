@@ -1,14 +1,14 @@
 <?php
 
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Utils\Templater;
+use src\utils\Templater;
 
-use Src\Services\UserService;
-use Src\Services\RoleService;
-use Src\Services\RecipeService;
+use src\services\UserService;
+use src\services\RoleService;
+use src\services\RecipeService;
 
-use Src\Models\UserEntity;
+use src\models\UserEntity;
 
 class UserController
 {

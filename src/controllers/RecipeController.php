@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Utils\Templater;
-use Src\Services\RecipeService;
-use Src\Services\UserService;
+use src\utils\Templater;
+use src\services\RecipeService;
+use src\services\UserService;
 
 class RecipeController
 {

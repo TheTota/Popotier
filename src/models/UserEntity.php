@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Models;
+namespace src\models;
 
 use Src\Models\RoleEntity;
 

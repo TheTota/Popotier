@@ -1,14 +1,14 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
 
-use Src\Models\IngredientEntity;
-use Src\Models\RecipeEntity;
-use Src\Models\RecipeTypeEntity;
-use Src\Models\StepEntity;
-use Src\Models\UserEntity;
-use Src\Services\StepService;
+use src\models\IngredientEntity;
+use src\models\RecipeEntity;
+use src\models\RecipeTypeEntity;
+use src\models\StepEntity;
+use src\models\UserEntity;
+use src\services\StepService;
 
 class RecipeService
 {
