@@ -2,14 +2,6 @@
 
 namespace Src\Services;
 
-require_once 'src/models/RecipeEntity.php';
-
-require_once 'src/models/RecipeEntity.php';
-
-require_once 'src/services/UserService.php';
-require_once 'src/services/TypeService.php';
-require_once 'src/services/IngredientService.php';
-require_once 'src/services/StepService.php';
 
 use Src\Models\IngredientEntity;
 use Src\Models\RecipeEntity;
@@ -54,7 +46,7 @@ class RecipeService
             TypeService::findById($recipe['id_type']),
             ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
             StepService::findByRecette($recipe['id']),
-            null
+            IngredientRecipeService::findAllByRecipe($recipe['id'])
         );
     }
 
@@ -181,7 +173,7 @@ class RecipeService
                     TypeService::findById($recipe['id_type']),
                     ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
                     StepService::findByRecette($recipe['id']),
-                    IngredientService::findAllByRecipe($recipe['id'])
+                    IngredientRecipeService::findAllByRecipe($recipe['id'])
                 )
             );
         }

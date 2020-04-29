@@ -4,43 +4,22 @@ namespace Src\Models;
 
 class IngredientEntity{
 
-    private $id;
     private $name;
-    private $quantity;
-    private $allergen; // AllergenEntity
+    private $allergen;
 
     /**
      * IngredientEntity constructor.
-     * @param $id
      * @param $name
-     * @param null|AllergenEntity $allergen
      */
-    public function __construct($id, $name, $quantity = null, $allergen)
+    public function __construct($name, $allergen)
     {
-        $this->id = $id;
         $this->name = $name;
-        $this->quantity = $quantity;
         $this->allergen = $allergen;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
+     * @return string
      */
     public function getName(): string
     {
@@ -53,22 +32,6 @@ class IngredientEntity{
     public function setName(string $name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param int $quantity
-     */
-    public function setQuantity(int $quantity)
-    {
-        $this->quantity = $quantity;
     }
 
     /**

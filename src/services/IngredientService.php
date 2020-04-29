@@ -2,7 +2,9 @@
 
 namespace Src\Services;
 
+
 use Src\Models\IngredientEntity;
+use Src\Models\IngredientRecipeEntity;
 
 class IngredientService
 {
@@ -12,13 +14,16 @@ class IngredientService
 
     }
 
-    public function findById($id)
+    public static function findByName($name)
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $result = $db->query("SELECT * FROM Ingredient WHERE id = '$id'")->fetch();
+        $ingredient = $db->query("SELECT * FROM Ingredient WHERE nom = '$name'")->fetch();
 
-        $ingredient = new IngredientEntity();
+        $ingredient = new IngredientEntity(
+            $ingredient['nom'],
+            ($ingredient['id_allergene'] == null) ? null : AllergenService::findById($ingredient['id_allergene'])
+        );
 
         return $ingredient;
     }
@@ -38,33 +43,5 @@ class IngredientService
 
     }
 
-    public static function findAllByRecipe($recipeId)
-    {
-        $db = DataBaseService::getInstance()->getDb();
 
-        $query = $db->query("
-                            SELECT * 
-                            FROM Ingredient I 
-                            JOIN Ingredients_Recette IR ON I.id = IR.id_ingredient  
-                            WHERE id_recette = '$recipeId'");
-
-        if($query)
-            $ingredients = $query->fetch();
-        else
-            return null;
-
-        $ingredientArray = [];
-
-        foreach ($ingredients as $ingredient){
-            array_push($ingredientArray,
-                new IngredientEntity(
-                $ingredient['id'],
-                $ingredient['nom'],
-                $ingredient['quantite']
-                )
-            );
-        }
-
-        return $ingredientArray;
-    }
 }

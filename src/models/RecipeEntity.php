@@ -2,8 +2,6 @@
 
 namespace Src\Models;
 
-use http\Client\Curl\User;
-
 class RecipeEntity
 {
 
@@ -22,7 +20,7 @@ class RecipeEntity
     private $type; // TypeEntity
     private $admin; // UserEntity
     private $steps; // StepEntity[]
-    private $ingredients; // IngredientEntity[]
+    private $ingredients; // IngredientRecipeEntity[]
 
     public function __construct(
         $id,
@@ -302,7 +300,7 @@ class RecipeEntity
     }
 
     /**
-     * @return IngredientEntity[]
+     * @return IngredientRecipeEntity[]
      */
     public function getIngredients(): array
     {
@@ -310,7 +308,7 @@ class RecipeEntity
     }
 
     /**
-     * @param IngredientEntity[] $ingredients
+     * @param IngredientRecipeEntity[] $ingredients
      */
     public function setIngredients(array $ingredients)
     {
