@@ -2,16 +2,18 @@
 
 namespace Src\Controllers;
 
-require_once 'src/services/RecipeService.php';
+use Src\Services\AllergenService;
+use Src\Services\TagService;
+use Src\Utils\Templater;
 
 use Src\Services\RecipeService;
 
 class AdminController
 {
 
-    public static function viewAction()
+    public function view()
     {
-        $twig = \Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
 
         echo $twig->render(
             'admin/admin-dashboard.html.twig'
@@ -19,8 +21,8 @@ class AdminController
 
     }
 
-    public static function viewRecipesAction() {
-        $twig = \Templater::getInstance()->getTwig();
+    public function viewRecipes() {
+        $twig = Templater::getInstance()->getTwig();
 
         $recipesToValidate = RecipeService::findAllThatNeedValidation();
 
@@ -29,5 +31,25 @@ class AdminController
             [
                 'recipesToValidate' => $recipesToValidate
             ]);
+    }
+
+    public function viewTags() {
+        $twig = Templater::getInstance()->getTwig();
+
+        $tags = TagService::fetchAll();
+
+        echo $twig->render('admin/admin-tag.html.twig', [
+            'tags' => $tags
+        ]);
+    }
+
+    public function  viewAllergies() {
+        $twig = Templater::getInstance()->getTwig();
+
+        $allergens = AllergenService::fetchAll();
+
+        echo $twig->render('admin/admin-allergy.html.twig',[
+            'allergens' => $allergens
+        ]);
     }
 }

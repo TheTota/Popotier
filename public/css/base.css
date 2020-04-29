@@ -1,12 +1,30 @@
+
+
 html, body {
     height: 100%;
     padding-top: 28px;
+    font-family: 'Comic Neue', cursive;
+}
+
+a {
+    text-decoration: none;
+    color: #6D997D;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #91CCA7;
+    transition: all 0.3s;
 }
 
 #content {
     height: 100%;
     width: 80%;
     margin: auto;
+}
+
+hr {
+    background: #91CCA7;
 }
 
 button:hover:disabled {

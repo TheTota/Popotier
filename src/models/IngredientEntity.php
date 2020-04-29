@@ -4,51 +4,52 @@ namespace Src\Models;
 
 class IngredientEntity{
 
-    private $id;
     private $name;
+    private $allergen;
 
     /**
      * IngredientEntity constructor.
-     * @param $id
      * @param $name
      */
-    public function __construct($id, $name)
+    public function __construct($name, $allergen)
     {
-        $this->id = $id;
         $this->name = $name;
+        $this->allergen = $allergen;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return string
      */
-    public function getLibelle(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string $libelle
+     * @param string $name
      */
-    public function setLibelle(string $name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
+
+    /**
+     * @return null|AllergenEntity
+     */
+    public function getAllergen()
+    {
+        return $this->allergen;
+    }
+
+    /**
+     * @param AllergenEntity $allergen
+     */
+    public function setAllergen(AllergenEntity $allergen)
+    {
+        $this->allergen = $allergen;
+    }
+
 
 
 

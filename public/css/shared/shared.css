@@ -16,3 +16,12 @@ strong-blur {
 .width80 {
     width: 80%;
 }
+
+.icon::before {
+    color: #CCAD7C;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}

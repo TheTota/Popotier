@@ -2,35 +2,46 @@
 
 namespace Src\Services;
 
+
 use Src\Models\IngredientEntity;
+use Src\Models\IngredientRecipeEntity;
 
-class IngredientService{
+class IngredientService
+{
 
-    public function fetchAll(){
+    public function fetchAll()
+    {
 
     }
 
-    public function findById($id){
+    public static function findByName($name)
+    {
         $db = DataBaseService::getInstance()->getDb();
 
-        $result = query("SELECT * FROM Ingredient WHERE id = '$id'")->fetch();
+        $ingredient = $db->query("SELECT * FROM Ingredient WHERE nom = '$name'")->fetch();
 
         $ingredient = new IngredientEntity(
-
+            $ingredient['nom'],
+            ($ingredient['id_allergene'] == null) ? null : AllergenService::findById($ingredient['id_allergene'])
         );
 
         return $ingredient;
     }
 
-    public function add(IngredientEntity $ingredient){
+    public function add(IngredientEntity $ingredient)
+    {
 
     }
 
-    public function update(IngredientEntity $ingredient){
+    public function update(IngredientEntity $ingredient)
+    {
 
     }
 
-    public function delete(IngredientEntity $ingredient){
+    public function delete(IngredientEntity $ingredient)
+    {
 
     }
+
+
 }

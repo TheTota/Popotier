@@ -1,3 +1,7 @@
+a {
+    color: black;
+}
+
 #search-section {
     min-height: 200px;
     display: table;
@@ -29,11 +33,13 @@
 
 .separator {
     width: 80%;
+    color: #91CCA7;
 }
 
 #recipe-section {
     display: flex;
     justify-content: center;
+
 }
 
 h2 {
@@ -41,7 +47,7 @@ h2 {
 }
 
 .recipe-block {
-    margin: 0 15px 15px;
+    margin: 0 20px 25px;
     padding: 0;
     width: 270px;
     border-radius: 15px;
@@ -73,9 +79,7 @@ h2 {
     font-size: 1.2em;
 }
 
-.center {
-    text-align: center;
-}
+
 
 
 

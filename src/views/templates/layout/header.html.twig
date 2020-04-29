@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/">Popotier</a>
+    <a class="navbar-brand" href="{{ path('home')}}">Popotier</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -15,15 +15,14 @@
             <div class="user-actions">
                 {% if session.alias %}
                     {% if session.role == 'admin' %}
-                        <a class="btn btn-light btn-sm" href="/admin/view/dashboard">Administration</a>
-                        <a class="btn btn-outline-danger btn-sm" href="/logout">Deconnexion</a>
+                        <a class="btn btn-light btn-sm" href="{{ path('admin_dashboard') }}">Administration</a>
                     {% else %}
-                        <a class="btn btn-light btn-sm" href="/user/view/recipe-list">Profil</a>
-                        <a class="btn btn-outline-danger btn-sm" href="/logout">Deconnexion</a>
+                        <a class="btn btn-light btn-sm" href="{{ path('user_recipe_list') }}">Profil</a>
                     {% endif %}
+                    <a class="btn btn-danger btn-sm" href="{{ path('logout') }}">Deconnexion</a>
                 {% else %}
-                    <a class="btn btn-outline-primary" href="/user/add">Inscritpion</a>
-                    <a class="btn btn-outline-primary" href="/login">Connexion</a>
+                    <a class="btn btn-outline-primary" href="{{ path('add_user') }}">Inscription</a>
+                    <a class="btn btn-outline-primary" href="{{ path('login') }}">Connexion</a>
                 {% endif %}
             </div>
         </form>

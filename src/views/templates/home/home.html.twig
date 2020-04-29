@@ -25,17 +25,21 @@
                 {% for recipe in recipes %}
                     <div class="row-sm-4">
                         <div class="recipe-block">
-                            <div class="recipe-image">
-                                {% if recipe.image %}
-                                    <img src="{{ recipe.image }}" alt="image du plat">
-                                {% else %}
-                                    <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat">
-                                {% endif %}
-                            </div>
-                            <div class="recipe-description">
-                                <strong class="center">{{ recipe.name }}</strong>
-                            </div>
+                            <a href="{{ path('recipe_view', [recipe.id]) }}">
+                                <div class="recipe-image">
+                                    {% if recipe.image %}
+                                        <img src="{{ recipe.image }}" alt="image du plat">
+                                    {% else %}
+                                        <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat">
+                                    {% endif %}
+                                </div>
+                                <div class="recipe-description">
+                                    <strong class="center">{{ recipe.name }}</strong>
+                                </div>
+                            </a>
                         </div>
+
+
                     </div>
                 {% endfor %}
             {% else %}
