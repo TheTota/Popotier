@@ -39,6 +39,17 @@ class AllergenService {
         return $db->prepare("DELETE FROM Allergene WHERE id = ?")->execute([$allergenId]);
     }
 
+    public static function findById($allergenId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $allergen = $db->query("SELECT * FROM Allergene WHERE id = '$allergenId'")->fetch();
+
+        return new AllergenEntity(
+            $allergen['id'],
+            $allergen['nom']
+        );
+    }
+
 
 
 }

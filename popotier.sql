@@ -163,17 +163,16 @@ CREATE TABLE Utilisateur_Recette
 DROP TABLE IF EXISTS Ingredient;
 CREATE TABLE Ingredient
 (
-    id  INTEGER      NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(255) NOT NULL,
+    nom          VARCHAR(255) NOT NULL,
     id_allergene INTEGER,
-    CONSTRAINT PK_Ingredient PRIMARY KEY (id),
-    CONSTRAINT FK_Allergene FOREIGN KEY (id_allergene) REFERENCES Allergene(id)
+    CONSTRAINT PK_Ingredient PRIMARY KEY (nom),
+    CONSTRAINT FK_Allergene FOREIGN KEY (id_allergene) REFERENCES Allergene (id)
 );
 
 DROP TABLE IF EXISTS Unite;
 CREATE TABLE Unite
 (
-    id INTEGER NOT NULL AUTO_INCREMENT,
+    id  INTEGER      NOT NULL AUTO_INCREMENT,
     nom VARCHAR(255) NOT NULL,
     CONSTRAINT PK_Unite PRIMARY KEY (id)
 );
@@ -181,12 +180,12 @@ CREATE TABLE Unite
 DROP TABLE IF EXISTS Ingredient_Recette;
 CREATE TABLE Ingredient_Recette
 (
-    id_ingredient INTEGER           NOT NULL,
+    id_ingredient VARCHAR(255)      NOT NULL,
     id_recette    INTEGER           NOT NULL,
     quantite      INTEGER DEFAULT 1 NOT NULL,
-    id_unite INTEGER,
+    id_unite      INTEGER,
     CONSTRAINT PK_Ingredient_Recette PRIMARY KEY (id_ingredient, id_recette),
-    CONSTRAINT FK_Ingredient_Recette_Ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient (id),
+    CONSTRAINT FK_Ingredient_Recette_Ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient (nom),
     CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
     CONSTRAINT FK_Ingredient_Recette_Unite FOREIGN KEY (id_unite) REFERENCES Unite (id)
 );
@@ -194,19 +193,19 @@ CREATE TABLE Ingredient_Recette
 DROP TABLE IF EXISTS Note;
 CREATE TABLE Note
 (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  valeur TINYINT NOT NULL,
-  id_recette INTEGER NOT NULL,
-  id_utilisateur VARCHAR(255) NOT NULL,
-  CONSTRAINT PK_Note PRIMARY KEY (id),
-  CONSTRAINT FK_Note_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
-  CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (email)
+    id             INTEGER      NOT NULL AUTO_INCREMENT,
+    valeur         TINYINT      NOT NULL,
+    id_recette     INTEGER      NOT NULL,
+    id_utilisateur VARCHAR(255) NOT NULL,
+    CONSTRAINT PK_Note PRIMARY KEY (id),
+    CONSTRAINT FK_Note_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
+    CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (email)
 );
 
 DROP TABLE IF EXISTS Allergene;
 CREATE TABLE Allergene
 (
-    id INTEGER NOT NULL AUTO_INCREMENT,
+    id  INTEGER      NOT NULL AUTO_INCREMENT,
     nom VARCHAR(255) NOT NULL,
     CONSTRAINT PK_Allergene PRIMARY KEY (id)
 );
@@ -215,7 +214,10 @@ CREATE TABLE Allergene
 -- TRIGGERS
 -- ---------------------------------------------------------------------------
 DELIMITER $$
-CREATE TRIGGER `set_creation_date` BEFORE INSERT ON `Recette` FOR EACH ROW
+CREATE TRIGGER `set_creation_date`
+    BEFORE INSERT
+    ON `Recette`
+    FOR EACH ROW
 BEGIN
     SET NEW.date_creation = NOW();
 END

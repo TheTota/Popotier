@@ -77,9 +77,9 @@ INSERT INTO `Role` (`libelle`) VALUES
 -- Dumping data for table `Utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`email`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `id_role`) VALUES
-('defaultadmin@gmail.com', 'Admin', 'Default', 'DefaultAdmin', 'admin', 1),
-('defaultuser@gmail.com', 'User', 'Default', 'DefaultUser', 'user', 2);
+-- INSERT INTO `Utilisateur` (`email`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `id_role`) VALUES
+-- ('defaultadmin@gmail.com', 'Admin', 'Default', 'DefaultAdmin', 'admin', 1),
+-- ('defaultuser@gmail.com', 'User', 'Default', 'DefaultUser', 'user', 2);
 
 --
 -- Dumping data for table `Recette`
@@ -123,6 +123,25 @@ INSERT INTO `Etape` (`position`, `description`, `id_recette`) VALUES
 ( 7, 'Couper la pâte en bandes espacées d’environ 1, 74 cm (oui c’est précis), former des nœuds ou des torsades selon la longueur des bandes.', 3),
 ( 8, 'Plonger les ganses dans l’huile à frire chaude et tourner les lorsque la ganse devient dorée.', 3),
 ( 9, 'Poser les ganses chaudes sur un sopalin et ajouter le sucre glace.', 3);
+
+INSERT INTO Ingredient (nom, id_allergene)
+VALUES
+    ('tomate', null),
+    ('thon', null),
+    ('moutarde', null),
+    ('farine', 1),
+    ('riz', null),
+    ('courge', null),
+    ('sel', null),
+    ('oeuf', 4),
+    ('huile', null),
+    ('eau', null);
+
+INSERT INTO Ingredient_Recette (id_ingredient, id_recette, quantite, id_unite)
+VALUES
+    ('tomate', 2, 2, null),
+    ('thon', 2, 200, 5),
+    ('moutarde', 2, 50, 5);
 
 
 COMMIT;
