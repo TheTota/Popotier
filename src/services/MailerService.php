@@ -5,6 +5,7 @@ namespace src\services;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use src\models\UserEntity;
 use src\utils\Templater;
 
 /**
@@ -14,9 +15,13 @@ use src\utils\Templater;
  */
 class MailerService
 {
+    private static $from = 'popotier@alwaysdata.net';
+    private static $host = 'smtp-popotier.alwaysdata.net';
+    private static $username = 'popotier@alwaysdata.net';
+    private static $password = 'nopass@2020';
+    private static $port = 25;
 
-
-    public static function sendMail($user)
+    public static function sendMail(UserEntity $user)
     {
         require_once 'vendor/autoload.php';
 
@@ -26,18 +31,18 @@ class MailerService
 
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                    // Enable verbose debug output
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                    // Enable verbose debug output
             $mail->isSMTP();                                          // Send using SMTP
-            $mail->Host = 'smtp-popotier.alwaysdata.net';             // Set the SMTP server to send through
+            $mail->Host = self::$host;          // Set the SMTP server to send through
             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-            $mail->Username = 'popotier@alwaysdata.net';              // SMTP username
-            $mail->Password = 'nopass@2020';                          // SMTP password
+            $mail->Username = self::$username;            // SMTP username
+            $mail->Password = self::$password;                         // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;       // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port = 25;                                         // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->Port = self::$port;                                         // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //Recipients
-            $mail->setFrom('popotier@alwaysdata.net', 'Mailer');
-            $mail->addAddress('alexandre.tomasia@gmail.com', 'Alexandre Tomasia');    // Add a recipient
+            $mail->setFrom(self::$from, 'Mailer');
+            $mail->addAddress($user->getEmail(), $user->getLastName() . ' ' . $user->getFirstName());    // Add a recipient
 
             // Attachments
             // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -47,10 +52,9 @@ class MailerService
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Verifiez votre email';
             $mail->Body = $twig->render('user/mail/confirmation-mail-template.html.twig', ['user' => $user]);
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }

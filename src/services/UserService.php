@@ -40,18 +40,28 @@ class UserService
         $db = DataBaseService::getInstance()->getDb();
 
 
-        $request = $db->prepare("INSERT INTO Utilisateur VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $request = $db->prepare("INSERT INTO Utilisateur (email, nom, prenom, pseudo, mot_de_passe, valide, chaine_validation, id_role) VALUES (
+            :email,
+            :nom, 
+            :prenom, 
+            :pseudo, 
+            :mot_de_passe, 
+            :valide, 
+            :chaine_validation, 
+            :id_role)");
 
-        $request->execute([
-            $user->getEmail(),
-            $user->getLastName(),
-            $user->getFirstName(),
-            $user->getAlias(),
-            password_hash($user->getPassword(), PASSWORD_DEFAULT),
-            $user->getValid() == true ? 1 : 0,
-            $user->getValidationString(),
-            $user->getRole()->getId()
-        ]);
+        $data = [
+            'email' => $user->getEmail(),
+            'nom' => $user->getLastName(),
+            'prenom' => $user->getFirstName(),
+            'pseudo' => $user->getAlias(),
+            'mot_de_passe' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            'valide' => $user->getValid() == true ? 1 : 0,
+            'chaine_validation' => $user->getValidationString(),
+            'id_role' => $user->getRole()->getId()
+        ];
+
+        $request->execute($data);
     }
 
     public function update(UserEntity $user)
