@@ -48,14 +48,15 @@ CREATE TABLE Role
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur
 (
-    email        VARCHAR(255) NOT NULL,
-    nom          VARCHAR(255) NOT NULL,
-    prenom       VARCHAR(255) NOT NULL,
-    pseudo       VARCHAR(255) NOT NULL,
-    mot_de_passe VARCHAR(255) NOT NULL, -- hash this
-    valide       BOOLEAN      NOT NULL DEFAULT 0,
+    email             VARCHAR(255) NOT NULL,
+    nom               VARCHAR(255) NOT NULL,
+    prenom            VARCHAR(255) NOT NULL,
+    pseudo            VARCHAR(255) NOT NULL,
+    mot_de_passe      VARCHAR(255) NOT NULL, -- hash this
+    valide            BOOLEAN      NOT NULL DEFAULT 0,
     chaine_validation varchar(255),
-    id_role      INTEGER      NOT NULL,
+    id_role           INTEGER      NOT NULL,
+    date_creation     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CONSTRAINT PK_Utilisateur PRIMARY KEY (email),
     CONSTRAINT FK_Utilisateur_Role FOREIGN KEY (id_role) REFERENCES Role (id)
 );

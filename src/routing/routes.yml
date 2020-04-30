@@ -132,6 +132,10 @@ delete_tag:
   requirements:
     id: '[0-9]+'
 
+task_user_delete:
+  path: /task/user/delete
+  controller: TaskController
+  action: deleteUnvalidUsers
 
 
 
