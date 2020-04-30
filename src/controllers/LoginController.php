@@ -1,8 +1,8 @@
 <?php
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Services\LoginService;
-use Src\Utils\Templater;
+use src\services\LoginService;
+use src\utils\Templater;
 
 
 

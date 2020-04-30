@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-use Src\Models\UnitEntity;
+use src\models\UnitEntity;
 
 class UnitService {
 

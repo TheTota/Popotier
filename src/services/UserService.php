@@ -1,13 +1,13 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
 require_once 'src/models/UserEntity.php';
 
 require_once 'src/services/RoleService.php';
 
-use Src\Models\RoleEntity;
-use Src\Models\UserEntity;
+use src\models\RoleEntity;
+use src\models\UserEntity;
 
 class UserService
 {
@@ -39,7 +39,8 @@ class UserService
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $request = $db->prepare("INSERT INTO Utilisateur VALUES (?, ?, ?, ?, ?, ?)");
+
+        $request = $db->prepare("INSERT INTO Utilisateur VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
         $request->execute([
             $user->getEmail(),
@@ -47,6 +48,8 @@ class UserService
             $user->getFirstName(),
             $user->getAlias(),
             password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            $user->getValid() == true ? 1 : 0,
+            $user->getValidationString(),
             $user->getRole()->getId()
         ]);
     }
@@ -83,6 +86,30 @@ class UserService
         } else {
             return false;
         }
+    }
+
+    public static function findByValidationString($validationString){
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT * FROM Utilisateur WHERE chaine_validation LIKE '$validationString'")->fetch();
+
+        $user = new UserEntity(
+            $result['email'],
+            $result['nom'],
+            $result['prenom'],
+            $result['pseudo'],
+            $result['mot_de_passe'],
+            RoleService::findById($result['id_role'])
+        );
+
+        return $user;
+    }
+
+    public static function validateUser($email){
+        $db = DataBaseService::getInstance()->getDb();
+        $db->exec("UPDATE Utilisateur SET valide = true WHERE email = '$email'");
+        $db->exec("UPDATE Utilisateur SET chaine_validation = '' WHERE email = '$email'");
+        return;
     }
 
 

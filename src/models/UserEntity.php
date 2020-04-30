@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Models;
+namespace src\models;
 
 use Src\Models\RoleEntity;
 
@@ -11,6 +11,8 @@ class UserEntity
     private $firstName;
     private $alias;
     private $password;
+    private $valid;
+    private $validationString;
     private $role; // Role Entity
 
     public function __construct(
@@ -19,7 +21,8 @@ class UserEntity
         $firstName,
         $alias,
         $password,
-        $role
+        $role,
+        $validationString = ''
     )
     {
         $this->email = $email;
@@ -27,7 +30,41 @@ class UserEntity
         $this->firstName = $firstName;
         $this->alias = $alias;
         $this->password = $password;
+        $this->valid = false;
+        $this->validationString = $validationString;
         $this->role = $role;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValidationString(): string
+    {
+        return $this->validationString;
+    }
+
+    /**
+     * @param string $validationString
+     */
+    public function setValidationString(string $validationString)
+    {
+        $this->validationString = $validationString;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param mixed $valid
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
-use Src\Utils\Templater;
-use Src\Routing\Route;
-use Src\Routing\RouterModule;
+use src\utils\Templater;
+use src\routing\Route;
+use src\routing\RouterModule;
 use Symfony\Component\Yaml\Yaml;
 
 // AUTOLOADER INIT

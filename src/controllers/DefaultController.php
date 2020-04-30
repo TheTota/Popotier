@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Services\RecipeService;
-use Src\Utils\Templater;
+use src\services\RecipeService;
+use src\utils\Templater;
 
 class DefaultController{
 

@@ -1,14 +1,16 @@
 <?php
 
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Utils\Templater;
+use http\Client\Curl\User;
+use src\services\MailerService;
+use src\utils\Templater;
 
-use Src\Services\UserService;
-use Src\Services\RoleService;
-use Src\Services\RecipeService;
+use src\services\UserService;
+use src\services\RoleService;
+use src\services\RecipeService;
 
-use Src\Models\UserEntity;
+use src\models\UserEntity;
 
 class UserController
 {
@@ -26,15 +28,18 @@ class UserController
         if (!empty($_POST)) {
 
             $user = new UserEntity(
-                $_POST['email'],
+                strtolower($_POST['email']),
                 $_POST['lastName'],
                 $_POST['firstName'],
                 $_POST['alias'],
                 $_POST['password'],
-                RoleService::findByName('Utilisateur')
+                RoleService::findByName('Utilisateur'),
+                self::generateRandomString(30)
             );
 
-            UserService::add($user);
+            if(UserService::add($user) == null)
+                MailerService::sendMail($user);
+
             echo $twig->render('user/user-create.html.twig', ["userCreated" => "true"]);
             return;
         }
@@ -96,6 +101,29 @@ class UserController
     {
         $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
+    }
+
+    public function emailConfirmation($validationString) {
+        $user = UserService::findByValidationString($validationString);
+
+        UserService::validateUser($user->getEmail());
+
+        $twig  = Templater::getInstance()->getTwig();
+        echo $twig->render('user/mail/user-mail-confirmed.html.twig');
+    }
+
+    /**
+     * @param int $length
+     * @return string
+     */
+    private function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
 }

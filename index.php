@@ -4,7 +4,9 @@
 // This file will be our router
 require_once 'bootstrap.php';
 
-use Src\Routing\RouterModule;
+use src\routing\RouterModule;
+use src\services\MailerService;
+
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -13,7 +15,7 @@ $routerModule = RouterModule::getInstance();
 try {
     $routerModule->checkURL($request);
 } catch (Exception $e){
-    $defaultController = new \Src\Controllers\DefaultController();
+    $defaultController = new \src\controllers\DefaultController();
     $defaultController->pageNotFound();
 }
 

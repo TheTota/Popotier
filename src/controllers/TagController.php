@@ -1,12 +1,12 @@
 <?php
 
-namespace Src\controllers;
+namespace src\controllers;
 
-use Src\Models\AllergenEntity;
-use Src\Models\TagEntity;
-use Src\Routing\RouterModule;
-use Src\Services\AllergenService;
-use Src\Services\TagService;
+use src\models\AllergenEntity;
+use src\models\TagEntity;
+use src\routing\RouterModule;
+use src\services\AllergenService;
+use src\services\TagService;
 
 class TagController {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Models\AllergenEntity;
-use Src\Routing\RouterModule;
-use Src\Services\AllergenService;
+use src\models\AllergenEntity;
+use src\routing\RouterModule;
+use src\services\AllergenService;
 
 class AllergenController{
 

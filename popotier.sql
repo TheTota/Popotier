@@ -53,6 +53,8 @@ CREATE TABLE Utilisateur
     prenom       VARCHAR(255) NOT NULL,
     pseudo       VARCHAR(255) NOT NULL,
     mot_de_passe VARCHAR(255) NOT NULL, -- hash this
+    valide       BOOLEAN      NOT NULL DEFAULT 0,
+    chaine_validation varchar(255),
     id_role      INTEGER      NOT NULL,
     CONSTRAINT PK_Utilisateur PRIMARY KEY (email),
     CONSTRAINT FK_Utilisateur_Role FOREIGN KEY (id_role) REFERENCES Role (id)

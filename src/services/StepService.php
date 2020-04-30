@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
 require_once 'src/models/StepEntity.php';
 
-use Src\Models\StepEntity;
+use src\models\StepEntity;
 
 class StepService{
 

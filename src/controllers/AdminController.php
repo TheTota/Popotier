@@ -1,12 +1,12 @@
 <?php
 
-namespace Src\Controllers;
+namespace src\controllers;
 
-use Src\Services\AllergenService;
-use Src\Services\TagService;
-use Src\Utils\Templater;
+use src\services\AllergenService;
+use src\services\TagService;
+use src\utils\Templater;
 
-use Src\Services\RecipeService;
+use src\services\RecipeService;
 
 class AdminController
 {

@@ -55,6 +55,13 @@ user_favorite_list:
   controller: UserController
   action: favoriteList
 
+user_mail_confirm:
+  path: /user/email/confirmation/{key}
+  controller: UserController
+  action: emailConfirmation
+  requirements:
+    key: '[a-zA-Z0-9]{30}'
+
 add_recipe:
   path: /recipe/add
   controller: RecipeController

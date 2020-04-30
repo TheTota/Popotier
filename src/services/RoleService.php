@@ -1,12 +1,12 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
 require_once 'src/services/DataBaseService.php';
 
 require_once 'src/models/RoleEntity.php';
 
-use Src\Models\RoleEntity;
+use src\models\RoleEntity;
 
 class RoleService{
 

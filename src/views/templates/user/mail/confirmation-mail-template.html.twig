@@ -1,0 +1,19 @@
+<div>
+    <p>Bonjour {{ user.firstname }},</p>
+
+    <p>Veuillez verifier votre email afin de terminer la configuration de votre compte.</p>
+
+    <p>
+        <a href="http://{{ server.SERVER_NAME }}{{ path("user_mail_confirm", [user.validationString]) }}" class="btn btn-primary">Verifier</a>
+    </p>
+
+    <p>Vous pouvez aussi copier coller le lien ci dessous dans votre navigateur :</p>
+
+
+    http://{{ server.SERVER_NAME }}{{ path("user_mail_confirm", [user.validationString]) }}
+
+    <p>
+        Merci,
+        Popotier
+    </p>
+</div>

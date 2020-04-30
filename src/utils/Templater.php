@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Utils;
+namespace src\utils;
 
 require_once 'src/routing/RouterModule.php';
 
@@ -27,6 +27,8 @@ class Templater {
         $this->twig = new \Twig\Environment($loader, [
             //'cache' => './var/cache/twig',
         ]);
+
+        $this->twig->addGlobal('server', $_SERVER);
     }
 
     /**

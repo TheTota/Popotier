@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Routing;
+namespace src\routing;
 
 
 
@@ -59,7 +59,7 @@ abstract class AbstractRouter {
      * Call the right controller and the right action depending on the route
      */
     public function callController(Route $route, $parameters = null) {
-        $controllerClass = '\Src\Controllers\\'.$route->getController();
+        $controllerClass = '\src\controllers\\'.$route->getController();
         $controllerInstance = new $controllerClass();
         if($parameters){
             // TODO: Find a way to generalise this part

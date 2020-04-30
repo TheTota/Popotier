@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-use Src\Models\CommentEntity;
+use src\models\CommentEntity;
 
 class CommentService{
 
