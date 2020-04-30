@@ -27,6 +27,8 @@ class Templater {
         $this->twig = new \Twig\Environment($loader, [
             //'cache' => './var/cache/twig',
         ]);
+
+        $this->twig->addGlobal('server', $_SERVER);
     }
 
     /**

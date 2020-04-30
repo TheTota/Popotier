@@ -13,6 +13,7 @@ class LoginService
 
         $res = $db->query("SELECT * FROM Utilisateur WHERE email='" . $email . "'")->fetch();
 
+
         if($res){
             // TODO: don't forget to remove that, it's for dev purpose
             if ($email == 'defaultadmin@gmail.com' || $email == 'defaultuser@gmail.com') {
@@ -22,7 +23,7 @@ class LoginService
                 return true;
             }
 
-            if (password_verify($password, $res['mot_de_passe'])) {
+            if ($res['valide'] && password_verify($password, $res['mot_de_passe'])) {
                 $_SESSION['alias'] = $res['pseudo'];
                 $_SESSION['role'] = $res['role'];
                 $_SESSION['email'] = $res['email'];
