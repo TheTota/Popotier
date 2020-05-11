@@ -11,7 +11,7 @@ class RecoveryController{
     public function view(){
         $twig = Templater::getInstance()->getTwig();
 
-        echo $twig->render('login/password-recovery.html.twig', []);
+            echo $twig->render('login/password-recovery.html.twig', []);
     }
 
 }
