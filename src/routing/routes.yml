@@ -48,12 +48,12 @@ user_verify_alias:
 user_recipe_list:
   path: /user/view/recipe-list
   controller: UserController
-  action: recipeList
+  action: viewRecipe
 
 user_favorite_list:
   path: /user/view/favorite-list
   controller: UserController
-  action: favoriteList
+  action: viewFavorite
 
 user_mail_confirm:
   path: /user/email/confirmation/{key}

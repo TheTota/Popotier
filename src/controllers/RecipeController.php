@@ -5,8 +5,8 @@ namespace src\controllers;
 use src\utils\Templater;
 use src\services\RecipeService;
 use src\services\UserService;
-require_once 'src/services/RecipeTypeService.php';
-require_once 'src/models/RecipeEntity.php';
+use Src\Services\RecipeTypeService;
+use Src\Models\RecipeEntity;
 
 class RecipeController
 {
@@ -28,8 +28,45 @@ class RecipeController
         ]);
     }
 
-    public static function addRecipeAction() {
-	    $twig = \Templater::getInstance()->getTwig();
+    public static function add() {
+	    $twig = Templater::getInstance()->getTwig();
+		$recipeCreated = false;
+
+		if (!empty($_POST)) {
+
+			$recipe = new RecipeEntity(
+				null, // id
+				$_POST['inputName'],
+				$_POST['inputImage'],
+				null, //date creation
+				$_POST['inputCookingTime'],
+				$_POST['inputPreparationTime'],
+				$_POST['inputPersonNumber'],
+				$_POST['inputDifficulty'],
+				$_POST['inputMeanPrice'],
+				null, //evaluation
+				$_POST['inputAuthorQuote'],
+				0, //valid
+				UserService::findByEmail($_SESSION['email']),
+				RecipeTypeService::findById($_POST['inputType']),
+				null, // admin
+				null // steps
+			);
+			RecipeService::add($recipe);
+			$recipeCreated = true;
+			echo $twig->render('recipe/recipe-create.html.twig', ["recipeCreated"=> $recipeCreated]);
+			return;
+		}
+
+	/*	if($recipeCreated)
+		{
+			header('Location: /user');
+		} else {
+			header('Location: /recipe/add');
+		}
+
+    public static function add() {
+	    $twig = Templater::getInstance()->getTwig();
 		$recipeCreated = false;
 
 		if (!empty($_POST)) {
