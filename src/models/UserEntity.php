@@ -17,7 +17,6 @@ class UserEntity
     private $role; // Role Entity
 
     public function __construct(
-        $id,
         $email,
         $lastName,
         $firstName,
@@ -27,7 +26,6 @@ class UserEntity
         $validationString = ''
     )
     {
-        $this->id = $id;
         $this->email = $email;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
