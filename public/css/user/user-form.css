@@ -1,5 +1,14 @@
+#user-create-container {
+    height: 100%;
+    padding-top: 50px;
+}
+
 #submit {
     width: 100%;
+}
+
+#user-create-title {
+    text-align: center;
 }
 
 small {

@@ -21,6 +21,11 @@ login:
   controller: LoginController
   action: login
 
+recovery:
+  path: /recovery
+  controller: RecoveryController
+  action: view
+
 logout:
   path: /logout
   controller: LoginController
