@@ -38,7 +38,11 @@ class UserController
             );
 
             if(UserService::add($user) == null)
-                MailerService::sendMail($user);
+                MailerService::sendMail(
+                    $user->getEmail(),
+                    $user->getLastName() . ' ' . $user->getFirstName(),
+                    'Verifiez votre email',
+                    $twig->render('user/mail/confirmation-mail-template.html.twig', ['user' => $user]));
 
             echo $twig->render('user/user-create.html.twig', ["userCreated" => "true"]);
             return;

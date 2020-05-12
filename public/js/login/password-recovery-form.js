@@ -3,19 +3,22 @@
 $(() => {
 
     const email = $('#inputEmail');
-    const submit = $('#submit');
 
-    enableOrDisableSubmit();
+    if (email.length > 0) {
+        const submit = $('#submit');
 
-    email.on('input', enableOrDisableSubmit);
+        enableOrDisableSubmit();
 
-    function enableOrDisableSubmit() {
-        const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+        email.on('input', enableOrDisableSubmit);
 
-        if(email.val() == '' || email.val().match(emailRegex) == null ){
-            submit.prop('disabled', true);
-        }else{
-            submit.prop('disabled', false);
+        function enableOrDisableSubmit() {
+            const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+
+            if (email.val() == '' || email.val().match(emailRegex) == null) {
+                submit.prop('disabled', true);
+            } else {
+                submit.prop('disabled', false);
+            }
         }
     }
 });

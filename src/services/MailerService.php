@@ -21,7 +21,7 @@ class MailerService
     private static $password = 'nopass@2020';
     private static $port = 25;
 
-    public static function sendMail(UserEntity $user)
+    public static function sendMail(string $targetEmail, string $targetFullName, string $subject, $body)
     {
         require_once 'vendor/autoload.php';
 
@@ -41,8 +41,8 @@ class MailerService
             $mail->Port = self::$port;                                         // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //Recipients
-            $mail->setFrom(self::$from, 'Mailer');
-            $mail->addAddress($user->getEmail(), $user->getLastName() . ' ' . $user->getFirstName());    // Add a recipient
+            $mail->setFrom(self::$from, "L'équipe Popotier");
+            $mail->addAddress($targetEmail, $targetFullName);    // Add a recipient
 
             // Attachments
             // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -50,8 +50,8 @@ class MailerService
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Verifiez votre email';
-            $mail->Body = $twig->render('user/mail/confirmation-mail-template.html.twig', ['user' => $user]);
+            $mail->Subject = $subject;
+            $mail->Body = $body;
             // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();

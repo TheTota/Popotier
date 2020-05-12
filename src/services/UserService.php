@@ -142,5 +142,16 @@ class UserService
         return;
     }
 
+    public static function userValidated($email) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT valide from Utilisateur WHERE email = '$email'")->fetch();
+
+        if($result && $result[0] == '1'){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
