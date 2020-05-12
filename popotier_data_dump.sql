@@ -86,9 +86,9 @@ INSERT INTO `Role` (`libelle`) VALUES
 --
 
 INSERT INTO `Recette` (`nom`, `image`, `date_creation`, `temps_cuisson`, `temps_preparation`, `nb_personnes`, `difficulte`, `prix_moyen`, `note_auteur`, `id_auteur`, `id_type`, `valide`, `id_admin`) VALUES
-('Barbajuan', NULL, '2020-04-14', NULL, 60, 4, NULL, NULL, 'A manger froid ou chaud !', 'defaultuser@gmail.com', 1, 0, NULL),
-('Tarte Thon, Tomates & Moutardes', NULL, '2020-04-14', 40, 15, NULL, NULL, 8, NULL, 'defaultadmin@gmail.com', 2, 0, NULL),
-('Ganses', NULL, '2020-04-14', NULL, 90, 4, 5, NULL, 'A déguster froid !', 'defaultuser@gmail.com', 3, 0, NULL);
+('Barbajuan', NULL, '2020-04-14', NULL, 60, 4, NULL, NULL, 'A manger froid ou chaud !', 2, 1, 0, NULL),
+('Tarte Thon, Tomates & Moutardes', NULL, '2020-04-14', 40, 15, NULL, NULL, 8, NULL, 2, 2, 0, NULL),
+('Ganses', NULL, '2020-04-14', NULL, 90, 4, 5, NULL, 'A déguster froid !', 2, 3, 0, NULL);
 
 --
 -- Dumping data for table `Etape`

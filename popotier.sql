@@ -48,6 +48,7 @@ CREATE TABLE Role
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur
 (
+    id                INTEGER      NOT NULL AUTO_INCREMENT,
     email             VARCHAR(255) NOT NULL,
     nom               VARCHAR(255) NOT NULL,
     prenom            VARCHAR(255) NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE Utilisateur
     chaine_validation varchar(255),
     id_role           INTEGER      NOT NULL,
     date_creation     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    CONSTRAINT PK_Utilisateur PRIMARY KEY (email),
+    CONSTRAINT PK_Utilisateur PRIMARY KEY (id),
     CONSTRAINT FK_Utilisateur_Role FOREIGN KEY (id_role) REFERENCES Role (id)
 );
 
@@ -92,12 +93,12 @@ CREATE TABLE Recette
     difficulte        INTEGER,
     prix_moyen        INTEGER,
     note_auteur       VARCHAR(255),
-    id_auteur         VARCHAR(255) NOT NULL,
+    id_auteur         INTEGER NOT NULL,
     id_type           INTEGER      NOT NULL,
     valide            BOOLEAN DEFAULT 0,
     id_admin          VARCHAR(255),
     CONSTRAINT PK_Recette PRIMARY KEY (id),
-    CONSTRAINT FK_Recette_Utilisateur FOREIGN KEY (id_auteur) REFERENCES Utilisateur (email),
+    CONSTRAINT FK_Recette_Utilisateur FOREIGN KEY (id_auteur) REFERENCES Utilisateur (id),
     CONSTRAINT FK_Recette_Type FOREIGN KEY (id_type) REFERENCES Type (id)
 );
 
@@ -146,20 +147,20 @@ CREATE TABLE Commentaire
     id               INTEGER      NOT NULL AUTO_INCREMENT,
     description      VARCHAR(255) NOT NULL,
     date_publication DATETIME,
-    email            VARCHAR(255) NOT NULL,
+    id_auteur        INTEGER NOT NULL,
     id_recette       INTEGER      NOT NULL,
     CONSTRAINT PK_Commentaire PRIMARY KEY (id),
-    CONSTRAINT FK_Commentaire_Utilisateur FOREIGN KEY (email) REFERENCES Utilisateur (email),
+    CONSTRAINT FK_Commentaire_Utilisateur FOREIGN KEY (id_auteur) REFERENCES Utilisateur (id),
     CONSTRAINT FK_Commentaire_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
 );
 
 DROP TABLE IF EXISTS Utilisateur_Recette;
 CREATE TABLE Utilisateur_Recette
 (
-    email      VARCHAR(255) NOT NULL,
+    id_utilisateur      INTEGER NOT NULL,
     id_recette INTEGER      NOT NULL,
-    CONSTRAINT PK_Utilisateur_Recette PRIMARY KEY (email, id_recette),
-    CONSTRAINT FK_Utilisateur_Recette_Utilisateur FOREIGN KEY (email) REFERENCES Utilisateur (email),
+    CONSTRAINT PK_Utilisateur_Recette PRIMARY KEY (id_utilisateur, id_recette),
+    CONSTRAINT FK_Utilisateur_Recette_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id),
     CONSTRAINT FK_Utilisateur_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
 );
 
@@ -199,10 +200,10 @@ CREATE TABLE Note
     id             INTEGER      NOT NULL AUTO_INCREMENT,
     valeur         TINYINT      NOT NULL,
     id_recette     INTEGER      NOT NULL,
-    id_utilisateur VARCHAR(255) NOT NULL,
+    id_utilisateur INTEGER NOT NULL,
     CONSTRAINT PK_Note PRIMARY KEY (id),
     CONSTRAINT FK_Note_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
-    CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (email)
+    CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id)
 );
 
 DROP TABLE IF EXISTS Allergene;

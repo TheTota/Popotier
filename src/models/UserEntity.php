@@ -6,6 +6,7 @@ use Src\Models\RoleEntity;
 
 class UserEntity
 {
+    private $id;
     private $email;
     private $lastName;
     private $firstName;
@@ -16,6 +17,7 @@ class UserEntity
     private $role; // Role Entity
 
     public function __construct(
+        $id,
         $email,
         $lastName,
         $firstName,
@@ -25,6 +27,7 @@ class UserEntity
         $validationString = ''
     )
     {
+        $this->id = $id;
         $this->email = $email;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
@@ -33,6 +36,22 @@ class UserEntity
         $this->valid = false;
         $this->validationString = $validationString;
         $this->role = $role;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
