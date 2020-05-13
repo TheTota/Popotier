@@ -12,6 +12,7 @@
                         La recette a bien été créé.
 			</div>
 		{% endif %}
+
 		<form action="/recipe/add" method="POST">
 			<div class="row">
 				<div class="form-group col-sm-8">
@@ -19,10 +20,12 @@
 					<input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nom">
 					<small id="nameError" class="form-text text-danger hide">Le nom doit contenir uniquement des lettres</small>
 				</div>
+
 				<div class="form-group col-sm-8">
 					<img src="/public/assets/recipes-image/knives.jpg" alt="image du plat"  id="image">
 					<input type="file" class="form-control" id="inputImage" name="inputImage" accept="image/png, image/jpeg">
 				</div>
+
 				<div class="form-group col-sm-8">
 				<label for="inputType"> Type de la recette </label>
 				<select type="number" class="form-control" id="inputType" name="inputType" placeholter="Type">
@@ -32,7 +35,8 @@
 					<option value="3">Dessert</option>
 					<option value="4">Boisson</option>
 				</select>
-			</div>
+				</div>
+
 			</div>
 
 			<div class="form-group">
@@ -89,9 +93,10 @@
 
 			{% block steps %}{% endblock %}	
 
-			<button type="submit" class="btn btn-primary" name="addRecipe">Valider</button>
+			<button type="submit" class="btn btn-primary" name="addRecipe" disabled>Valider</button>
 		</form>
-		</div>
+
+	</div>
 {% endblock %}
 
 {% block scripts %}

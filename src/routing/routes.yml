@@ -190,9 +190,3 @@ task_user_delete:
   path: /task/user/delete
   controller: TaskController
   action: deleteUnvalidUsers
-
-
-
-
-
-

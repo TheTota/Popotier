@@ -55,22 +55,16 @@ class RecipeController
 				UserService::findByEmail($_SESSION['email']),
 				RecipeTypeService::findById($_POST['inputType']),
 				null, // admin
-				null // steps
+				null, // steps
+				null //ingredients
 			);
-			RecipeService::add($recipe);
-			$recipeCreated = true;
+			if(RecipeService::add($recipe)) {
+            	$recipeCreated = true;
+            }
 			echo $twig->render('recipe/recipe-create.html.twig', ["recipeCreated"=> $recipeCreated]);
 			return;
 		}
 
-	/*	if($recipeCreated)
-		{
-			header('Location: /user');
-		} else {
-			header('Location: /recipe/add');
-		}
-
-		*/
         echo $twig->render('recipe/recipe-step-create.html.twig', []);
 
     public function deleteValidatedRecipe($recipeId) {

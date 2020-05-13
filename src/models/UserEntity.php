@@ -17,7 +17,7 @@ class UserEntity
     private $role; // Role Entity
 
     public function __construct(
-        $id = null,
+        $id,
         $email,
         $lastName,
         $firstName,
@@ -186,4 +186,3 @@ class UserEntity
 
 
 }
-
