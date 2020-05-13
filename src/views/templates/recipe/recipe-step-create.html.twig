@@ -1,21 +1,20 @@
 {% extends "recipe/recipe-create.html.twig" %}
 
+{% block scripts %}
+	<script src="/public/js/recipe/recipe-steps.js"></script>
+{% endblock %}
+
 {% block steps %}
 
-	<div class="form-group">
-		<h2>Etapes à suivre </h2>
-		<ol id="steps">
-			<li>
-				<textarea  class="form-control" placeholder="Description de l'étape"></textarea>
-			</li>
-
-
-		</ol>
-	
-
-	</div>
-
-			<input type="button" class="btn" onclick="addStep()" value="Ajouter étape">
-
+    <div class="form-group">
+        <h2>Etapes à suivre </h2>
+        <ol id="steps">
+            <li>
+                <textarea class="form-control" placeholder="Description de l'étape"></textarea>
+            </li>
+        </ol>
+    </div>
+	<button type="button" class="btn btn-light" onclick="addStep()">Ajouter une étape</button>
 
 {% endblock %}
+
