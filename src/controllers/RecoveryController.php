@@ -49,4 +49,16 @@ class RecoveryController{
         }
     }
 
+    public function proceedRecovery($validationString) {
+        $twig = Templater::getInstance()->getTwig();
+
+        // if user sets password and clicks validate button
+        if (isset($_POST['passwordChange'])) {
+            UserService::resetPassword($_POST['inputPassword'], $validationString);
+
+            echo $twig->render('login/password-change.html.twig', ['passwordReset' => true]);
+        } else {
+            echo $twig->render('login/password-change.html.twig', ['validationString' => $validationString]);
+        }
+    }
 }

@@ -67,6 +67,13 @@ user_mail_confirm:
   requirements:
     key: '[a-zA-Z0-9]{30}'
 
+user_password_recovery:
+  path: /user/password-recovery/{key}
+  controller: RecoveryController
+  action: proceedRecovery
+  requirements:
+    key: '[a-zA-Z0-9]{30}'
+
 add_recipe:
   path: /recipe/add
   controller: RecipeController

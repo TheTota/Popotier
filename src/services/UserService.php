@@ -92,6 +92,15 @@ class UserService
 
     }
 
+    public static function resetPassword($password, $validationString) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $newPassword = password_hash($password, PASSWORD_DEFAULT);
+        $db->exec("UPDATE Utilisateur SET mot_de_passe = '$newPassword' WHERE chaine_validation = '$validationString'"); // set new pwd
+        $db->exec("UPDATE Utilisateur SET chaine_validation = '' WHERE chaine_validation = '$validationString'"); // set chaine_validation to blank
+        return;
+    }
+
     public function delete(UserEntity $user)
     {
 
