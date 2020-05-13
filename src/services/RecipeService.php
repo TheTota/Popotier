@@ -47,13 +47,13 @@ class RecipeService
             $recipe['nb_personnes'],
             $recipe['difficulte'],
             $recipe['prix_moyen'],
-            $recipe['note_recette'],
             $recipe['note_auteur'],
             $recipe['valide'],
             UserService::findByEmail($recipe['id_auteur']),
-            TypeService::findById($recipe['id_type'])->gz,
+            TypeService::findById($recipe['id_type'])->getId(),
             ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
-            StepService::findByRecette($recipe['id'])
+            StepService::findByRecette($recipe['id']),
+            null
         );
     }
 
@@ -180,7 +180,8 @@ class RecipeService
                     UserService::findByEmail($recipe['id_auteur']),
                     TypeService::findById($recipe['id_type']),
                     ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
-                    StepService::findByRecette($recipe['id'])
+                    StepService::findByRecette($recipe['id']),
+                    null
                 )
             );
         }

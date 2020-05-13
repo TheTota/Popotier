@@ -1,11 +1,20 @@
-var nbSteps = 1;
+nbSteps = 1;
 
 function addStep() {
-    console.log("Ajouter Ã©tape");
     nbSteps = nbSteps + 1;
-    var ul = document.getElementById("steps");
+    console.log("Ajouter étape" + nbSteps);
+
+    var ol = document.getElementById("steps");
     var li = document.createElement("li");
-    li.appendChild(document.createTextNode("test"));
-    li.setAttribute("id", nbSteps); // added line
-    ul.appendChild(li);
+    var desc = document.createElement("TEXTAREA");
+    desc.placeholder = "Description de l'étape";
+    desc.className = "form-control";
+    li.appendChild(desc);
+    li.setAttribute("id", nbSteps);
+    ol.appendChild(li);
+}
+
+function deleteStep($id) {
+    //decaler les etapes  a partir de i
+
 }

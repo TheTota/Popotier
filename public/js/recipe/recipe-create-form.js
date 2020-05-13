@@ -4,8 +4,6 @@ $(function () {
     var stepsError = true;
     const onlyLettersRegex = /[A-Za-z]+$/;
 
-    var nbSteps = 1;
-
     // TO DO : ingredientsError 
 
     // Elements selection
@@ -17,18 +15,24 @@ $(function () {
     name.on('input', () => {
         const inputName = name.val();
 
-        if (inputName != '' || inputName.match(onlyLettersRegex) != null) {
+        if (inputName.match(onlyLettersRegex) != null) {
             $('#nameError').hide();
             nameError = false;
         } else {
             $('#nameError').show();
             nameError = true;
+            submitButton.prop('disabled', false);
+
         }
-        console.log('error :' + nameError);
     })
 
 
+    $("form :input").on('change', () => {
+        handleSubmitButton();
+    });
+
     function handleSubmitButton() {
+        console.log(formHasErrors());
         if (formHasErrors()) {
             submitButton.prop('disabled', true);
         } else {
@@ -40,16 +44,6 @@ $(function () {
         return (
             nameError
         )
-    }
-
-    function addStep() {
-        console.log("Ajouter étape");
-        nbSteps = nbSteps + 1;
-        var ul = document.getElementById("steps");
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode("test"));
-        li.setAttribute("id", nbSteps); // added line
-        ul.appendChild(li);
     }
 
 });

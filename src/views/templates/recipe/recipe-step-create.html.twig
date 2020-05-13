@@ -2,6 +2,7 @@
 
 {% block scripts %}
 	<script src="/public/js/recipe/recipe-steps.js"></script>
+    <script src="/public/js/recipe/recipe-create-form.js"></script>
 {% endblock %}
 
 {% block steps %}
@@ -9,12 +10,14 @@
     <div class="form-group">
         <h2>Etapes à suivre </h2>
         <ol id="steps">
-            <li>
+            <li id=1>
                 <textarea class="form-control" placeholder="Description de l'étape"></textarea>
             </li>
         </ol>
+       	<button type="button" class="btn btn-light" onclick="addStep()">Ajouter une étape</button>
     </div>
-	<button type="button" class="btn btn-light" onclick="addStep()">Ajouter une étape</button>
+
+
 
 {% endblock %}
 
