@@ -1,21 +1,15 @@
 $(function () {
     // Properties 
     var nameError = true;
-
+    var stepsError = true;
     const onlyLettersRegex = /[A-Za-z]+$/;
 
+    var nbSteps = 1;
 
-    // TO DO : ingredientsError - stepsError in array 
+    // TO DO : ingredientsError 
 
     // Elements selection
     const name = $('#inputName');
-    const image = $('#inputImage');
-    const personNumber = $('#inputPersonNumber');
-    const cookingTime = $('#inputCookingTime');
-    const preparationTime = $('#inputPreparationTime');
-    const difficultyTime = $('inputDifficulty');
-    const meanPrice = $('#inputMeanPrice');
-    const authorQuote = $('#inputAuthoQuote');
     const submitButton = $('#submit');
 
     // Events
@@ -23,14 +17,39 @@ $(function () {
     name.on('input', () => {
         const inputName = name.val();
 
-        if (inputName.match(onlyLettersRegex) != null) {
+        if (inputName != '' || inputName.match(onlyLettersRegex) != null) {
             $('#nameError').hide();
             nameError = false;
         } else {
             $('#nameError').show();
             nameError = true;
         }
-        console.log(inputName);
+        console.log('error :' + nameError);
     })
+
+
+    function handleSubmitButton() {
+        if (formHasErrors()) {
+            submitButton.prop('disabled', true);
+        } else {
+            submitButton.prop('disabled', false);
+        }
+    }
+
+    function formHasErrors() {
+        return (
+            nameError
+        )
+    }
+
+    function addStep() {
+        console.log("Ajouter étape");
+        nbSteps = nbSteps + 1;
+        var ul = document.getElementById("steps");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("test"));
+        li.setAttribute("id", nbSteps); // added line
+        ul.appendChild(li);
+    }
 
 });

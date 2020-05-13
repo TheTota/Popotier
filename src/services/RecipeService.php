@@ -1,14 +1,21 @@
 <?php
 
-namespace src\services;
+namespace Src\Services;
 
+require_once 'src/models/RecipeEntity.php';
 
-use src\models\IngredientEntity;
-use src\models\RecipeEntity;
-use src\models\RecipeTypeEntity;
-use src\models\StepEntity;
-use src\models\UserEntity;
-use src\services\StepService;
+require_once 'src/models/RecipeEntity.php';
+
+require_once 'src/services/UserService.php';
+require_once 'src/services/TypeService.php';
+require_once 'src/services/IngredientService.php';
+require_once 'src/services/StepService.php';
+
+use Src\Models\RecipeEntity;
+use Src\Models\RecipeTypeEntity;
+use Src\Models\StepEntity;
+use Src\Models\UserEntity;
+use Src\Services\StepService;
 
 class RecipeService
 {
@@ -40,13 +47,13 @@ class RecipeService
             $recipe['nb_personnes'],
             $recipe['difficulte'],
             $recipe['prix_moyen'],
+            $recipe['note_recette'],
             $recipe['note_auteur'],
             $recipe['valide'],
             UserService::findByEmail($recipe['id_auteur']),
             TypeService::findById($recipe['id_type'])->gz,
             ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
-            StepService::findByRecette($recipe['id']),
-            IngredientRecipeService::findAllByRecipe($recipe['id'])
+            StepService::findByRecette($recipe['id'])
         );
     }
 
@@ -80,7 +87,7 @@ class RecipeService
             $recipe->getMeanPrice(),
             $recipe->getAuthorQuote(),
             $recipe->getValid(),
-            $recipe->getType()->getId(),
+            $recipe->getType()->getId(),	
             $recipe->getAdmin()->getEmail(),
             $recipe->getId()
         ]);
@@ -116,11 +123,11 @@ class RecipeService
 							nb_personnes,
 							difficulte,
 							prix_moyen,
-							valid,
-							id_auteur, 
+							note_auteur, 
+							id_auteur,
+							valide,
 							id_type
 							) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-
         $req->execute([
             $recipe->getName(),
             $recipe->getImage(),
@@ -130,7 +137,7 @@ class RecipeService
             $recipe->getDifficulty(),
 			$recipe->getMeanPrice(),
             $recipe->getAuthorQuote(),
-            $recipe->getAuthor()->getEmail(),
+            $recipe->getAuthor()->getId(),
 			$recipe->getValid(),
             $recipe->getType()->getId()
         ]);
@@ -173,8 +180,7 @@ class RecipeService
                     UserService::findByEmail($recipe['id_auteur']),
                     TypeService::findById($recipe['id_type']),
                     ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
-                    StepService::findByRecette($recipe['id']),
-                    IngredientRecipeService::findAllByRecipe($recipe['id'])
+                    StepService::findByRecette($recipe['id'])
                 )
             );
         }
