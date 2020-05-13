@@ -12,6 +12,7 @@ use src\models\UserEntity;
 class UserService
 {
 
+
     public function fetchAll()
     {
 
@@ -30,7 +31,8 @@ class UserService
             $result['prenom'],
             $result['pseudo'],
             $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
+            RoleService::findById($result['id_role']),
+            $result['valide']
         );
 
         return $user;
@@ -49,7 +51,8 @@ class UserService
             $result['prenom'],
             $result['pseudo'],
             $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
+            RoleService::findById($result['id_role']),
+            $result['valide']
         );
 
         return $user;
@@ -106,6 +109,14 @@ class UserService
         }
     }
 
+    public static function addValidationString($userId, $validationString)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $db->exec("UPDATE Utilisateur SET chaine_validation = '$validationString' WHERE id = '$userId'");
+        return;
+    }
+
     public static function emailExists($email){
         $db = DataBaseService::getInstance()->getDb();
 
@@ -124,6 +135,7 @@ class UserService
         $result = $db->query("SELECT * FROM Utilisateur WHERE chaine_validation LIKE '$validationString'")->fetch();
 
         $user = new UserEntity(
+            $result['id'],
             $result['email'],
             $result['nom'],
             $result['prenom'],

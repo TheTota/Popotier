@@ -21,6 +21,13 @@ class MailerService
     private static $password = 'nopass@2020';
     private static $port = 25;
 
+
+    private static $testHost = 'smtp.mailtrap.io';
+    private static $testUsername = '840c85838225c4';
+    private static $testPassword = 'ea768852a4b078';
+    private static $testPort = 2525;
+
+
     public static function sendMail(string $targetEmail, string $targetFullName, string $subject, $body)
     {
         require_once 'vendor/autoload.php';
@@ -33,12 +40,12 @@ class MailerService
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                    // Enable verbose debug output
             $mail->isSMTP();                                          // Send using SMTP
-            $mail->Host = self::$host;          // Set the SMTP server to send through
+            $mail->Host = self::$testHost;          // Set the SMTP server to send through
             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-            $mail->Username = self::$username;            // SMTP username
-            $mail->Password = self::$password;                         // SMTP password
+            $mail->Username = self::$testUsername;            // SMTP username
+            $mail->Password = self::$testPassword;                         // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;       // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port = self::$port;                                         // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->Port = self::$testPort;                                         // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //Recipients
             $mail->setFrom(self::$from, "L'équipe Popotier");

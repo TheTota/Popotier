@@ -17,22 +17,25 @@ class UserEntity
     private $role; // Role Entity
 
     public function __construct(
+        $id = null,
         $email,
         $lastName,
         $firstName,
         $alias,
         $password,
         $role,
+        $valid = false,
         $validationString = ''
     )
     {
+        $this->id = $id;
         $this->email = $email;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
         $this->alias = $alias;
         $this->password = $password;
-        $this->valid = false;
         $this->validationString = $validationString;
+        $this->valid = $valid;
         $this->role = $role;
     }
 

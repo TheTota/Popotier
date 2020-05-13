@@ -2,7 +2,9 @@
 namespace src\controllers;
 
 use src\services\LoginService;
+use src\services\MailerService;
 use src\services\UserService;
+use src\utils\StringGenerator;
 use src\utils\Templater;
 
 
@@ -24,8 +26,20 @@ class RecoveryController{
             // only send mail if the given email is linked to an activated account
             // TODO: make the link available for a few hours only
             $targetMail = $_POST['inputEmail'];
-            if (UserService::emailExists($targetMail) && UserService::userValidated($targetMail)) {
-                echo "<h1>SEND A MAIL!!! </h1>";
+            if (UserService::emailExists($targetMail)) {
+                $user = UserService::findByEmail($targetMail); // get user
+
+                if ($user->getValid()) {
+                    $user->setValidationString(StringGenerator::generateRandomString(30));
+                    UserService::addValidationString($user->getId(), $user->getValidationString());
+
+                    MailerService::sendMail(
+                        $targetMail,
+                        $user->getLastName() . ' ' . $user->getFirstName(),
+                        'Réinitialisation de votre mot de passe',
+                        $twig->render('user/mail/password-recovery-mail.html.twig', ['user' => $user])
+                    );
+                }
             }
 
             // update render to say signal an email has been sent

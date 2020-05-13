@@ -4,6 +4,7 @@ namespace src\controllers;
 
 use http\Client\Curl\User;
 use src\services\MailerService;
+use src\utils\StringGenerator;
 use src\utils\Templater;
 
 use src\services\UserService;
@@ -28,13 +29,15 @@ class UserController
         if (!empty($_POST)) {
 
             $user = new UserEntity(
+                null,
                 strtolower($_POST['email']),
                 $_POST['lastName'],
                 $_POST['firstName'],
                 $_POST['alias'],
                 $_POST['password'],
                 RoleService::findByName('Utilisateur'),
-                self::generateRandomString(30)
+                false,
+                StringGenerator::generateRandomString(30)
             );
 
             if(UserService::add($user) == null)
@@ -114,20 +117,6 @@ class UserController
 
         $twig  = Templater::getInstance()->getTwig();
         echo $twig->render('user/mail/user-mail-confirmed.html.twig');
-    }
-
-    /**
-     * @param int $length
-     * @return string
-     */
-    private function generateRandomString($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 
 }
