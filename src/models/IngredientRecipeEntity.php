@@ -62,7 +62,7 @@ class IngredientRecipeEntity {
     /**
      * @return UnitEntity
      */
-    public function getUnit(): UnitEntity
+    public function getUnit()
     {
         return $this->unit;
     }
@@ -70,7 +70,7 @@ class IngredientRecipeEntity {
     /**
      * @param UnitEntity $unit
      */
-    public function setUnit(UnitEntity $unit)
+    public function setUnit($unit)
     {
         $this->unit = $unit;
     }
