@@ -26,4 +26,8 @@ class TagController {
         $path = RouterModule::getInstance()->generatePath('admin_tags');
         header("location: $path");
     }
+
+    public function update($tagId, $value){
+        return TagService::update($tagId, $value);
+    }
 }
