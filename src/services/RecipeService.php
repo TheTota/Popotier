@@ -97,11 +97,16 @@ class RecipeService
         $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
     }
 
-    public static function findAllThatNeedValidation(): array
+    public static function deleteByID($id){
+        $db = DataBaseService::getInstance()->getDb();
+        $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
+    }
+
+    public static function findByValidation($validated): array
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $recipes = $db->query('SELECT * FROM Recette WHERE valide = false');
+        $recipes = $db->query("SELECT * FROM Recette WHERE valide = '$validated'");
 
         return self::createRecipeArray($recipes);
     }
@@ -150,7 +155,6 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
-
     private static function createRecipeArray(\PDOStatement $recipes): array
     {
         $recipesArray = array();
@@ -179,4 +183,6 @@ class RecipeService
         }
         return $recipesArray;
     }
+
+
 }

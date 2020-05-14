@@ -86,6 +86,27 @@ validate_recipe:
   requirements:
     id: '[0-9]+'
 
+devalidate_recipe:
+  path: /recipe/devalidate/{id}
+  controller: RecipeController
+  action: devalidate
+  requirements:
+    id: '[0-9]+'
+
+delete_validated_recipe:
+  path: /recipe/deleteValid/{id}
+  controller: RecipeController
+  action: deleteValidatedRecipe
+  requirements:
+    id: '[0-9]+'
+
+delete_recipe_to_validate:
+  path: /recipe/deleteInvalid/{id}
+  controller: RecipeController
+  action: deleteRecipeToValidate
+  requirements:
+    id: '[0-9]+'
+
 recipe_summary:
   path: /recipe/summary/{id}
   controller: RecipeController
@@ -105,10 +126,15 @@ admin_dashboard:
   controller: AdminController
   action: view
 
-admin_recipes:
-  path: /admin/view/recipes
+admin_recipes_to_validate:
+  path: /admin/view/recipes-to-validate
   controller: AdminController
-  action: viewRecipes
+  action: viewRecipesToValidate
+
+admin_validated_recipes:
+  path: /admin/view/validated-recipes
+  controller: AdminController
+  action: viewValidatedRecipes
 
 admin_tags:
   path: /admin/view/tags

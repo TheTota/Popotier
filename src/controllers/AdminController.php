@@ -21,15 +21,31 @@ class AdminController
 
     }
 
-    public function viewRecipes() {
+    // Route "admin_recipes_to_validate" => /admin/view/recipes-to-validate
+    public function viewRecipesToValidate() {
         $twig = Templater::getInstance()->getTwig();
 
-        $recipesToValidate = RecipeService::findAllThatNeedValidation();
+        $recipesToValidate = RecipeService::findByValidation(false);
 
         echo $twig->render(
             'admin/admin-recipe.html.twig',
             [
-                'recipesToValidate' => $recipesToValidate
+                'checkingValidatedRecipes' => false,
+                'recipes' => $recipesToValidate
+            ]);
+    }
+
+    // Route "admin_validated_recipes" => /admin/view/validated-recipes
+    public function viewValidatedRecipes() {
+        $twig = Templater::getInstance()->getTwig();
+
+        $validatedRecipes = RecipeService::findByValidation(true);
+
+        echo $twig->render(
+            'admin/admin-recipe.html.twig',
+            [
+                'checkingValidatedRecipes' => true,
+                'recipes' => $validatedRecipes
             ]);
     }
 

@@ -79,3 +79,6 @@
     transition: all .3s ease-out;
 }
 
+#recipeCollapse a {
+    padding-left: 35px;
+}

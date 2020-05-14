@@ -20,8 +20,16 @@
                     <a id="dashboard" href="{{ path('admin_dashboard') }}" onclick="setActive(this)">Dashboard</a>
                 </li>
                 <li>
-                    <a id="recipe" href="{{ path('admin_recipes') }}" onclick="setActive(this)">Recettes</a>
+                    <a id="recipe" data-toggle="collapse" href="#recipeCollapse" role="button" aria-expanded="true" aria-controls="collapseExample" onclick="setActive(this)">Recettes</a>
                 </li>
+                <div class="collapse" id="recipeCollapse">
+                    <li>
+                        <a id="recipesToValidate" href="{{ path('admin_recipes_to_validate') }}" onclick="setActive(this)">Recettes à valider</a>
+                    </li>
+                    <li>
+                        <a id="validatedRecipes" href="{{ path('admin_validated_recipes') }}" onclick="setActive(this)">Recettes validées</a>
+                    </li>
+                </div>
                 <li>
                     <a id="tag" href="{{ path('admin_tags') }}" onclick="setActive(this)">Tags</a>
                 </li>

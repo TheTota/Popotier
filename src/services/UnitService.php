@@ -11,9 +11,13 @@ class UnitService {
 
         $unit = $db->query("SELECT * FROM Unite WHERE id = '$idUnit'")->fetch();
 
-        return new UnitEntity(
-            $unit['id'],
-            $unit['nom']
-        );
+        if ($unit == false) {
+            return false;
+        } else {
+            return new UnitEntity(
+                $unit['id'],
+                $unit['nom']
+            );
+        }
     }
 }
