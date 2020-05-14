@@ -12,6 +12,7 @@ use src\models\UserEntity;
 class UserService
 {
 
+
     public function fetchAll()
     {
 
@@ -30,7 +31,8 @@ class UserService
             $result['prenom'],
             $result['pseudo'],
             $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
+            RoleService::findById($result['id_role']),
+            $result['valide']
         );
 
         return $user;
@@ -49,7 +51,8 @@ class UserService
             $result['prenom'],
             $result['pseudo'],
             $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
+            RoleService::findById($result['id_role']),
+            $result['valide']
         );
 
         return $user;
@@ -89,6 +92,15 @@ class UserService
 
     }
 
+    public static function resetPassword($password, $validationString) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $newPassword = password_hash($password, PASSWORD_DEFAULT);
+        $db->exec("UPDATE Utilisateur SET mot_de_passe = '$newPassword' WHERE chaine_validation = '$validationString'"); // set new pwd
+        $db->exec("UPDATE Utilisateur SET chaine_validation = '' WHERE chaine_validation = '$validationString'"); // set chaine_validation to blank
+        return;
+    }
+
     public function delete(UserEntity $user)
     {
 
@@ -104,6 +116,14 @@ class UserService
         } else {
             return false;
         }
+    }
+
+    public static function addValidationString($userId, $validationString)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $db->exec("UPDATE Utilisateur SET chaine_validation = '$validationString' WHERE id = '$userId'");
+        return;
     }
 
     public static function emailExists($email){
@@ -123,16 +143,21 @@ class UserService
 
         $result = $db->query("SELECT * FROM Utilisateur WHERE chaine_validation LIKE '$validationString'")->fetch();
 
-        $user = new UserEntity(
-            $result['email'],
-            $result['nom'],
-            $result['prenom'],
-            $result['pseudo'],
-            $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
-        );
+        if ($result == false) {
+            return false;
+        } else {
+            $user = new UserEntity(
+                $result['id'],
+                $result['email'],
+                $result['nom'],
+                $result['prenom'],
+                $result['pseudo'],
+                $result['mot_de_passe'],
+                RoleService::findById($result['id_role'])
+            );
 
-        return $user;
+            return $user;
+        }
     }
 
     public static function validateUser($email){
@@ -142,5 +167,16 @@ class UserService
         return;
     }
 
+    public static function userValidated($email) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT valide from Utilisateur WHERE email = '$email'")->fetch();
+
+        if($result && $result[0] == '1'){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
