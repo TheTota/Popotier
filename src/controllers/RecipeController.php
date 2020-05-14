@@ -7,8 +7,8 @@ use src\utils\Templater;
 use src\services\RecipeService;
 use src\services\UserService;
 use Src\Services\RecipeTypeService;
-use Src\Models\RecipeEntity;
-use Src\Models\StepEntity;
+use src\models\RecipeEntity;
+use src\models\StepEntity;
 
 class RecipeController
 {

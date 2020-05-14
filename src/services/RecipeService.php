@@ -1,21 +1,11 @@
 <?php
 
-namespace Src\Services;
+namespace src\services;
 
-require_once 'src/models/RecipeEntity.php';
 
-require_once 'src/models/RecipeEntity.php';
+use src\models\RecipeEntity;
 
-require_once 'src/services/UserService.php';
-require_once 'src/services/TypeService.php';
-require_once 'src/services/IngredientService.php';
-require_once 'src/services/StepService.php';
 
-use Src\Models\RecipeEntity;
-use Src\Models\RecipeTypeEntity;
-use Src\Models\StepEntity;
-use Src\Models\UserEntity;
-use Src\Services\StepService;
 
 class RecipeService
 {

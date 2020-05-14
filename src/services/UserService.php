@@ -2,12 +2,9 @@
 
 namespace src\services;
 
-require_once 'src/models/UserEntity.php';
-
-require_once 'src/services/RoleService.php';
-
 use src\models\RoleEntity;
 use src\models\UserEntity;
+
 
 class UserService
 {

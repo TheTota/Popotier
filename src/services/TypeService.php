@@ -8,7 +8,7 @@ require_once 'src/models/RecipeTypeEntity.php';
 
 use src\models\RecipeTypeEntity;
 
-class TypeService{
+class TypeService {
 
     public function fetchAll(){
 
