@@ -56,7 +56,7 @@ class RecoveryController{
         if (isset($_POST['passwordChange'])) {
             UserService::resetPassword($_POST['inputPassword'], $validationString);
 
-            echo $twig->render('login/password-change.html.twig', ['passwordReset' => true]);
+            echo $twig->render('login/password-change.html.twig', ['passwordReset' => true, 'validationTokenExists' => true]);
         } else {
             $validationTokenExists = false;
             if (UserService::findByValidationString($validationString) != false) {
