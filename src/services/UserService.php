@@ -24,25 +24,20 @@ class UserService
 
         $result = $db->query("SELECT * FROM Utilisateur WHERE email LIKE '$email'")->fetch();
 
-        if ($result == false) {
-            return false;
-        } else {
-            $user = new UserEntity(
-                $result['id'],
-                $result['email'],
-                $result['nom'],
-                $result['prenom'],
-                $result['pseudo'],
-                $result['mot_de_passe'],
-                RoleService::findById($result['id_role']),
-                $result['valide']
-            );
+        $user = new UserEntity(
+            $result['id'],
+            $result['email'],
+            $result['nom'],
+            $result['prenom'],
+            $result['pseudo'],
+            $result['mot_de_passe'],
+            RoleService::findById($result['id_role'])
+        );
 
-            return $user;
-        }
+        return $user;
     }
 
-    public static function findById($id)
+      public static function findById($id)
     {
         $db = DataBaseService::getInstance()->getDb();
 
@@ -65,6 +60,7 @@ class UserService
             return $user;
         }
     }
+
 
     public static function add(UserEntity $user)
     {

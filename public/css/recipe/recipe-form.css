@@ -1,0 +1,14 @@
+
+img {
+    width: 30%;
+    display:inline-block;
+}
+
+.recipe-form {
+    display: flex;
+    justify-content: center;
+}
+
+small {
+    display: none;
+}

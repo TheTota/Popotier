@@ -95,7 +95,7 @@ class UserController
      */
     public function viewRecipe()
     {
-        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
+        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['id']);
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
             [
                 'recipes' => $recipes,
@@ -106,7 +106,7 @@ class UserController
 
     public function viewFavorite()
     {
-        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
+        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['id']);
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
     }
 
@@ -117,6 +117,20 @@ class UserController
 
         $twig  = Templater::getInstance()->getTwig();
         echo $twig->render('user/mail/user-mail-confirmed.html.twig');
+    }
+
+    /**
+     * @param int $length
+     * @return string
+     */
+    private function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
 }
