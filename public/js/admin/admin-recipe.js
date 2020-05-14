@@ -1,5 +1,13 @@
 $( () => {
-    $('#recipe').addClass('active');
+    var str = window.location.href.split('/');
+    var last = str[str.length-1];
+    if (last === "recipes-to-validate") {
+        $('#recipesToValidate').addClass('active');
+    } else {
+        $('#validatedRecipes').addClass('active');
+    }
+
+    $('#recipeCollapse').addClass('show');
 })
 
 function getRecipeSummary(id) {
