@@ -190,7 +190,7 @@ CREATE TABLE Ingredient_Recette
     id_unite      INTEGER,
     CONSTRAINT PK_Ingredient_Recette PRIMARY KEY (id_ingredient, id_recette),
     CONSTRAINT FK_Ingredient_Recette_Ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient (nom),
-    CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
+    CONSTRAINT FK_Ingredient_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id) ON DELETE CASCADE,
     CONSTRAINT FK_Ingredient_Recette_Unite FOREIGN KEY (id_unite) REFERENCES Unite (id)
 );
 
