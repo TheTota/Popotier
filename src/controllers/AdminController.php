@@ -30,6 +30,7 @@ class AdminController
         echo $twig->render(
             'admin/admin-recipe.html.twig',
             [
+                'checkingValidatedRecipes' => false,
                 'recipes' => $recipesToValidate
             ]);
     }
@@ -43,6 +44,7 @@ class AdminController
         echo $twig->render(
             'admin/admin-recipe.html.twig',
             [
+                'checkingValidatedRecipes' => true,
                 'recipes' => $validatedRecipes
             ]);
     }

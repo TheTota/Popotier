@@ -27,7 +27,7 @@ function getRecipeSummaryRequest(id) {
 function validateRecipe(idRecipe) {
     validateRecipeRequest(idRecipe).then(
         () => {
-            window.location.replace("/admin/view/recipes");
+            window.location.replace("/admin/view/recipes-to-validate");
         }
     )
 }
@@ -35,6 +35,27 @@ function validateRecipe(idRecipe) {
 function validateRecipeRequest (idRecipe) {
     return new Promise((resolve, reject) => {
         $.get('/recipe/validate/'+idRecipe, (data, success) => {
+            if(success){
+                console.log(data);
+                resolve()
+            } else {
+                reject();
+            }
+        })
+    })
+}
+
+function devalidateRecipe(idRecipe) {
+    devalidateRecipeRequest(idRecipe).then(
+        () => {
+            window.location.replace("/admin/view/validated-recipes");
+        }
+    )
+}
+
+function devalidateRecipeRequest (idRecipe) {
+    return new Promise((resolve, reject) => {
+        $.get('/recipe/devalidate/'+idRecipe, (data, success) => {
             if(success){
                 console.log(data);
                 resolve()

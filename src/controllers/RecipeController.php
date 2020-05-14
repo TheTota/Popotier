@@ -35,9 +35,21 @@ class RecipeController
 
     public function delete($recipeId) {
         RecipeService::deleteByID($recipeId);
+    }
 
-        $path = RouterModule::getInstance()->generatePath('admin_recipes');
+    public function deleteValidatedRecipe($recipeId) {
+        self::delete($recipeId);
+
+        $path = RouterModule::getInstance()->generatePath(admin_validated_recipes);
         header("location: $path");
+    }
+
+    public function deleteRecipeToValidate($recipeId) {
+        self::delete($recipeId);
+
+        $path = RouterModule::getInstance()->generatePath(admin_recipes_to_validate);
+        header("location: $path");
+
     }
 
     /**
@@ -62,10 +74,26 @@ class RecipeController
      */
     public function validate($recipeId)
     {
-
         $recipe = RecipeService::findById($recipeId);
 
         $recipe->setValid(true);
+        $recipe->setAdmin(UserService::findByEmail($_SESSION['email']));
+
+        if (RecipeService::update($recipe)) {
+            echo true;
+        } else {
+            echo false;
+        }
+    }
+
+    /**
+     * Route: /recipe/validate/:id
+     */
+    public function devalidate($recipeId)
+    {
+        $recipe = RecipeService::findById($recipeId);
+
+        $recipe->setValid(false);
         $recipe->setAdmin(UserService::findByEmail($_SESSION['email']));
 
         if (RecipeService::update($recipe)) {
