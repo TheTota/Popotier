@@ -24,18 +24,22 @@ class UserService
 
         $result = $db->query("SELECT * FROM Utilisateur WHERE email LIKE '$email'")->fetch();
 
-        $user = new UserEntity(
-            $result['id'],
-            $result['email'],
-            $result['nom'],
-            $result['prenom'],
-            $result['pseudo'],
-            $result['mot_de_passe'],
-            RoleService::findById($result['id_role']),
-            $result['valide']
-        );
+        if ($result == false) {
+            return false;
+        } else {
+            $user = new UserEntity(
+                $result['id'],
+                $result['email'],
+                $result['nom'],
+                $result['prenom'],
+                $result['pseudo'],
+                $result['mot_de_passe'],
+                RoleService::findById($result['id_role']),
+                $result['valide']
+            );
 
-        return $user;
+            return $user;
+        }
     }
 
     public static function findById($id)
@@ -44,18 +48,22 @@ class UserService
 
         $result = $db->query("SELECT * FROM Utilisateur WHERE id LIKE '$id'")->fetch();
 
-        $user = new UserEntity(
-            $result['id'],
-            $result['email'],
-            $result['nom'],
-            $result['prenom'],
-            $result['pseudo'],
-            $result['mot_de_passe'],
-            RoleService::findById($result['id_role']),
-            $result['valide']
-        );
+        if ($result == false) {
+            return false;
+        } else {
+            $user = new UserEntity(
+                $result['id'],
+                $result['email'],
+                $result['nom'],
+                $result['prenom'],
+                $result['pseudo'],
+                $result['mot_de_passe'],
+                RoleService::findById($result['id_role']),
+                $result['valide']
+            );
 
-        return $user;
+            return $user;
+        }
     }
 
     public static function add(UserEntity $user)

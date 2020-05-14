@@ -24,6 +24,7 @@ function getRecipeSummaryRequest(id) {
     return new Promise((resolve, reject) => {
         $.get('/recipe/summary/'+id, (data, success) => {
             if(success){
+                //console.log(data);
                 resolve(data);
             }else{
                 reject();
@@ -44,8 +45,8 @@ function validateRecipeRequest (idRecipe) {
     return new Promise((resolve, reject) => {
         $.get('/recipe/validate/'+idRecipe, (data, success) => {
             if(success){
-                console.log(data);
-                resolve()
+                //console.log(data);
+                resolve();
             } else {
                 reject();
             }
@@ -65,8 +66,8 @@ function devalidateRecipeRequest (idRecipe) {
     return new Promise((resolve, reject) => {
         $.get('/recipe/devalidate/'+idRecipe, (data, success) => {
             if(success){
-                console.log(data);
-                resolve()
+                //console.log(data);
+                resolve();
             } else {
                 reject();
             }
