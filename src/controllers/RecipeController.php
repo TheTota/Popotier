@@ -7,6 +7,7 @@ use src\services\RecipeService;
 use src\services\UserService;
 use Src\Services\RecipeTypeService;
 use Src\Models\RecipeEntity;
+use Src\Models\StepEntity;
 
 class RecipeController
 {
@@ -34,6 +35,21 @@ class RecipeController
 
 		if (!empty($_POST)) {
 
+            $steps = array();
+
+            for($i = 0; $i < count($_POST['stepList']); $i++) {
+                array_push( 
+                    $steps,
+                    new StepEntity(
+                        null,
+                        $i+1,
+                        $_POST['stepList'][$i]
+                     )
+                );
+
+			}
+
+
 			$recipe = new RecipeEntity(
 				null, // id
 				$_POST['inputName'],
@@ -49,7 +65,7 @@ class RecipeController
 				UserService::findByEmail($_SESSION['email']),
 				RecipeTypeService::findById($_POST['inputType']),
 				null, // admin
-				null, // steps
+				$steps, // steps
 				null //ingredients
 			);
 			if(RecipeService::add($recipe)) {
