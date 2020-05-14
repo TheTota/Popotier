@@ -8,7 +8,7 @@ use src\utils\Templater;
 class DefaultController{
 
     public function home(){
-        $recipes = RecipeService::fetchAll();
+        $recipes = RecipeService::findByValidation(true);
 
         echo Templater::getInstance()->getTwig()->render('home/home.html.twig',
             [
