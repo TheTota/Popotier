@@ -86,6 +86,13 @@ validate_recipe:
   requirements:
     id: '[0-9]+'
 
+delete_recipe:
+  path: /recipe/delete/{id}
+  controller: RecipeController
+  action: delete
+  requirements:
+    id: '[0-9]+'
+
 recipe_summary:
   path: /recipe/summary/{id}
   controller: RecipeController

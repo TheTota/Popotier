@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use src\routing\RouterModule;
 use src\utils\Templater;
 use src\services\RecipeService;
 use src\services\UserService;
@@ -30,6 +31,13 @@ class RecipeController
     public function addRecipe()
     {
         echo Templater::getInstance()->getTwig()->render('recipe/recipe-step-create.html.twig', []);
+    }
+
+    public function delete($recipeId) {
+        RecipeService::deleteByID($recipeId);
+
+        $path = RouterModule::getInstance()->generatePath('admin_recipes');
+        header("location: $path");
     }
 
     /**

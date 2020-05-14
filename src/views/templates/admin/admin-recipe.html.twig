@@ -33,6 +33,9 @@
                 <td>
                     <button class="btn btn-info" onclick="validateRecipe({{ recipe.id }})">valider</button>
                     <button class="btn btn-info" onclick="getRecipeSummary({{ recipe.id }})">voir</button>
+                    <a class="btn btn-outline-danger" href="{{ path('delete_recipe', [recipe.id]) }}" >
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

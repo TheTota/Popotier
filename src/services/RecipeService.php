@@ -97,6 +97,11 @@ class RecipeService
         $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
     }
 
+    public static function deleteByID($id){
+        $db = DataBaseService::getInstance()->getDb();
+        $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
+    }
+
     public static function findAllThatNeedValidation(): array
     {
         $db = DataBaseService::getInstance()->getDb();
@@ -150,7 +155,6 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
-
     private static function createRecipeArray(\PDOStatement $recipes): array
     {
         $recipesArray = array();
@@ -179,4 +183,6 @@ class RecipeService
         }
         return $recipesArray;
     }
+
+
 }
