@@ -144,6 +144,14 @@ delete_tag:
   requirements:
     id: '[0-9]+'
 
+update_tag:
+  path: /tag/update/{id}/{value}
+  controller: TagController
+  action: update
+  requirements:
+    id: '[0-9]+'
+    value: '[a-zA-Z]+'
+
 task_user_delete:
   path: /task/user/delete
   controller: TaskController
