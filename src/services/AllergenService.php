@@ -30,8 +30,9 @@ class AllergenService {
         return $db->prepare("INSERT INTO Allergene (nom) VALUES (?);")->execute([$allergenEntity->getName()]);
     }
 
-    public static function update($allergenEntity) {
-
+    public static function update($allergenId, $name) {
+        $db = DataBaseService::getInstance()->getDb();
+        return $db->prepare("UPDATE Allergene SET nom = '$name' WHERE id = '$allergenId'")->execute();
     }
 
     public static function delete($allergenId) {

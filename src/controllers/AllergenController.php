@@ -24,4 +24,8 @@ class AllergenController{
         header("location: $path");
     }
 
+    public function update($allergenId, $value){
+        return AllergenService::update($allergenId, $value);
+    }
+
 }
