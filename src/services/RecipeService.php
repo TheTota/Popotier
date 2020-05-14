@@ -102,11 +102,11 @@ class RecipeService
         $req = $db->exec("DELETE FROM Recette WHERE id=". $id );
     }
 
-    public static function findAllThatNeedValidation(): array
+    public static function findByValidation($validated): array
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $recipes = $db->query('SELECT * FROM Recette WHERE valide = false');
+        $recipes = $db->query("SELECT * FROM Recette WHERE valide = '$validated'");
 
         return self::createRecipeArray($recipes);
     }
