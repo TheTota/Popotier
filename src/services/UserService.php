@@ -43,15 +43,6 @@ class UserService
 
         $result = $db->query("SELECT * FROM Utilisateur WHERE id LIKE '$id'")->fetch();
 
-        $user = new UserEntity(
-            $result['id'],
-            $result['email'],
-            $result['nom'],
-            $result['prenom'],
-            $result['pseudo'],
-            $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
-        );
         if ($result == false) {
             return false;
         } else {
@@ -70,29 +61,6 @@ class UserService
         }
     }
 
-    public static function findById($id)
-    {
-        $db = DataBaseService::getInstance()->getDb();
-
-        $result = $db->query("SELECT * FROM Utilisateur WHERE id LIKE '$id'")->fetch();
-
-        if ($result == false) {
-            return false;
-        } else {
-            $user = new UserEntity(
-                $result['id'],
-                $result['email'],
-                $result['nom'],
-                $result['prenom'],
-                $result['pseudo'],
-                $result['mot_de_passe'],
-                RoleService::findById($result['id_role']),
-                $result['valide']
-            );
-
-            return $user;
-        }
-    }
 
     public static function add(UserEntity $user)
     {

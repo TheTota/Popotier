@@ -95,7 +95,7 @@ class UserController
      */
     public function viewRecipe()
     {
-        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['email']);
+        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['id']);
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
             [
                 'recipes' => $recipes,
@@ -106,7 +106,7 @@ class UserController
 
     public function viewFavorite()
     {
-        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['email']);
+        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['id']);
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
     }
 
@@ -132,8 +132,6 @@ class UserController
         }
         return $randomString;
     }
-
-
 
 }
 

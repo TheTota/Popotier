@@ -151,7 +151,7 @@ class RecipeService
 
     public static function fetchAllUserFavoriteRecipe($userEmail){
         $db = DataBaseService::getInstance()->getDb();
-        $recipes = $db->query("SELECT * FROM Recette JOIN Utilisateur_Recette on Recette.id = Utilisateur_Recette.id_recette AND Utilisateur_Recette.email ='" . $userEmail . "'");
+        $recipes = $db->query("SELECT * FROM Recette JOIN Utilisateur_Recette on Recette.id = Utilisateur_Recette.id_recette AND Utilisateur_Recette.id_utilisateur ='" . $userEmail . "'");
 
         return self::createRecipeArray($recipes);
     }
@@ -184,7 +184,8 @@ class RecipeService
                     UserService::findById($recipe['id_auteur']),
                     TypeService::findById($recipe['id_type']),
                     ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
-                    StepService::findByRecette($recipe['id'])
+                    StepService::findByRecette($recipe['id']),
+                    null
                 )
             );
         }

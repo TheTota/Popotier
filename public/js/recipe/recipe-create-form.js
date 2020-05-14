@@ -29,6 +29,18 @@ $(function () {
 
 
     function handleSubmitButton() {
+            submitButton.prop('disabled', false);
+
+        }
+    })
+
+
+    $("form :input").on('change', () => {
+        handleSubmitButton();
+    });
+
+    function handleSubmitButton() {
+        console.log(formHasErrors());
         if (formHasErrors()) {
             submitButton.prop('disabled', true);
         } else {
@@ -43,7 +55,7 @@ $(function () {
     }
 
     function addStep() {
-        console.log("Ajouter étape");
+        console.log("Ajouter ï¿½tape");
         nbSteps = nbSteps + 1;
         var ul = document.getElementById("steps");
         var li = document.createElement("li");
