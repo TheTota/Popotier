@@ -20,6 +20,7 @@ class LoginService
                 $_SESSION['alias'] = $res['pseudo'];
                 $_SESSION['role'] = ($res['id_role'] == '1')? 'admin' : 'user';
                 $_SESSION['email'] = $res['email'];
+                $_SESSION['id'] = $res['id'];
                 return true;
             }
 
@@ -27,6 +28,7 @@ class LoginService
                 $_SESSION['alias'] = $res['pseudo'];
                 $_SESSION['role'] = $res['role'];
                 $_SESSION['email'] = $res['email'];
+                $_SESSION['id'] = $res['id'];
                 return true;
             } else {
                 return false;
