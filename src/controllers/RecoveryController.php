@@ -58,7 +58,11 @@ class RecoveryController{
 
             echo $twig->render('login/password-change.html.twig', ['passwordReset' => true]);
         } else {
-            echo $twig->render('login/password-change.html.twig', ['validationString' => $validationString]);
+            $validationTokenExists = false;
+            if (UserService::findByValidationString($validationString) != false) {
+                $validationTokenExists = true;
+            }
+            echo $twig->render('login/password-change.html.twig', ['validationString' => $validationString, 'validationTokenExists' => $validationTokenExists]);
         }
     }
 }
