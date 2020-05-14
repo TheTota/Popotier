@@ -93,7 +93,7 @@ CREATE TABLE Recette
     difficulte        INTEGER,
     prix_moyen        INTEGER,
     note_auteur       VARCHAR(255),
-    id_auteur         INTEGER NOT NULL,
+    id_auteur         INTEGER      NOT NULL,
     id_type           INTEGER      NOT NULL,
     valide            BOOLEAN DEFAULT 0,
     id_admin          VARCHAR(255),
@@ -109,7 +109,7 @@ CREATE TABLE Saison_Recette
     id_recette INTEGER NOT NULL,
     CONSTRAINT PK_Saison_Recette PRIMARY KEY (id_saison, id_recette),
     CONSTRAINT FK_Saison_Recette_Saison FOREIGN KEY (id_saison) REFERENCES Saison (id),
-    CONSTRAINT FK_Saison_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
+    CONSTRAINT FK_Saison_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Tag;
@@ -127,7 +127,7 @@ CREATE TABLE Tag_Recette
     id_recette INTEGER NOT NULL,
     CONSTRAINT PK_Tag_Recette PRIMARY KEY (id_tag, id_recette),
     CONSTRAINT FK_Tag_Recette_Tag FOREIGN KEY (id_tag) REFERENCES Tag (id),
-    CONSTRAINT FK_Tag_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
+    CONSTRAINT FK_Tag_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Etape;
@@ -138,7 +138,7 @@ CREATE TABLE Etape
     description VARCHAR(255) NOT NULL,
     id_recette  INTEGER      NOT NULL,
     CONSTRAINT PK_Etape PRIMARY KEY (id),
-    CONSTRAINT FK_Etape_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
+    CONSTRAINT FK_Etape_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Commentaire;
@@ -147,20 +147,20 @@ CREATE TABLE Commentaire
     id               INTEGER      NOT NULL AUTO_INCREMENT,
     description      VARCHAR(255) NOT NULL,
     date_publication DATETIME,
-    id_auteur        INTEGER NOT NULL,
+    id_auteur        INTEGER      NOT NULL,
     id_recette       INTEGER      NOT NULL,
     CONSTRAINT PK_Commentaire PRIMARY KEY (id),
     CONSTRAINT FK_Commentaire_Utilisateur FOREIGN KEY (id_auteur) REFERENCES Utilisateur (id),
-    CONSTRAINT FK_Commentaire_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
+    CONSTRAINT FK_Commentaire_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Utilisateur_Recette;
 CREATE TABLE Utilisateur_Recette
 (
-    id_utilisateur      INTEGER NOT NULL,
-    id_recette INTEGER      NOT NULL,
+    id_utilisateur INTEGER NOT NULL,
+    id_recette     INTEGER NOT NULL,
     CONSTRAINT PK_Utilisateur_Recette PRIMARY KEY (id_utilisateur, id_recette),
-    CONSTRAINT FK_Utilisateur_Recette_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id),
+    CONSTRAINT FK_Utilisateur_Recette_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id) ON DELETE CASCADE,
     CONSTRAINT FK_Utilisateur_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
 );
 
@@ -197,13 +197,13 @@ CREATE TABLE Ingredient_Recette
 DROP TABLE IF EXISTS Note;
 CREATE TABLE Note
 (
-    id             INTEGER      NOT NULL AUTO_INCREMENT,
-    valeur         TINYINT      NOT NULL,
-    id_recette     INTEGER      NOT NULL,
+    id             INTEGER NOT NULL AUTO_INCREMENT,
+    valeur         TINYINT NOT NULL,
+    id_recette     INTEGER NOT NULL,
     id_utilisateur INTEGER NOT NULL,
     CONSTRAINT PK_Note PRIMARY KEY (id),
     CONSTRAINT FK_Note_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id),
-    CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id)
+    CONSTRAINT FK_Note_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Allergene;
