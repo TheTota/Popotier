@@ -33,7 +33,9 @@ class TagService{
         return $db->prepare("INSERT INTO Tag (nom) VALUES (?);")->execute([$tagEntity->getName()]);
     }
 
-    public function update(TagEntity $tag){
+    public static function update($tagId, $value){
+        $db = DataBaseService::getInstance()->getDb();
+        return $db->prepare("UPDATE Tag SET nom = '$value' WHERE id = '$tagId'")->execute();
 
     }
 
