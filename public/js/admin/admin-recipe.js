@@ -74,3 +74,38 @@ function devalidateRecipeRequest (idRecipe) {
         })
     })
 }
+
+
+function deleteRecipe(idRecipe, recipeValid) {
+    var url;
+    if (recipeValid){
+        url = "/admin/view/validated-recipes";
+    } else {
+        url = "/admin/view/recipes-to-validate";
+    }
+
+    deleteRecipeRequest("/recipe/delete/" + idRecipe).then(
+        () => {
+            window.location.replace(url);
+        }
+    )
+}
+
+function deleteRecipeRequest (path) {
+    return new Promise((resolve, reject) => {
+        // TODO: add confirm alert
+        $.get(path, (data, success) => {
+            if(success){
+                //console.log(data);
+                resolve();
+            } else {
+                reject();
+            }
+        })
+    })
+}
+
+
+
+
+

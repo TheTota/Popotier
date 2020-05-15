@@ -82,6 +82,7 @@ class RecipeController
     }
 
     public function delete($recipeId) {
+        echo "<h1>vardump</h1>";
         RecipeService::deleteByID($recipeId);
     }
 
@@ -119,21 +120,6 @@ class RecipeController
         }
 
         echo $twig->render('recipe/recipe-step-create.html.twig', []);
-    }
-
-    public function deleteValidatedRecipe($recipeId) {
-        self::delete($recipeId);
-
-        $path = RouterModule::getInstance()->generatePath(admin_validated_recipes);
-        header("location: $path");
-    }
-
-    public function deleteRecipeToValidate($recipeId) {
-        self::delete($recipeId);
-
-        $path = RouterModule::getInstance()->generatePath(admin_recipes_to_validate);
-        header("location: $path");
-
     }
 
     /**

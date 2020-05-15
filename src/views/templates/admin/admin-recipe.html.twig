@@ -43,13 +43,9 @@
                         <button class="btn btn-info" onclick="validateRecipe({{ recipe.id }})">valider</button>
                     {% endif %}
                     <!-- Do the right redirection -->
-                    {% if recipe.valid %}
-                        <a class="btn btn-outline-danger" href="{{ path('delete_validated_recipe', [recipe.id]) }}" >
-                    {% else %}
-                        <a class="btn btn-outline-danger" href="{{ path('delete_recipe_to_validate', [recipe.id]) }}" >
-                    {% endif %}
+                    <button class="btn btn-outline-danger" onclick="deleteRecipe({{ recipe.id }}, {{ recipe.valid }})">
                         <i class="fas fa-trash-alt"></i>
-                    </a>
+                    </button>
                 </td>
             </tr>
         {% endfor %}
