@@ -2,7 +2,7 @@
 
 namespace src\models;
 
-class RecipeEntity
+class RecipeEntity implements \JsonSerializable
 {
 
     private $id;
@@ -21,6 +21,7 @@ class RecipeEntity
     private $admin; // UserEntity
     private $steps; // StepEntity[]
     private $ingredients; // IngredientRecipeEntity[]
+
 
     public function __construct(
         $id,
@@ -302,7 +303,7 @@ class RecipeEntity
     /**
      * @return IngredientRecipeEntity[]
      */
-    public function getIngredients(): array
+    public function getIngredients()
     {
         return $this->ingredients;
     }
@@ -316,6 +317,25 @@ class RecipeEntity
     }
 
 
-
-
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "creationDate" => $this->getCreationDate(),
+            "cookingTime" => $this->getCookingTime(),
+            "preparationTime" => $this->getPreparationTime(),
+            "personNumber" => $this->getPersonNumber(),
+            "difficulty" => $this->getDifficulty(),
+            "meanPrice" => $this->getMeanPrice(),
+            "authorQuote" => $this->getAuthorQuote(),
+            "author" => $this->getAuthor(),
+            "type" => $this->getType(),
+            "steps" => $this->getSteps(),
+            "ingredients" => $this->getIngredients(),
+        ];
+    }
 }

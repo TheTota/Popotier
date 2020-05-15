@@ -2,7 +2,7 @@
 
 namespace src\models;
 
-class RecipeTypeEntity{
+class RecipeTypeEntity implements \JsonSerializable {
 
     private $id;
     private $label;
@@ -51,5 +51,14 @@ class RecipeTypeEntity{
     }
 
 
-
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->getId(),
+            "label" => $this->getLabel()
+        ];
+    }
 }

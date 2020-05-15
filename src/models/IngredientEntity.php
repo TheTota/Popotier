@@ -2,7 +2,7 @@
 
 namespace src\models;
 
-class IngredientEntity{
+class IngredientEntity implements \JsonSerializable {
 
     private $name;
     private $allergen;
@@ -16,7 +16,6 @@ class IngredientEntity{
         $this->name = $name;
         $this->allergen = $allergen;
     }
-
 
     /**
      * @return string
@@ -51,7 +50,13 @@ class IngredientEntity{
     }
 
 
-
-
-
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "name" => $this->getName()
+        ];
+    }
 }
