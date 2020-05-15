@@ -52,7 +52,6 @@ class RecipeController
 
             }
 
-
             $recipe = new RecipeEntity(
                 null, // id
                 $_POST['inputName'],
@@ -119,21 +118,6 @@ class RecipeController
         }
 
         echo $twig->render('recipe/recipe-step-create.html.twig', []);
-    }
-
-    public function deleteValidatedRecipe($recipeId) {
-        self::delete($recipeId);
-
-        $path = RouterModule::getInstance()->generatePath(admin_validated_recipes);
-        header("location: $path");
-    }
-
-    public function deleteRecipeToValidate($recipeId) {
-        self::delete($recipeId);
-
-        $path = RouterModule::getInstance()->generatePath(admin_recipes_to_validate);
-        header("location: $path");
-
     }
 
     /**

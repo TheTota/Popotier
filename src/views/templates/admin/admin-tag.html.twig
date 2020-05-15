@@ -22,9 +22,9 @@
                         <td><input type="text" class="form-control tag" value="{{ tag.name }}" onchange="updateTagValue(this, {{ tag.id }})" ></td>
 
                         <td>
-                            <a class="btn btn-outline-danger" href="{{ path('delete_tag', [tag.id]) }}" >
+                            <button class="btn btn-outline-danger" onclick="deleteTag({{ tag.id }})">
                                 <i class="fas fa-trash-alt"></i>
-                            </a>
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}

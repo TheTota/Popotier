@@ -15,7 +15,7 @@ $('#inputTagName').on('input', () => {
 });
 
 function updateTagValue(element, id) {
-    if( confirm('Etes vous sur de vouloir modifier la valeur du tag?')){
+    if( confirm('Etes-vous sûr de vouloir modifier la valeur du tag ?')){
         updateTagValueRequest(element.value, id).then(
             (data) => {
                 console.log('Le tag a été changé en ' + element.value);
@@ -24,9 +24,6 @@ function updateTagValue(element, id) {
     }else{
         location.reload();
     }
-
-
-
 }
 
 function updateTagValueRequest(value, id) {
@@ -34,6 +31,28 @@ function updateTagValueRequest(value, id) {
         $.get('/tag/update/' + id + '/' + value, (data, success) => {
             if (success) {
                 resolve(data);
+            } else {
+                reject();
+            }
+        })
+    })
+}
+
+function deleteTag(id) {
+    if( confirm('Etes-vous sûr de vouloir supprimer le tag ?')){
+        deleteTagRequest(id).then(
+            () => {
+                window.location.reload();
+            }
+        )
+    }
+}
+
+function deleteTagRequest(id) {
+    return new Promise((resolve, reject) => {
+        $.get('/tag/delete/' + id, (data, success) => {
+            if (success) {
+                resolve();
             } else {
                 reject();
             }

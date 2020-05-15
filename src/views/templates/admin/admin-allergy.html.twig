@@ -21,9 +21,9 @@
                     <tr>
                         <td><input type="text" class="form-control" value="{{ allergen.name }}" onchange="updateAllergenValue(this, {{ allergen.id }})"></td>
                         <td>
-                            <a class="btn btn-outline-danger" href="{{ path('delete_allergen', [allergen.id]) }}" >
+                            <button class="btn btn-outline-danger" onclick="deleteAllergen({{ allergen.id }})">
                                 <i class="fas fa-trash-alt"></i>
-                            </a>
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}

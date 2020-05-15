@@ -93,17 +93,10 @@ devalidate_recipe:
   requirements:
     id: '[0-9]+'
 
-delete_validated_recipe:
-  path: /recipe/deleteValid/{id}
+delete_recipe:
+  path: /recipe/delete/{id}
   controller: RecipeController
-  action: deleteValidatedRecipe
-  requirements:
-    id: '[0-9]+'
-
-delete_recipe_to_validate:
-  path: /recipe/deleteInvalid/{id}
-  controller: RecipeController
-  action: deleteRecipeToValidate
+  action: delete
   requirements:
     id: '[0-9]+'
 

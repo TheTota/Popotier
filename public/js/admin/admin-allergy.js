@@ -15,7 +15,7 @@ $( () => {
 });
 
 function updateAllergenValue(element, id) {
-    if( confirm('Etes vous sur de vouloir modifier la valeur de l\'allergene?')){
+    if( confirm('Etes-vous sûr de vouloir modifier la valeur de l\'allergene?')){
         updateAllergenValueRequest(element.value, id).then(
             (data) => {
                 console.log('L\'allergène a été changé en ' + element.value);
@@ -37,4 +37,27 @@ function updateAllergenValueRequest(value, id) {
         })
     })
 }
+
+function deleteAllergen(id) {
+    if( confirm('Etes-vous sûr de vouloir supprimer l\'allergène ?')){
+        deleteAllergenRequest(id).then(
+            () => {
+                window.location.reload();
+            }
+        )
+    }
+}
+
+function deleteAllergenRequest(id) {
+    return new Promise((resolve, reject) => {
+        $.get('/allergen/delete/' + id, (data, success) => {
+            if (success) {
+                resolve();
+            } else {
+                reject();
+            }
+        })
+    })
+}
+
 
