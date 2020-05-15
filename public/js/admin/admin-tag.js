@@ -42,7 +42,7 @@ function deleteTag(id) {
     if( confirm('Etes-vous sûr de vouloir supprimer le tag ?')){
         deleteTagRequest(id).then(
             () => {
-                window.location.replace("/admin/view/tags");
+                window.location.reload();
             }
         )
     }

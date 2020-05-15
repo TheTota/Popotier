@@ -36,7 +36,7 @@ function getRecipeSummaryRequest(id) {
 function validateRecipe(idRecipe) {
     validateRecipeRequest(idRecipe).then(
         () => {
-            window.location.replace("/admin/view/recipes-to-validate");
+            window.location.reload();
         }
     )
 }
@@ -57,7 +57,7 @@ function validateRecipeRequest (idRecipe) {
 function devalidateRecipe(idRecipe) {
     devalidateRecipeRequest(idRecipe).then(
         () => {
-            window.location.replace("/admin/view/validated-recipes");
+            window.location.reload();
         }
     )
 }

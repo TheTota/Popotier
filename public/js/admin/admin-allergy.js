@@ -42,7 +42,7 @@ function deleteAllergen(id) {
     if( confirm('Etes-vous sûr de vouloir supprimer l\'allergène ?')){
         deleteAllergenRequest(id).then(
             () => {
-                window.location.replace("/admin/view/allergies");
+                window.location.reload();
             }
         )
     }

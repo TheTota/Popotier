@@ -52,7 +52,6 @@ class RecipeController
 
             }
 
-
             $recipe = new RecipeEntity(
                 null, // id
                 $_POST['inputName'],
@@ -82,7 +81,6 @@ class RecipeController
     }
 
     public function delete($recipeId) {
-        echo "<h1>vardump</h1>";
         RecipeService::deleteByID($recipeId);
     }
 
