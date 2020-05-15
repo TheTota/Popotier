@@ -15,7 +15,7 @@ $('#inputTagName').on('input', () => {
 });
 
 function updateTagValue(element, id) {
-    if( confirm('Etes vous sur de vouloir modifier la valeur du tag?')){
+    if( confirm('Etes-vous sûr de vouloir modifier la valeur du tag ?')){
         updateTagValueRequest(element.value, id).then(
             (data) => {
                 console.log('Le tag a été changé en ' + element.value);

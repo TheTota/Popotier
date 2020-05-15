@@ -77,18 +77,20 @@ function devalidateRecipeRequest (idRecipe) {
 
 
 function deleteRecipe(idRecipe, recipeValid) {
-    var url;
-    if (recipeValid){
-        url = "/admin/view/validated-recipes";
-    } else {
-        url = "/admin/view/recipes-to-validate";
-    }
-
-    deleteRecipeRequest("/recipe/delete/" + idRecipe).then(
-        () => {
-            window.location.replace(url);
+    if( confirm('Etes-vous sûr de vouloir supprimer cette recette ?')){
+        var url;
+        if (recipeValid){
+            url = "/admin/view/validated-recipes";
+        } else {
+            url = "/admin/view/recipes-to-validate";
         }
-    )
+
+        deleteRecipeRequest("/recipe/delete/" + idRecipe).then(
+            () => {
+                window.location.replace(url);
+            }
+        )
+    }
 }
 
 function deleteRecipeRequest (path) {
