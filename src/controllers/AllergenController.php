@@ -19,9 +19,6 @@ class AllergenController{
 
     public function delete($allergenId) {
         AllergenService::delete($allergenId);
-
-        $path = RouterModule::getInstance()->generatePath('admin_allergies');
-        header("location: $path");
     }
 
     public function update($allergenId, $value){

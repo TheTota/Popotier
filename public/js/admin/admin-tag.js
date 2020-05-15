@@ -24,9 +24,6 @@ function updateTagValue(element, id) {
     }else{
         location.reload();
     }
-
-
-
 }
 
 function updateTagValueRequest(value, id) {
@@ -34,6 +31,28 @@ function updateTagValueRequest(value, id) {
         $.get('/tag/update/' + id + '/' + value, (data, success) => {
             if (success) {
                 resolve(data);
+            } else {
+                reject();
+            }
+        })
+    })
+}
+
+function deleteTag(id) {
+    if( confirm('Etes-vous sûr de vouloir supprimer le tag ?')){
+        deleteTagRequest(id).then(
+            () => {
+                window.location.replace("/admin/view/tags");
+            }
+        )
+    }
+}
+
+function deleteTagRequest(id) {
+    return new Promise((resolve, reject) => {
+        $.get('/tag/delete/' + id, (data, success) => {
+            if (success) {
+                resolve();
             } else {
                 reject();
             }

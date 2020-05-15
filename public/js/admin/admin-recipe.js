@@ -95,7 +95,6 @@ function deleteRecipe(idRecipe, recipeValid) {
 
 function deleteRecipeRequest (path) {
     return new Promise((resolve, reject) => {
-        // TODO: add confirm alert
         $.get(path, (data, success) => {
             if(success){
                 //console.log(data);

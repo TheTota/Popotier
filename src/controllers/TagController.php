@@ -20,11 +20,8 @@ class TagController {
         header("location: $path");
     }
 
-    public function delete ($tagId) {
+    public function delete($tagId) {
         TagService::delete($tagId);
-
-        $path = RouterModule::getInstance()->generatePath('admin_tags');
-        header("location: $path");
     }
 
     public function update($tagId, $value){
