@@ -195,6 +195,11 @@ class RecipeService
         $request->execute($data);
     }
 
+    public static function dislikeRecipe($userId, $recipeId) {
+        $db = DataBaseService::getInstance()->getDb();
+        $db->exec("DELETE FROM Utilisateur_Like_Recette WHERE id_utilisateur = '$userId' AND id_recette = '$recipeId'");
+    }
+
     /**
      * Returns whether or not the given recipe is liked by the given use.
      *

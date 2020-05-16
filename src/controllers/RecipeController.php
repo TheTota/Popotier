@@ -181,7 +181,12 @@ class RecipeController
     public function like($recipeId) {
         // if connected, like the recipe
         if (isset($_SESSION['email'])) {
-            RecipeService::likeRecipe($_SESSION['id'], $recipeId);
+            $userId = $_SESSION['id'];
+            if (RecipeService::recipeIsLiked($userId, $recipeId)) {
+                RecipeService::dislikeRecipe($userId, $recipeId);
+            } else {
+                RecipeService::likeRecipe($userId, $recipeId);
+            }
         } else { // not connected, redirect towards login page
             header('location: /login');
         }
