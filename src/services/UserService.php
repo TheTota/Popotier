@@ -180,17 +180,4 @@ class UserService
         }
     }
 
-    public static function likeRecipe($userId, $recipeId) {
-        $db = DataBaseService::getInstance()->getDb();
-
-        $request = $db->prepare("INSERT INTO Utilisateur_Like_Recette (id_utilisateur, id_recette) VALUES (:userId, :recipeId)");
-
-        $data = [
-            'userId' => $userId,
-            'recipeId' => $recipeId
-        ];
-
-        $request->execute($data);
-    }
-
 }

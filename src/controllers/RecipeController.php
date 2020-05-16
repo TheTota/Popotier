@@ -25,9 +25,15 @@ class RecipeController
         $twig = Templater::getInstance()->getTwig();
 
         $recipe = RecipeService::findById($recipeId);
+        // if connected, check if the recipe is liked by user
+        $recipeLikedByUser = false;
+        if (isset($_SESSION['email'])) {
+            $recipeLikedByUser = RecipeService::recipeIsLiked($_SESSION['id'], $recipeId);
+        }
 
         echo $twig->render('recipe/recipe-view.html.twig', [
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'recipeLiked' => $recipeLikedByUser
         ]);
     }
 
@@ -175,7 +181,7 @@ class RecipeController
     public function like($recipeId) {
         // if connected, like the recipe
         if (isset($_SESSION['email'])) {
-            UserService::likeRecipe($_SESSION['id'], $recipeId);
+            RecipeService::likeRecipe($_SESSION['id'], $recipeId);
         } else { // not connected, redirect towards login page
             header('location: /login');
         }

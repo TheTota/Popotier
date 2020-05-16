@@ -182,5 +182,36 @@ class RecipeService
         return $recipesArray;
     }
 
+    public static function likeRecipe($userId, $recipeId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $request = $db->prepare("INSERT INTO Utilisateur_Like_Recette (id_utilisateur, id_recette) VALUES (:userId, :recipeId)");
+
+        $data = [
+            'userId' => $userId,
+            'recipeId' => $recipeId
+        ];
+
+        $request->execute($data);
+    }
+
+    /**
+     * Returns whether or not the given recipe is liked by the given use.
+     *
+     * @param $userId
+     * @param $recipeId
+     * @return bool
+     */
+    public static function recipeIsLiked($userId, $recipeId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT * FROM Utilisateur_Like_Recette WHERE id_utilisateur = '$userId' AND id_recette = '$recipeId'")->fetch();
+        if ($result == false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
 }
