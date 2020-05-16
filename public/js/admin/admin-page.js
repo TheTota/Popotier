@@ -1,12 +1,8 @@
 $(() => {
-
     $('#sidenavCollapse').on('click', () => {
         $('#sidenav').toggleClass('active');
         $('#admin-content').toggleClass('active')
     });
-
-
-
 });
 
 function setActive(element){

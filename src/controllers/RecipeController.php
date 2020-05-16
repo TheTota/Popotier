@@ -37,7 +37,6 @@ class RecipeController
         $recipeCreated = false;
 
         if (!empty($_POST)) {
-
             $steps = array();
 
             for ($i = 0; $i < count($_POST['stepList']); $i++) {
@@ -49,7 +48,6 @@ class RecipeController
                         $_POST['stepList'][$i]
                     )
                 );
-
             }
 
             $recipe = new RecipeEntity(
@@ -168,6 +166,17 @@ class RecipeController
             echo true;
         } else {
             echo false;
+        }
+    }
+
+    /**
+     * Route: /recipe/like/:id
+     */
+    public function like($recipeId) {
+        // if connected, like the recipe
+        if (isset($_SESSION['email'])) {
+        } else { // not connected, redirect towards login page
+            header('location: /login');
         }
     }
 }
