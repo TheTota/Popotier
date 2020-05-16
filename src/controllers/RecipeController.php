@@ -175,6 +175,7 @@ class RecipeController
     public function like($recipeId) {
         // if connected, like the recipe
         if (isset($_SESSION['email'])) {
+            UserService::likeRecipe($_SESSION['id'], $recipeId);
         } else { // not connected, redirect towards login page
             header('location: /login');
         }
