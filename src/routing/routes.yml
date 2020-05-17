@@ -100,6 +100,13 @@ delete_recipe:
   requirements:
     id: '[0-9]+'
 
+like_recipe:
+  path: /recipe/like/{id}
+  controller: RecipeController
+  action: like
+  requirements:
+    id: '[0-9]+'
+
 recipe_summary:
   path: /recipe/summary/{id}
   controller: RecipeController

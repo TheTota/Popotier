@@ -25,9 +25,15 @@ class RecipeController
         $twig = Templater::getInstance()->getTwig();
 
         $recipe = RecipeService::findById($recipeId);
+        // if connected, check if the recipe is liked by user
+        $recipeLikedByUser = false;
+        if (isset($_SESSION['email'])) {
+            $recipeLikedByUser = RecipeService::recipeIsLiked($_SESSION['id'], $recipeId);
+        }
 
         echo $twig->render('recipe/recipe-view.html.twig', [
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'recipeLiked' => $recipeLikedByUser
         ]);
     }
 
@@ -37,7 +43,6 @@ class RecipeController
         $recipeCreated = false;
 
         if (!empty($_POST)) {
-
             $steps = array();
 
             for ($i = 0; $i < count($_POST['stepList']); $i++) {
@@ -49,7 +54,6 @@ class RecipeController
                         $_POST['stepList'][$i]
                     )
                 );
-
             }
 
             $recipe = new RecipeEntity(
@@ -168,6 +172,23 @@ class RecipeController
             echo true;
         } else {
             echo false;
+        }
+    }
+
+    /**
+     * Route: /recipe/like/:id
+     */
+    public function like($recipeId) {
+        // if connected, like the recipe
+        if (isset($_SESSION['email'])) {
+            $userId = $_SESSION['id'];
+            if (RecipeService::recipeIsLiked($userId, $recipeId)) {
+                RecipeService::dislikeRecipe($userId, $recipeId);
+            } else {
+                RecipeService::likeRecipe($userId, $recipeId);
+            }
+        } else { // not connected, redirect towards login page
+            header('location: /login');
         }
     }
 }

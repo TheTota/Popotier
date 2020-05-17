@@ -164,6 +164,16 @@ CREATE TABLE Utilisateur_Recette
     CONSTRAINT FK_Utilisateur_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id)
 );
 
+DROP TABLE IF EXISTS Utilisateur_Like_Recette;
+CREATE TABLE Utilisateur_Like_Recette
+(
+    id_utilisateur INTEGER NOT NULL,
+    id_recette     INTEGER NOT NULL,
+    CONSTRAINT PK_Utilisateur_Like_Recette PRIMARY KEY (id_utilisateur, id_recette),
+    CONSTRAINT FK_Utilisateur_Like_Recette_Utilisateur FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur (id) ON DELETE CASCADE,
+    CONSTRAINT FK_Utilisateur_Like_Recette_Recette FOREIGN KEY (id_recette) REFERENCES Recette (id) ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS Ingredient;
 CREATE TABLE Ingredient
 (

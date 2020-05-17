@@ -1,4 +1,8 @@
 {% extends "layout/base.html.twig" %}
+{% block links %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/public/css/user/user-recipes.css">
+{% endblock %}
 
 {% block content %}
 	<ul class="nav nav-tabs text-dark">
