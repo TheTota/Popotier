@@ -1,16 +1,29 @@
 {% extends "layout/base.html.twig" %}
+
 {% block links %}
-	{{ parent() }}
-	<link rel="stylesheet" href="/public/css/user/user-recipes.css">
+    {{ parent() }}
+    <link rel="stylesheet" href="/public/css/user/user-recipes.css">
 {% endblock %}
 
 {% block content %}
-	<ul class="nav nav-tabs text-dark">
-	 <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/recipe-list">Mes recettes</a></li>
-	 <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/favorite-list">Mes favoris</a></li>
-	</ul>
+    <h2>
+		<i class="fas fa-utensils"></i>
+		Ma Cuisine
+		<i class="fas fa-utensils"></i>
+	</h2>
 
-	{%block recipeList %}{%endblock%}
+    <a class="btn btn-flat-primary " id="addRecipe" href="{{ path('add_recipe') }}"> <i class="fas fa-plus-square"></i>
+        Partager une nouvelle recette
+	</a>
+
+    <ul class="nav nav-tabs text-dark">
+        <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/recipe-list">Mes
+                recettes</a></li>
+        <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/favorite-list">Mes
+                favoris</a></li>
+    </ul>
+
+    {% block recipeList %}{% endblock %}
 
 {% endblock %}
 

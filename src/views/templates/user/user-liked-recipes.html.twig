@@ -1,84 +1,13 @@
-{% extends "user/user.html.twig" %}
+{% extends "user/components/recipe-list-component.html.twig" %}
 
-{% block recipeList %}
 
-	<div class="d-block">
-
-		{%if recipes %}
-		<ul class="list-group">
-			{% for recipe in recipes %}
-				<li class="list-group-item text-justify" id={{recipe.id}}>
-					<div class="row">
-						<a href="{{ path('recipe_view', [recipe.id]) }}" class="col-lg-2">
-							<div class="limit">
-								{% if recipe.image %}
-									<img class="recipe-preview-img" src="{{ recipe.image }}" alt="image of the recipe">
-								{% else %}
-									<img class="recipe-preview-img" src="/public/assets/recipes-image/knives.jpg" alt="image of the recipe">
-								{% endif %}
-							</div>
-						</a>
-						<a href="{{ path('recipe_view', [recipe.id]) }}" class="col-lg-9 text-dark list-group-item">
-							<h3>
-							{{ recipe.name }}
-							</h3>
-
-							<hr class="separator">
-
-							<div class="row">
-								<div class="col-lg-8">
-									<div class="row">
-										<div class="col-lg-6">
-											<p>
-												<i class="fas fa-clock icon"></i>
-												Temps de cuisson : {{ recipe.cookingTime }} min
-											</p>
-										</div>
-										<div class="col-lg-6">
-											<p>
-												<i class="fas fa-clock icon"></i>
-												Temps de préparation : {{ recipe.preparationTime }} min
-											</p>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="col">
-											<i class="fas fa-users icon"></i>
-											{{ recipe.personNumber }} personne(s)
-										</div>
-										<div class="col">
-											<i class="fas fa-utensils icon"></i>
-											Difficulté : {{ recipe.difficulty }}/5
-										</div>
-										<div class="col">
-											<i class="fas fa-coins icon"></i>
-											Prix moyen :
-											{% if recipe.meanPrice %}
-												{{ recipe.meanPrice }} €
-											{% else %}
-												nc
-											{% endif %}
-										</div>
-									</div>
-								</div>
-							</div>
-						</a>
-						<div class="col">
-							<button class="like-btn btn btn-info" type="button" onclick="handleLikeButtonClick({{ recipe.id }}, true)">
-								<i class="fas fa-heart fa-2x"></i>
-							</button>
-						</div>
-					</div>
-				</li>
-
-			{% endfor %}
-		</ul>
-		{% endif %}
-
-	</div>
+{% block user_recipes_list_actions %}
+	<button class="like-btn btn btn-info" type="button" onclick="handleLikeButtonClick({{ recipe.id }}, true)">
+		<i class="fas fa-heart fa-2x"></i>
+	</button>
 {% endblock %}
 
+
 {% block scripts %}
-	<script src="/public/js/recipe/recipe-like-system.js"></script>
+    <script src="/public/js/recipe/recipe-like-system.js"></script>
 {% endblock %}
