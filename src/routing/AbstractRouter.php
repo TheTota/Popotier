@@ -62,23 +62,10 @@ abstract class AbstractRouter {
         $controllerClass = '\src\controllers\\'.$route->getController();
         $controllerInstance = new $controllerClass();
         if($parameters){
-            // TODO: Find a way to generalise this part
-            switch(count($parameters)){
-                case 1:
-                    call_user_func(array($controllerInstance, $route->getAction()), $parameters[0]);
-                    break;
 
-                case 2:
-                    call_user_func(array($controllerInstance, $route->getAction()), $parameters[0], $parameters[1]);
-                    break;
+            $reflexionMethod = new \ReflectionMethod($controllerInstance, $route->getAction());
+            $reflexionMethod->invokeArgs($controllerInstance, $parameters);
 
-                case 3:
-                    call_user_func(array($controllerInstance, $route->getAction()), $parameters[0], $parameters[1], $parameters[2]);
-                    break;
-
-                default:
-                    break;
-            }
         }else{
             call_user_func(array($controllerInstance, $route->getAction()));
         }

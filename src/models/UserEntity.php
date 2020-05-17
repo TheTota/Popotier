@@ -4,7 +4,7 @@ namespace src\models;
 
 use Src\Models\RoleEntity;
 
-class UserEntity
+class UserEntity implements \JsonSerializable
 {
     private $id;
     private $email;
@@ -184,5 +184,17 @@ class UserEntity
     }
 
 
-
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->getId(),
+            "email" => $this->getEmail(),
+            "lastName" => $this->getLastName(),
+            "firstName" => $this->getFirstName(),
+            "alias" => $this->getAlias(),
+        ];
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace src\models;
 
-class StepEntity {
+class StepEntity implements \JsonSerializable {
 
     private $id;
     private $position;
@@ -68,5 +68,16 @@ class StepEntity {
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "position" => $this->getPosition(),
+            "description" => $this->getDescription()
+        ];
     }
 }

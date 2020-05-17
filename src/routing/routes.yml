@@ -190,3 +190,17 @@ task_user_delete:
   path: /task/user/delete
   controller: TaskController
   action: deleteUnvalidUsers
+
+# API PART
+
+api_get_recipes:
+  path: /api/recipe
+  controller: ApiController
+  action: getAllRecipes
+
+api_get_recipes_by_id:
+  path: /api/recipe/{id}
+  controller: ApiController
+  action: getRecipeById
+  requirements:
+      id: '[0-9]+'

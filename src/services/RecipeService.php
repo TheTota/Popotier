@@ -21,30 +21,34 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
-    public static function findById($id): RecipeEntity
+    public static function findById($id): ?RecipeEntity
     {
         $db = DataBaseService::getInstance()->getDb();
 
         $recipe = $db->query("SELECT * FROM Recette WHERE id = '$id'")->fetch();
 
-        return new RecipeEntity(
-            $recipe['id'],
-            $recipe['nom'],
-            $recipe['image'],
-            $recipe['date_creation'],
-            $recipe['temps_cuisson'],
-            $recipe['temps_preparation'],
-            $recipe['nb_personnes'],
-            $recipe['difficulte'],
-            $recipe['prix_moyen'],
-            $recipe['note_auteur'],
-            $recipe['valide'],
-            UserService::findById($recipe['id_auteur']),
-            TypeService::findById($recipe['id_type']),
-            ($recipe['id_admin'] == null) ? null : UserService::findById($recipe['id_admin']),
-            StepService::findByRecette($recipe['id']),
-            IngredientRecipeService::findAllByRecipe($recipe['id'])
-        );
+        if (!$recipe){
+            return null;
+        } else {
+            return new RecipeEntity(
+                $recipe['id'],
+                $recipe['nom'],
+                $recipe['image'],
+                $recipe['date_creation'],
+                $recipe['temps_cuisson'],
+                $recipe['temps_preparation'],
+                $recipe['nb_personnes'],
+                $recipe['difficulte'],
+                $recipe['prix_moyen'],
+                $recipe['note_auteur'],
+                $recipe['valide'],
+                UserService::findById($recipe['id_auteur']),
+                TypeService::findById($recipe['id_type']),
+                ($recipe['id_admin'] == null) ? null : UserService::findById($recipe['id_admin']),
+                StepService::findByRecette($recipe['id']),
+                IngredientRecipeService::findAllByRecipe($recipe['id'])
+            );
+        }
     }
 
     public static function update(RecipeEntity $recipe)

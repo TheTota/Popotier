@@ -8,7 +8,7 @@ namespace src\models;
  * This entity is used for ingredients attached to a recipe.
  * To display a list of ingredients IngredientEntity should be used.
  */
-class IngredientRecipeEntity {
+class IngredientRecipeEntity implements \JsonSerializable {
 
     private $ingredient; //IngredientEntity
     private $quantity;
@@ -73,5 +73,17 @@ class IngredientRecipeEntity {
     public function setUnit($unit)
     {
         $this->unit = $unit;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            "ingredient" => $this->getIngredient(),
+            "quantity" => $this->getQuantity(),
+            "unit" => $this->getUnit()
+        ];
     }
 }
