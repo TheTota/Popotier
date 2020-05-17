@@ -1,20 +1,22 @@
-function handleLikeButtonClick(idRecipe) {
+function handleLikeButtonClick(idRecipe, isPartOfList) {
     // (Try to) like the recipe
-    likeRecipeRequest(idRecipe).then(
+    likeRecipeRequest(idRecipe, isPartOfList).then(
         () => {
-            //window.location.reload();
+            if (isPartOfList) {
+                window.location.reload();
+            } else {
+                toggleLikeIcon();
+            }
         }
     )
 }
 
-function likeRecipeRequest (idRecipe) {
+function likeRecipeRequest (idRecipe, isPartOfList) {
     return new Promise((resolve, reject) => {
         $.get('/recipe/like/'+idRecipe, (data, success) => {
             if(success){
                 if (data !== "") {
                     window.location.href = "/login";
-                } else {
-                    toggleLikeIcon();
                 }
                 //console.log(data);
                 resolve();
@@ -27,7 +29,7 @@ function likeRecipeRequest (idRecipe) {
 
 function toggleLikeIcon() {
     // Color btn
-    var icon = $("#like-btn i");
+    var icon = $(".like-btn i");
     icon.toggleClass("far");
     icon.toggleClass("fas");
 }
