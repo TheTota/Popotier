@@ -1,27 +1,29 @@
-{% extends "user/user.html.twig" %}
+{% extends "user/components/recipe-list-component.html.twig" %}
 
-{% block recipeList %}
-
-	<div class="d-block">
-		{% if recipeList %}
-		<a  class="btn btn-primary " id="addRecipe" href="{{ path('add_recipe') }}"> Ajouter une recette</a>
-		{% endif %}
-
-		{%if recipes %}
-		<ul class="list-group">
-
-			{% for recipe in recipes %}
-				<li class="list-group-item text-justify" id= {{recipe.id}}>
-					<a class="text-dark list-group-item" href="">
-								{{ recipe.name }}
-					</a>
-					<button type="button" class="btn btn-warning">Editer</button>
-					<button type="button" class="btn btn-danger ">Supprimer</button>
-				</li>
-
-			{% endfor %}
-		</ul>
-		{% endif %}
-
-	</div>
+{% block user_recipes_list_actions %}
+<a
+		class="btn btn-info text-white"
+		type="button"
+		data-toggle="tooltip"
+		title="Modifier"
+		{# TODO: Add the path to the modification form later #}
+>
+	<i class="fas fa-pencil-alt"></i>
+</a>
+<button
+		class="btn btn-danger"
+		type="button"
+		data-toggle="tooltip"
+		title="Supprimer"
+		onclick="deleteRecipe({{ recipe.id }})"
+>
+	<i class="fas fa-trash-alt"></i>
+</button>
 {% endblock %}
+
+{% block scripts %}
+	<script src="/public/js/recipe/recipe-management.js"></script>
+{% endblock %}
+
+
+

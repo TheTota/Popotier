@@ -15,14 +15,14 @@
             <div class="user-actions">
                 {% if session.alias %}
                     {% if session.role == 'admin' %}
-                        <a class="btn btn-light btn-sm" href="{{ path('admin_dashboard') }}">Administration</a>
+                        <a class="btn btn-light btn-sm" href="{{ path('admin_dashboard') }}"><i class="fas fa-user-cog"></i> Administration</a>
                     {% else %}
-                        <a class="btn btn-light btn-sm" href="{{ path('user_recipe_list') }}">Profil</a>
+                        <a class="btn btn-light btn-sm" href="{{ path('user_recipe_list') }}"><i class="fas fa-user"></i> Profil</a>
                     {% endif %}
-                    <a class="btn btn-danger btn-sm" href="{{ path('logout') }}">Deconnexion</a>
+                    <a class="btn btn-danger btn-sm" href="{{ path('logout') }}"> <i class="fas fa-sign-out-alt"></i> Deconnexion</a>
                 {% else %}
                     <a class="btn btn-outline-primary" href="{{ path('add_user') }}">Inscription</a>
-                    <a class="btn btn-outline-primary" href="{{ path('login') }}">Connexion</a>
+                    <a class="btn btn-outline-primary" href="{{ path('login') }}"><i class="fas fa-sign-in-alt"></i> Connexion</a>
                 {% endif %}
             </div>
         </form>
