@@ -107,7 +107,7 @@ class UserController
     public function viewFavorite()
     {
         $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['id']);
-        echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig', ['recipes' => $recipes]);
+        echo Templater::getInstance()->getTwig()->render('user/user-liked-recipes.html.twig', ['recipes' => $recipes]);
     }
 
     public function emailConfirmation($validationString) {

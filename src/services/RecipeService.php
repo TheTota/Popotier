@@ -139,9 +139,9 @@ class RecipeService
 
     }
 
-    public static function fetchAllUserFavoriteRecipe($userEmail){
+    public static function fetchAllUserFavoriteRecipe($userId){
         $db = DataBaseService::getInstance()->getDb();
-        $recipes = $db->query("SELECT * FROM Recette JOIN Utilisateur_Recette on Recette.id = Utilisateur_Recette.id_recette AND Utilisateur_Recette.id_utilisateur ='" . $userEmail . "'");
+        $recipes = $db->query("SELECT * FROM Recette INNER JOIN Utilisateur_Like_Recette ON Recette.id = Utilisateur_Like_Recette.id_recette WHERE id_utilisateur = '$userId'");
 
         return self::createRecipeArray($recipes);
     }
