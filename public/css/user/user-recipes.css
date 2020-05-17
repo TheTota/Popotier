@@ -18,20 +18,3 @@ h3 {
 .separator {
     margin: 5px 0px 15px 0px;
 }
-
-.like-btn {
-    width: 100%;
-    height: 100%;
-    background-color: #91CCA7;
-    border: 1px solid #88bf9c;
-}
-
-.like-btn i {
-    margin-top: 3px;
-}
-
-.like-btn:hover, .like-btn:focus, .like-btn:active, .like-btn.active {
-    background-color: #a0dcb7 !important;
-    border: 1px solid #88bf9c !important;
-    box-shadow: none !important;
-}
