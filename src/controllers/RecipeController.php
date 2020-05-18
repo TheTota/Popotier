@@ -191,4 +191,12 @@ class RecipeController
             header('location: /login');
         }
     }
+
+    public function searchByString($normalizedSearchString){
+        $twig = Templater::getInstance()->getTwig();
+
+        $recipes = RecipeService::searchByName($normalizedSearchString);
+
+        echo $twig->render("recipe/components/file-list-component.html.twig", [ "recipes" => $recipes]);
+    }
 }

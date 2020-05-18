@@ -121,6 +121,11 @@ recipe_view:
   requirements:
     id: '[0-9]+'
 
+recipe_search_by_string:
+  path: /recipe/search/{substring}
+  controller: RecipeController
+  action: searchByString
+
 admin_dashboard:
   path: /admin/view/dashboard
   controller: AdminController

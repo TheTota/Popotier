@@ -325,6 +325,7 @@ class RecipeEntity implements \JsonSerializable
         return [
             "id" => $this->getId(),
             "name" => $this->getName(),
+            "image" => $this->getImage(),
             "creationDate" => $this->getCreationDate(),
             "cookingTime" => $this->getCookingTime(),
             "preparationTime" => $this->getPreparationTime(),

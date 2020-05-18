@@ -42,3 +42,13 @@ strong-blur {
     border: 1px solid #88bf9c !important;
     box-shadow: none !important;
 }
+
+.recipe-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#loading-spinner {
+    visibility: hidden;
+}
