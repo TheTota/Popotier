@@ -47,11 +47,11 @@ class ApiController
     }
 
     /**
-     * method: GET
-     * route: api/recipe/{id}
-     * return: The recipe specified by the id or null if the id doest'n exist
-     * @param $id
-     */
+ * method: GET
+ * route: api/recipe/{id}
+ * return: The recipe specified by the id or null if the id doest'n exist
+ * @param $id
+ */
     public function getRecipeById($id)
     {
         //HEADERS

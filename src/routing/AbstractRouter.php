@@ -94,7 +94,7 @@ abstract class AbstractRouter {
                     if(isset($requirements[$parameter])){ // if the parameter as requirements we put those in the path
                         $path = str_replace($parameters[0][$key], $requirements[$parameter], $path);
                     } else {
-                        $path = str_replace($parameters[0][$key], '([a-z0-9]+)', $path);
+                        $path = str_replace($parameters[0][$key], '(.*?)', $path);
                     }
                 }
 
