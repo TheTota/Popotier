@@ -32,4 +32,24 @@ class RatingService {
         }
     }
 
+    public static function userAlreadyRated($recipeId, $userId)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT * FROM Note WHERE id_utilisateur = '$userId' AND id_recette = '$recipeId'")->fetch();
+        if ($result == false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static function updateRating($recipeId, $userId, $value)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $db->exec("UPDATE Note SET valeur = '$value' WHERE id_utilisateur = '$userId' AND id_recette = '$recipeId'");
+        return;
+    }
+
 }
