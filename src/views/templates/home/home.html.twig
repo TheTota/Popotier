@@ -8,13 +8,21 @@
 {% endblock %}
 
 {% block content %}
-    <div id="search-section" class="container-fluid">
+    <div id="search-section" class="container col">
         <div class="row search-content">
             <div class="center-search">
-                <input class="form-control" type="text" placeholder="Une envie particulière?">
+                <input id="search-input" class="form-control" type="text" placeholder="Une envie particulière?">
             </div>
         </div>
     </div>
+
+    <div id="search-result-section" class="container"></div>
+    <div id="loading-spinner" class="d-flex justify-content-center text-success">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
     <hr class="separator">
 
     <h2>Dernières recettes</h2>
@@ -49,5 +57,9 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/public/js/search.js"></script>
 {% endblock %}
 

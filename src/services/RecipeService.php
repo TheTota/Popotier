@@ -222,5 +222,22 @@ class RecipeService
         }
     }
 
+    /**
+     * @param $name
+     * @return array|null
+     * Return all the recipe that contain the string send in param in their name
+     */
+    public static function searchByName($name) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $recipes = $db->query("SELECT * FROM Recette WHERE nom LIKE '%$name%'");
+
+        if($recipes){
+            return self::createRecipeArray($recipes);
+        } else {
+            return null;
+        }
+    }
+
 
 }
