@@ -6,12 +6,12 @@ html, body {
     font-family: 'Comic Neue', cursive;
 }
 
-a {
+body a {
     text-decoration: none;
     color: #6D997D;
 }
 
-a:hover {
+body a:hover {
     text-decoration: none;
     color: #91CCA7;
     transition: all 0.3s;

@@ -41,7 +41,7 @@ user_verify_email:
   controller: UserController
   action: emailVerify
   requirements:
-    email: '[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/'
+    email: '[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+'
 
 user_verify_alias:
   path: /user/verify/alias/{alias}
