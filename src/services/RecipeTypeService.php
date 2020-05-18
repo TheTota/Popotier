@@ -14,8 +14,9 @@ class RecipeTypeService
 
 		$recipeTypeAll = $db->query('SELECT * FROM  Type');
 
-		return self::createRecipeTypeArray($recipesTypeAll);
+		return self::createRecipeTypeArray($recipeTypeAll);
 	}
+
 	public static function findById($id) {
 	        $db = DataBaseService::getInstance()->getDb();
 
@@ -30,7 +31,7 @@ class RecipeTypeService
 	public static function createRecipeTypeArray(\PDOStatement $recipeTypeAll): array
 	{
 		$recipeTypeArray = array();
-		foreach ($recipesTypeAll as $recipeType) {
+		foreach ($recipeTypeAll as $recipeType) {
 			array_push(
 				$recipeTypeArray,
 				new RecipeTypeEntity(

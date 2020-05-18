@@ -2,11 +2,6 @@ function handleLikeButtonClick(idRecipe, isPartOfList) {
     // (Try to) like the recipe
     likeRecipeRequest(idRecipe, isPartOfList).then(
         () => {
-            if (isPartOfList) {
-                window.location.reload();
-            } else {
-                toggleLikeIcon();
-            }
         }
     )
 }
@@ -18,7 +13,13 @@ function likeRecipeRequest (idRecipe, isPartOfList) {
                 if (data !== "") {
                     window.location.href = "/login";
                 }
-                //console.log(data);
+                else {
+                    if (isPartOfList) {
+                        window.location.reload();
+                    } else {
+                        toggleLikeIcon();
+                    }
+                }
                 resolve();
             } else {
                 reject();

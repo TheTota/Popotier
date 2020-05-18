@@ -12,10 +12,15 @@
             Recette proposée par <a href="/user/view/{{ recipe.author.alias }}">{{ recipe.author.alias }}</a>
         </div>
 
-
         <h3 id="recipe-name" class="center">{{ recipe.name }}</h3>
-        <div class="center">
-            Note: {{ recipe.evaluation }}
+        <div class="center rating-display">
+            {% for i in 0..4 %}
+                {% if recipeAverageRating > i %}
+                    <i class="fas fa-star icon fa-lg"></i>
+                {% else %}
+                    <i class="far fa-star icon fa-lg"></i>
+                {% endif %}
+            {% endfor %}
         </div>
         <div class="row-md">
             {% if recipe.image %}
@@ -79,8 +84,20 @@
         <hr class="separator">
         <div class="row">
             <div class="col-lg-4">
-                <h4>Ingrédients</h4>
+                <h4>Noter cette recette</h4>
+                <div class="rating-display">
+                {% for i in 0..4 %}
+                    <button type="button" onclick="rateRecipe({{ recipe.id }}, {{ i + 1 }})">
+                    {% if userRating > i %}
+                        <i class="fas fa-star icon fa-lg"></i>
+                    {% else %}
+                        <i class="far fa-star icon fa-lg"></i>
+                    {% endif %}
+                    </button>
+                {% endfor %}
+                </div>
 
+                <h4>Ingrédients</h4>
                 {% for ingredient in recipe.ingredients %}
                     <div>
                         {{ ingredient.ingredient.name }}
@@ -113,5 +130,6 @@
 
 
 {% block scripts %}
+    <script src="/public/js/recipe/recipe-rate-system.js"></script>
     <script src="/public/js/recipe/recipe-like-system.js"></script>
 {% endblock %}
