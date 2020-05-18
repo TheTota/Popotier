@@ -1,10 +1,11 @@
 $(function () {
     // Properties
-    var lastNameError = true;
-    var firstNameError = true;
-    var emailError = true;
-    var passwordError = true;
-    var aliasError = true;
+    let lastNameError = true;
+    let firstNameError = true;
+    let emailError = true;
+    let emailExistError = true;
+    let passwordError = true;
+    let aliasError = true;
 
     const onlyLettersRegex = /[A-Za-z]+$/;
 
@@ -15,6 +16,14 @@ $(function () {
     const password = $('#inputPassword');
     const alias = $('#inputAlias');
     const submitButton = $('#submit');
+
+    $('#lastNameError').hide();
+    $('#firstNameError').hide();
+    $('#emailExistError').hide();
+    $('#emailError').hide();
+    $('#aliasError').hide();
+    $('#passwordError').hide();
+
 
     // Events
     lastName.on('input', () => {
@@ -41,15 +50,14 @@ $(function () {
         }
     });
 
-    email.on('change', () => {
+    email.on('input', () => {
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
         const emailValue = email.val();
 
         if(emailValue == ''){
-            $('#emailExistError').hide();
-            $('#emailError').hide();
             emailError = true;
         } else {
+
             if(emailValue.match(emailRegex) != null) {
                 checkEmail().then(
                     () => {
@@ -57,11 +65,27 @@ $(function () {
                     }
                 )
             } else {
-                $('#emailError').show();
                 emailError = true;
             }
         }
     });
+
+    email.on('change', () => {
+
+        if(emailError && email.val() != ""){
+            $('#emailError').show();
+        } else {
+            $('#emailError').hide();
+        }
+
+        if(emailExistError){
+            $('#emailExistError').show();
+        } else {
+            $('#emailExistError').hide();
+        }
+
+    });
+
 
     alias.on('change',  () => {
         const aliasValue = alias.val();
@@ -78,16 +102,23 @@ $(function () {
         }
     });
 
-    password.on('change', () => {
+    password.on('input', () => {
         const passwordValue = password.val();
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
 
         if (passwordValue.match(passwordRegex) != null) {
-            $('#passwordError').hide();
             passwordError = false;
         } else {
-            $('#passwordError').show();
             passwordError = true;
+        }
+    });
+
+    password.on('change', () => {
+
+        if (passwordError) {
+            $('#passwordError').show();
+        } else {
+            $('#passwordError').hide();
         }
     });
 
@@ -119,14 +150,12 @@ $(function () {
     function checkEmail() {
         return new Promise((resolve, reject) => {
             $.get('/user/verify/email/' + email.val(), function(data, status) {
-
                 if(status == 'success'){
+                    emailError = false;
                     if(!data){
-                        emailError = true;
-                        $('#emailExistError').show();
+                        emailExistError = true;
                     } else {
-                        emailError = false;
-                        $('#emailExistError').hide();
+                        emailExistError = false;
                     }
                     resolve();
                 } else {
