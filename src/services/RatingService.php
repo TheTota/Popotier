@@ -32,6 +32,19 @@ class RatingService {
         }
     }
 
+    public static function getUserRating($userId, $recipeId)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT valeur FROM Note WHERE id_utilisateur = '$userId' AND id_recette = '$recipeId'")->fetch();
+
+        if ($result == false) {
+            return 0;
+        } else {
+            return $result[0];
+        }
+    }
+
     public static function userAlreadyRated($recipeId, $userId)
     {
         $db = DataBaseService::getInstance()->getDb();

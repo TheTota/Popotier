@@ -26,10 +26,12 @@ class RecipeController
         $twig = Templater::getInstance()->getTwig();
 
         $recipe = RecipeService::findById($recipeId);
-        // if connected, check if the recipe is liked by user
+        // if user connected
         $recipeLikedByUser = false;
+        $userRating = 0;
         if (isset($_SESSION['email'])) {
             $recipeLikedByUser = RecipeService::recipeIsLiked($_SESSION['id'], $recipeId);
+            $userRating = RatingService::getUserRating($_SESSION['id'], $recipeId);
         }
 
         // get recipe average rating
@@ -38,7 +40,8 @@ class RecipeController
         echo $twig->render('recipe/recipe-view.html.twig', [
             'recipe' => $recipe,
             'recipeLiked' => $recipeLikedByUser,
-            'recipeAverageRating' => $recipeAverageRating
+            'recipeAverageRating' => $recipeAverageRating,
+            'userRating' => $userRating
         ]);
     }
 
