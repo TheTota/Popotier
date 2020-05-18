@@ -121,6 +121,14 @@ recipe_view:
   requirements:
     id: '[0-9]+'
 
+update_rate:
+  path: /recipe/rate/{id}/{value}
+  controller: RatingController
+  action: rate
+  requirements:
+    id: '[0-9]+'
+    value: '[0-5]'
+
 admin_dashboard:
   path: /admin/view/dashboard
   controller: AdminController
