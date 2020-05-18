@@ -15,7 +15,7 @@
         <h3 id="recipe-name" class="center">{{ recipe.name }}</h3>
         <div class="center">
             {% for i in 0..4 %}
-                {% if recipe.rating > i %}
+                {% if recipeAverageRating > i %}
                     <i class="fas fa-star icon"></i>
                 {% else %}
                     <i class="far fa-star icon"></i>

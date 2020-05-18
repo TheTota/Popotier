@@ -23,12 +23,12 @@ class RatingService {
     public static function getAverageRating($recipeId) {
         $db = DataBaseService::getInstance()->getDb();
 
-        $result = $db->query("SELECT * FROM Unite WHERE id = '$recipeId'")->fetch();
+        $result = $db->query("SELECT avg(valeur) FROM Note WHERE id_recette = '$recipeId'")->fetch();
 
         if ($result == false) {
-            return false;
+            return 0;
         } else {
-            return $result;
+            return $result[0];
         }
     }
 
