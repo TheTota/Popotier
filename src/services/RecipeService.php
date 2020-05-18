@@ -157,6 +157,26 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
+    public static function fetchAllUserRecipePaginated($userId, $page){
+        $db = DataBaseService::getInstance()->getDb();
+        $recipePerPage = 2;
+
+        if($page == null){
+            $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userId . "' LIMIT ". $recipePerPage ." ");
+        }else{
+            $limit = ($page - 1) * $recipePerPage;
+            $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userId . "' LIMIT ". $limit .", ".$recipePerPage." ");
+        }
+
+        return self::createRecipeArray($recipes);
+    }
+
+    public static function countUserRecipes($userEmail){
+        $db = DataBaseService::getInstance()->getDb();
+
+        return $db->query("SELECT COUNT(*) AS userRecipeCount FROM Recette WHERE id_auteur='" . $userEmail . "'")->fetch()[0];
+    }
+
     private static function createRecipeArray(\PDOStatement $recipes): array
     {
         $recipesArray = array();

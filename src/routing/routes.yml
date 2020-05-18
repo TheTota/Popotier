@@ -55,6 +55,13 @@ user_recipe_list:
   controller: UserController
   action: viewRecipe
 
+user_recipe_list_page:
+  path: /user/view/recipe-list/{page}
+  controller: UserController
+  action: viewRecipe
+  requirements:
+    page: '[1-9]+'
+
 user_favorite_list:
   path: /user/view/favorite-list
   controller: UserController

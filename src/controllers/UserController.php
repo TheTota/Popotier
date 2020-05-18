@@ -40,7 +40,7 @@ class UserController
                 StringGenerator::generateRandomString(30)
             );
 
-            if(UserService::add($user) == null)
+            if (UserService::add($user) == null)
                 MailerService::sendMail(
                     $user->getEmail(),
                     $user->getLastName() . ' ' . $user->getFirstName(),
@@ -92,14 +92,24 @@ class UserController
 
     /**
      * This function is used to view all the user's recipes.
+     * @param int|null $page
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
-    public function viewRecipe()
+    public function viewRecipe($page = null)
     {
-        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['id']);
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+        $recipes = RecipeService::fetchAllUserRecipePaginated($_SESSION['id'], $page);
+
+        $pages = round($recipeCount/2);
 
         echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
             [
                 'recipes' => $recipes,
+                'recipeCount' => $recipeCount,
+                'pages' => $pages,
+                'page' => $page,
                 'recipeList' => true
             ]
         );
@@ -111,12 +121,13 @@ class UserController
         echo Templater::getInstance()->getTwig()->render('user/user-liked-recipes.html.twig', ['recipes' => $recipes]);
     }
 
-    public function emailConfirmation($validationString) {
+    public function emailConfirmation($validationString)
+    {
         $user = UserService::findByValidationString($validationString);
 
         UserService::validateUser($user->getEmail());
 
-        $twig  = Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
         echo $twig->render('user/mail/user-mail-confirmed.html.twig');
     }
 
@@ -124,7 +135,8 @@ class UserController
      * @param int $length
      * @return string
      */
-    private function generateRandomString($length = 10) {
+    private function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
