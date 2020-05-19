@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use http\Client\Curl\User;
+use src\services\DataBaseService;
 use src\services\MailerService;
 use src\utils\StringGenerator;
 use src\utils\Templater;
@@ -40,7 +41,7 @@ class UserController
                 StringGenerator::generateRandomString(30)
             );
 
-            if(UserService::add($user) == null)
+            if (UserService::add($user) == null)
                 MailerService::sendMail(
                     $user->getEmail(),
                     $user->getLastName() . ' ' . $user->getFirstName(),
@@ -95,28 +96,53 @@ class UserController
      */
     public function viewRecipe()
     {
-        $recipes = RecipeService::fetchAllUserRecipe($_SESSION['id']);
-
-        echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
-            [
-                'recipes' => $recipes,
-                'recipeList' => true
-            ]
-        );
+        echo Templater::getInstance()->getTwig()->render('user/user.html.twig');
     }
 
-    public function viewFavorite()
+
+    public function getUserRecipeList($page = null) {
+        $twig = Templater::getInstance()->getTwig();
+        $recipes = RecipeService::fetchAllUserRecipePaginated($_SESSION['id'], $page);
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+        $pages = round($recipeCount/2);
+
+        echo $twig->render('user/components/recipe-buttons-component.html.twig', [
+            'recipes' => $recipes,
+            'pages' => $pages
+        ]);
+    }
+
+    public function getUserLikedRecipeList($page = null) {
+        $twig = Templater::getInstance()->getTwig();
+        $recipes = RecipeService::fetchAllUserFavoriteRecipePaginated($_SESSION['id'], $page);
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+        $pages = round($recipeCount/2);
+
+        echo $twig->render('user/components/recipe-like-component.html.twig', [
+            'recipes' => $recipes,
+            'pages' => $pages
+        ]);
+    }
+
+    public function getUserRecipePageCount() {
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+
+        echo round($recipeCount/2);
+    }
+
+    public function getUserLikedRecipePageCount() {
+        $recipeCount = RecipeService::countUserLikedRecipes($_SESSION['id']);
+
+        echo round($recipeCount/2);
+    }
+
+    public function emailConfirmation($validationString)
     {
-        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['id']);
-        echo Templater::getInstance()->getTwig()->render('user/user-liked-recipes.html.twig', ['recipes' => $recipes]);
-    }
-
-    public function emailConfirmation($validationString) {
         $user = UserService::findByValidationString($validationString);
 
         UserService::validateUser($user->getEmail());
 
-        $twig  = Templater::getInstance()->getTwig();
+        $twig = Templater::getInstance()->getTwig();
         echo $twig->render('user/mail/user-mail-confirmed.html.twig');
     }
 
@@ -124,7 +150,8 @@ class UserController
      * @param int $length
      * @return string
      */
-    private function generateRandomString($length = 10) {
+    private function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';

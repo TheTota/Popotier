@@ -150,11 +150,50 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
+    public static function fetchAllUserFavoriteRecipePaginated($userId, $page = null){
+        $db = DataBaseService::getInstance()->getDb();
+        $recipePerPage = 2;
+        if( $page == null){
+            $recipes = $db->query("SELECT * FROM Recette INNER JOIN Utilisateur_Like_Recette ON Recette.id = Utilisateur_Like_Recette.id_recette WHERE id_utilisateur = '$userId' LIMIT ".$recipePerPage);
+        } else {
+            $limit = ($page - 1) * $recipePerPage;
+            $recipes = $db->query("SELECT * FROM Recette INNER JOIN Utilisateur_Like_Recette ON Recette.id = Utilisateur_Like_Recette.id_recette WHERE id_utilisateur = '$userId' LIMIT ".$limit.", ".$recipePerPage);
+        }
+
+        return self::createRecipeArray($recipes);
+    }
+
     public static function fetchAllUserRecipe($userEmail){
         $db = DataBaseService::getInstance()->getDb();
         $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userEmail . "'");
 
         return self::createRecipeArray($recipes);
+    }
+
+    public static function fetchAllUserRecipePaginated($userId, $page = null){
+        $db = DataBaseService::getInstance()->getDb();
+        $recipePerPage = 2;
+
+        if($page == null){
+            $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userId . "' LIMIT ". $recipePerPage ." ");
+        }else{
+            $limit = ($page - 1) * $recipePerPage;
+            $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userId . "' LIMIT ". $limit .", ".$recipePerPage." ");
+        }
+
+        return self::createRecipeArray($recipes);
+    }
+
+    public static function countUserRecipes($userEmail){
+        $db = DataBaseService::getInstance()->getDb();
+
+        return $db->query("SELECT COUNT(*) AS userRecipeCount FROM Recette WHERE id_auteur='" . $userEmail . "'")->fetch()[0];
+    }
+
+    public static function countUserLikedRecipes($userId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        return $db->query("SELECT COUNT(*) AS userLikedRecipeCount FROM Recette INNER JOIN Utilisateur_Like_Recette ON Recette.id = Utilisateur_Like_Recette.id_recette WHERE id_utilisateur = '$userId'")->fetch()[0];
     }
 
     private static function createRecipeArray(\PDOStatement $recipes): array

@@ -1,6 +1,4 @@
-{% extends "user/user.html.twig" %}
 
-{% block recipeList %}
     <div class="d-block">
         <div class="d-block">
 
@@ -77,8 +75,22 @@
                     {% endfor %}
                 </ul>
             {% endif %}
+            <div class="row justify-content-lg-center">
+                {% if page > 1 %}
+                    <a href=""><i class="fas fa-chevron-left"></i></a>
+                {% endif %}
+                {% for i in 1..pages %}
+                    {% if page == i %}
+                        <strong><a href="{{ path('user_recipe_list_page', [i]) }}">{{ i }}</a></strong>
+                    {% else %}
+                        <a href="{{ path('user_recipe_list_page', [i]) }}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if page < pages %}
+                    <a href=""><i class="fas fa-chevron-right"></i></a>
+                {% endif %}
+            </div>
         </div>
     </div>
-{% endblock %}
 
 
