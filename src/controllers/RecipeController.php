@@ -205,6 +205,6 @@ class RecipeController
 
         $recipes = RecipeService::searchByName($normalizedSearchString);
 
-        echo $twig->render("recipe/components/file-list-component.html.twig", [ "recipes" => $recipes]);
+        echo $twig->render("recipe/components/recipe-search-component.html.twig", [ "recipes" => $recipes]);
     }
 }
