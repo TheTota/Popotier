@@ -93,27 +93,10 @@ class UserController
 
     /**
      * This function is used to view all the user's recipes.
-     * @param int|null $page
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
      */
-    public function viewRecipe($page = null)
+    public function viewRecipe()
     {
-        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
-        $recipes = RecipeService::fetchAllUserRecipePaginated($_SESSION['id'], $page);
-
-        $pages = round($recipeCount/2);
-
-        echo Templater::getInstance()->getTwig()->render('user/user.html.twig',
-            [
-                'recipes' => $recipes,
-                'recipeCount' => $recipeCount,
-                'pages' => $pages,
-                'page' => $page,
-                'recipeList' => true
-            ]
-        );
+        echo Templater::getInstance()->getTwig()->render('user/user.html.twig');
     }
 
 
@@ -151,13 +134,6 @@ class UserController
         $recipeCount = RecipeService::countUserLikedRecipes($_SESSION['id']);
 
         echo round($recipeCount/2);
-    }
-
-    public function viewFavorite()
-    {
-        $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['id']);
-
-        echo Templater::getInstance()->getTwig()->render('user/user.html.twig', ['recipes' => $recipes]);
     }
 
     public function emailConfirmation($validationString)

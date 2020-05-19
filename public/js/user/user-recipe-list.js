@@ -4,26 +4,31 @@ $(() => {
 
     $("#user-recipe-button")
         .on('click', () => {
-        getUserRecipePagesNumber().then(
-            (pages) => {
-                $('#page-numbers').empty();
-                for (i = 1; i <= pages; i++) {
-                    $("#page-numbers").append("<button class='pagination-button btn btn-flat-primary'>" + i + "</button>")
-                    getRecipesPerPage(path, 1);
-                    hideChevron(page);
+            $("#user-recipe-button").addClass('active');
+            $("#user-liked-recipe-button").removeClass('active');
 
-                    $(".pagination-button").on('click', (event) => {
-                        page = event.target.innerText;
-                        changePage(path, page);
-                    });
+            getUserRecipePagesNumber().then(
+                (pages) => {
+                    $('#page-numbers').empty();
+                    for (i = 1; i <= pages; i++) {
+                        $("#page-numbers").append("<button class='pagination-button btn btn-flat-primary'>" + i + "</button>")
+                        getRecipesPerPage(path, 1);
+                        hideChevron(page);
+
+                        $(".pagination-button").on('click', (event) => {
+                            page = event.target.innerText;
+                            changePage(path, page);
+                        });
+                    }
                 }
-            }
-        )
-    })
+            )
+        })
         .trigger('click');
 
 
     $("#user-liked-recipe-button").on('click', () => {
+        $("#user-recipe-button").removeClass('active');
+        $("#user-liked-recipe-button").addClass('active');
         getUserLikedRecipePagesNumber().then(
             (pages) => {
                 $('#page-numbers').empty();
@@ -41,10 +46,11 @@ $(() => {
         )
     });
 
-    $("#user-liked-recipe-button").on('click', () => {
-        path = '/user/get/like/';
-        getRecipesPerPage(path, 1);
-    });
+    $("#user-liked-recipe-button")
+        .on('click', () => {
+            path = '/user/get/like/';
+            getRecipesPerPage(path, 1);
+        });
 
     $("#user-recipe-button").on('click', () => {
         path = '/user/get/recipe/';
