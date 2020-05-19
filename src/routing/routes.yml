@@ -62,6 +62,13 @@ user_recipe_list_page:
   requirements:
     page: '[1-9]+'
 
+get_recipes_per_page:
+  path: /recipe/get/{page}
+  controller: UserController
+  action: getRecipeList
+  requirements:
+    page: '[1-9]+'
+
 user_favorite_list:
   path: /user/view/favorite-list
   controller: UserController

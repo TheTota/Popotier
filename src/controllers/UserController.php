@@ -104,7 +104,7 @@ class UserController
 
         $pages = round($recipeCount/2);
 
-        echo Templater::getInstance()->getTwig()->render('user/user-recipe-list.html.twig',
+        echo Templater::getInstance()->getTwig()->render('user/user.html.twig',
             [
                 'recipes' => $recipes,
                 'recipeCount' => $recipeCount,
@@ -113,6 +113,18 @@ class UserController
                 'recipeList' => true
             ]
         );
+    }
+
+    public function getRecipeList($page = null) {
+        $twig = Templater::getInstance()->getTwig();
+        $recipes = RecipeService::fetchAllUserRecipePaginated($_SESSION['id'], $page);
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+        $pages = round($recipeCount/2);
+
+        echo $twig->render('user/components/recipe-buttons-component.html.twig', [
+            'recipes' => $recipes,
+            'pages' => $pages
+        ]);
     }
 
     public function viewFavorite()

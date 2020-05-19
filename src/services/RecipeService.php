@@ -157,7 +157,7 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
-    public static function fetchAllUserRecipePaginated($userId, $page){
+    public static function fetchAllUserRecipePaginated($userId, $page = null){
         $db = DataBaseService::getInstance()->getDb();
         $recipePerPage = 2;
 

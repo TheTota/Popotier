@@ -23,7 +23,20 @@
                 favoris</a></li>
     </ul>
 
-    {% block recipeList %}{% endblock %}
+    <div id="recipe-list">
+
+    </div>
+    <div class="row justify-content-lg-center">
+        <button id="pagination-left-chevron" class="btn btn-flat"><i class="fas fa-chevron-left"></i></button>
+        {% for i in 1..pages %}
+            <button class="pagination-button btn btn-flat-primary">{{ i }}</button>
+        {% endfor %}
+        <button id="pagination-right-chevron" class="btn btn-flat"><i class="fas fa-chevron-right"></i></button>
+    </div>
 
 {% endblock %}
 
+{% block scripts %}
+    <script src="/public/js/user/user-recipe-list.js"></script>
+    <script src="/public/js/user/pagination.js"></script>
+{% endblock %}

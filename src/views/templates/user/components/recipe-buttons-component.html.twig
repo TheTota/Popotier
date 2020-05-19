@@ -1,0 +1,22 @@
+{% extends "recipe/components/recipe-list-base-component.html.twig" %}
+
+{% block user_recipes_list_actions %}
+    <a
+            class="btn btn-info text-white"
+            type="button"
+            data-toggle="tooltip"
+            title="Modifier"
+            {# TODO: Add the path to the modification form later #}
+    >
+        <i class="fas fa-pencil-alt"></i>
+    </a>
+    <button
+            class="btn btn-danger"
+            type="button"
+            data-toggle="tooltip"
+            title="Supprimer"
+            onclick="deleteRecipe({{ recipe.id }})"
+    >
+        <i class="fas fa-trash-alt"></i>
+    </button>
+{% endblock %}
