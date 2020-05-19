@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use http\Client\Curl\User;
+use src\services\DataBaseService;
 use src\services\MailerService;
 use src\utils\StringGenerator;
 use src\utils\Templater;
@@ -115,7 +116,8 @@ class UserController
         );
     }
 
-    public function getRecipeList($page = null) {
+
+    public function getUserRecipeList($page = null) {
         $twig = Templater::getInstance()->getTwig();
         $recipes = RecipeService::fetchAllUserRecipePaginated($_SESSION['id'], $page);
         $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
@@ -127,10 +129,35 @@ class UserController
         ]);
     }
 
+    public function getUserLikedRecipeList($page = null) {
+        $twig = Templater::getInstance()->getTwig();
+        $recipes = RecipeService::fetchAllUserFavoriteRecipePaginated($_SESSION['id'], $page);
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+        $pages = round($recipeCount/2);
+
+        echo $twig->render('user/components/recipe-like-component.html.twig', [
+            'recipes' => $recipes,
+            'pages' => $pages
+        ]);
+    }
+
+    public function getUserRecipePageCount() {
+        $recipeCount = RecipeService::countUserRecipes($_SESSION['id']);
+
+        echo round($recipeCount/2);
+    }
+
+    public function getUserLikedRecipePageCount() {
+        $recipeCount = RecipeService::countUserLikedRecipes($_SESSION['id']);
+
+        echo round($recipeCount/2);
+    }
+
     public function viewFavorite()
     {
         $recipes = RecipeService::fetchAllUserFavoriteRecipe($_SESSION['id']);
-        echo Templater::getInstance()->getTwig()->render('user/user-liked-recipes.html.twig', ['recipes' => $recipes]);
+
+        echo Templater::getInstance()->getTwig()->render('user/user.html.twig', ['recipes' => $recipes]);
     }
 
     public function emailConfirmation($validationString)

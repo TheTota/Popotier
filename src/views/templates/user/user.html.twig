@@ -17,10 +17,12 @@
 	</a>
 
     <ul class="nav nav-tabs text-dark">
-        <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/recipe-list">Mes
-                recettes</a></li>
-        <li role="presentation" class="nav-item"><a class="nav-link text-dark" href="/user/view/favorite-list">Mes
-                favoris</a></li>
+        <li role="presentation" class="nav-item">
+            <button id="user-recipe-button" class="nav-link text-dark btn">Mes recettes</button>
+        </li>
+        <li role="presentation" class="nav-item">
+            <button id="user-liked-recipe-button" class="nav-link text-dark btn" >Mes favoris</button>
+        </li>
     </ul>
 
     <div id="recipe-list">
@@ -28,9 +30,7 @@
     </div>
     <div class="row justify-content-lg-center">
         <button id="pagination-left-chevron" class="btn btn-flat"><i class="fas fa-chevron-left"></i></button>
-        {% for i in 1..pages %}
-            <button class="pagination-button btn btn-flat-primary">{{ i }}</button>
-        {% endfor %}
+        <div id="page-numbers"></div>
         <button id="pagination-right-chevron" class="btn btn-flat"><i class="fas fa-chevron-right"></i></button>
     </div>
 
@@ -38,5 +38,5 @@
 
 {% block scripts %}
     <script src="/public/js/user/user-recipe-list.js"></script>
-    <script src="/public/js/user/pagination.js"></script>
+    <script src="/public/js/recipe/recipe-like-system.js"></script>
 {% endblock %}

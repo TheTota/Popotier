@@ -1,0 +1,8 @@
+{% extends "recipe/components/recipe-list-base-component.html.twig" %}
+
+
+{% block user_recipes_list_actions %}
+    <button class="like-btn btn btn-info" type="button" onclick="handleLikeButtonClick({{ recipe.id }}, true)">
+        <i class="fas fa-heart fa-2x"></i>
+    </button>
+{% endblock %}
