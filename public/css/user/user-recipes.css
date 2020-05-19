@@ -18,3 +18,7 @@ h3 {
 .separator {
     margin: 5px 0px 15px 0px;
 }
+
+#pagination div {
+    text-align: center;
+}

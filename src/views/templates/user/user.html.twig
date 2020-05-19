@@ -25,13 +25,16 @@
         </li>
     </ul>
 
-    <div id="recipe-list">
+    <div id="recipe-list"></div>
 
-    </div>
-    <div class="row justify-content-lg-center">
-        <button id="pagination-left-chevron" class="btn btn-flat"><i class="fas fa-chevron-left"></i></button>
+    <div id="pagination" class="row justify-content-lg-center">
+        <div class="col-1">
+            <button id="pagination-left-chevron" class="btn btn-flat text-justify"><i class="fas fa-chevron-left"></i></button>
+        </div>
         <div id="page-numbers"></div>
-        <button id="pagination-right-chevron" class="btn btn-flat"><i class="fas fa-chevron-right"></i></button>
+        <div class="col-1">
+            <button id="pagination-right-chevron" class="btn btn-flat"><i class="fas fa-chevron-right"></i></button>
+        </div>
     </div>
 
 {% endblock %}
