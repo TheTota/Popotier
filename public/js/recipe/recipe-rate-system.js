@@ -14,7 +14,8 @@ function rateRecipeRequest (id, value) {
                     window.location.href = "/login";
                 }
                 else {
-                    window.location.reload();
+                    $("#user-rating").load(location.href + " #user-rating>*","");
+                    $("#global-rating").load(location.href+" #global-rating>*","");
                 }
                 resolve(data);
             } else {
