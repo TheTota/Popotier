@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use src\routing\RouterModule;
+use src\services\CommentService;
 use src\services\RatingService;
 use src\utils\Templater;
 use src\services\RecipeService;
@@ -37,11 +38,15 @@ class RecipeController
         // get recipe average rating
         $recipeAverageRating = RatingService::getAverageRating($recipeId);
 
+        // get recipe comments if any
+        $recipeComments = CommentService::fetchRecipeComments($recipeId);
+
         echo $twig->render('recipe/recipe-view.html.twig', [
             'recipe' => $recipe,
             'recipeLiked' => $recipeLikedByUser,
             'recipeAverageRating' => $recipeAverageRating,
-            'userRating' => $userRating
+            'userRating' => $userRating,
+            'recipeComments' => $recipeComments
         ]);
     }
 

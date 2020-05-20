@@ -131,6 +131,7 @@ like_recipe:
   requirements:
     id: '[0-9]+'
 
+
 recipe_summary:
   path: /recipe/summary/{id}
   controller: RecipeController
@@ -152,7 +153,12 @@ update_rate:
   requirements:
     id: '[0-9]+'
     value: '[0-5]'
-    
+
+comment_recipe:
+  path: /recipe/comment
+  controller: CommentController
+  action: comment
+
 recipe_search_by_string:
   path: /recipe/search/{substring}
   controller: RecipeController
