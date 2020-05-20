@@ -5,7 +5,10 @@ $(() => {
             if (searchString.length > 3) {
                 $("#loading-spinner").css("visibility", "visible");
                 searchRecipe(searchString);
+            } else {
+                $('#search-result-section').empty();
             }
+
         })
     }
 );
