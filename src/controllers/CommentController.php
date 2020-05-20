@@ -15,7 +15,6 @@ class CommentController
             $userId = $_SESSION['id'];
             // check if user already rated
             CommentService::insertComment($recipeId, $userId, $value);
-            var_dump($value);
         } else { // not connected, redirect towards login page
             header('location: /login');
         }

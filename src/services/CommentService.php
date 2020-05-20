@@ -21,6 +21,28 @@ class CommentService{
         $req->execute($data);
     }
 
+    public static function fetchRecipeComments($recipeId)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $comments = $db->query("SELECT * FROM Commentaire WHERE id_recette = '$recipeId' ORDER BY date_publication DESC")->fetchAll();
+
+        $commentsArray = [];
+        foreach ($comments as $comment){
+            array_push($commentsArray,
+                new CommentEntity(
+                    $comment['id'],
+                    $comment['date_publication'],
+                    $comment['description'],
+                    $comment['id_recette'],
+                    $comment['id_auteur']
+                )
+            );
+        }
+
+        return $commentsArray;
+    }
+
     public function fetchAll(){
 
     }

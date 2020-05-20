@@ -61,3 +61,7 @@ hr {
 #global-rating i {
     margin: 0px 2px 0px 2px;
 }
+
+.comment {
+    width: 100%;
+}

@@ -17,6 +17,10 @@ function enableOrDisableSubmit() {
 
 function commentRecipe(idRecipe) {
     var comment = commentTextArea.val();
+    // clear input
+    commentTextArea.val('');
+    enableOrDisableSubmit();
+
     commentRecipeRequest(idRecipe, comment).then(
         () => {
         }
@@ -26,16 +30,17 @@ function commentRecipe(idRecipe) {
 function commentRecipeRequest (id, value) {
     return new Promise((resolve, reject) => {
         var path = '/recipe/comment/' + id + '/' + value;
-        alert(path);
         $.get(path, (data, success) => {
             if (success) {
               /*  if (data !== "") {
                     window.location.href = "/login";
+                    // TODO: enable comments only if connected
                 }
                 else {
                     //$("#user-rating").load(location.href + " #user-rating>*","");
                     // TODO: refresh comments
                 }*/
+                $("#recipeComments").load(location.href + " #recipeComments>*","");
                 resolve();
             } else {
                 reject();

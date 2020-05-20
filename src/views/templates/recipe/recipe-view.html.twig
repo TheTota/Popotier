@@ -140,6 +140,13 @@
                 <button id="submitComment" type="submit" class="btn btn-primary btn-info" onclick="commentRecipe({{ recipe.id }})">Envoyer</button>
             </div>
         </div>
+        <div id="recipeComments" class="row">
+            {% for comment in recipeComments %}
+                <div class="comment alert alert-secondary" role="alert">
+                    {{ comment.description }}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
 
