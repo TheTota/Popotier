@@ -27,14 +27,14 @@ strong-blur {
 }
 
 .like-btn {
-    width: 100%;
-    height: 100%;
-    background-color: #91CCA7;
-    border: 1px solid #88bf9c;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #91CCA7 !important;
+    border: 1px solid #88bf9c !important;
 }
 
 .like-btn i {
-    margin-top: 3px;
+    margin-top: 3px !important;
 }
 
 .like-btn:hover, .like-btn:focus, .like-btn:active, .like-btn.active {

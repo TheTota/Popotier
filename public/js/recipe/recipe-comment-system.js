@@ -21,30 +21,17 @@ function commentRecipe(idRecipe) {
     commentTextArea.val('');
     enableOrDisableSubmit();
 
-    commentRecipeRequest(idRecipe, comment).then(
-        () => {
-        }
-    )
+    commentRecipeRequest(idRecipe, comment);
 }
 
 function commentRecipeRequest (id, value) {
-    return new Promise((resolve, reject) => {
-        var path = '/recipe/comment/' + id + '/' + value;
-        $.get(path, (data, success) => {
-            if (success) {
-              /*  if (data !== "") {
+        var path = '/recipe/comment';
+        $.post( path, { id: id, value:value })
+            .done(function( data ) {
+                if (data !== "") {
                     window.location.href = "/login";
-                    // TODO: enable comments only if connected
+                } else {
+                    $("#recipeComments").load(location.href + " #recipeComments>*", "");
                 }
-                else {
-                    //$("#user-rating").load(location.href + " #user-rating>*","");
-                    // TODO: refresh comments
-                }*/
-                $("#recipeComments").load(location.href + " #recipeComments>*","");
-                resolve();
-            } else {
-                reject();
-            }
-        })
-    })
+            });
 }

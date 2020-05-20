@@ -155,11 +155,9 @@ update_rate:
     value: '[0-5]'
 
 comment_recipe:
-  path: /recipe/comment/{id}/{value}
+  path: /recipe/comment
   controller: CommentController
   action: comment
-  requirements:
-    id: '[0-9]+'
 
 recipe_search_by_string:
   path: /recipe/search/{substring}

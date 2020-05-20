@@ -35,7 +35,7 @@ class CommentService{
                     $comment['date_publication'],
                     $comment['description'],
                     $comment['id_recette'],
-                    $comment['id_auteur']
+                    UserService::findById($comment['id_auteur'])
                 )
             );
         }

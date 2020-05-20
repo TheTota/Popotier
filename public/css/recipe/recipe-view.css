@@ -62,6 +62,10 @@ hr {
     margin: 0px 2px 0px 2px;
 }
 
+#recipeComments {
+    margin: 20px 0px 0px 0px;
+}
+
 .comment {
     width: 100%;
 }
