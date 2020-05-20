@@ -142,7 +142,7 @@
         </div>
         <div id="recipeComments" class="row">
             {% for comment in recipeComments %}
-                <span><a href="/user/view/{{ comment.user.alias }}">{{ comment.user.alias }}</a>, le {{ comment.date }}</span>
+                <span><a href="/user/view/{{ comment.user.alias }}">{{ comment.user.alias }}</a>, le {{ comment.date|date("d/m/Y") }} à {{ comment.date|date("H:i:s") }}</span>
                 <div class="comment alert alert-secondary" role="alert">
                     {{ comment.description }}
                 </div>
