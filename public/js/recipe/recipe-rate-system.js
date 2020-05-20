@@ -1,5 +1,4 @@
 function rateRecipe(idRecipe, rating) {
-    // (Try to) like the recipe
     rateRecipeRequest(idRecipe, rating).then(
         () => {
         }

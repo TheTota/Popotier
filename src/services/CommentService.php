@@ -6,6 +6,21 @@ use src\models\CommentEntity;
 
 class CommentService{
 
+    public static function insertComment($recipeId, $userId, $value)
+    {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $req = $db->prepare("INSERT INTO Commentaire (description, date_publication, id_auteur, id_recette) VALUES (:val, now(), :userId, :recipeId)");
+
+        $data = [
+            'val' => $value,
+            'recipeId' => $recipeId,
+            'userId' => $userId
+        ];
+
+        $req->execute($data);
+    }
+
     public function fetchAll(){
 
     }
