@@ -8,10 +8,6 @@
 {% block content %}
 
     <div class="container col-lg-6 recipe-container">
-        <div>
-            Recette proposée par <a href="/user/view/{{ recipe.author.alias }}">{{ recipe.author.alias }}</a>
-        </div>
-
         <h3 id="recipe-name" class="center">{{ recipe.name }}</h3>
         <div id="global-rating" class="center rating-display">
             {% for i in 0..4 %}
@@ -29,7 +25,7 @@
                 <img class="width100" src="/public/assets/recipes-image/knives.jpg" alt="image of the recipe">
             {% endif %}
         </div>
-        <small>Créée le {{ recipe.creationDate | date('d/m/Y') }}</small>
+        <p>Recette proposée par <a href="/user/view/{{ recipe.author.alias }}">{{ recipe.author.alias }}</a>, le {{ recipe.creationDate | date('d/m/Y') }}</p>
 
         <hr class="separator">
 
