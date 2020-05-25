@@ -1,24 +1,37 @@
-{% extends "recipe/recipe-create.html.twig" %}
-
-{% block scripts %}
-	<script src="/public/js/recipe/recipe-steps.js"></script>
-    <script src="/public/js/recipe/recipe-create-form.js"></script>
-{% endblock %}
-
-{% block steps %}
-
-    <div class="form-group">
-        <h2>Etapes à suivre </h2>
-        <ol id="steps">
-            <li id="1" class ="desc">
-                <textarea class="form-control" placeholder="Description de l'étape" name="stepList[]"></textarea>
-                <button type="button" class=" btn btn-warning" onclick="deleteStep(this.closest('li').id)">Supprimer étape</button>
-            </li>
-        </ol>
-       	<button type="button" class="btn btn-light" onclick="addStep()">Ajouter une étape</button>
+<div class="form-group">
+    <h2>Etapes à suivre </h2>
+    <ol id="steps" class="container">
+        <li class="step-row-element">
+            <div class="row">
+                <div class="col">
+                        <textarea
+                                class="form-control"
+                                placeholder="Description de l'étape"
+                                name="stepList[]"
+                        ></textarea>
+                </div>
+                <div class="col-1">
+                    <button type="button"
+                            class=" btn btn-danger delete-step-button"
+                            data-toggle="tooltip"
+                            title="Supprimer étape"
+                    >
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ol>
+    <div class="row justify-content-center">
+        <button id="add-step-button"
+                type="button"
+                class="btn btn-info"
+                data-toggle="tooltip"
+                title="Ajouter étape"
+        >
+            <i class="fas fa-plus"></i>
+            Ajouter Etape
+        </button>
     </div>
-	<button type="button" class="btn btn-light" onclick="addStep()">Ajouter une étape</button>
-
-
-{% endblock %}
+</div>
 

@@ -40,5 +40,7 @@ class RecipeTypeService
 				)	
 			);
 		}
+
+		return $recipeTypeArray;
 	}
 }

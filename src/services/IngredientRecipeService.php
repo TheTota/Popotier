@@ -29,4 +29,18 @@ class IngredientRecipeService {
 
         return $ingredientArray;
     }
+
+    public static function add($ingredientId, $recipeId, $quantity, $unitId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $req = $db->prepare("INSERT INTO Ingredient_Recette VALUES (?,?,?,?)");
+
+        $req->execute([
+            $ingredientId,
+            $recipeId,
+            $quantity,
+            $unitId
+        ]);
+
+    }
 }

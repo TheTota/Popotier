@@ -35,6 +35,7 @@ INSERT INTO `Allergene` (`nom`) VALUES
 ('Lait');
 
 INSERT INTO `Unite` (`nom`) VALUES
+(NULL),
 ('ml'),
 ('cl'),
 ('l'),
