@@ -269,7 +269,24 @@ class RecipeService
     public static function searchByName($name) {
         $db = DataBaseService::getInstance()->getDb();
 
-        $recipes = $db->query("SELECT * FROM Recette WHERE nom LIKE '%$name%'");
+        $recipes = $db->query("SELECT * FROM Recette WHERE nom LIKE '%$name%' AND valide = 1");
+
+        if($recipes){
+            return self::createRecipeArray($recipes);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param $name
+     * @return array|null
+     * Return all the recipe that contain the string send in param in their name
+     */
+    public static function advancedSearch($name, $tag) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $recipes = $db->query("SELECT * FROM Recette WHERE nom LIKE '%$name%' AND valide = 1");
 
         if($recipes){
             return self::createRecipeArray($recipes);
