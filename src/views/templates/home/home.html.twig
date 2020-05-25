@@ -28,7 +28,7 @@
     <h2>Dernières recettes</h2>
 
     <div id="recipe-section" class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             {% if recipes %}
                 {% for recipe in recipes %}
                     <div class="row-sm-4">
@@ -36,7 +36,7 @@
                             <a href="{{ path('recipe_view', [recipe.id]) }}">
                                 <div class="recipe-image">
                                     {% if recipe.image %}
-                                        <img src="{{ recipe.image }}" alt="image du plat">
+                                        <img src="/public/assets/recipes-image/{{ recipe.image }}" alt="image du plat">
                                     {% else %}
                                         <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat">
                                     {% endif %}
@@ -51,7 +51,6 @@
             {% else %}
                 <p>Aucune recette pour le moment :(</p>
             {% endif %}
-
         </div>
 
     </div>

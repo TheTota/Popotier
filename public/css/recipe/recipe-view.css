@@ -6,6 +6,12 @@
 
 }
 
+#image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
 hr {
     background: #91CCA7;
 }

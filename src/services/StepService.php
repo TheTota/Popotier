@@ -16,8 +16,19 @@ class StepService{
 
     }
 
-    public function add(StepEntity $step){
+    public static function add(StepEntity $step, $recipeId){
+        $db = DataBaseService::getInstance()->getDb();
 
+        //var_dump($recipeId);die;
+
+        $req = $db->prepare("INSERT INTO Etape VALUES (?,?,?,?)");
+
+        $req->execute([
+            null,
+            $step->getPosition(),
+            $step->getDescription(),
+            $recipeId
+        ]);
     }
 
     public function update(StepEntity $step){

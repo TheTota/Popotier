@@ -4,7 +4,7 @@ namespace src\services;
 
 
 use src\models\RecipeEntity;
-
+use src\models\StepEntity;
 
 
 class RecipeService
@@ -114,6 +114,7 @@ class RecipeService
 
     public static function add(RecipeEntity $recipe){
         $db = DataBaseService::getInstance()->getDb();
+
         $req = $db->prepare("INSERT INTO Recette (
 							nom,
 							image,
@@ -140,6 +141,10 @@ class RecipeService
 			$recipe->getValid(),
             $recipe->getType()->getId()
         ]);
+
+        return $db->lastInsertId();
+
+
 
     }
 

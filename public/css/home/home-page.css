@@ -77,4 +77,5 @@ h2 {
 .recipe-description {
     height: 100px;
     font-size: 1.2em;
+    text-align: center;
 }

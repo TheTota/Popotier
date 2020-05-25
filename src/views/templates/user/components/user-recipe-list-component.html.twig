@@ -10,7 +10,7 @@
                                 <a href="{{ path('recipe_view', [recipe.id]) }}" class="col-lg-2">
                                     <div class="limit">
                                         {% if recipe.image %}
-                                            <img class="recipe-preview-img" src="{{ recipe.image }}"
+                                            <img class="recipe-preview-img" src="/public/assets/recipes-image/{{ recipe.image }}"
                                                  alt="image of the recipe">
                                         {% else %}
                                             <img class="recipe-preview-img"
