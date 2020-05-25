@@ -2,8 +2,6 @@
 
 namespace src\services;
 
-
-
 use src\models\RecipeTypeEntity;
 
 class RecipeTypeService

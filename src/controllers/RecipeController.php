@@ -3,8 +3,6 @@
 namespace src\controllers;
 
 use src\models\IngredientEntity;
-use src\models\RecipeTypeEntity;
-use src\routing\RouterModule;
 use src\services\CommentService;
 use src\services\FileUploadService;
 use src\services\IngredientRecipeService;
@@ -15,7 +13,7 @@ use src\services\UnitService;
 use src\utils\Templater;
 use src\services\RecipeService;
 use src\services\UserService;
-use Src\Services\RecipeTypeService;
+use src\services\RecipeTypeService;
 use src\models\RecipeEntity;
 use src\models\StepEntity;
 
