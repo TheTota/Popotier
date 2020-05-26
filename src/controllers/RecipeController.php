@@ -205,10 +205,10 @@ class RecipeController
         }
     }
 
-    public function searchByString($normalizedSearchString){
+    public function searchByString(){
         $twig = Templater::getInstance()->getTwig();
 
-        $recipes = RecipeService::searchByName($normalizedSearchString);
+        $recipes = RecipeService::searchByName($_POST['name']);
 
         echo $twig->render("recipe/components/recipe-search-component.html.twig", [ "recipes" => $recipes]);
     }

@@ -18,9 +18,9 @@ function searchRecipe(searchString) {
     const normalizedString = searchString.replace(/ /g, "_");
 
     // get filters
-    var a = $('#rating-filter').selectpicker();
+    handleRatingFilter();
 
-    searchRecipeRequest("/recipe/search/" + normalizedString).then(
+    searchRecipeRequest("/recipe/search", normalizedString).then(
         (data) => {
             $("#search-result-section").empty();
             $("#search-result-section").append(data);
@@ -29,14 +29,30 @@ function searchRecipe(searchString) {
     )
 }
 
-function searchRecipeRequest(path) {
+function searchRecipeRequest(path, name) {
     return new Promise((resolve, reject) => {
-        $.get(path, (data, success) => {
-            if (success) {
-                resolve(data);
-            } else {
-                reject();
-            }
-        })
+        $.post( path, { name: name })
+            .done(function( data ) {
+                if (data !== "") {
+                    resolve(data);
+                } 
+            })
     })
+}
+
+function handleRatingFilter() {
+    var val = $('#rating-filter option:selected').text();
+
+    switch (val) {
+        case "Tout":
+            break;
+        case ">4":
+            break;
+        case ">3":
+            break;
+        case ">2":
+            break;
+        case ">1":
+            break;
+    }
 }

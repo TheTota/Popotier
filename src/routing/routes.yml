@@ -160,7 +160,7 @@ comment_recipe:
   action: comment
 
 recipe_search_by_string:
-  path: /recipe/search/{substring}
+  path: /recipe/search
   controller: RecipeController
   action: searchByString
 
