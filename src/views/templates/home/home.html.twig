@@ -11,7 +11,51 @@
     <div id="search-section" class="container col">
         <div class="row search-content">
             <div class="center-search">
-                <input id="search-input" class="form-control" type="text" placeholder="Une envie particulière?">
+                <!-- Search bar -->
+                <div class="input-group mb-3">
+                    <input id="search-input" class="form-control" type="text" placeholder="Une envie particulière?">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters"><i class="fas fa-filter"></i></button>
+                    </div>
+                </div>
+                <!-- Filters -->
+                <div class="collapse" id="collapseFilters">
+                    <div class="row">
+                        <div class="col">
+                            <label for="tag-filter">Tag(s)</label>
+                            <select id="tag-filter" name="tag-filter" class="selectpicker" multiple data-live-search="true">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="type-filter">Type(s)</label>
+                            <select id="type-filter" name="type-filter" class="selectpicker" multiple data-live-search="true">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="rating-filter">Note</label>
+                            <select id="rating-filter" name="rating-filter" class="selectpicker" data-live-search="true">
+                                <option value=">4">Tout</option>
+                                <option value=">4">>4</option>
+                                <option value=">3">>3</option>
+                                <option value=">2">>2</option>
+                                <option value=">1">>1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col">
+                            <label for="season-filter">Saison(s)</label>
+                            <select id="season-filter" name="season-filter" class="selectpicker" multiple data-live-search="true">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="allergen-filter">Allergène(s) exclu(s)</label>
+                            <select id="allergen-filter" name="allergen-filter" class="selectpicker" multiple data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -59,5 +103,6 @@
 
 {% block scripts %}
     <script src="/public/js/search.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 {% endblock %}
 

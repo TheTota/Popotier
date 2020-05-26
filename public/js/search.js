@@ -17,6 +17,9 @@ $(() => {
 function searchRecipe(searchString) {
     const normalizedString = searchString.replace(/ /g, "_");
 
+    // get filters
+    var a = $('#rating-filter').selectpicker();
+
     searchRecipeRequest("/recipe/search/" + normalizedString).then(
         (data) => {
             $("#search-result-section").empty();
