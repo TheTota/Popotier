@@ -208,7 +208,7 @@ class RecipeController
     public function searchByString(){
         $twig = Templater::getInstance()->getTwig();
 
-        $recipes = RecipeService::searchByName($_POST['name']);
+        $recipes = RecipeService::advancedSearch($_POST['name'], $_POST['ratingFilter']);
 
         echo $twig->render("recipe/components/recipe-search-component.html.twig", [ "recipes" => $recipes]);
     }
