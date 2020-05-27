@@ -5,6 +5,7 @@ namespace src\controllers;
 use src\routing\RouterModule;
 use src\services\CommentService;
 use src\services\RatingService;
+use src\services\TagService;
 use src\utils\Templater;
 use src\services\RecipeService;
 use src\services\UserService;
@@ -208,7 +209,14 @@ class RecipeController
     public function searchByString(){
         $twig = Templater::getInstance()->getTwig();
 
-        $recipes = RecipeService::advancedSearch($_POST['name'], $_POST['ratingFilter']);
+        // tags
+        $tagsFilter = null;
+        if (isset($_POST['tagsFilter'])) {
+            $tagsFilter = implode(" OR id_tag = ", $_POST['tagsFilter']);
+        }
+
+        // Search!
+        $recipes = RecipeService::advancedSearch($_POST['name'], $_POST['ratingFilter'], $tagsFilter);
 
         echo $twig->render("recipe/components/recipe-search-component.html.twig", [ "recipes" => $recipes]);
     }

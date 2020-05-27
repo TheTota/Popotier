@@ -1,7 +1,5 @@
 $(() => {
 
-        initFilters();
-
         $("#search-input").on('input', (event) => {
             const searchString = event.target.value;
             if (searchString.length > 3) {
@@ -21,24 +19,15 @@ $(() => {
     }
 );
 
-function initFilters() {
-    // init tags
-
-    // init types
-
-    // init seasons
-
-    // init allergens
-}
-
 
 function searchRecipe(searchString) {
     const normalizedString = searchString.replace(/ /g, "_");
 
     // get filters
-    var ratingFiler = getRatingFilter();
+    var ratingFilter = getRatingFilter();
+    var tagsFilter = getTagsFilter();
 
-    searchRecipeRequest("/recipe/search", normalizedString, ratingFiler).then(
+    searchRecipeRequest("/recipe/search", normalizedString, ratingFilter, tagsFilter).then(
         (data) => {
             $("#search-result-section").empty();
             $("#search-result-section").append(data);
@@ -47,9 +36,9 @@ function searchRecipe(searchString) {
     )
 }
 
-function searchRecipeRequest(path, name, ratingFilter) {
+function searchRecipeRequest(path, name, ratingFilter, tagsFilter) {
     return new Promise((resolve, reject) => {
-        $.post( path, { name: name, ratingFilter: ratingFilter })
+        $.post( path, { name: name, ratingFilter: ratingFilter, tagsFilter: tagsFilter })
             .done(function( data ) {
                 if (data !== "") {
                     resolve(data);
@@ -59,25 +48,10 @@ function searchRecipeRequest(path, name, ratingFilter) {
 }
 
 function getRatingFilter() {
-    var val = $('#rating-filter option:selected').text();
-
-    switch (val) {
-        case "Tout":
-            return 0;
-            break;
-        case ">4":
-            return 4;
-            break;
-        case ">3":
-            return 3;
-            break;
-        case ">2":
-            return 2;
-            break;
-        case ">1":
-            return 1;
-            break;
-    }
-
-    return 0;
+    return val = $('#rating-filter option:selected').val();
 }
+
+function getTagsFilter() {
+    return $('#tag-filter').val();
+}
+
