@@ -269,9 +269,9 @@ class RecipeEntity implements \JsonSerializable
     }
 
     /**
-     * @return UserEntity
+     * @return UserEntity|null
      */
-    public function getAdmin(): UserEntity
+    public function getAdmin()
     {
         return $this->admin;
     }

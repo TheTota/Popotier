@@ -55,6 +55,7 @@ class RecipeService
     {
         $db = DataBaseService::getInstance()->getDb();
 
+
         $statement = $db->prepare("UPDATE Recette SET 
             nom = ?,
             image = ?,
@@ -71,6 +72,8 @@ class RecipeService
             WHERE id = ?
         ");
 
+
+
         $response = $statement->execute([
             $recipe->getName(),
             $recipe->getImage(),
@@ -82,9 +85,10 @@ class RecipeService
             $recipe->getAuthorQuote(),
             $recipe->getValid(),
             $recipe->getType()->getId(),
-            $recipe->getAdmin()->getEmail(),
+            $recipe->getAdmin() == null ? null : $recipe->getAdmin()->getId(),
             $recipe->getId()
         ]);
+
 
         if($response){
             return true;

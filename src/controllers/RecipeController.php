@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use src\models\IngredientEntity;
+use src\models\RecipeTypeEntity;
 use src\services\CommentService;
 use src\services\FileUploadService;
 use src\services\IngredientRecipeService;
@@ -127,16 +128,56 @@ class RecipeController
         $recipeEntity = RecipeService::findById($recipeId);
 
         if(!empty($_POST)){
-            var_dump("ok");die;
+
+            StepService::deleteByRecipe($recipeId);
+
+            foreach ($_POST['stepList'] as $key => $step){
+                StepService::add(new StepEntity(
+                    null,
+                    $key ++,
+                    $step
+                    ),
+                    $recipeId
+                );
+            }
+
+
+            $type = new RecipeTypeEntity($_POST['inputType'], null);
+
+
+
+            $recipeEntity = new RecipeEntity(
+                $recipeId,
+                $_POST['inputName'],
+                $recipeEntity->getImage(),
+                $recipeEntity->getCreationDate(),
+                $_POST['inputCookingTime'],
+                $_POST['inputPreparationTime'],
+                $_POST['inputPersonNumber'],
+                $_POST['inputDifficulty'],
+                $_POST['inputMeanPrice'],
+                $_POST['inputAuthorQuote'],
+                $recipeEntity->getValid(),
+                $recipeEntity->getAuthor(),
+                $type,
+                $recipeEntity->getAdmin(),
+                $recipeEntity->getSteps(),
+                $recipeEntity->getIngredients()
+            );
+
+            RecipeService::update($recipeEntity);
+
+            header("location: /recipe/view/$recipeId");
+
+        } else {
+            echo $twig->render('recipe/recipe-create.html.twig', [
+                'update' => true,
+                'recipeTypes' => RecipeTypeService::fetchAll(),
+                'ingredients' => IngredientService::fetchAll(),
+                'units' => UnitService::fetchAll(),
+                'recipe' => $recipeEntity
+            ]);
         }
-        var_dump($recipeEntity);
-        echo $twig->render('recipe/recipe-create.html.twig', [
-            'update' => true,
-            'recipeTypes' => RecipeTypeService::fetchAll(),
-            'ingredients' => IngredientService::fetchAll(),
-            'units' => UnitService::fetchAll(),
-            'recipe' => $recipeEntity
-        ]);
     }
 
     public function delete($recipeId) {

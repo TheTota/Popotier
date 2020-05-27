@@ -35,9 +35,19 @@ class StepService{
 
     }
 
-    public function delete(StepEntity $step){
+    public static function delete($stepId){
+        $db = DataBaseService::getInstance()->getDb();
 
+        $response = $db->prepare("DELETE FROM Etape WHERE id = ?")->execute([$stepId]);
     }
+
+    public static function deleteByRecipe($recipeId){
+        $db = DataBaseService::getInstance()->getDb();
+
+        return $db->prepare("DELETE FROM Etape WHERE id_recette = ?")->execute([$recipeId]);
+    }
+
+
 
     public static function findByRecette($id_recette){
         $db = DataBaseService::getInstance()->getDb();

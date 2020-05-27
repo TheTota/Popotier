@@ -15,7 +15,7 @@
 
         <form
                 {% if update %}
-                    action="/recipe/update"
+                    action="{{ path('update_recipe', [recipe.id]) }}"
                 {% else %}
                     action="/recipe/add"
                 {% endif %}
@@ -52,9 +52,9 @@
                         <div id="image-container">
                             <img
                                     {% if update %}
-                                        src="/public/assets/recipes-image/{{ recipe.image }}"
+                                        src="{{ globals.recipe_image_path}}{{ recipe.image }}"
                                     {% else %}
-                                        src="/public/assets/recipes-image/knives.jpg"
+                                        src="{{ globals.recipe_image_path}}knives.jpg"
                                     {% endif %}
                                     alt="image du plat"
                                     id="image">
@@ -66,7 +66,6 @@
 
                 <h2>
                     Informations sur la recette
-                    {{ recipe.cookingTime }}
                 </h2>
 
                 <div class="form-group row">
