@@ -170,9 +170,13 @@
                 {% include 'recipe/recipe-ingredient-create.html.twig' %}
 
                 <div class="text-center">
-                    <button id="submit" type="submit" class="btn btn-primary width100" name="addRecipe">Ajouter la
-                        recette
-                    </button>
+                    <button id="submit" type="submit" class="btn btn-primary width100" name="addRecipe">
+                    {% if update %}
+                            Modifier la recete
+                    {% else %}
+                            Ajouter la recette
+                    {% endif %}
+                        </button>
                 </div>
 
             </div>

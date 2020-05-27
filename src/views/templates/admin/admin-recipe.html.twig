@@ -43,7 +43,19 @@
                         <button class="btn btn-info" onclick="validateRecipe({{ recipe.id }})">valider</button>
                     {% endif %}
                     <!-- Do the right redirection -->
-                    <button class="btn btn-outline-danger" onclick="deleteRecipe({{ recipe.id }})">
+                    <a
+                            href="{{ path('update_recipe', [recipe.id]) }}"
+                            class="btn btn-outline-warning text-warning"
+                            data-toggle="tooltip"
+                            title="Modifier la recette"
+                    >
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <button
+                            class="btn btn-outline-danger"
+                            data-toggle="tooltip"
+                            title="Supprimer la recette"
+                            onclick="deleteRecipe({{ recipe.id }})">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>

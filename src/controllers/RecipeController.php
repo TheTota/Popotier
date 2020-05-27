@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use src\models\IngredientEntity;
+use src\models\IngredientRecipeEntity;
 use src\models\RecipeTypeEntity;
 use src\services\CommentService;
 use src\services\FileUploadService;
@@ -65,7 +66,7 @@ class RecipeController
             $steps = array();
             // var_dump($_FILES);die;
             // If there is an error on the image upload
-            if(!FileUploadService::uploadFile()){
+            if (!FileUploadService::uploadFile()) {
 
             };
 
@@ -89,12 +90,12 @@ class RecipeController
             );
             $recipeId = RecipeService::add($recipe);
 
-            for($i = 1; $i<=count($_POST['stepList']); $i++) {
-                StepService::add(new StepEntity(null, $i,$_POST['stepList'][$i-1]), $recipeId);
+            for ($i = 1; $i <= count($_POST['stepList']); $i++) {
+                StepService::add(new StepEntity(null, $i, $_POST['stepList'][$i - 1]), $recipeId);
             }
 
-            for ($i = 0; $i<count($_POST['ingredients']); $i++) {
-                if(IngredientService::findByName($_POST['ingredients'][$i]) == false){
+            for ($i = 0; $i < count($_POST['ingredients']); $i++) {
+                if (IngredientService::findByName($_POST['ingredients'][$i]) == false) {
                     IngredientService::add(
                         new IngredientEntity(
                             $_POST['ingredients'][$i],
@@ -123,28 +124,40 @@ class RecipeController
         ]);
     }
 
-    public function update($recipeId) {
+    public function update($recipeId)
+    {
         $twig = Templater::getInstance()->getTwig();
         $recipeEntity = RecipeService::findById($recipeId);
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
 
             StepService::deleteByRecipe($recipeId);
+            IngredientRecipeService::deleteByRecipe($recipeId);
 
-            foreach ($_POST['stepList'] as $key => $step){
-                StepService::add(new StepEntity(
-                    null,
-                    $key ++,
-                    $step
+            foreach ($_POST['stepList'] as $key => $step) {
+                if ($key + 1 != count($_POST['stepList'])) {
+                    StepService::add(new StepEntity(
+                        null,
+                        $key++,
+                        $step
                     ),
-                    $recipeId
-                );
+                        $recipeId
+                    );
+                }
             }
 
+            foreach ($_POST['ingredients'] as $key => $ingredient) {
+                if ($key + 1 != count($_POST['ingredients'])){
+                    IngredientRecipeService::add(
+                        $ingredient,
+                        $recipeId,
+                        $_POST['quantity'][$key],
+                        $_POST['unit'][$key]
+                    );
+                }
+            }
 
             $type = new RecipeTypeEntity($_POST['inputType'], null);
-
-
 
             $recipeEntity = new RecipeEntity(
                 $recipeId,
@@ -180,7 +193,8 @@ class RecipeController
         }
     }
 
-    public function delete($recipeId) {
+    public function delete($recipeId)
+    {
         RecipeService::deleteByID($recipeId);
     }
 
@@ -238,7 +252,8 @@ class RecipeController
     /**
      * Route: /recipe/like/:id
      */
-    public function like($recipeId) {
+    public function like($recipeId)
+    {
         // if connected, like the recipe
         if (isset($_SESSION['email'])) {
             $userId = $_SESSION['id'];
@@ -252,11 +267,12 @@ class RecipeController
         }
     }
 
-    public function searchByString($normalizedSearchString){
+    public function searchByString($normalizedSearchString)
+    {
         $twig = Templater::getInstance()->getTwig();
 
         $recipes = RecipeService::searchByName($normalizedSearchString);
 
-        echo $twig->render("recipe/components/recipe-search-component.html.twig", [ "recipes" => $recipes]);
+        echo $twig->render("recipe/components/recipe-search-component.html.twig", ["recipes" => $recipes]);
     }
 }
