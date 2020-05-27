@@ -60,9 +60,6 @@ class RecipeController
         $twig = Templater::getInstance()->getTwig();
         $recipeCreated = false;
 
-
-
-
         if (!empty($_POST)) {
             $steps = array();
             // var_dump($_FILES);die;
@@ -122,6 +119,23 @@ class RecipeController
             'recipeTypes' => RecipeTypeService::fetchAll(),
             'ingredients' => IngredientService::fetchAll(),
             'units' => UnitService::fetchAll()
+        ]);
+    }
+
+    public function update($recipeId) {
+        $twig = Templater::getInstance()->getTwig();
+        $recipeEntity = RecipeService::findById($recipeId);
+
+        if(!empty($_POST)){
+            var_dump("ok");die;
+        }
+        var_dump($recipeEntity);
+        echo $twig->render('recipe/recipe-create.html.twig', [
+            'update' => true,
+            'recipeTypes' => RecipeTypeService::fetchAll(),
+            'ingredients' => IngredientService::fetchAll(),
+            'units' => UnitService::fetchAll(),
+            'recipe' => $recipeEntity
         ]);
     }
 

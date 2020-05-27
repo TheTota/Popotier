@@ -1,6 +1,31 @@
 <div class="form-group">
     <h2>Etapes à suivre </h2>
     <ol id="steps" class="container">
+        {% if update %}
+            {% for step in recipe.steps %}
+                <li class="step-row-element">
+                    <div class="row">
+                        <div class="col">
+                        <textarea
+                                class="form-control"
+                                placeholder="Description de l'étape"
+                                name="stepList[]"
+                        >{{ step.description }}</textarea>
+                        </div>
+                        <div class="col-1">
+                            <button type="button"
+                                    class=" btn btn-danger delete-step-button"
+                                    data-toggle="tooltip"
+                                    title="Supprimer étape"
+                            >
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+
         <li class="step-row-element">
             <div class="row">
                 <div class="col">
@@ -12,7 +37,7 @@
                 </div>
                 <div class="col-1">
                     <button type="button"
-                            class=" btn btn-danger delete-step-button"
+                            class="btn btn-danger delete-step-button"
                             data-toggle="tooltip"
                             title="Supprimer étape"
                     >
@@ -21,6 +46,7 @@
                 </div>
             </div>
         </li>
+        {% endif %}
     </ol>
     <div class="row justify-content-center">
         <button id="add-step-button"
@@ -33,5 +59,29 @@
             Ajouter Etape
         </button>
     </div>
+</div>
+
+
+<div id="main-step-element" style="display: none;">
+    <li class="step-row-element">
+        <div class="row">
+            <div class="col">
+                        <textarea
+                                class="form-control"
+                                placeholder="Description de l'étape"
+                                name="stepList[]"
+                        ></textarea>
+            </div>
+            <div class="col-1">
+                <button type="button"
+                        class=" btn btn-danger delete-step-button"
+                        data-toggle="tooltip"
+                        title="Supprimer étape"
+                >
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </li>
 </div>
 
