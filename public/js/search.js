@@ -10,6 +10,12 @@ $(() => {
             }
 
         })
+
+        $( "select" ).change(function() {
+            var searchString = $('#search-input').val();
+            searchRecipe(searchString)
+        });
+
     }
 );
 
