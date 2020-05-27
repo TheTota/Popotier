@@ -3,17 +3,20 @@
 namespace src\controllers;
 
 use src\services\RecipeService;
+use src\services\TagService;
 use src\utils\Templater;
 
 class DefaultController{
 
     public function home(){
         $recipes = RecipeService::findByValidation(true);
+        $tags = TagService::fetchAll();
 
         echo Templater::getInstance()->getTwig()->render('home/home.html.twig',
             [
                 'page' => 'accueil',
-                'recipes' => $recipes // Array of recipe entities
+                'recipes' => $recipes, // Array of recipe entities,
+                'filterTags' => $tags
             ]
         );
     }

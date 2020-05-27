@@ -1,5 +1,7 @@
 $(() => {
 
+        initFilters();
+
         $("#search-input").on('input', (event) => {
             const searchString = event.target.value;
             if (searchString.length > 3) {
@@ -18,6 +20,16 @@ $(() => {
 
     }
 );
+
+function initFilters() {
+    // init tags
+
+    // init types
+
+    // init seasons
+
+    // init allergens
+}
 
 
 function searchRecipe(searchString) {

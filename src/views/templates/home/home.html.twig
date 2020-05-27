@@ -24,21 +24,27 @@
                         <div class="col">
                             <label for="tag-filter">Tag(s)</label>
                             <select id="tag-filter" name="tag-filter" class="selectpicker" multiple data-live-search="true">
+                                {% for tag in filterTags %}
+                                <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col">
                             <label for="type-filter">Type(s)</label>
                             <select id="type-filter" name="type-filter" class="selectpicker" multiple data-live-search="true">
+                                {% for type in filterTypes %}
+                                    <option value="{{ type.id }}">{{ type.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col">
                             <label for="rating-filter">Note</label>
                             <select id="rating-filter" name="rating-filter" class="selectpicker" data-live-search="true">
                                 <option value=">4">Tout</option>
-                                <option value=">4">>4</option>
-                                <option value=">3">>3</option>
-                                <option value=">2">>2</option>
-                                <option value=">1">>1</option>
+                                <option value=">4">>= 4</option>
+                                <option value=">3">>= 3</option>
+                                <option value=">2">>= 2</option>
+                                <option value=">1">>= 1</option>
                             </select>
                         </div>
                     </div>
@@ -47,11 +53,17 @@
                         <div class="col">
                             <label for="season-filter">Saison(s)</label>
                             <select id="season-filter" name="season-filter" class="selectpicker" multiple data-live-search="true">
+                                {% for season in filterSeasons %}
+                                    <option value="{{ season.id }}">{{ season.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col">
                             <label for="allergen-filter">Allergène(s) exclu(s)</label>
                             <select id="allergen-filter" name="allergen-filter" class="selectpicker" multiple data-live-search="true">
+                                {% for allergen in filterAllergens %}
+                                    <option value="{{ allergen.id }}">{{ allergen.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
