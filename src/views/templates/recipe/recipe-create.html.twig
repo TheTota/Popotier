@@ -25,7 +25,7 @@
         >
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-md-6">
                         <label for="inputName"></label>
                         <input
                                 required
@@ -33,7 +33,7 @@
                                 class="form-control"
                                 id="inputName"
                                 name="inputName"
-                                placeholder="Nom de la recette"
+                                placeholder="Nom"
                                 {% if update %}
                                     value="{{ recipe.name }}"
                                 {% endif %}
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center text-center">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-lg-6">
                         <label for="inputImage" class="file-input">
                             <i class="fas fa-file-import"></i>
                             Choisissez une image pour votre recette
@@ -73,7 +73,7 @@
                 </h2>
 
                 <div class="form-group row">
-                    <div class="col">
+                    <div class="col-sm">
                         <label for="inputType"> Type de la recette </label>
                         <select type="number" class="form-control" id="inputType" name="inputType" placeholter="Type">
                             {% for recipeType in recipeTypes %}
@@ -93,7 +93,6 @@
                                class="form-control"
                                id="inputCookingTime"
                                name="inputCookingTime"
-                               step="5"
                                min="0"
                                 {% if update %}
                                     value="{{ recipe.cookingTime }}"
@@ -106,7 +105,6 @@
                     <div class="col-sm">
                         <label for="inputPreparationTime"> Temps de préparation en minute</label>
                         <input type="number" class="form-control" id="inputPreparationTime" name="inputPreparationTime"
-                               step="5"
                                min="0"
                                 {% if update %}
                                     value="{{ recipe.cookingTime }}"
@@ -146,7 +144,7 @@
                     </div>
 
                     <div class="col">
-                        <label for="inputMeanPrice"> Prix moyen </label>
+                        <label for="inputMeanPrice"> Prix moyen (en euros) </label>
                         <input
                                 type="number"
                                 class="form-control"

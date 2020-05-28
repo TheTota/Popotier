@@ -5,7 +5,7 @@
             {% for ingredient in recipe.ingredients %}
                 <li class="ingredient-row-element">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md">
                             <label for="ingredient">Ingredient</label>
                             <input
                                     id="ingredient"
@@ -43,7 +43,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-md">
                             <label for="allergen">Allergène</label>
                             <select class="form-control" name="allergen[]" id="allergen">
                                 <option value=""></option>
@@ -72,7 +72,7 @@
         {% else %}
             <li class="ingredient-row-element">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md">
                         <label for="ingredient">Ingredient</label>
                         <input id="ingredient" list="ingredient-list" class="form-control" name="ingredients[]">
                         <datalist id="ingredient-list">
@@ -93,7 +93,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-md">
                         <label for="allergen">Allergène</label>
                         <select class="form-control" name="allergen[]" id="allergen">
                             <option value=""></option>
@@ -131,8 +131,8 @@
 
 <div id="main-ingredient-element" style="display: none;">
     <li class="ingredient-row-element">
-        <div class="row">
-            <div class="col">
+        <div class="row justify-content-end">
+            <div class="col-md">
                 <label for="ingredient">Ingredient</label>
                 <input id="ingredient" list="ingredient-list" class="form-control" name="ingredients[]">
                 <datalist id="ingredient-list">
@@ -153,7 +153,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="col-sm">
+            <div class="col-md">
                 <label for="allergen">Allergène</label>
                 <select class="form-control" name="allergen[]" id="allergen">
                     <option value=""></option>
@@ -162,7 +162,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="col-1 text-center">
+            <div class="col-sm-1 text-center">
                 <button type="button"
                         class="btn btn-danger delete-ingredient-button center-vertically"
                         data-toggle="tooltip"
