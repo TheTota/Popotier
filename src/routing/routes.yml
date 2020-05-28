@@ -50,6 +50,13 @@ user_verify_alias:
   requirements:
     alias: '[a-zA-Z]+'
 
+user_recipe_list_public:
+    path: /user/view/{alias}
+    controller: UserController
+    action: viewRecipeListByAlias
+    requirements:
+        alias: '[a-zA-Z]+'
+
 user_recipe_list:
   path: /user/view/recipe-list
   controller: UserController

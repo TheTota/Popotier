@@ -1,0 +1,125 @@
+{% extends "layout/base.html.twig" %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/public/css/user/user-recipes.css">
+{% endblock %}
+
+{% block content %}
+    <div>
+     <div class="d-block">
+        <div class="d-block">
+        <h2><i class="fas fa-utensils"> </i> Les recettes de {{alias}} <i class="fas fa-utensils"> </i> </h2>
+            {% if recipes %}
+                <ul class="list-group">
+                    {% for recipe in recipes %}
+                        <li class="list-group-item text-justify" id={{ recipe.id }}>
+                            <div class="row">
+                                <a href="{{ path('recipe_view', [recipe.id]) }}" class="col-lg-2">
+                                    <div class="limit">
+                                        {% if recipe.image %}
+                                            <img class="recipe-preview-img" src="{{ recipe.image }}"
+                                                 alt="image of the recipe">
+                                        {% else %}
+                                            <img class="recipe-preview-img"
+                                                 src="/public/assets/recipes-image/knives.jpg"
+                                                 alt="image of the recipe">
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <a href="{{ path('recipe_view', [recipe.id]) }}"
+                                   class="col-lg-9 text-dark list-group-item">
+                                    <h3>
+                                        {{ recipe.name }}
+                                    </h3>
+
+                                    <hr class="separator">
+
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <p>
+                                                        <i class="fas fa-clock icon"></i>
+                                                        Temps de cuisson : {{ recipe.cookingTime }} min
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <p>
+                                                        <i class="fas fa-clock icon"></i>
+                                                        Temps de préparation : {{ recipe.preparationTime }} min
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <i class="fas fa-users icon"></i>
+                                                    {{ recipe.personNumber }} personne(s)
+                                                </div>
+                                                <div class="col">
+                                                    <i class="fas fa-utensils icon"></i>
+                                                    Difficulté : {{ recipe.difficulty }}/5
+                                                </div>
+                                                <div class="col">
+                                                    <i class="fas fa-coins icon"></i>
+                                                    Prix moyen :
+                                                    {% if recipe.meanPrice %}
+                                                        {{ recipe.meanPrice }} €
+                                                    {% else %}
+                                                        nc
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                              {% if logged %}
+                                <div class="col-lg-1">
+                                  <button class="like-btn btn btn-info" type="button" onclick="handleLikeButtonClick({{ recipe.id }}, true)">
+                                    <i class="fas fa-heart fa-2x"></i>
+                                  </button>
+                                </div>
+                              {% endif %}
+                            </div>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="row justify-content-lg-center">
+                {% if page > 1 %}
+                    <a href=""><i class="fas fa-chevron-left"></i></a>
+                {% endif %}
+                {% for i in 1..pages %}
+                    {% if page == i %}
+                        <strong><a href="{{ path('user_recipe_list_page', [i]) }}">{{ i }}</a></strong>
+                    {% else %}
+                        <a href="{{ path('user_recipe_list_page', [i]) }}">{{ i }}</a>
+
+                    {% endif %}
+                {% endfor %}
+                {% if page < pages %}
+                    <a href=""><i class="fas fa-chevron-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        
+    </div>
+
+    <div id="pagination" class="row justify-content-lg-center">
+        <div class="col-1">
+            <button id="pagination-left-chevron" class="btn btn-flat text-justify"><i class="fas fa-chevron-left"></i></button>
+        </div>
+        <div id="page-numbers"></div>
+        <div class="col-1">
+            <button id="pagination-right-chevron" class="btn btn-flat"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/public/js/user/user-recipe-list.js"></script>
+    <script src="/public/js/recipe/recipe-like-system.js"></script>
+{% endblock %}
