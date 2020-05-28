@@ -99,6 +99,28 @@ class UserController
         echo Templater::getInstance()->getTwig()->render('user/user.html.twig');
     }
 
+    public function viewRecipeListByAlias($alias,$page = null)
+    {
+        $twig = Templater::getInstance()->getTwig();
+        $user = UserService::findByAlias($alias);
+        $recipes = RecipeService::fetchAllUserRecipePaginated($user->getId(), $page);
+        $recipeCount = RecipeService::countUserRecipes($user->getId());
+        $pages = round($recipeCount/2);
+        $logged = false;
+
+        if($_SESSION != null) 
+        {
+            $logged = true;  
+		}
+        echo $twig->render('user/user-public.html.twig', [
+            'recipes' => $recipes,
+            'alias' => $alias,
+            'pages' => $pages,
+            'logged' => $logged
+        ]);
+
+	}
+
 
     public function getUserRecipeList($page = null) {
         $twig = Templater::getInstance()->getTwig();

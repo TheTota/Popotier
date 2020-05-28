@@ -58,6 +58,29 @@ class UserService
         }
     }
 
+    public static function findByAlias($alias) 
+    {
+        $db = DataBaseService::getInstance()->getDb();
+        $result = $db->query("SELECT * FROM Utilisateur WHERE pseudo LIKE '$alias'")->fetch();
+
+        
+        if ($result == false) {
+            return false;
+        } else {
+             $user = new UserEntity(
+                $result['id'],
+                $result['email'],
+                $result['nom'],
+                $result['prenom'],
+                $result['pseudo'],
+                $result['mot_de_passe'],
+                RoleService::findById($result['id_role'])
+            );
+
+            return $user;
+        }
+	}
+
 
     public static function add(UserEntity $user)
     {
