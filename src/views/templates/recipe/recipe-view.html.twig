@@ -25,10 +25,10 @@
             {% endfor %}
         </div>
         <div class="row-md">
-            <div id="image">
+            <div id="image-container">
                 {% if recipe.image %}
                     <img class="width100" src="{{ globals.recipe_image_path}}{{ recipe.image }}"
-                         alt="image of the recipe">
+                         alt="image of the recipe" id="image">
                 {% else %}
                     <img class="width100" src="{{ globals.recipe_image_path}}knives.jpg" alt="image of the recipe">
                 {% endif %}
