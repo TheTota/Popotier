@@ -100,7 +100,8 @@ class RecipeController
             $tags = explode(',', $_POST['inputTag']);
 
             foreach ($tags as $tag) {
-                if ($tagEntity = TagService::findByName($tag) != false) {
+                $tagEntity = TagService::findByName($tag);
+                if ($tagEntity != false) {
                     TagService::addTagToRecipe($tagEntity->getId(), $recipeId);
                 } else {
                     $tagId = TagService::add(

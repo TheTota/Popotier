@@ -7,9 +7,9 @@
                     <li class="list-group-item text-justify" id={{ recipe.id }}>
                         <div class="row">
                             <a href="{{ path('recipe_view', [recipe.id]) }}" class="col-lg-2">
-                                <div class="limit">
+                                <div id="image">
                                     {% if recipe.image %}
-                                        <img class="recipe-preview-img" src="{{ recipe.image }}"
+                                        <img class="recipe-preview-img" src="{{ globals.recipe_image_path}}{{ recipe.image }}"
                                              alt="image of the recipe">
                                     {% else %}
                                         <img class="recipe-preview-img"
