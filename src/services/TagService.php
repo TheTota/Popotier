@@ -37,7 +37,7 @@ class TagService
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $tag = $db->query("SELECT * FROM Tag WHERE nom = '.$tagName.'")->fetchAll();
+        $tag = $db->query("SELECT * FROM Tag WHERE nom = '" . $tagName . "'")->fetch();
 
         if ($tag) {
             return new TagEntity(
@@ -90,7 +90,7 @@ class TagService
     {
         $db = DataBaseService::getInstance()->getDb();
 
-        $tags = $db->query("SELECT id, nom FROM Tag JOIN Tag_Recette ON Tag.id = Tag_Recette.id_tag WHERE id_recette = '.$recipeId.'")->fetchAll();
+        $tags = $db->query("SELECT id, nom FROM Tag JOIN Tag_Recette ON Tag.id = Tag_Recette.id_tag WHERE id_recette = '". $recipeId ."'")->fetchAll();
 
         if ($tags) {
             $tagArray = [];

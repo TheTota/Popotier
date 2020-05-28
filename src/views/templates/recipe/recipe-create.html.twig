@@ -28,7 +28,7 @@
                     <div class="form-group col-sm-6">
                         <label for="inputName"></label>
                         <input
-                                required="required"
+                                required
                                 type="text"
                                 class="form-control"
                                 id="inputName"
@@ -38,8 +38,6 @@
                                     value="{{ recipe.name }}"
                                 {% endif %}
                         >
-                        <small id="nameError" class="form-text text-danger hide">Le nom doit contenir uniquement des
-                            lettres</small>
                     </div>
                 </div>
                 <div class="row justify-content-center text-center">
@@ -65,7 +63,7 @@
                 
                 <div class="col-sm">
                     <label for="inputTag">Etiquettes lié a la recette</label>
-                    <input class="form-control" id="tags" name="inputTag" type="text" value="{{ tags }}">
+                    <input  class="form-control" id="tags" name="inputTag" type="text" value="{{ tags }}" autocapitalize="sentences">
                 </div>
 
                 <hr>
@@ -191,9 +189,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="/public/js/recipe/recipe-create-form.js"></script>
     <script src="/public/js/recipe/recipe-steps.js"></script>
-    <script src="/public/js/recipe/recipe-create-form.js"></script>
     <script src="/public/js/recipe/recipe-ingredients.js"></script>
     <script src="/public/js/recipe/form-tags.js"></script>
 {% endblock %}

@@ -77,7 +77,6 @@ class RecipeController
                 };
             }
 
-
             $recipe = new RecipeEntity(
                 null, // id
                 $_POST['inputName'],
@@ -171,7 +170,9 @@ class RecipeController
             $tags = explode(',', $_POST['inputTag']);
             TagService::deleteByRecipe($recipeId);
             foreach ($tags as $tag) {
-                if ($tagEntity = TagService::findByName($tag) != false) {
+                $tagEntity = TagService::findByName($tag);
+                if ($tagEntity  != false) {
+                    var_dump($tagEntity);
                     TagService::addTagToRecipe($tagEntity->getId(), $recipeId);
                 } else {
                     $tagId = TagService::add(

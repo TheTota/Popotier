@@ -114,7 +114,6 @@ class UserController
             if($alias == $_SESSION['alias']) 
             {
                 header('Location: /user/view/recipe-list');
-
 			}
 		}
         echo $twig->render('user/user-public.html.twig', [
