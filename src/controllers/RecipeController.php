@@ -69,9 +69,13 @@ class RecipeController
             $steps = array();
 
             // If there is an error on the image upload
-            if (!FileUploadService::uploadFile()) {
 
-            };
+            if($_FILES['fileToUpload']['name'] != ''){
+                if (!FileUploadService::uploadFile()) {
+
+                };
+            }
+
 
             $recipe = new RecipeEntity(
                 null, // id
@@ -106,25 +110,29 @@ class RecipeController
                 }
             }
 
-            for ($i = 1; $i <= count($_POST['stepList']); $i++) {
-                StepService::add(new StepEntity(null, $i, $_POST['stepList'][$i - 1]), $recipeId);
+            foreach ($_POST['stepList'] as $key => $step) {
+                if( $key + 1 != count($_POST['stepList'])){
+                    StepService::add(new StepEntity(null, $key+1, $_POST['stepList'][$key]), $recipeId);
+                }
             }
 
-            for ($i = 0; $i < count($_POST['ingredients']); $i++) {
-                if (IngredientService::findByName($_POST['ingredients'][$i]) == false) {
-                    IngredientService::add(
-                        new IngredientEntity(
-                            $_POST['ingredients'][$i],
-                            null
-                        )
+            foreach ($_POST['ingredients'] as $key => $ingredient) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+                    if (IngredientService::findByName($ingredient) == false) {
+                        IngredientService::add(
+                            new IngredientEntity(
+                                $ingredient,
+                                null
+                            )
+                        );
+                    }
+                    IngredientRecipeService::add(
+                        $ingredient,
+                        $recipeId,
+                        $_POST['quantity'][$key],
+                        $_POST['unit'][$key]
                     );
                 }
-                IngredientRecipeService::add(
-                    $_POST['ingredients'][$i],
-                    $recipeId,
-                    $_POST['quantity'][$i],
-                    $_POST['unit'][$i]
-                );
             }
 
             // ALLERGENS

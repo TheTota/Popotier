@@ -39,7 +39,6 @@ class TagService
 
         $tag = $db->query("SELECT * FROM Tag WHERE nom = '.$tagName.'")->fetchAll();
 
-        var_dump($tag);
         if ($tag) {
             return new TagEntity(
                 $tag['id'],
