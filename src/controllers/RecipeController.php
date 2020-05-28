@@ -246,7 +246,7 @@ class RecipeController
                 'units' => UnitService::fetchAll(),
                 'allergens' => AllergenService::fetchAll(),
                 'recipe' => $recipeEntity,
-                'tags' => implode(',', TagService::findByRecipe($recipeId))
+                'tags' => TagService::findByRecipe($recipeId) ? implode(',', TagService::findByRecipe($recipeId)) : null
             ]);
         }
     }
