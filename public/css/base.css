@@ -1,6 +1,7 @@
 
 html, body {
     height: 100%;
+    margin: 0;
     padding-top: 28px;
     font-family: 'Comic Neue', cursive !important;
 }
@@ -17,9 +18,11 @@ body a:hover {
 }
 
 #content {
+    min-height: 100%;
     width: 80%;
     margin: auto;
 }
+
 
 hr {
     background: #91CCA7;
