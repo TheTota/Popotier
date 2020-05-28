@@ -75,3 +75,11 @@ hr {
 .comment {
     width: 100%;
 }
+
+.tag {
+    background: #91CCA7;
+    color: white;
+    border-radius: 0.3em;
+    padding: 5px;
+    margin: 5px;
+}

@@ -56,7 +56,8 @@ class RecipeController
             'recipeLiked' => $recipeLikedByUser,
             'recipeAverageRating' => $recipeAverageRating,
             'userRating' => $userRating,
-            'recipeComments' => $recipeComments
+            'recipeComments' => $recipeComments,
+            'tags' => TagService::findByRecipe($recipeId)
         ]);
     }
 
