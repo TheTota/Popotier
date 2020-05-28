@@ -103,12 +103,19 @@ add_recipe:
   controller: RecipeController
   action: add
 
+update_recipe:
+  path: /recipe/update/{id}
+  controller: RecipeController
+  action: update
+  requirements:
+      id: '[1-9]+'
+
 validate_recipe:
   path: /recipe/validate/{id}
   controller: RecipeController
   action: validate
   requirements:
-    id: '[0-9]+'
+    id: '[1-9]+'
 
 devalidate_recipe:
   path: /recipe/devalidate/{id}

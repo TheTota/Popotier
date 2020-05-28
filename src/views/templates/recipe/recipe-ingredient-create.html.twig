@@ -1,41 +1,120 @@
 <div class="form-group">
     <h2>Ingrédients</h2>
     <ul id="ingredients" class="container">
-        <li class="ingredient-row-element">
-            <div class="row">
-                <div class="col">
-                    <label for="ingredient">Ingredient</label>
-                    <input id="ingredient" list="ingredient-list" class="form-control" name="ingredients[]">
-                    <datalist id="ingredient-list">
-                        {% for ingredient in ingredients %}
-                            <option value="{{ ingredient.name }}"></option>
-                        {% endfor %}
-                    </datalist>
-                </div>
-                <div class="col">
-                    <label for="quantity">Quantité</label>
-                    <input class="form-control" id="quantity" type="number" name="quantity[]">
-                </div>
-                <div class="col">
-                    <label for="unit">Unité</label>
-                    <select class="form-control" name="unit[]" id="unit">
-                        {% for unit in units %}
-                            <option value="{{ unit.id }}">{{ unit.name }}</option>
-                        {%  endfor %}
-                    </select>
-                </div>
-                <div class="col-1">
-                    <button type="button"
-                            class=" btn btn-danger delete-ingredient-button"
-                            data-toggle="tooltip"
-                            title="Supprimer ingrédient"
-                    >
+        {% if update %}
+            {% for ingredient in recipe.ingredients %}
+                <li class="ingredient-row-element">
+                    <div class="row">
+                        <div class="col">
+                            <label for="ingredient">Ingredient</label>
+                            <input
+                                    id="ingredient"
+                                    list="ingredient-list"
+                                    class="form-control"
+                                    name="ingredients[]"
+                                    value="{{ ingredient.ingredient.name }}"
+                            >
+                            <datalist id="ingredient-list">
+                                {% for ingredient in ingredients %}
+                                    <option value="{{ ingredient.name }}"></option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="col">
+                            <label for="quantity">Quantité</label>
+                            <input
+                                    class="form-control"
+                                    id="quantity"
+                                    type="number"
+                                    name="quantity[]"
+                                    value="{{ ingredient.quantity }}"
+                            >
+                        </div>
+                        <div class="col">
+                            <label for="unit">Unité</label>
+                            <select class="form-control" name="unit[]" id="unit">
+                                {% for unit in units %}
+                                    {% if unit.id == ingredient.unit.id %}
+                                        <option value="{{ unit.id }}" selected>{{ unit.name }}</option>
+                                    {% else %}
+                                        <option value="{{ unit.id }}">{{ unit.name }}</option>
+                                    {% endif %}
 
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <label for="allergen">Allergène</label>
+                            <select class="form-control" name="allergen[]" id="allergen">
+                                <option value=""></option>
+                                {% for allergen in allergens %}
+                                    {% if allergen.id == ingredient.ingredient.allergen.id %}
+                                        <option value="{{ allergen.id }}" selected>{{ allergen.name }}</option>
+                                    {% else %}
+                                        <option value="{{ allergen.id }}">{{ allergen.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-1 text-center">
+                            <button type="button"
+                                    class="btn btn-danger delete-ingredient-button center-vertically"
+                                    data-toggle="tooltip"
+                                    title="Supprimer ingrédient"
+                            >
+
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li class="ingredient-row-element">
+                <div class="row">
+                    <div class="col">
+                        <label for="ingredient">Ingredient</label>
+                        <input id="ingredient" list="ingredient-list" class="form-control" name="ingredients[]">
+                        <datalist id="ingredient-list">
+                            {% for ingredient in ingredients %}
+                                <option value="{{ ingredient.name }}"></option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                    <div class="col">
+                        <label for="quantity">Quantité</label>
+                        <input class="form-control" id="quantity" type="number" name="quantity[]">
+                    </div>
+                    <div class="col">
+                        <label for="unit">Unité</label>
+                        <select class="form-control" name="unit[]" id="unit">
+                            {% for unit in units %}
+                                <option value="{{ unit.id }}">{{ unit.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm">
+                        <label for="allergen">Allergène</label>
+                        <select class="form-control" name="allergen[]" id="allergen">
+                            <option value=""></option>
+                            {% for allergen in allergens %}
+                                <option value="{{ allergen.id }}">{{ allergen.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-1 text-center">
+                        <button type="button"
+                                class="btn btn-danger delete-ingredient-button center-vertically"
+                                data-toggle="tooltip"
+                                title="Supprimer ingrédient"
+                        >
+
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        {% endif %}
     </ul>
     <div class="row justify-content-center">
         <button id="add-ingredient-button"
@@ -48,4 +127,51 @@
             <i class="fas fa-plus"></i>
         </button>
     </div>
+</div>
+
+<div id="main-ingredient-element" style="display: none;">
+    <li class="ingredient-row-element">
+        <div class="row">
+            <div class="col">
+                <label for="ingredient">Ingredient</label>
+                <input id="ingredient" list="ingredient-list" class="form-control" name="ingredients[]">
+                <datalist id="ingredient-list">
+                    {% for ingredient in ingredients %}
+                        <option value="{{ ingredient.name }}"></option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="col">
+                <label for="quantity">Quantité</label>
+                <input class="form-control" id="quantity" type="number" name="quantity[]">
+            </div>
+            <div class="col">
+                <label for="unit">Unité</label>
+                <select class="form-control" name="unit[]" id="unit">
+                    {% for unit in units %}
+                        <option value="{{ unit.id }}">{{ unit.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm">
+                <label for="allergen">Allergène</label>
+                <select class="form-control" name="allergen[]" id="allergen">
+                    <option value=""></option>
+                    {% for allergen in allergens %}
+                        <option value="{{ allergen.id }}">{{ allergen.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-1 text-center">
+                <button type="button"
+                        class="btn btn-danger delete-ingredient-button center-vertically"
+                        data-toggle="tooltip"
+                        title="Supprimer ingrédient"
+                >
+
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </li>
 </div>

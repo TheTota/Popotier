@@ -36,9 +36,9 @@
                             <a href="{{ path('recipe_view', [recipe.id]) }}">
                                 <div class="recipe-image">
                                     {% if recipe.image %}
-                                        <img src="/public/assets/recipes-image/{{ recipe.image }}" alt="image du plat">
+                                        <img src="{{ globals.recipe_image_path}}{{ recipe.image }}" alt="image du plat">
                                     {% else %}
-                                        <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat">
+                                        <img src="{{ globals.recipe_image_path}}knives.jpg" alt="image du plat">
                                     {% endif %}
                                 </div>
                                 <div class="recipe-description">

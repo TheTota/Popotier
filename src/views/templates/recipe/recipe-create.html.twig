@@ -2,6 +2,7 @@
 {% block links %}
     {{ parent() }}
     <link rel="stylesheet" href="/public/css/recipe/recipe-form.css">
+    <link rel="stylesheet" href="/public/css/recipe/tag.css">
 {% endblock %}
 
 {% block content %}
@@ -13,12 +14,30 @@
             </div>
         {% endif %}
 
-        <form action="/recipe/add" method="POST" enctype="multipart/form-data">
+        <form
+                {% if update %}
+                    action="{{ path('update_recipe', [recipe.id]) }}"
+                {% else %}
+                    action="/recipe/add"
+                {% endif %}
+                method="POST"
+                enctype="multipart/form-data"
+        >
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="form-group col-sm-6">
                         <label for="inputName"></label>
-                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nom de la recette">
+                        <input
+                                required="required"
+                                type="text"
+                                class="form-control"
+                                id="inputName"
+                                name="inputName"
+                                placeholder="Nom de la recette"
+                                {% if update %}
+                                    value="{{ recipe.name }}"
+                                {% endif %}
+                        >
                         <small id="nameError" class="form-text text-danger hide">Le nom doit contenir uniquement des
                             lettres</small>
                     </div>
@@ -32,9 +51,21 @@
                         <input type="file" class="file-input" id="inputImage" name="fileToUpload"
                                accept="image/png, image/jpeg" onchange="readURL(this)">
                         <div id="image-container">
-                            <img src="/public/assets/recipes-image/knives.jpg" alt="image du plat" id="image">
+                            <img
+                                    {% if update and recipe.image %}
+                                        src="{{ globals.recipe_image_path}}{{ recipe.image }}"
+                                    {% else %}
+                                        src="{{ globals.recipe_image_path}}knives.jpg"
+                                    {% endif %}
+                                    alt="image du plat"
+                                    id="image">
                         </div>
                     </div>
+                </div>
+                
+                <div class="col-sm">
+                    <label for="inputTag">Etiquettes lié a la recette</label>
+                    <input class="form-control" id="tags" name="inputTag" type="text" value="{{ tags }}">
                 </div>
 
                 <hr>
@@ -48,60 +79,92 @@
                         <label for="inputType"> Type de la recette </label>
                         <select type="number" class="form-control" id="inputType" name="inputType" placeholter="Type">
                             {% for recipeType in recipeTypes %}
-                                <option value="{{ recipeType.id }}">{{ recipeType.label }}</option>
+                                {% if update and recipeType.label == recipe.type.label %}
+                                    <option value="{{ recipeType.id }}"
+                                            selected="selected">{{ recipeType.label }}</option>
+                                {% else %}
+                                    <option value="{{ recipeType.id }}">{{ recipeType.label }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col-sm">
                         <label for="inputCookingTime"> Temps de cuisson en minute</label>
-                        <input type="number" class="form-control" id="inputCookingTime" name="inputCookingTime" step="5"
+                        <input type="number"
+                               class="form-control"
+                               id="inputCookingTime"
+                               name="inputCookingTime"
+                               step="5"
                                min="0"
-                               value="0">
+                                {% if update %}
+                                    value="{{ recipe.cookingTime }}"
+                                {% else %}
+                                    value="0"
+                                {% endif %}
+                        >
                     </div>
 
-                    <div class="col">
+                    <div class="col-sm">
                         <label for="inputPreparationTime"> Temps de préparation en minute</label>
                         <input type="number" class="form-control" id="inputPreparationTime" name="inputPreparationTime"
                                step="5"
                                min="0"
-                               value="0">
+                                {% if update %}
+                                    value="{{ recipe.cookingTime }}"
+                                {% else %}
+                                    value="0"
+                                {% endif %}
+                        >
                     </div>
                 </div>
 
                 <div class="row form-group">
-                    <div class="col">
+                    <div class="col-sm">
                         <label for="inputPersonNumber"> Nombre de personne </label>
                         <select type="number" class="form-control" id="inputPersonNumber" name="inputPersonNumber">
                             {% for i in range(1, 10) %}
-                                <option value="{{ i }}">{{ i }}</option>
+                                {% if update and recipe.personNumber == i %}
+                                    <option value="{{ i }}" selected="selected">{{ i }}</option>
+                                {% else %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endif %}
+
                             {% endfor %}
                         </select>
                     </div>
 
-                    <div class="col">
+                    <div class="col-sm">
                         <label for="inputDifficulty"> Difficulté </label>
                         <select type="number" class="form-control" id="inputDifficulty" name="inputDifficulty">
                             {% for i in range(1, 5) %}
-                                <option value="{{ i }}">{{ i }}</option>
+                                {% if update and recipe.difficulty == i %}
+                                    <option value="{{ i }}" selected="selected">{{ i }}</option>
+                                {% else %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="col">
                         <label for="inputMeanPrice"> Prix moyen </label>
-                        <select type="text" class="form-control" id="inputMeanPrice" name="inputMeanPrice">
-                            <option value="1 - 10 €">1 - 10 €</option>
-                            <option value="10 - 20 €">10 - 20 €</option>
-                            <option value="20 - 50 €">20 - 50 €</option>
-                            <option value="50 - 100 €">5 - 100 €</option>
-                        </select>
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="inputMeanPrice"
+                                name="inputMeanPrice"
+                                {% if update %}
+                                value= {{ recipe.meanPrice }}
+                                {% endif %}
+                        >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputAuthorQuote"> Annotations </label>
-                    <textarea class="form-control" id="inputAuthorQuote" name="inputAuthorQuote"></textarea>
+                    <textarea class="form-control" id="inputAuthorQuote" name="inputAuthorQuote"
+                              autocapitalize="sentences">{{ recipe.authorQuote }}</textarea>
                 </div>
 
                 <hr>
@@ -113,7 +176,13 @@
                 {% include 'recipe/recipe-ingredient-create.html.twig' %}
 
                 <div class="text-center">
-                    <button id="submit" type="submit" class="btn btn-primary width100" name="addRecipe">Ajouter la recette</button>
+                    <button id="submit" type="submit" class="btn btn-primary width100" name="addRecipe">
+                    {% if update %}
+                            Modifier la recete
+                    {% else %}
+                            Ajouter la recette
+                    {% endif %}
+                    </button>
                 </div>
 
             </div>
@@ -126,5 +195,6 @@
     <script src="/public/js/recipe/recipe-steps.js"></script>
     <script src="/public/js/recipe/recipe-create-form.js"></script>
     <script src="/public/js/recipe/recipe-ingredients.js"></script>
+    <script src="/public/js/recipe/form-tags.js"></script>
 {% endblock %}
 

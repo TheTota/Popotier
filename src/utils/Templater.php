@@ -29,6 +29,7 @@ class Templater {
         ]);
 
         $this->twig->addGlobal('server', $_SERVER);
+        $this->twig->addGlobal('globals', $GLOBALS);
     }
 
     /**

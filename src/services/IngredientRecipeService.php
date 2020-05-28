@@ -43,4 +43,10 @@ class IngredientRecipeService {
         ]);
 
     }
+
+    public static function deleteByRecipe($recipeId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        return $db->prepare("DELETE FROM Ingredient_Recette WHERE id_recette = ?")->execute([$recipeId]);
+    }
 }

@@ -1,9 +1,14 @@
 $(function () {
 
     $('#nameError').hide();
+    let nameError = false;
 
+    console.log($('#inputName').val());
     // Properties
-    let nameError = true;
+    if($('#inputName').val() == ''){
+        nameError = true;
+    }
+
     let stepsError = true;
     const onlyLettersAndSpaceRegex = /[A-Za-z_ ]$/;
 

@@ -11,12 +11,12 @@
                                     <div id="image">
                                         {% if recipe.image %}
                                             <img class="recipe-preview-img"
-                                                 src="/public/assets/recipes-image/{{ recipe.image }}"
+                                                 src="{{ globals.recipe_image_path}}{{ recipe.image }}"
                                                  alt="image of the recipe">
 
                                         {% else %}
                                             <img class="recipe-preview-img"
-                                                 src="/public/assets/recipes-image/knives.jpg"
+                                                 src="{{ globals.recipe_image_path}}knives.jpg"
                                                  alt="image of the recipe">
                                         {% endif %}
                                     </div>

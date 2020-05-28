@@ -3,12 +3,17 @@
 namespace src\controllers;
 
 use src\models\IngredientEntity;
+use src\models\IngredientRecipeEntity;
+use src\models\RecipeTypeEntity;
+use src\models\TagEntity;
+use src\services\AllergenService;
 use src\services\CommentService;
 use src\services\FileUploadService;
 use src\services\IngredientRecipeService;
 use src\services\IngredientService;
 use src\services\RatingService;
 use src\services\StepService;
+use src\services\TagService;
 use src\services\UnitService;
 use src\utils\Templater;
 use src\services\RecipeService;
@@ -60,16 +65,17 @@ class RecipeController
         $twig = Templater::getInstance()->getTwig();
         $recipeCreated = false;
 
-
-
-
         if (!empty($_POST)) {
             $steps = array();
-            // var_dump($_FILES);die;
-            // If there is an error on the image upload
-            if(!FileUploadService::uploadFile()){
 
-            };
+            // If there is an error on the image upload
+
+            if($_FILES['fileToUpload']['name'] != ''){
+                if (!FileUploadService::uploadFile()) {
+
+                };
+            }
+
 
             $recipe = new RecipeEntity(
                 null, // id
@@ -91,25 +97,49 @@ class RecipeController
             );
             $recipeId = RecipeService::add($recipe);
 
-            for($i = 1; $i<=count($_POST['stepList']); $i++) {
-                StepService::add(new StepEntity(null, $i,$_POST['stepList'][$i-1]), $recipeId);
+            $tags = explode(',', $_POST['inputTag']);
+
+            foreach ($tags as $tag) {
+                if ($tagEntity = TagService::findByName($tag) != false) {
+                    TagService::addTagToRecipe($tagEntity->getId(), $recipeId);
+                } else {
+                    $tagId = TagService::add(
+                        new TagEntity(null, $tag)
+                    );
+                    TagService::addTagToRecipe($tagId, $recipeId);
+                }
             }
 
-            for ($i = 0; $i<count($_POST['ingredients']); $i++) {
-                if(IngredientService::findByName($_POST['ingredients'][$i]) == false){
-                    IngredientService::add(
-                        new IngredientEntity(
-                            $_POST['ingredients'][$i],
-                            null
-                        )
+            foreach ($_POST['stepList'] as $key => $step) {
+                if( $key + 1 != count($_POST['stepList'])){
+                    StepService::add(new StepEntity(null, $key+1, $_POST['stepList'][$key]), $recipeId);
+                }
+            }
+
+            foreach ($_POST['ingredients'] as $key => $ingredient) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+                    if (IngredientService::findByName($ingredient) == false) {
+                        IngredientService::add(
+                            new IngredientEntity(
+                                $ingredient,
+                                null
+                            )
+                        );
+                    }
+                    IngredientRecipeService::add(
+                        $ingredient,
+                        $recipeId,
+                        $_POST['quantity'][$key],
+                        $_POST['unit'][$key]
                     );
                 }
-                IngredientRecipeService::add(
-                    $_POST['ingredients'][$i],
-                    $recipeId,
-                    $_POST['quantity'][$i],
-                    $_POST['unit'][$i]
-                );
+            }
+
+            // ALLERGENS
+            foreach ($_POST['allergen'] as $key => $allergenId) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+                    IngredientService::updateAllergen($_POST['ingredients'][$key], $allergenId);
+                }
             }
 
             $recipeCreated = true;
@@ -121,11 +151,107 @@ class RecipeController
         echo $twig->render('recipe/recipe-create.html.twig', [
             'recipeTypes' => RecipeTypeService::fetchAll(),
             'ingredients' => IngredientService::fetchAll(),
-            'units' => UnitService::fetchAll()
+            'units' => UnitService::fetchAll(),
+            'allergens' => AllergenService::fetchAll()
         ]);
     }
 
-    public function delete($recipeId) {
+    public function update($recipeId)
+    {
+        $twig = Templater::getInstance()->getTwig();
+        $recipeEntity = RecipeService::findById($recipeId);
+
+        if (!empty($_POST)) {
+
+            StepService::deleteByRecipe($recipeId);
+            IngredientRecipeService::deleteByRecipe($recipeId);
+
+            // TAGS
+            $tags = explode(',', $_POST['inputTag']);
+            TagService::deleteByRecipe($recipeId);
+            foreach ($tags as $tag) {
+                if ($tagEntity = TagService::findByName($tag) != false) {
+                    TagService::addTagToRecipe($tagEntity->getId(), $recipeId);
+                } else {
+                    $tagId = TagService::add(
+                        new TagEntity(null, $tag)
+                    );
+                    TagService::addTagToRecipe($tagId, $recipeId);
+                }
+            }
+
+            // STEPS
+            foreach ($_POST['stepList'] as $key => $step) {
+                if ($key + 1 != count($_POST['stepList'])) {
+                    StepService::add(new StepEntity(
+                        null,
+                        $key++,
+                        $step
+                    ),
+                        $recipeId
+                    );
+                }
+            }
+
+            // INGREDIENTS
+            foreach ($_POST['ingredients'] as $key => $ingredient) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+                    IngredientRecipeService::add(
+                        $ingredient,
+                        $recipeId,
+                        $_POST['quantity'][$key],
+                        $_POST['unit'][$key]
+                    );
+                }
+            }
+
+            // ALLERGENS
+            foreach ($_POST['allergen'] as $key => $allergenId) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+                    IngredientService::updateAllergen($_POST['ingredients'][$key], $allergenId);
+                }
+            }
+
+            $type = new RecipeTypeEntity($_POST['inputType'], null);
+
+            $recipeEntity = new RecipeEntity(
+                $recipeId,
+                $_POST['inputName'],
+                $recipeEntity->getImage(),
+                $recipeEntity->getCreationDate(),
+                $_POST['inputCookingTime'],
+                $_POST['inputPreparationTime'],
+                $_POST['inputPersonNumber'],
+                $_POST['inputDifficulty'],
+                $_POST['inputMeanPrice'],
+                $_POST['inputAuthorQuote'],
+                $recipeEntity->getValid(),
+                $recipeEntity->getAuthor(),
+                $type,
+                $recipeEntity->getAdmin(),
+                $recipeEntity->getSteps(),
+                $recipeEntity->getIngredients()
+            );
+
+            RecipeService::update($recipeEntity);
+
+            header("location: /recipe/view/$recipeId");
+
+        } else {
+            echo $twig->render('recipe/recipe-create.html.twig', [
+                'update' => true,
+                'recipeTypes' => RecipeTypeService::fetchAll(),
+                'ingredients' => IngredientService::fetchAll(),
+                'units' => UnitService::fetchAll(),
+                'allergens' => AllergenService::fetchAll(),
+                'recipe' => $recipeEntity,
+                'tags' => implode(',', TagService::findByRecipe($recipeId))
+            ]);
+        }
+    }
+
+    public function delete($recipeId)
+    {
         RecipeService::deleteByID($recipeId);
     }
 
@@ -183,7 +309,8 @@ class RecipeController
     /**
      * Route: /recipe/like/:id
      */
-    public function like($recipeId) {
+    public function like($recipeId)
+    {
         // if connected, like the recipe
         if (isset($_SESSION['email'])) {
             $userId = $_SESSION['id'];
@@ -197,11 +324,12 @@ class RecipeController
         }
     }
 
-    public function searchByString($normalizedSearchString){
+    public function searchByString($normalizedSearchString)
+    {
         $twig = Templater::getInstance()->getTwig();
 
         $recipes = RecipeService::searchByName($normalizedSearchString);
 
-        echo $twig->render("recipe/components/recipe-search-component.html.twig", [ "recipes" => $recipes]);
+        echo $twig->render("recipe/components/recipe-search-component.html.twig", ["recipes" => $recipes]);
     }
 }
