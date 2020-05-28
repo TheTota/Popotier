@@ -283,19 +283,41 @@ class RecipeService
      * @return array|null
      * Return all the recipe that contain the string send in param in their name
      */
-    public static function advancedSearch($name, $rating, $tagsFilter) {
+    public static function advancedSearch($name, $rating, $tagsFilter, $typesFilter, $seasonsFilter, $allergensFilter) {
         $db = DataBaseService::getInstance()->getDb();
-
+var_dump($typesFilter);
         // tags
         $tagsQuery = "";
         if (isset($tagsFilter)) {
-            $tagsQuery = "AND R.id IN (SELECT id_recette FROM Tag_Recette WHERE id_tag = " . $tagsFilter . ")";
+            $tagsQuery = "AND R.id IN (SELECT id_recette FROM Tag_Recette WHERE id_tag IN (" . implode(",", $tagsFilter) . "))";
+        }
+
+        // types
+        $typesQuery = "";
+        if (isset($typesFilter)) {
+            $typesQuery = "AND R.id_type IN (" . implode(",", $typesFilter) . ")";
+        }
+
+        // seasons
+        $seasonsQuery = "";
+        if (isset($seasonsFilter)) {
+            $tagsQuery = "AND R.id IN (SELECT id_recette FROM Saison_Recette WHERE id_saison IN (" . implode(",", $seasonsFilter) . "))";
+        }
+
+        // allergens
+        $allergensQuery = "";
+        if (isset($allergensFilter)) {
+            $allergensQuery = "AND R.id IN (SELECT id_recette FROM Saison_Recette WHERE id_saison IN (" . implode(",", $seasonsFilter) . "))";
         }
 
         $recipes = $db->query("SELECT * FROM Recette R WHERE nom LIKE '%$name%' AND valide = 1
                                          AND (SELECT coalesce(avg(valeur), 0) FROM Note WHERE id_recette = R.id) >= '$rating'"
-                                         . $tagsQuery);
+                                         . $tagsQuery
+                                         . $typesQuery
+                                         . $seasonsQuery
+                                         . $allergensQuery);
 
+        // Create recipes from search
         if($recipes){
             return self::createRecipeArray($recipes);
         } else {
