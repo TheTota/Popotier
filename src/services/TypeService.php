@@ -7,11 +7,26 @@ require_once 'src/services/DataBaseService.php';
 require_once 'src/models/RecipeTypeEntity.php';
 
 use src\models\RecipeTypeEntity;
+use src\models\TypeEntity;
 
 class TypeService {
 
-    public function fetchAll(){
+    public static function fetchAll(){
+        $db = DataBaseService::getInstance()->getDb();
 
+        $types = $db->query("SELECT * FROM Type")->fetchAll();
+
+        $typeArray = [];
+
+        foreach ($types as $type){
+            array_push($typeArray,
+                new TypeEntity(
+                    $type['id'],
+                    $type['libelle']
+                ));
+        }
+
+        return $typeArray;
     }
 
     public static function findById($id): RecipeTypeEntity{

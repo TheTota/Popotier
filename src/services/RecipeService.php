@@ -279,8 +279,60 @@ class RecipeService
     public static function searchByName($name) {
         $db = DataBaseService::getInstance()->getDb();
 
-        $recipes = $db->query("SELECT * FROM Recette WHERE nom LIKE '%$name%'");
+        $recipes = $db->query("SELECT * FROM Recette WHERE nom LIKE '%$name%' AND valide = 1");
 
+        if($recipes){
+            return self::createRecipeArray($recipes);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param $name
+     * @return array|null
+     * Return all the recipe that contain the string send in param in their name
+     */
+    public static function advancedSearch($name, $rating, $tagsFilter, $typesFilter, $seasonsFilter, $allergensFilter) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        // tags
+        $tagsQuery = "";
+        if (isset($tagsFilter)) {
+            $tagsQuery = "AND R.id IN (SELECT id_recette FROM Tag_Recette WHERE id_tag IN (" . implode(",", $tagsFilter) . "))";
+        }
+
+        // types
+        $typesQuery = "";
+        if (isset($typesFilter)) {
+            $typesQuery = "AND R.id_type IN (" . implode(",", $typesFilter) . ")";
+        }
+
+        // seasons
+        $seasonsQuery = "";
+        if (isset($seasonsFilter)) {
+            $tagsQuery = "AND R.id IN (SELECT id_recette FROM Saison_Recette WHERE id_saison IN (" . implode(",", $seasonsFilter) . "))";
+        }
+
+        // allergens
+        $allergensQuery = "";
+        if (isset($allergensFilter)) {
+            $allergensQuery = "AND R.id IN (
+                SELECT DISTINCT IR.id_recette
+                FROM Ingredient_Recette IR
+                INNER JOIN Ingredient I
+                ON  IR.id_ingredient = I.nom
+                WHERE I.id_allergene NOT IN (" . implode(",", $seasonsFilter) . "))";
+        }
+
+        $recipes = $db->query("SELECT * FROM Recette R WHERE nom LIKE '%$name%' AND valide = 1
+                                         AND (SELECT coalesce(avg(valeur), 0) FROM Note WHERE id_recette = R.id) >= '$rating'"
+                                         . $tagsQuery
+                                         . $typesQuery
+                                         . $seasonsQuery
+                                         . $allergensQuery);
+
+        // Create recipes from search
         if($recipes){
             return self::createRecipeArray($recipes);
         } else {

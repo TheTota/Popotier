@@ -325,12 +325,40 @@ class RecipeController
             header('location: /login');
         }
     }
-
-    public function searchByString($normalizedSearchString)
-    {
+  
+    public function searchByString(){
         $twig = Templater::getInstance()->getTwig();
 
-        $recipes = RecipeService::searchByName($normalizedSearchString);
+        // tags
+        if (isset($_POST['tagsFilter'])) {
+            $tagsFilter = $_POST['tagsFilter'];
+        } else {
+            $tagsFilter = null;
+        }
+
+        // types
+        if (isset($_POST["typesFilter"]))
+        {
+            $typesFilter = $_POST['typesFilter'];
+        } else {
+            $typesFilter = null;
+        }
+
+        // seasons
+        if (isset($_POST['seasonsFilter'])) {
+            $seasonsFilter = $_POST['seasonsFilter'];
+        } else {
+            $seasonsFilter = null;
+        }
+
+        // allergens
+        $allergensFilter = null;
+        if (isset($_POST['allergensFilter'])) {
+            $tagsFilter = $_POST['allergensFilter'];
+        }
+
+        // Search!
+        $recipes = RecipeService::advancedSearch($_POST['name'], $_POST['ratingFilter'], $tagsFilter, $typesFilter, $seasonsFilter, $allergensFilter);
 
         echo $twig->render("recipe/components/recipe-search-component.html.twig", ["recipes" => $recipes]);
     }

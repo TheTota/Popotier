@@ -3,11 +3,26 @@
 namespace src\services;
 
 use src\models\RecipeSeasonEntity;
+use src\models\SeasonEntity;
 
 class SeasonService{
 
-    public function fetchAll(){
+    public static function fetchAll(){
+        $db = DataBaseService::getInstance()->getDb();
 
+        $seasons = $db->query("SELECT * FROM Saison")->fetchAll();
+
+        $seasonArray = [];
+
+        foreach ($seasons as $season){
+            array_push($seasonArray,
+                new SeasonEntity(
+                    $season['id'],
+                    $season['libelle']
+                ));
+        }
+
+        return $seasonArray;
     }
 
     public function findById($id){
