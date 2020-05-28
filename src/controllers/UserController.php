@@ -103,7 +103,7 @@ class UserController
     {
         $twig = Templater::getInstance()->getTwig();
         $user = UserService::findByAlias($alias);
-        $recipes = RecipeService::fetchAllUserRecipePaginated($user->getId(), $page);
+        $recipes = RecipeService::fetchAllUserRecipe($user->getId());
         $recipeCount = RecipeService::countUserRecipes($user->getId());
         $pages = round($recipeCount/2);
         $logged = false;
@@ -123,7 +123,6 @@ class UserController
             'pages' => $pages,
             'logged' => $logged
         ]);
-
 	}
 
 

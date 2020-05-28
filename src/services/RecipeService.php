@@ -172,9 +172,10 @@ class RecipeService
         return self::createRecipeArray($recipes);
     }
 
-    public static function fetchAllUserRecipe($userEmail){
+
+    public static function fetchAllUserRecipe($userId){
         $db = DataBaseService::getInstance()->getDb();
-        $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userEmail . "'");
+        $recipes = $db->query("SELECT * FROM Recette WHERE id_auteur='" . $userId . "'");
 
         return self::createRecipeArray($recipes);
     }
