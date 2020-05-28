@@ -17,7 +17,6 @@ body a:hover {
 }
 
 #content {
-    height: 100%;
     width: 80%;
     margin: auto;
 }
@@ -33,4 +32,10 @@ button:hover:disabled {
 .center-vertically {
     position: relative;
     top: 50%;
+}
+
+footer {
+    margin-top: 150px;
+    background: #91CCA7;
+    padding-top: 50px;
 }

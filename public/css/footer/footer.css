@@ -1,0 +1,10 @@
+#myfooter {
+    background: #91CCA7 !important;
+    color: white !important;
+    width:100%;
+}
+
+#myfooter, ul {
+    list-style:none;
+}
+
