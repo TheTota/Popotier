@@ -127,6 +127,13 @@ class RecipeController
                 );
             }
 
+            // ALLERGENS
+            foreach ($_POST['allergen'] as $key => $allergenId) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+                    IngredientService::updateAllergen($_POST['ingredients'][$key], $allergenId);
+                }
+            }
+
             $recipeCreated = true;
 
             echo $twig->render('recipe/recipe-create.html.twig', ["recipeCreated" => $recipeCreated]);
@@ -193,13 +200,8 @@ class RecipeController
             // ALLERGENS
             foreach ($_POST['allergen'] as $key => $allergenId) {
                 if ($key + 1 != count($_POST['ingredients'])) {
-
                     IngredientService::updateAllergen($_POST['ingredients'][$key], $allergenId);
-
-
                 }
-
-
             }
 
             $type = new RecipeTypeEntity($_POST['inputType'], null);
