@@ -180,7 +180,7 @@ CREATE TABLE Ingredient
     nom          VARCHAR(255) NOT NULL,
     id_allergene INTEGER,
     CONSTRAINT PK_Ingredient PRIMARY KEY (nom),
-    CONSTRAINT FK_Allergene FOREIGN KEY (id_allergene) REFERENCES Allergene (id)
+    CONSTRAINT FK_Allergene FOREIGN KEY (id_allergene) REFERENCES Allergene (id) ON DELETE NO ACTION
 );
 
 DROP TABLE IF EXISTS Unite;

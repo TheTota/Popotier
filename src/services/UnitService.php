@@ -20,4 +20,30 @@ class UnitService {
             );
         }
     }
+
+    public static function fetchAll() {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $unit = $db->query("SELECT * FROM Unite");
+
+
+
+        return self::createUnitArray($unit);
+    }
+
+    private static function createUnitArray(\PDOStatement $units): array
+    {
+        $unitArray = array();
+        foreach ($units as $unit) {
+            array_push(
+                $unitArray,
+                new UnitEntity(
+                    $unit['id'],
+                    $unit['nom']
+                )
+            );
+        }
+
+        return $unitArray;
+    }
 }

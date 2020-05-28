@@ -1,52 +1,50 @@
 $(function () {
-    // Properties 
-    var nameError = true;
-    var stepsError = true;
-    const onlyLettersRegex = /[A-Za-z]+$/;
+
+    $('#nameError').hide();
+    let nameError = false;
+
+    console.log($('#inputName').val());
+    // Properties
+    if($('#inputName').val() == ''){
+        nameError = true;
+    }
+
+    let stepsError = true;
+    const onlyLettersAndSpaceRegex = /[A-Za-z_ ]$/;
+
+    handleSubmitButton();
 
     var nbSteps = 1;
 
-    // TO DO : ingredientsError 
+    // TO DO : ingredientsError
 
     // Elements selection
     const name = $('#inputName');
     const submitButton = $('#submit');
 
     // Events
-
     name.on('input', () => {
         const inputName = name.val();
 
-        if (inputName != '' || inputName.match(onlyLettersRegex) != null) {
+        if (inputName != '' && inputName.match(onlyLettersAndSpaceRegex) != null) {
             $('#nameError').hide();
             nameError = false;
-        } else {
+        } else if (inputName != '' && inputName.match(onlyLettersAndSpaceRegex) == null) {
             $('#nameError').show();
             nameError = true;
         }
-        console.log('error :' + nameError);
-    })
 
-
-    function handleSubmitButton() {
-            submitButton.prop('disabled', false);
-
+        if(inputName == ''){
+            nameError = true;
         }
-    })
-
+        console.log('error :' + nameError);
+    });
 
     $("form :input").on('change', () => {
         handleSubmitButton();
     });
 
-    function handleSubmitButton() {
-        console.log(formHasErrors());
-        if (formHasErrors()) {
-            submitButton.prop('disabled', true);
-        } else {
-            submitButton.prop('disabled', false);
-        }
-    }
+
 
     function formHasErrors() {
         return (
@@ -54,14 +52,26 @@ $(function () {
         )
     }
 
-    function addStep() {
-        console.log("Ajouter �tape");
-        nbSteps = nbSteps + 1;
-        var ul = document.getElementById("steps");
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode("test"));
-        li.setAttribute("id", nbSteps); // added line
-        ul.appendChild(li);
+    function handleSubmitButton() {
+        console.log(formHasErrors());
+        if (formHasErrors()) {
+            $('#submit').prop('disabled', true);
+        } else {
+            $('#submit').prop('disabled', false);
+        }
     }
-
 });
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image')
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+

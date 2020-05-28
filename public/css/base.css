@@ -1,9 +1,8 @@
 
-
 html, body {
     height: 100%;
     padding-top: 28px;
-    font-family: 'Comic Neue', cursive;
+    font-family: 'Comic Neue', cursive !important;
 }
 
 body a {
@@ -18,7 +17,6 @@ body a:hover {
 }
 
 #content {
-    height: 100%;
     width: 80%;
     margin: auto;
 }
@@ -29,4 +27,15 @@ hr {
 
 button:hover:disabled {
     cursor: no-drop;
+}
+
+.center-vertically {
+    position: relative;
+    top: 50%;
+}
+
+footer {
+    margin-top: 150px;
+    background: #91CCA7;
+    padding-top: 50px;
 }

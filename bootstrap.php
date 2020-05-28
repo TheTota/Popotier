@@ -5,6 +5,8 @@ use src\routing\Route;
 use src\routing\RouterModule;
 use Symfony\Component\Yaml\Yaml;
 
+$GLOBALS['recipe_image_path'] = '/public/assets/recipes-image/';
+
 // AUTOLOADER INIT
 spl_autoload_register( function($className) {
     $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
@@ -35,6 +37,3 @@ foreach ($routesYML as $name => $route){
         )
     );
 }
-
-
-//$routerModule->checkURL('/recipe/summary/5');die;

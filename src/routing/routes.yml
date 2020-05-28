@@ -50,6 +50,13 @@ user_verify_alias:
   requirements:
     alias: '[a-zA-Z]+'
 
+user_recipe_list_public:
+    path: /user/view/{alias}
+    controller: UserController
+    action: viewRecipeListByAlias
+    requirements:
+        alias: '[a-zA-Z]+'
+
 user_recipe_list:
   path: /user/view/recipe-list
   controller: UserController
@@ -103,12 +110,19 @@ add_recipe:
   controller: RecipeController
   action: add
 
+update_recipe:
+  path: /recipe/update/{id}
+  controller: RecipeController
+  action: update
+  requirements:
+      id: '[1-9]+'
+
 validate_recipe:
   path: /recipe/validate/{id}
   controller: RecipeController
   action: validate
   requirements:
-    id: '[0-9]+'
+    id: '[1-9]+'
 
 devalidate_recipe:
   path: /recipe/devalidate/{id}
