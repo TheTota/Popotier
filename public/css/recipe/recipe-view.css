@@ -6,6 +6,12 @@
 
 }
 
+#image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
 hr {
     background: #91CCA7;
 }
@@ -68,4 +74,12 @@ hr {
 
 .comment {
     width: 100%;
+}
+
+.tag {
+    background: #91CCA7;
+    color: white;
+    border-radius: 0.3em;
+    padding: 5px;
+    margin: 5px;
 }

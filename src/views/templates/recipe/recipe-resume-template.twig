@@ -1,11 +1,13 @@
 <div class="container col-md-6 modal">
     <h3>{{ recipe.name }}</h3>
     <div class="row-md">
-        {% if recipe.image %}
-            <img class="width100" src="{{ recipe.image }}" alt="image of the recipe">
-        {% else %}
-            <img class="width100" src="/public/assets/recipes-image/knives.jpg" alt="image of the recipe">
-        {% endif %}
+        <div id="image">
+            {% if recipe.image %}
+                <img class="width100" src="{{ globals.recipe_image_path}}{{ recipe.image }}" alt="image of the recipe">
+            {% else %}
+                <img class="width100" src="{{ globals.recipe_image_path}}knives.jpg" alt="image of the recipe">
+            {% endif %}
+        </div>
     </div>
     <small>Créé le {{ recipe.creationDate | date('d/m/Y') }}</small>
 
@@ -35,17 +37,32 @@
     <p>Recette proposée par <a href="/user/view/{{ recipe.author.alias }}">{{ recipe.author.alias }}</a></p>
 
     <hr class="separator">
-    <h4>Etapes</h4>
-    <div class="col">
-        {% for step in recipe.steps %}
-            <div class="row">
-                <p>
-                    <strong>{{ step.position }} .</strong>
-                    {{ step.description }}
-                </p>
-            </div>
-        {% endfor %}
+
+    <div class="row">
+        <div class="col-4">
+            <h4>Ingrédients</h4>
+            {% for ingredient in recipe.ingredients %}
+                <div>
+                    {{ ingredient.ingredient.name }}
+                    {{ ingredient.quantity }}
+                    {{ ingredient.unit.name }}
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="col">
+            <h4>Etapes</h4>
+            {% for step in recipe.steps %}
+                <div class="row">
+                    <p>
+                        <strong>{{ step.position }} .</strong>
+                        {{ step.description }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
+
     <div class="row-md-12">
         <button class="btn btn-info width100" onclick="validateRecipe({{ recipe.id }})">Valider</button>
     </div>

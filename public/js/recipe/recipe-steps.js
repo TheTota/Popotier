@@ -1,26 +1,19 @@
-var nbSteps = 1;
+$(() => {
 
-function addStep() {
-    console.log("Ajouter étape");
-    nbSteps = nbSteps + 1;
-    var ol_step = document.getElementById("steps");
-    var desc = ol_step.lastElementChild;
-    var desc_clone = desc.cloneNode(true);
-    desc_clone.setAttribute("id", nbSteps);
-    desc_clone.placeholder = "Description de l'�tape";
-    document.getElementById("steps").appendChild(desc_clone);
-}
+    const stepRow = $('#main-step-element .step-row-element');
 
-function deleteStep(stepToDelete) {
-    var firtsIndexToChange = parseInt(stepToDelete);
+    $('.step-row-element:first-child button').hide();
+    $('.step-row-element button').on('click', () => {
+        $(event.target).closest('li').remove();
+    })
 
-    if (firtsIndexToChange > 1) {
-        document.getElementById(stepToDelete).setAttribute("id", "toRemove");
-        for (let i = firtsIndexToChange; i < nbSteps; i++) {
-            document.getElementById(i + 1).setAttribute("id", i);
-        }
-        document.getElementById("toRemove").remove();
-        nbSteps = nbSteps - 1;
-    }
-
-}
+    // When adding a step we clone the step-row-element we hide the first delete button and we add the onClick event to the new cloned element
+    $('#add-step-button').on('click', () => {
+        stepRow.clone().appendTo('#steps');
+        $('.delete-step-button').show();
+        $('.step-row-element:first-child button').hide();
+        $('.delete-step-button').on('click', (event) => {
+            $(event.target).closest('li').remove();
+        });
+    });
+})

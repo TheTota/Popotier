@@ -1,9 +1,8 @@
 
-
 html, body {
     height: 100%;
     padding-top: 28px;
-    font-family: 'Comic Neue', cursive;
+    font-family: 'Comic Neue', cursive !important;
 }
 
 body a {
@@ -28,6 +27,11 @@ hr {
 
 button:hover:disabled {
     cursor: no-drop;
+}
+
+.center-vertically {
+    position: relative;
+    top: 50%;
 }
 
 footer {

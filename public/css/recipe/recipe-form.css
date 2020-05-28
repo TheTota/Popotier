@@ -1,7 +1,6 @@
 
 img {
-    width: 30%;
-    display:inline-block;
+    width: 100%;
 }
 
 .recipe-form {
@@ -12,3 +11,50 @@ img {
 small {
     display: none;
 }
+
+.step-row-element {
+    margin: 10px;
+}
+
+#inputName {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px #91CCA7 solid;
+    font-size: 2.5em;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(145, 204, 167, 0.25);
+}
+
+
+
+input[type="file"] {
+    display: none;
+}
+.file-input {
+    border: 2px solid #91CCA7;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-input:hover {
+    background: #91CCA7;
+    color: white;
+    transition: all 0.3s;
+}
+
+#image-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+
+
+
+
+

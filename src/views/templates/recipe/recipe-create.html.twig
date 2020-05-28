@@ -2,104 +2,199 @@
 {% block links %}
     {{ parent() }}
     <link rel="stylesheet" href="/public/css/recipe/recipe-form.css">
+    <link rel="stylesheet" href="/public/css/recipe/tag.css">
 {% endblock %}
 
 {% block content %}
-	<div id="recipe-form">
-	<h2>Ajouter une nouvelle Recette</h2>
-		{% if recipeCreated %}
-			<div class="alert alert-success" role="alert">
-                        La recette a bien été créé.
-			</div>
-		{% endif %}
+    <div id="recipe-form">
+        <h2>Ajouter une nouvelle Recette</h2>
+        {% if recipeCreated %}
+            <div class="alert alert-success" role="alert">
+                La recette a bien été créé.
+            </div>
+        {% endif %}
 
-		<form action="/recipe/add" method="POST">
-			<div class="row">
-				<div class="form-group col-sm-8">
-					<label for="inputName"> Nom de la recette </label>
-					<input type="text" class="form-control" id="inputName" name="inputName" placeholder="Nom">
-					<small id="nameError" class="form-text text-danger hide">Le nom doit contenir uniquement des lettres</small>
-				</div>
+        <form
+                {% if update %}
+                    action="{{ path('update_recipe', [recipe.id]) }}"
+                {% else %}
+                    action="/recipe/add"
+                {% endif %}
+                method="POST"
+                enctype="multipart/form-data"
+        >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="form-group col-sm-6">
+                        <label for="inputName"></label>
+                        <input
+                                required="required"
+                                type="text"
+                                class="form-control"
+                                id="inputName"
+                                name="inputName"
+                                placeholder="Nom de la recette"
+                                {% if update %}
+                                    value="{{ recipe.name }}"
+                                {% endif %}
+                        >
+                        <small id="nameError" class="form-text text-danger hide">Le nom doit contenir uniquement des
+                            lettres</small>
+                    </div>
+                </div>
+                <div class="row justify-content-center text-center">
+                    <div class="form-group col-md-6">
+                        <label for="inputImage" class="file-input">
+                            <i class="fas fa-file-import"></i>
+                            Choisissez une image pour votre recette
+                        </label>
+                        <input type="file" class="file-input" id="inputImage" name="fileToUpload"
+                               accept="image/png, image/jpeg" onchange="readURL(this)">
+                        <div id="image-container">
+                            <img
+                                    {% if update and recipe.image %}
+                                        src="{{ globals.recipe_image_path}}{{ recipe.image }}"
+                                    {% else %}
+                                        src="{{ globals.recipe_image_path}}knives.jpg"
+                                    {% endif %}
+                                    alt="image du plat"
+                                    id="image">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm">
+                    <label for="inputTag">Etiquettes lié a la recette</label>
+                    <input class="form-control" id="tags" name="inputTag" type="text" value="{{ tags }}">
+                </div>
 
-				<div class="form-group col-sm-8">
-					<img src="/public/assets/recipes-image/knives.jpg" alt="image du plat"  id="image">
-					<input type="file" class="form-control" id="inputImage" name="inputImage" accept="image/png, image/jpeg">
-				</div>
+                <hr>
 
-				<div class="form-group col-sm-8">
-				<label for="inputType"> Type de la recette </label>
-				<select type="number" class="form-control" id="inputType" name="inputType" placeholter="Type">
-				<!-- TODO : faire une requête sur la BDD pour afficher dynamiquement les types existants-->
-					<option value="1">Entrée</option>
-					<option value="2">Plat</option>
-					<option value="3">Dessert</option>
-					<option value="4">Boisson</option>
-				</select>
-				</div>
+                <h2>
+                    Informations sur la recette
+                </h2>
 
-			</div>
+                <div class="form-group row">
+                    <div class="col">
+                        <label for="inputType"> Type de la recette </label>
+                        <select type="number" class="form-control" id="inputType" name="inputType" placeholter="Type">
+                            {% for recipeType in recipeTypes %}
+                                {% if update and recipeType.label == recipe.type.label %}
+                                    <option value="{{ recipeType.id }}"
+                                            selected="selected">{{ recipeType.label }}</option>
+                                {% else %}
+                                    <option value="{{ recipeType.id }}">{{ recipeType.label }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
 
-			<div class="form-group">
-				<label for="inputCookingTime"> Temps de cuisson en minute</label>
-				<input type="number" class="form-control" id="inputCookingTime" name="inputCookingTime" step="5" min="5" value="5">
-			</div>
+                    <div class="col-sm">
+                        <label for="inputCookingTime"> Temps de cuisson en minute</label>
+                        <input type="number"
+                               class="form-control"
+                               id="inputCookingTime"
+                               name="inputCookingTime"
+                               step="5"
+                               min="0"
+                                {% if update %}
+                                    value="{{ recipe.cookingTime }}"
+                                {% else %}
+                                    value="0"
+                                {% endif %}
+                        >
+                    </div>
 
-			<div class="form-group">
-				<label for="inputPreparationTime"> Temps de préparation en minute</label>
-				<input type="number" class="form-control" id="inputPreparationTime" name="inputPreparationTime" step="5" min="5" value ="5">
-			</div>
+                    <div class="col-sm">
+                        <label for="inputPreparationTime"> Temps de préparation en minute</label>
+                        <input type="number" class="form-control" id="inputPreparationTime" name="inputPreparationTime"
+                               step="5"
+                               min="0"
+                                {% if update %}
+                                    value="{{ recipe.cookingTime }}"
+                                {% else %}
+                                    value="0"
+                                {% endif %}
+                        >
+                    </div>
+                </div>
 
-			<div class="form-group">
-				<label for="inputPersonNumber"> Nombre de personne </label>
-				<select type="number" class="form-control" id="inputPersonNumber" name="inputPersonNumber">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select>
-			</div>
+                <div class="row form-group">
+                    <div class="col-sm">
+                        <label for="inputPersonNumber"> Nombre de personne </label>
+                        <select type="number" class="form-control" id="inputPersonNumber" name="inputPersonNumber">
+                            {% for i in range(1, 10) %}
+                                {% if update and recipe.personNumber == i %}
+                                    <option value="{{ i }}" selected="selected">{{ i }}</option>
+                                {% else %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endif %}
 
-			<div class="form-group">
-				<label for="inputDifficulty"> Difficulté </label>
-				<select type="number" class="form-control" id="inputDifficulty" name="inputDifficulty">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
-			</div>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-			<div class="form-group">
-				<label for="inputMeanPrice"> Prix moyen  </label>
-				<select type="text" class="form-control" id="inputMeanPrice" name="inputMeanPrice">
-					<option value="1 - 10 €">1 - 10 €</option>
-					<option value="10 - 20 €">10 - 20 €</option>
-					<option value="20 - 50 €">20 - 50 €</option>
-					<option value="50 - 100 €">5 - 100 €</option>
-				</select>
-			</div>
+                    <div class="col-sm">
+                        <label for="inputDifficulty"> Difficulté </label>
+                        <select type="number" class="form-control" id="inputDifficulty" name="inputDifficulty">
+                            {% for i in range(1, 5) %}
+                                {% if update and recipe.difficulty == i %}
+                                    <option value="{{ i }}" selected="selected">{{ i }}</option>
+                                {% else %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
 
-			<div class="form-group">
-				<label for="inputAuthorQuote"> Annotations   </label>
-				<textarea  class="form-control" id="inputAuthorQuote" name="inputAuthorQuote"></textarea>
-			</div>
+                    <div class="col">
+                        <label for="inputMeanPrice"> Prix moyen </label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="inputMeanPrice"
+                                name="inputMeanPrice"
+                                {% if update %}
+                                value= {{ recipe.meanPrice }}
+                                {% endif %}
+                        >
+                    </div>
+                </div>
 
-			{% block steps %}{% endblock %}	
+                <div class="form-group">
+                    <label for="inputAuthorQuote"> Annotations </label>
+                    <textarea class="form-control" id="inputAuthorQuote" name="inputAuthorQuote"
+                              autocapitalize="sentences">{{ recipe.authorQuote }}</textarea>
+                </div>
 
-			<button type="submit" class="btn btn-primary" name="addRecipe" >Valider</button>
-		</form>
+                <hr>
 
-	</div>
+                {% include 'recipe/recipe-step-create.html.twig' %}
+
+                <hr>
+
+                {% include 'recipe/recipe-ingredient-create.html.twig' %}
+
+                <div class="text-center">
+                    <button id="submit" type="submit" class="btn btn-primary width100" name="addRecipe">
+                    {% if update %}
+                            Modifier la recete
+                    {% else %}
+                            Ajouter la recette
+                    {% endif %}
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block scripts %}
     <script src="/public/js/recipe/recipe-create-form.js"></script>
+    <script src="/public/js/recipe/recipe-steps.js"></script>
+    <script src="/public/js/recipe/recipe-create-form.js"></script>
+    <script src="/public/js/recipe/recipe-ingredients.js"></script>
+    <script src="/public/js/recipe/form-tags.js"></script>
 {% endblock %}
 

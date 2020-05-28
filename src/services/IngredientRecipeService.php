@@ -29,4 +29,24 @@ class IngredientRecipeService {
 
         return $ingredientArray;
     }
+
+    public static function add($ingredientId, $recipeId, $quantity, $unitId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $req = $db->prepare("INSERT INTO Ingredient_Recette VALUES (?,?,?,?)");
+
+        $req->execute([
+            $ingredientId,
+            $recipeId,
+            $quantity,
+            $unitId
+        ]);
+
+    }
+
+    public static function deleteByRecipe($recipeId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        return $db->prepare("DELETE FROM Ingredient_Recette WHERE id_recette = ?")->execute([$recipeId]);
+    }
 }
