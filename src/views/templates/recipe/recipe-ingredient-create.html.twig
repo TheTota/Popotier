@@ -43,6 +43,19 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        <div class="col-sm">
+                            <label for="allergen">Allergène</label>
+                            <select class="form-control" name="allergen[]" id="allergen">
+                                <option value=""></option>
+                                {% for allergen in allergens %}
+                                    {% if allergen.id == ingredient.ingredient.allergen.id %}
+                                        <option value="{{ allergen.id }}" selected>{{ allergen.name }}</option>
+                                    {% else %}
+                                        <option value="{{ allergen.id }}">{{ allergen.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
                         <div class="col-1 text-center">
                             <button type="button"
                                     class="btn btn-danger delete-ingredient-button center-vertically"
@@ -77,6 +90,15 @@
                         <select class="form-control" name="unit[]" id="unit">
                             {% for unit in units %}
                                 <option value="{{ unit.id }}">{{ unit.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm">
+                        <label for="allergen">Allergène</label>
+                        <select class="form-control" name="allergen[]" id="allergen">
+                            <option value=""></option>
+                            {% for allergen in allergens %}
+                                <option value="{{ allergen.id }}">{{ allergen.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -128,6 +150,15 @@
                 <select class="form-control" name="unit[]" id="unit">
                     {% for unit in units %}
                         <option value="{{ unit.id }}">{{ unit.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm">
+                <label for="allergen">Allergène</label>
+                <select class="form-control" name="allergen[]" id="allergen">
+                    <option value=""></option>
+                    {% for allergen in allergens %}
+                        <option value="{{ allergen.id }}">{{ allergen.name }}</option>
                     {% endfor %}
                 </select>
             </div>

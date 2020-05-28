@@ -5,12 +5,15 @@ namespace src\controllers;
 use src\models\IngredientEntity;
 use src\models\IngredientRecipeEntity;
 use src\models\RecipeTypeEntity;
+use src\models\TagEntity;
+use src\services\AllergenService;
 use src\services\CommentService;
 use src\services\FileUploadService;
 use src\services\IngredientRecipeService;
 use src\services\IngredientService;
 use src\services\RatingService;
 use src\services\StepService;
+use src\services\TagService;
 use src\services\UnitService;
 use src\utils\Templater;
 use src\services\RecipeService;
@@ -64,7 +67,7 @@ class RecipeController
 
         if (!empty($_POST)) {
             $steps = array();
-            // var_dump($_FILES);die;
+
             // If there is an error on the image upload
             if (!FileUploadService::uploadFile()) {
 
@@ -89,6 +92,19 @@ class RecipeController
                 null //ingredients
             );
             $recipeId = RecipeService::add($recipe);
+
+            $tags = explode(',', $_POST['inputTag']);
+
+            foreach ($tags as $tag) {
+                if ($tagEntity = TagService::findByName($tag) != false) {
+                    TagService::addTagToRecipe($tagEntity->getId(), $recipeId);
+                } else {
+                    $tagId = TagService::add(
+                        new TagEntity(null, $tag)
+                    );
+                    TagService::addTagToRecipe($tagId, $recipeId);
+                }
+            }
 
             for ($i = 1; $i <= count($_POST['stepList']); $i++) {
                 StepService::add(new StepEntity(null, $i, $_POST['stepList'][$i - 1]), $recipeId);
@@ -120,7 +136,8 @@ class RecipeController
         echo $twig->render('recipe/recipe-create.html.twig', [
             'recipeTypes' => RecipeTypeService::fetchAll(),
             'ingredients' => IngredientService::fetchAll(),
-            'units' => UnitService::fetchAll()
+            'units' => UnitService::fetchAll(),
+            'allergens' => AllergenService::fetchAll()
         ]);
     }
 
@@ -134,6 +151,21 @@ class RecipeController
             StepService::deleteByRecipe($recipeId);
             IngredientRecipeService::deleteByRecipe($recipeId);
 
+            // TAGS
+            $tags = explode(',', $_POST['inputTag']);
+            TagService::deleteByRecipe($recipeId);
+            foreach ($tags as $tag) {
+                if ($tagEntity = TagService::findByName($tag) != false) {
+                    TagService::addTagToRecipe($tagEntity->getId(), $recipeId);
+                } else {
+                    $tagId = TagService::add(
+                        new TagEntity(null, $tag)
+                    );
+                    TagService::addTagToRecipe($tagId, $recipeId);
+                }
+            }
+
+            // STEPS
             foreach ($_POST['stepList'] as $key => $step) {
                 if ($key + 1 != count($_POST['stepList'])) {
                     StepService::add(new StepEntity(
@@ -146,8 +178,9 @@ class RecipeController
                 }
             }
 
+            // INGREDIENTS
             foreach ($_POST['ingredients'] as $key => $ingredient) {
-                if ($key + 1 != count($_POST['ingredients'])){
+                if ($key + 1 != count($_POST['ingredients'])) {
                     IngredientRecipeService::add(
                         $ingredient,
                         $recipeId,
@@ -155,6 +188,18 @@ class RecipeController
                         $_POST['unit'][$key]
                     );
                 }
+            }
+
+            // ALLERGENS
+            foreach ($_POST['allergen'] as $key => $allergenId) {
+                if ($key + 1 != count($_POST['ingredients'])) {
+
+                    IngredientService::updateAllergen($_POST['ingredients'][$key], $allergenId);
+
+
+                }
+
+
             }
 
             $type = new RecipeTypeEntity($_POST['inputType'], null);
@@ -188,7 +233,9 @@ class RecipeController
                 'recipeTypes' => RecipeTypeService::fetchAll(),
                 'ingredients' => IngredientService::fetchAll(),
                 'units' => UnitService::fetchAll(),
-                'recipe' => $recipeEntity
+                'allergens' => AllergenService::fetchAll(),
+                'recipe' => $recipeEntity,
+                'tags' => implode(',', TagService::findByRecipe($recipeId))
             ]);
         }
     }

@@ -2,6 +2,7 @@
 {% block links %}
     {{ parent() }}
     <link rel="stylesheet" href="/public/css/recipe/recipe-form.css">
+    <link rel="stylesheet" href="/public/css/recipe/tag.css">
 {% endblock %}
 
 {% block content %}
@@ -51,7 +52,7 @@
                                accept="image/png, image/jpeg" onchange="readURL(this)">
                         <div id="image-container">
                             <img
-                                    {% if update %}
+                                    {% if update and recipe.image %}
                                         src="{{ globals.recipe_image_path}}{{ recipe.image }}"
                                     {% else %}
                                         src="{{ globals.recipe_image_path}}knives.jpg"
@@ -60,6 +61,11 @@
                                     id="image">
                         </div>
                     </div>
+                </div>
+                
+                <div class="col-sm">
+                    <label for="inputTag">Etiquettes lié a la recette</label>
+                    <input class="form-control" id="tags" name="inputTag" type="text" value="{{ tags }}">
                 </div>
 
                 <hr>
@@ -176,7 +182,7 @@
                     {% else %}
                             Ajouter la recette
                     {% endif %}
-                        </button>
+                    </button>
                 </div>
 
             </div>
@@ -189,5 +195,6 @@
     <script src="/public/js/recipe/recipe-steps.js"></script>
     <script src="/public/js/recipe/recipe-create-form.js"></script>
     <script src="/public/js/recipe/recipe-ingredients.js"></script>
+    <script src="/public/js/recipe/form-tags.js"></script>
 {% endblock %}
 

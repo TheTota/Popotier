@@ -57,6 +57,19 @@ class IngredientService
 
     }
 
+    public static function updateAllergen($ingredientName, $allergenId) {
+        $db = DataBaseService::getInstance()->getDb();
+
+
+
+        if($allergenId == ''){
+            return $db->prepare("UPDATE Ingredient SET id_allergene = NULL WHERE nom = ? ")->execute([$ingredientName]);
+        } else {
+            return $db->prepare("UPDATE Ingredient SET id_allergene = ? WHERE nom = ? ")->execute([$allergenId, $ingredientName]);
+        }
+
+    }
+
     private static function createIngredientArray(\PDOStatement $ingredients): array
     {
         $ingredientArray = array();
