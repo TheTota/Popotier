@@ -285,7 +285,7 @@ class RecipeService
      */
     public static function advancedSearch($name, $rating, $tagsFilter, $typesFilter, $seasonsFilter, $allergensFilter) {
         $db = DataBaseService::getInstance()->getDb();
-var_dump($typesFilter);
+
         // tags
         $tagsQuery = "";
         if (isset($tagsFilter)) {
@@ -307,7 +307,12 @@ var_dump($typesFilter);
         // allergens
         $allergensQuery = "";
         if (isset($allergensFilter)) {
-            $allergensQuery = "AND R.id IN (SELECT id_recette FROM Saison_Recette WHERE id_saison IN (" . implode(",", $seasonsFilter) . "))";
+            $allergensQuery = "AND R.id IN (
+                SELECT DISTINCT IR.id_recette
+                FROM Ingredient_Recette IR
+                INNER JOIN Ingredient I
+                ON  IR.id_ingredient = I.nom
+                WHERE I.id_allergene NOT IN (" . implode(",", $seasonsFilter) . "))";
         }
 
         $recipes = $db->query("SELECT * FROM Recette R WHERE nom LIKE '%$name%' AND valide = 1
