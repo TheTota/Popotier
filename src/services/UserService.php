@@ -28,7 +28,8 @@ class UserService
             $result['prenom'],
             $result['pseudo'],
             $result['mot_de_passe'],
-            RoleService::findById($result['id_role'])
+            RoleService::findById($result['id_role']),
+            $result['valide']
         );
 
         return $user;
