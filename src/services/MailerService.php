@@ -48,7 +48,7 @@ class MailerService
             $mail->Port = self::$port;                                         // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //Recipients
-            $mail->setFrom(self::$from, "L'équipe Popotier");
+            $mail->setFrom(self::$from, "Popotier");
             $mail->addAddress($targetEmail, $targetFullName);    // Add a recipient
 
             // Attachments
