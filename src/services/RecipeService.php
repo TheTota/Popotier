@@ -226,7 +226,7 @@ class RecipeService
                     $recipe['valide'],
                     UserService::findById($recipe['id_auteur']),
                     TypeService::findById($recipe['id_type']),
-                    ($recipe['id_admin'] == null) ? null : UserService::findByEmail($recipe['id_admin']),
+                    ($recipe['id_admin'] == null) ? null : UserService::findById($recipe['id_admin']),
                     StepService::findByRecette($recipe['id']),
                     null
                 )
