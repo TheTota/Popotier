@@ -37,6 +37,12 @@ button:hover:disabled {
     top: 50%;
 }
 
+
+button#submit {
+    background: #CCAD7C;
+    border: #CCAD7C;
+}
+
 footer {
     margin-top: 150px;
     background: #91CCA7;

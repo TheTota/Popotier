@@ -8,5 +8,16 @@
     color: white !important;
 }
 
+a.btn.btn-outline-primary.menu-button {
+    color: #364D3E;
+    border: none;
+}
+
+a.btn.btn-outline-primary.menu-button:hover {
+    border: 2px solid #364D3E;
+    background: none;
+}
+
+
 
 
