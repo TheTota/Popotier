@@ -75,7 +75,7 @@
                 <div class="form-group row">
                     <div class="col-sm">
                         <label for="inputType"> Type de la recette </label>
-                        <select type="number" class="form-control" id="inputType" name="inputType" placeholter="Type">
+                        <select class="form-control" id="inputType" name="inputType" placeholder="Type">
                             {% for recipeType in recipeTypes %}
                                 {% if update and recipeType.label == recipe.type.label %}
                                     <option value="{{ recipeType.id }}"
@@ -118,7 +118,7 @@
                 <div class="row form-group">
                     <div class="col-sm">
                         <label for="inputPersonNumber"> Nombre de personne </label>
-                        <select type="number" class="form-control" id="inputPersonNumber" name="inputPersonNumber">
+                        <select class="form-control" id="inputPersonNumber" name="inputPersonNumber">
                             {% for i in range(1, 10) %}
                                 {% if update and recipe.personNumber == i %}
                                     <option value="{{ i }}" selected="selected">{{ i }}</option>
@@ -131,8 +131,8 @@
                     </div>
 
                     <div class="col-sm">
-                        <label for="inputDifficulty"> Difficulté </label>
-                        <select type="number" class="form-control" id="inputDifficulty" name="inputDifficulty">
+                        <label for="inputDifficulty">Difficulté</label>
+                        <select class="form-control" id="inputDifficulty" name="inputDifficulty">
                             {% for i in range(1, 5) %}
                                 {% if update and recipe.difficulty == i %}
                                     <option value="{{ i }}" selected="selected">{{ i }}</option>
@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="col">
-                        <label for="inputMeanPrice"> Prix moyen (en euros) </label>
+                        <label for="inputMeanPrice">Prix moyen (en euros)</label>
                         <input
                                 type="number"
                                 class="form-control"
