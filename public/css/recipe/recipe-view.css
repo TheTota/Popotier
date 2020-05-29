@@ -91,3 +91,7 @@ hr {
     padding: 5px;
     margin: 5px;
 }
+
+#recipeSteps ol li {
+    margin-bottom: 30px;
+}
