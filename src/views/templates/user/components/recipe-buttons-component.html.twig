@@ -3,9 +3,10 @@
 {% block user_recipes_list_actions %}
     <a
             class="btn btn-info text-white"
+            id="user-update-recipe"
             data-toggle="tooltip"
             title="Modifier"
-            src="{{ path('update_recipe', [recipe.id]) }}"
+            href="{{ path('update_recipe', [recipe.id]) }}"
     >
         <i class="fas fa-pencil-alt"></i>
     </a>
