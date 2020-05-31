@@ -288,6 +288,22 @@ class RecipeService
         }
     }
 
+    public static function searchByType($label) {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $id_type = TypeService::findByLabel($label)->getId();
+        $recipes = $db->query("SELECT * FROM Recette WHERE id_type = '$id_type'" );
+
+
+         // Create recipes from search
+        if($recipes){
+            return self::createRecipeArray($recipes);
+        } else {
+            return null;
+        }
+	}
+
+
     /**
      * @param $name
      * @return array|null

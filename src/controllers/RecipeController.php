@@ -363,4 +363,14 @@ class RecipeController
 
         echo $twig->render("recipe/components/recipe-search-component.html.twig", ["recipes" => $recipes]);
     }
+
+
+    public function searchByType($value)
+    {
+        $twig = Templater::getInstance()->getTwig();
+
+        $recipes = RecipeService::searchByType($value);
+
+        echo $twig->render("recipe/recipe-search-by-theme.html.twig", ["recipes" => $recipes, "theme"=>$value]);
+	}
 }

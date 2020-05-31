@@ -178,6 +178,11 @@ recipe_search_by_string:
   controller: RecipeController
   action: searchByString
 
+recipe_search_by_type:
+    path: /recipe/search/{value}
+    controller: RecipeController
+    action: searchByType
+
 admin_dashboard:
   path: /admin/view/dashboard
   controller: AdminController

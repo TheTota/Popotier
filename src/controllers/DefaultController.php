@@ -33,4 +33,9 @@ class DefaultController{
     public function pageNotFound(){
         echo Templater::getInstance()->getTwig()->render('layout/page-not-found.html.twig');
     }
+
+    public function getType($type) 
+    {
+       
+	}
 }

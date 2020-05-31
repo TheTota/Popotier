@@ -39,6 +39,16 @@ class TypeService {
         return $recipeType;
     }
 
+    public static function findByLabel($label): RecipeTypeEntity {
+        $db = DataBaseService::getInstance()->getDb();
+
+        $result = $db->query("SELECT * FROM Type WHERE libelle = '$label'")->fetch();
+
+        $recipeType = new RecipeTypeEntity($result['id'], $result['libelle']);
+
+        return $recipeType;
+	}
+
     public function add(RecipeTypeEntity $type){
 
     }
