@@ -103,7 +103,7 @@ class UserService
             'nom' => $user->getLastName(),
             'prenom' => $user->getFirstName(),
             'pseudo' => $user->getAlias(),
-            'mot_de_passe' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
+            'mot_de_passe' => $user->getPassword(),
             'valide' => $user->getValid() == true ? 1 : 0,
             'chaine_validation' => $user->getValidationString(),
             'id_role' => $user->getRole()->getId()
@@ -112,9 +112,11 @@ class UserService
         $request->execute($data);
     }
 
-    public function update(UserEntity $user)
+    public static function update(UserEntity $user)
     {
+        $db = DataBaseService::getInstance()->getDb();
 
+        return $db->prepare("UPDATE Utilisateur SET mot_de_passe = ? WHERE id = ? ")->execute([$user->getPassword(), $user->getId()]);
     }
 
     public static function resetPassword($password, $validationString) {

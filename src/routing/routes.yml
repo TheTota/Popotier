@@ -36,6 +36,13 @@ add_user:
   controller: UserController
   action: add
 
+user_update_info:
+  path: /user/update
+  controller: UserController
+  action: update
+
+
+
 user_verify_email:
   path: /user/verify/email/{email}
   controller: UserController

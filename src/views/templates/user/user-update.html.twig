@@ -1,0 +1,44 @@
+{% extends "layout/base.html.twig" %}
+
+{% block links %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <h2>Modifier son mot de passe</h2>
+    {% if updated %}
+        <div class="alert alert-success" role="alert">
+            Le mot de passe a bien été modifié.
+        </div>
+    {% endif %}
+
+    <div class="container pt-5">
+        <div class="row justify-content-center">
+            <form class="col-6 form-group" action="{{path ('user_update_info')}}" method="post">
+                <div>
+                    <label for="passwordInput">Nouveau mot de passe</label>
+                    <input class='form-control mb-3' type="password" id="passwordInput" name="password">
+                    <small id="password-error" class="text-danger"> Le mot de passe doit contenir au moins 8 caractères dont une majuscule, un chiffre et un caractère spécial</small>
+                </div>
+
+                <div>
+                    <label for="confirmInput">Confirmation</label>
+                    <input class='form-control mb-3' type="password" id="confirmInput" name="passwordConfirmation">
+                    <small id="confirmation-error" class="text-danger">Les deux champs ne sont pas identiques</small>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-primary" id="submit" type="submit">Changer de mot de passe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/public/js/user/password-change-form.js"></script>
+{% endblock %}
+

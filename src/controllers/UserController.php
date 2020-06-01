@@ -35,7 +35,7 @@ class UserController
                 $_POST['lastName'],
                 $_POST['firstName'],
                 $_POST['alias'],
-                $_POST['password'],
+                password_hash($_POST['password'], PASSWORD_DEFAULT),
                 RoleService::findByName('Utilisateur'),
                 false,
                 StringGenerator::generateRandomString(30)
@@ -53,6 +53,22 @@ class UserController
         }
 
         echo $twig->render('user/user-create.html.twig');
+    }
+
+    public function update(){
+        $twig = Templater::getInstance()->getTwig();
+
+        if (!empty($_POST)) {
+            $user = UserService::findById($_SESSION['id']);
+
+            $user->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
+
+            UserService::update($user);
+
+            echo $twig->render('user/user-update.html.twig', ['updated' => true]);
+        }
+
+        echo $twig->render('user/user-update.html.twig', ['updated' => false]);
     }
 
     /**
