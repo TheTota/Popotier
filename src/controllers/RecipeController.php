@@ -372,7 +372,7 @@ class RecipeController
         $recipes = RecipeService::searchByType($value);
 
         if($value == 'Entree') {
-            $value = "Entrée"  ;
+            $value = "EntrÃ©e"  ;
 		}
 
         echo $twig->render("recipe/recipe-search-by-theme.html.twig", ["recipes" => $recipes, "theme"=>$value]);
