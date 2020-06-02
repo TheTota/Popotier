@@ -1,5 +1,5 @@
 # Popotier
-_Le marmiton du pauvre !_
+_Le marmiton mais en mieux !_
 
 ## Récapitulation des consignes
 
