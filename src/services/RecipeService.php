@@ -228,7 +228,7 @@ class RecipeService
                     TypeService::findById($recipe['id_type']),
                     ($recipe['id_admin'] == null) ? null : UserService::findById($recipe['id_admin']),
                     StepService::findByRecette($recipe['id']),
-                    null
+                    IngredientRecipeService::findAllByRecipe($recipe['id'])
                 )
             );
         }

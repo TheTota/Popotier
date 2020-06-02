@@ -163,6 +163,14 @@ class RecipeController
         $recipeEntity = RecipeService::findById($recipeId);
 
         if (!empty($_POST)) {
+            $imageChanged = false;
+            if($_FILES['fileToUpload']['name'] != ''){
+                if (!FileUploadService::uploadFile()) {
+
+                } else {
+                    $imageChanged = true;
+                }
+            }
 
             StepService::deleteByRecipe($recipeId);
             IngredientRecipeService::deleteByRecipe($recipeId);
@@ -220,7 +228,7 @@ class RecipeController
             $recipeEntity = new RecipeEntity(
                 $recipeId,
                 $_POST['inputName'],
-                $recipeEntity->getImage(),
+                $imageChanged ? $_FILES['fileToUpload']['name']: $recipeEntity->getImage(),
                 $recipeEntity->getCreationDate(),
                 $_POST['inputCookingTime'],
                 $_POST['inputPreparationTime'],
